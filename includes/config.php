@@ -39,19 +39,28 @@ define('DB_CHARSET', 'utf8mb4');
 define('ROOT_PATH', dirname(__DIR__));
 define('UPLOADS_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'uploads');
 
-// Auto-detect base URL
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+// Auto-detect base URL (robust against reverse proxies, SSL offloaders, Vercel, cPanel, and localhost)
+$isHttps = (
+    (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https') ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && strtolower($_SERVER['HTTP_X_FORWARDED_SSL']) === 'on') ||
+    (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) ||
+    (!empty($_SERVER['HTTP_HOST']) && (
+        strpos($_SERVER['HTTP_HOST'], 'vercel.app') !== false ||
+        strpos($_SERVER['HTTP_HOST'], '.app') !== false
+    ))
+);
+$protocol = $isHttps ? 'https://' : 'http://';
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$scriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '');
+$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? ''));
+
 // Clean scriptDir to project root
-$parts = explode('/', trim($scriptDir, '/\\'));
 $baseFolder = '';
-if (count($parts) > 0 && !empty($parts[0])) {
-    $baseFolder = '/' . $parts[0];
-}
-// If inside /admin or /api, adjust baseFolder
-if (preg_match('#/(admin|api)#', $scriptDir)) {
-    $baseFolder = preg_replace('#/(admin|api).*$#', '', $scriptDir);
+if (!empty($scriptDir) && $scriptDir !== '/' && $scriptDir !== '.') {
+    $cleanDir = preg_replace('#/(admin|api).*$#', '', $scriptDir);
+    if (!empty($cleanDir) && $cleanDir !== '/' && $cleanDir !== '.') {
+        $baseFolder = '/' . trim($cleanDir, '/');
+    }
 }
 define('BASE_URL', rtrim($protocol . $host . $baseFolder, '/'));
 define('ASSETS_URL', BASE_URL . '/assets');

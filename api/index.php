@@ -26,16 +26,43 @@ if (!file_exists($target) && file_exists($target . '.php')) {
     $target .= '.php';
 }
 
-// If file exists and is a PHP file, execute it
+// If file exists, check whether it is a static asset or a PHP file
 if (file_exists($target) && is_file($target)) {
-    $_SERVER['SCRIPT_FILENAME'] = $target;
-    $_SERVER['SCRIPT_NAME'] = '/' . ltrim(str_replace($root, '', $target), '/\\');
-    chdir(dirname($target));
-    require $target;
-} else {
-    // Default fallback to homepage index.php
-    $_SERVER['SCRIPT_FILENAME'] = $root . '/index.php';
-    $_SERVER['SCRIPT_NAME'] = '/index.php';
-    chdir($root);
-    require $root . '/index.php';
+    $ext = strtolower(pathinfo($target, PATHINFO_EXTENSION));
+    $mimes = [
+        'css'   => 'text/css; charset=utf-8',
+        'js'    => 'application/javascript; charset=utf-8',
+        'json'  => 'application/json; charset=utf-8',
+        'svg'   => 'image/svg+xml',
+        'png'   => 'image/png',
+        'jpg'   => 'image/jpeg',
+        'jpeg'  => 'image/jpeg',
+        'webp'  => 'image/webp',
+        'gif'   => 'image/gif',
+        'woff'  => 'font/woff',
+        'woff2' => 'font/woff2',
+        'ttf'   => 'font/ttf',
+        'ico'   => 'image/x-icon',
+    ];
+
+    if (isset($mimes[$ext])) {
+        header('Content-Type: ' . $mimes[$ext]);
+        header('Cache-Control: public, max-age=31536000, immutable');
+        readfile($target);
+        exit;
+    }
+
+    if ($ext === 'php') {
+        $_SERVER['SCRIPT_FILENAME'] = $target;
+        $_SERVER['SCRIPT_NAME'] = '/' . ltrim(str_replace($root, '', $target), '/\\');
+        chdir(dirname($target));
+        require $target;
+        exit;
+    }
 }
+
+// Default fallback to homepage index.php
+$_SERVER['SCRIPT_FILENAME'] = $root . '/index.php';
+$_SERVER['SCRIPT_NAME'] = '/index.php';
+chdir($root);
+require $root . '/index.php';
