@@ -22,12 +22,26 @@ class Database {
             try {
                 self::$instance = new PDO($dsn, DB_USER, DB_PASS, $options);
             } catch (PDOException $e) {
+                // Auto-fallback to embedded SQLite for cloud preview (e.g. Vercel) if MySQL is unreachable
+                $sqliteFile = dirname(__DIR__) . '/database/midhila_fallback.sqlite';
+                if (file_exists($sqliteFile)) {
+                    try {
+                        self::$instance = new PDO("sqlite:" . $sqliteFile, null, null, [
+                            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                        ]);
+                        return self::$instance;
+                    } catch (Exception $sqe) {
+                        // Continue to standard error reporting below
+                    }
+                }
+
                 error_log("Database Connection Failed: " . $e->getMessage());
                 // Safe friendly error message to visitor
                 http_response_code(500);
                 echo '<div style="font-family:system-ui,sans-serif;max-width:600px;margin:50px auto;padding:24px;background:#FEF2F2;border:1px solid #FCA5A5;border-radius:12px;color:#991B1B;">';
                 echo '<h2 style="margin-top:0;">Database Connection Notice</h2>';
-                echo '<p>Unable to connect to the database. Please ensure MySQL is running in XAMPP and the database <code>' . htmlspecialchars(DB_NAME) . '</code> has been imported.</p>';
+                echo '<p>Unable to connect to the database. Please ensure MySQL is running in XAMPP / cPanel and the database <code>' . htmlspecialchars(DB_NAME) . '</code> has been imported.</p>';
                 echo '</div>';
                 exit;
             }
