@@ -87,14 +87,14 @@ require_once __DIR__ . '/includes/header.php';
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
   </div>
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:760px;">
-    <div style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-gold);margin-bottom:12px;font-weight:600;">Personal Attention</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;">Connect with Our Travel Desk</h1>
+    <div class="float-slow" style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-lavender);margin-bottom:12px;font-weight:700;background:rgba(196,181,253,0.12);padding:6px 16px;border-radius:var(--radius-pill);border:1px solid rgba(196,181,253,0.3);">✨ Personal Attention</div>
+    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;text-shadow:0 0 20px rgba(196,181,253,0.25);">Connect with Our Travel Desk</h1>
     <p class="lead-text" style="color:#CBD5E0;">We welcome your travel questions, itinerary inquiries, group tour arrangements, and custom pilgrimage requests.</p>
   </div>
 </section>
 
 <!-- Contact Info & Form Section -->
-<section class="section-padding" style="background-color:var(--color-ivory);">
+<section class="section-padding" style="background-color:transparent;">
   <div class="container">
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:clamp(36px, 6vw, 70px);">
       
@@ -107,8 +107,8 @@ require_once __DIR__ . '/includes/header.php';
         <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:36px;">
           
           <!-- Office Address -->
-          <div style="display:flex;gap:16px;background:#FFF;padding:24px;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);">
-            <div style="width:48px;height:48px;border-radius:12px;background:var(--color-gold-soft);color:var(--color-gold-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <div class="glass-card" style="display:flex;gap:16px;padding:24px;border-radius:var(--radius-md);">
+            <div style="width:48px;height:48px;border-radius:12px;background:rgba(196,181,253,0.2);color:var(--color-violet-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div>
@@ -118,21 +118,21 @@ require_once __DIR__ . '/includes/header.php';
           </div>
 
           <!-- Phone Numbers -->
-          <div style="display:flex;gap:16px;background:#FFF;padding:24px;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);">
+          <div class="glass-card" style="display:flex;gap:16px;padding:24px;border-radius:var(--radius-md);">
             <div style="width:48px;height:48px;border-radius:12px;background:rgba(0,168,150,0.12);color:var(--color-teal);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </div>
             <div>
               <h4 style="font-size:1.05rem;color:var(--color-navy);margin-bottom:4px;">Telephone Lines</h4>
               <p style="font-size:0.92rem;color:var(--color-text-body);">
-                Primary: <a href="tel:<?= preg_replace('/[^0-9+]/', '', $agencyPhone) ?>" style="color:var(--color-gold-dark);font-weight:600;"><?= e($agencyPhone) ?></a><br>
+                Primary: <a href="tel:<?= preg_replace('/[^0-9+]/', '', $agencyPhone) ?>" style="color:var(--color-violet-dark);font-weight:600;"><?= e($agencyPhone) ?></a><br>
                 Secondary: <a href="tel:<?= preg_replace('/[^0-9+]/', '', $agencySecondaryPhone) ?>"><?= e($agencySecondaryPhone) ?></a>
               </p>
             </div>
           </div>
 
           <!-- Email & Hours -->
-          <div style="display:flex;gap:16px;background:#FFF;padding:24px;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);">
+          <div class="glass-card" style="display:flex;gap:16px;padding:24px;border-radius:var(--radius-md);">
             <div style="width:48px;height:48px;border-radius:12px;background:rgba(10,25,47,0.08);color:var(--color-navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
@@ -157,7 +157,7 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <!-- Right Column: Interactive Form -->
-      <div style="background:#FFF;padding:clamp(28px, 5vw, 44px);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid var(--color-border);">
+      <div class="glass-card" style="padding:clamp(28px, 5vw, 44px);border-radius:var(--radius-lg);">
         <h3 style="font-size:1.55rem;color:var(--color-navy);margin-bottom:8px;">Send Us a Message</h3>
         <p style="font-size:0.92rem;color:var(--color-text-muted);margin-bottom:28px;">Fill in your contact details below and our travel team will respond promptly.</p>
 

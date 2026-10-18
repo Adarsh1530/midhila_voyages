@@ -37,11 +37,11 @@
         </svg>
       </div>
 
-      <h3 id="adminSuccessTitle" class="admin-modal-title" style="color:#0F5132;">Action Confirmed!</h3>
-      <p id="adminSuccessMessage" class="admin-modal-desc" style="color:#1E293B;font-weight:500;">Your changes have been successfully saved.</p>
+      <h3 id="adminSuccessTitle" class="admin-modal-title" style="color:#6EE7B7;">Action Confirmed!</h3>
+      <p id="adminSuccessMessage" class="admin-modal-desc" style="color:#E2E8F0;font-weight:500;">Your changes have been successfully saved.</p>
 
       <div class="admin-modal-actions" style="justify-content:center;">
-        <button type="button" id="adminSuccessOkBtn" class="admin-btn admin-btn-primary" style="min-width:140px;background:#0A192F;color:#FFF;">OK, Continue</button>
+        <button type="button" id="adminSuccessOkBtn" class="admin-btn admin-btn-primary" style="min-width:140px;">OK, Continue</button>
       </div>
 
       <div class="admin-modal-timer-bar">
@@ -51,13 +51,13 @@
   </div>
 
   <style>
-    /* Admin Modals Styling */
+    /* Admin Frosted Glass Modals */
     .admin-modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(6, 16, 30, 0.72);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+      background: rgba(6, 11, 24, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       z-index: 99999;
       display: none;
       align-items: center;
@@ -71,17 +71,21 @@
       opacity: 1;
     }
     .admin-modal-card {
-      background: #FFFFFF;
-      border-radius: 16px;
+      background: rgba(14, 23, 46, 0.88);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border-radius: 20px;
       max-width: 440px;
       width: 100%;
       padding: 32px 28px 26px;
-      box-shadow: 0 25px 50px -12px rgba(6, 16, 30, 0.35), 0 0 0 1px rgba(197, 160, 89, 0.25);
+      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(196, 181, 253, 0.3);
       text-align: center;
       position: relative;
       overflow: hidden;
       transform: scale(0.92);
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      color: #FFF;
     }
     .admin-modal-overlay.is-active .admin-modal-card {
       transform: scale(1);
@@ -96,30 +100,33 @@
       margin: 0 auto 18px;
     }
     .admin-modal-icon--warning {
-      background: #FEF2F2;
-      color: #EF4444;
-      border: 2px solid #FEE2E2;
+      background: rgba(239, 68, 68, 0.2);
+      color: #FCA5A5;
+      border: 2px solid rgba(239, 68, 68, 0.45);
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.3);
     }
     .admin-modal-icon--info {
-      background: #EFF6FF;
-      color: #1D4ED8;
-      border: 2px solid #DBEAFE;
+      background: rgba(59, 130, 246, 0.2);
+      color: #93C5FD;
+      border: 2px solid rgba(59, 130, 246, 0.45);
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.3);
     }
     .admin-modal-icon--success {
-      background: #ECFDF5;
-      color: #10B981;
-      border: 2px solid #A7F3D0;
-      box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.12);
+      background: rgba(16, 185, 129, 0.2);
+      color: #6EE7B7;
+      border: 2px solid rgba(16, 185, 129, 0.45);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
     }
     .admin-modal-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 700;
-      color: var(--admin-navy);
+      color: #FFF;
       margin-bottom: 8px;
+      text-shadow: 0 0 12px rgba(196, 181, 253, 0.2);
     }
     .admin-modal-desc {
       font-size: 0.92rem;
-      color: #475569;
+      color: #CBD5E1;
       line-height: 1.55;
       margin-bottom: 24px;
     }
@@ -134,13 +141,13 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.1);
       overflow: hidden;
     }
     .admin-modal-timer-progress {
       height: 100%;
       width: 100%;
-      background: #10B981;
+      background: linear-gradient(90deg, #10B981, #02C39A);
       transform-origin: left center;
       transform: scaleX(1);
     }

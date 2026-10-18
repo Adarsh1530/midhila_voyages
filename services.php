@@ -22,21 +22,21 @@ require_once __DIR__ . '/includes/header.php';
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
   </div>
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:760px;">
-    <div style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-gold);margin-bottom:12px;font-weight:600;">Full-Spectrum Travel Assistance</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;">Our Travel Services</h1>
+    <div class="float-slow" style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-lavender);margin-bottom:12px;font-weight:700;background:rgba(196,181,253,0.12);padding:6px 16px;border-radius:var(--radius-pill);border:1px solid rgba(196,181,253,0.3);">✨ Full-Spectrum Travel Assistance</div>
+    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;text-shadow:0 0 20px rgba(196,181,253,0.25);">Our Travel Services</h1>
     <p class="lead-text" style="color:#CBD5E0;">From individual flight logistics and handpicked resort stays to complete end-to-end holiday management.</p>
   </div>
 </section>
 
 <!-- Services Grid -->
-<section class="section-padding" style="background-color:var(--color-ivory);">
+<section class="section-padding" style="background-color:transparent;">
   <div class="container">
     
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:32px;">
       
       <!-- Service 1: Bespoke Itineraries -->
-      <div class="card-3d" style="background:#FFF;padding:36px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);">
-        <div style="width:56px;height:56px;border-radius:14px;background:var(--color-gold-soft);color:var(--color-gold-dark);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(196,181,253,0.2);color:var(--color-violet-dark);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
         <h3 style="font-size:1.35rem;color:var(--color-navy);margin-bottom:12px;">Bespoke Holiday Planning</h3>
@@ -47,7 +47,7 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <!-- Service 2: Luxury Stays & Resorts -->
-      <div class="card-3d" style="background:#FFF;padding:36px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);">
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
         <div style="width:56px;height:56px;border-radius:14px;background:rgba(0,168,150,0.12);color:var(--color-teal);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
@@ -59,7 +59,7 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <!-- Service 3: Kerala Houseboat Cruises -->
-      <div class="card-3d" style="background:#FFF;padding:36px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);">
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
         <div style="width:56px;height:56px;border-radius:14px;background:rgba(10,25,47,0.08);color:var(--color-navy);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         </div>
@@ -71,8 +71,8 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <!-- Service 4: Private Chauffeur Transit -->
-      <div class="card-3d" style="background:#FFF;padding:36px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);">
-        <div style="width:56px;height:56px;border-radius:14px;background:rgba(197,160,89,0.15);color:var(--color-gold);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(196,181,253,0.2);color:var(--color-violet-dark);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         </div>
         <h3 style="font-size:1.35rem;color:var(--color-navy);margin-bottom:12px;">Private AC Chauffeur Transit</h3>
@@ -83,7 +83,7 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <!-- Service 5: Flight & Train Ticketing -->
-      <div class="card-3d" style="background:#FFF;padding:36px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);">
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
         <div style="width:56px;height:56px;border-radius:14px;background:rgba(0,168,150,0.12);color:var(--color-teal);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </div>
@@ -95,7 +95,7 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <!-- Service 6: Visa & Entry Guidance -->
-      <div class="card-3d" style="background:#FFF;padding:36px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);">
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
         <div style="width:56px;height:56px;border-radius:14px;background:rgba(10,25,47,0.08);color:var(--color-navy);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </div>

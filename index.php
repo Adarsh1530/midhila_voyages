@@ -141,11 +141,11 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <!-- Compact Travel Quick-Finder Bar -->
-      <div class="reveal-fade-up stagger-4" style="background:rgba(17, 34, 64, 0.85);backdrop-filter:blur(16px);border:1px solid rgba(197, 160, 89, 0.3);border-radius:var(--radius-lg);padding:20px 24px;box-shadow:var(--shadow-xl);max-width:760px;">
+      <div class="reveal-fade-up stagger-4 glass-specular" style="background:rgba(14, 23, 46, 0.72);backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(196, 181, 253, 0.35);border-radius:var(--radius-xl);padding:22px 28px;box-shadow:inset 0 1px 1px 0 rgba(255,255,255,0.25), 0 24px 50px -10px rgba(0,0,0,0.5);max-width:780px;">
         <form action="<?= BASE_URL ?>/packages.php" method="GET" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)) auto;gap:16px;align-items:end;">
           <div>
-            <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-gold);margin-bottom:6px;font-weight:600;">Where To?</label>
-            <select name="destination" style="width:100%;padding:10px 14px;background:rgba(6, 16, 30, 0.7);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-sm);color:#FFF;font-size:0.9rem;">
+            <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-lavender);margin-bottom:6px;font-weight:700;">Where To?</label>
+            <select name="destination" style="width:100%;padding:11px 16px;background:rgba(10, 17, 40, 0.75);border:1.5px solid rgba(196, 181, 253, 0.35);border-radius:var(--radius-md);color:#FFF;font-size:0.9rem;outline:none;">
               <option value="">All Destinations</option>
               <?php foreach ($featuredDestinations as $fd): ?>
                 <option value="<?= e($fd['slug']) ?>"><?= e($fd['name']) ?></option>
@@ -153,8 +153,8 @@ require_once __DIR__ . '/includes/header.php';
             </select>
           </div>
           <div>
-            <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-gold);margin-bottom:6px;font-weight:600;">Trip Style</label>
-            <select name="category" style="width:100%;padding:10px 14px;background:rgba(6, 16, 30, 0.7);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-sm);color:#FFF;font-size:0.9rem;">
+            <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-lavender);margin-bottom:6px;font-weight:700;">Trip Style</label>
+            <select name="category" style="width:100%;padding:11px 16px;background:rgba(10, 17, 40, 0.75);border:1.5px solid rgba(196, 181, 253, 0.35);border-radius:var(--radius-md);color:#FFF;font-size:0.9rem;outline:none;">
               <option value="">All Experiences</option>
               <?php foreach ($categories as $cat): ?>
                 <option value="<?= e($cat['slug']) ?>"><?= e($cat['name']) ?></option>
@@ -162,7 +162,7 @@ require_once __DIR__ . '/includes/header.php';
             </select>
           </div>
           <div>
-            <button type="submit" class="btn btn-teal" style="width:100%;padding:11px 22px;">
+            <button type="submit" class="btn btn-teal" style="width:100%;padding:12px 24px;">
               <span>Find Tours</span>
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
@@ -639,19 +639,39 @@ require_once __DIR__ . '/includes/header.php';
 <!-- =====================================================================
      SECTION J: FINAL CONVERSION CTA
      ===================================================================== -->
-<section class="section-padding" style="background:linear-gradient(135deg, var(--color-navy-deep) 0%, #112240 100%);color:#FFF;position:relative;overflow:hidden;text-align:center;">
+<section class="section-padding" style="background:linear-gradient(135deg, var(--color-navy-deep) 0%, #0D1B3E 50%, #070D1E 100%);color:#FFF;position:relative;overflow:hidden;text-align:center;">
   
-  <div class="container" style="position:relative;z-index:2;max-width:800px;">
-    <span class="section-subtitle" style="color:var(--color-gold);">Begin Your Chapter</span>
-    <h2 class="editorial-headline" style="color:#FFF;margin-bottom:18px;font-size:clamp(2.2rem, 4.5vw, 3.4rem);">
+  <!-- Decorative Animated Compass Rose -->
+  <div style="position:absolute;top:-60px;right:-60px;width:320px;height:320px;opacity:0.12;pointer-events:none;">
+    <svg class="rotate-slow" viewBox="0 0 100 100" fill="none" stroke="#C4B5FD" stroke-width="1.2">
+      <circle cx="50" cy="50" r="46" stroke-dasharray="4 4" />
+      <circle cx="50" cy="50" r="32" stroke-dasharray="2 2" />
+      <polygon points="50,10 57,43 90,50 57,57 50,90 43,57 10,50 43,43" fill="rgba(196,181,253,0.35)" />
+    </svg>
+  </div>
+  <div style="position:absolute;bottom:-60px;left:-60px;width:280px;height:280px;opacity:0.1;pointer-events:none;">
+    <svg class="rotate-slow-reverse" viewBox="0 0 100 100" fill="none" stroke="#8DA4EF" stroke-width="1.2">
+      <circle cx="50" cy="50" r="46" stroke-dasharray="3 3" />
+      <polygon points="50,15 56,44 85,50 56,56 50,85 44,56 15,50 44,44" fill="rgba(141,164,239,0.3)" />
+    </svg>
+  </div>
+
+  <div class="container" style="position:relative;z-index:2;max-width:820px;">
+    <!-- Floating Journey Emblem -->
+    <div class="reveal-fade-up float-slow" style="display:inline-flex;align-items:center;gap:10px;background:rgba(196,181,253,0.12);backdrop-filter:blur(12px);border:1px solid rgba(196,181,253,0.35);padding:6px 20px;border-radius:var(--radius-pill);margin-bottom:24px;box-shadow:0 0 20px rgba(139,92,246,0.25);">
+      <span style="font-size:1rem;">✨</span>
+      <span style="font-size:0.8rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-lavender);font-weight:700;">Begin Your Next Chapter</span>
+    </div>
+
+    <h2 class="editorial-headline reveal-fade-up stagger-1" style="color:#FFF;margin-bottom:20px;font-size:clamp(2.2rem, 4.5vw, 3.4rem);text-shadow:0 0 24px rgba(196,181,253,0.2);">
       Your Next Great Journey Starts Here.
     </h2>
-    <p class="lead-text" style="color:#CBD5E0;margin-bottom:36px;">
+    <p class="lead-text reveal-fade-up stagger-2" style="color:#CBD5E0;margin-bottom:38px;max-width:700px;margin-left:auto;margin-right:auto;">
       Whether it is an intimate family vacation, a romantic anniversary getaway, or a peaceful devotional pilgrimage, our travel specialists are ready to turn your aspirations into an unforgettable reality.
     </p>
 
-    <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:18px;">
-      <a href="<?= BASE_URL ?>/enquiry.php" class="btn btn-primary btn-lg pulse-gold">
+    <div class="reveal-fade-up stagger-3" style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:18px;">
+      <a href="<?= BASE_URL ?>/enquiry.php" class="btn btn-primary btn-lg pulse-luminous">
         <span>Plan My Trip</span>
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </a>
@@ -662,8 +682,8 @@ require_once __DIR__ . '/includes/header.php';
       </a>
     </div>
 
-    <div style="margin-top:28px;display:flex;align-items:center;justify-content:center;gap:20px;font-size:0.88rem;color:#A0AEC0;">
-      <span>📞 Call Us: <a href="tel:<?= preg_replace('/[^0-9+]/', '', $agencyPhone) ?>" style="color:var(--color-gold);"><?= e($agencyPhone) ?></a></span>
+    <div class="reveal-fade-up stagger-4" style="margin-top:32px;display:flex;align-items:center;justify-content:center;gap:20px;font-size:0.88rem;color:#A0AEC0;">
+      <span>📞 Call Us: <a href="tel:<?= preg_replace('/[^0-9+]/', '', $agencyPhone) ?>" style="color:var(--color-lavender);font-weight:600;"><?= e($agencyPhone) ?></a></span>
       <span>•</span>
       <span>⚡ Quick Response Guaranteed</span>
     </div>

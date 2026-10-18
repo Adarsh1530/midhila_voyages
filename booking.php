@@ -45,12 +45,12 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Checkout Section -->
-<section class="section-padding" style="background-color:var(--color-ivory);">
+<section class="section-padding" style="background-color:transparent;">
   <div class="container">
     <div class="detail-layout-grid">
       
       <!-- Left Column: Booking Form -->
-      <div style="background:#FFF;padding:clamp(28px, 5vw, 44px);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid var(--color-border);">
+      <div class="glass-card" style="padding:clamp(28px, 5vw, 44px);border-radius:var(--radius-lg);">
         <h3 style="font-size:1.45rem;color:var(--color-navy);margin-bottom:8px;">Traveller &amp; Trip Details</h3>
         <p style="font-size:0.9rem;color:var(--color-text-muted);margin-bottom:28px;">All vouchers and confirmation updates will be sent to the email and phone entered below.</p>
 
@@ -60,7 +60,7 @@ require_once __DIR__ . '/includes/header.php';
           <!-- Package Selection -->
           <div style="margin-bottom:20px;">
             <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Select Package *</label>
-            <select name="package_id" id="bookingPackageSelect" required style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;background:#FFF;outline:none;">
+            <select name="package_id" id="bookingPackageSelect" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
               <?php foreach ($packages as $pkg): ?>
                 <option value="<?= (int)$pkg['id'] ?>" 
                         data-price="<?= (float)$pkg['starting_price'] ?>"
@@ -74,33 +74,33 @@ require_once __DIR__ . '/includes/header.php';
           <div class="form-grid-2">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Full Name *</label>
-              <input type="text" name="customer_name" id="bkgName" required placeholder="e.g. Priya Nair" style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
+              <input type="text" name="customer_name" id="bkgName" required placeholder="e.g. Priya Nair" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Phone / WhatsApp *</label>
-              <input type="tel" name="customer_phone" id="bkgPhone" required placeholder="+91 12345 67890" style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
+              <input type="tel" name="customer_phone" id="bkgPhone" required placeholder="+91 12345 67890" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
             </div>
           </div>
 
           <div class="form-grid-2">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Email Address *</label>
-              <input type="email" name="customer_email" id="bkgEmail" required placeholder="priya@example.com" style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
+              <input type="email" name="customer_email" id="bkgEmail" required placeholder="priya@example.com" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Travel Departure Date *</label>
-              <input type="date" name="travel_date" id="bkgDate" required style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
+              <input type="date" name="travel_date" id="bkgDate" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
             </div>
           </div>
 
           <div class="form-grid-2">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Number of Travellers *</label>
-              <input type="number" name="travellers_count" id="bkgTravellers" min="1" max="50" value="2" required style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
+              <input type="number" name="travellers_count" id="bkgTravellers" min="1" max="50" value="2" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Payment Selection</label>
-              <select name="payment_type" id="bkgPaymentType" style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;background:#FFF;outline:none;">
+              <select name="payment_type" id="bkgPaymentType" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
                 <option value="deposit">Initial Tour Deposit (₹5,000 / person)</option>
                 <option value="full">Pay Full Package Cost</option>
               </select>
@@ -109,10 +109,10 @@ require_once __DIR__ . '/includes/header.php';
 
           <div style="margin-bottom:28px;">
             <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Special Requests or Flight Timings</label>
-            <textarea name="special_requests" id="bkgNotes" rows="3" placeholder="Airport pickup timing, vegetarian meal preference, room preferences..." style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;resize:vertical;"></textarea>
+            <textarea name="special_requests" id="bkgNotes" rows="3" placeholder="Airport pickup timing, vegetarian meal preference, room preferences..." style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;resize:vertical;"></textarea>
           </div>
 
-          <div id="bookingErrorAlert" style="display:none;background:#FEF2F2;border-left:4px solid #E53E3E;padding:12px 16px;border-radius:var(--radius-sm);color:#991B1B;font-size:0.9rem;margin-bottom:20px;"></div>
+          <div id="bookingErrorAlert" style="display:none;background:rgba(239,68,68,0.15);border-left:4px solid #E53E3E;padding:12px 16px;border-radius:var(--radius-md);color:#991B1B;font-size:0.9rem;margin-bottom:20px;"></div>
 
           <button type="submit" id="proceedPayBtn" class="btn btn-primary btn-lg" style="width:100%;">
             <span>Proceed to Secure Payment</span>
@@ -123,8 +123,8 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Right Column: Cost Breakdown & Trust -->
       <div>
-        <div style="position:sticky;top:100px;background:#FFF;padding:30px;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid var(--color-border-gold);">
-          <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:18px;border-bottom:1px solid var(--color-border);padding-bottom:12px;">Payment Summary</h3>
+        <div class="glass-card" style="position:sticky;top:100px;padding:30px;border-radius:var(--radius-lg);">
+          <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:18px;border-bottom:1px solid rgba(196,181,253,0.25);padding-bottom:12px;">Payment Summary</h3>
           
           <div style="display:flex;justify-content:space-between;margin-bottom:12px;font-size:0.92rem;">
             <span style="color:var(--color-text-muted);">Package Rate (Per person):</span>
@@ -141,13 +141,13 @@ require_once __DIR__ . '/includes/header.php';
             <strong id="summaryTotal" style="color:var(--color-navy);font-size:1.1rem;">₹0</strong>
           </div>
 
-          <div style="background:var(--color-ivory-warm);padding:16px;border-radius:var(--radius-md);margin-bottom:24px;border:1px solid var(--color-border-gold);">
+          <div style="background:rgba(237,233,254,0.6);backdrop-filter:blur(10px);padding:16px;border-radius:var(--radius-md);margin-bottom:24px;border:1px solid rgba(196,181,253,0.4);">
             <div style="display:flex;justify-content:space-between;align-items:center;">
               <div>
                 <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-muted);">Amount Payable Now</span>
-                <div style="font-family:var(--font-serif);font-size:1.75rem;font-weight:700;color:var(--color-teal);margin-top:2px;" id="summaryPayable">₹10,000</div>
+                <div style="font-family:var(--font-serif);font-size:1.75rem;font-weight:700;color:var(--color-violet-dark);margin-top:2px;" id="summaryPayable">₹10,000</div>
               </div>
-              <span style="font-size:0.72rem;background:rgba(0,168,150,0.15);color:var(--color-teal-dark);padding:4px 10px;border-radius:var(--radius-pill);font-weight:700;">Deposit</span>
+              <span style="font-size:0.72rem;background:rgba(139,92,246,0.15);color:var(--color-violet);padding:4px 10px;border-radius:var(--radius-pill);font-weight:700;">Deposit</span>
             </div>
             <p style="font-size:0.78rem;color:var(--color-text-muted);margin-top:8px;margin-bottom:0;">
               Remaining balance payable 15 days prior to travel commencement.
@@ -176,8 +176,8 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Pre-Payment Interactive Confirmation Modal -->
-<div id="paymentConfirmModal" style="position:fixed;inset:0;background:rgba(6,16,30,0.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:2150;display:none;align-items:center;justify-content:center;padding:20px;">
-  <div style="background:#FFF;border-radius:var(--radius-lg);max-width:520px;width:100%;padding:32px;box-shadow:var(--shadow-xl);border:1px solid var(--color-border-gold);max-height:92vh;overflow-y:auto;">
+<div id="paymentConfirmModal" style="position:fixed;inset:0;background:rgba(6,11,24,0.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:2150;display:none;align-items:center;justify-content:center;padding:20px;">
+  <div class="glass-card" style="max-width:520px;width:100%;padding:32px;border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);max-height:92vh;overflow-y:auto;background:rgba(255,255,255,0.92);">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;border-bottom:1px solid var(--color-border);padding-bottom:16px;">
       <div style="width:48px;height:48px;border-radius:50%;background:rgba(0,168,150,0.12);color:var(--color-teal);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">
         🛡️

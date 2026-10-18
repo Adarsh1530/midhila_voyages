@@ -50,12 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/animations.css">
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-      background-color: #06101E;
+      background-color: #070D1E;
       color: #F8FAFC;
       min-height: 100vh;
       display: flex;
@@ -63,17 +64,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       justify-content: center;
       padding: 24px;
       position: relative;
+      overflow: hidden;
     }
     .login-box {
       width: 100%;
       max-width: 440px;
-      background: #0A192F;
-      border: 1px solid rgba(197, 160, 89, 0.3);
-      border-radius: 16px;
-      padding: 40px 36px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      background: rgba(14, 23, 46, 0.78);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(196, 181, 253, 0.28);
+      border-radius: 20px;
+      padding: 42px 36px;
+      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), 0 30px 60px -10px rgba(0, 0, 0, 0.6);
       position: relative;
-      z-index: 2;
+      z-index: 5;
     }
     .brand-logo {
       display: flex;
@@ -82,17 +86,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       gap: 12px;
       margin-bottom: 28px;
     }
+    .brand-logo img {
+      filter: drop-shadow(0 0 12px rgba(141, 164, 239, 0.6));
+    }
     .brand-title {
       font-family: 'Cinzel', serif;
       font-size: 1.35rem;
       letter-spacing: 0.12em;
       color: #FFF;
       line-height: 1.1;
+      text-shadow: 0 0 12px rgba(196, 181, 253, 0.3);
     }
     .brand-sub {
       font-size: 0.65rem;
       letter-spacing: 0.28em;
-      color: #C5A059;
+      color: #C4B5FD;
     }
     .form-group {
       margin-bottom: 20px;
@@ -102,53 +110,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       font-size: 0.82rem;
       font-weight: 600;
       color: #CBD5E1;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       letter-spacing: 0.04em;
     }
     .form-group input {
       width: 100%;
       padding: 12px 16px;
-      background: rgba(6, 16, 30, 0.8);
-      border: 1px solid #1E3A5F;
-      border-radius: 8px;
+      background: rgba(10, 17, 40, 0.75);
+      border: 1.5px solid rgba(196, 181, 253, 0.3);
+      border-radius: 10px;
       color: #FFF;
       font-size: 0.95rem;
       outline: none;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
     }
     .form-group input:focus {
-      border-color: #C5A059;
+      background: rgba(10, 17, 40, 0.95);
+      border-color: #8DA4EF;
+      box-shadow: 0 0 0 3px rgba(141, 164, 239, 0.25);
     }
     .btn-login {
       width: 100%;
       padding: 13px;
-      background: linear-gradient(135deg, #C5A059 0%, #D4AF37 100%);
-      color: #06101E;
+      background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%);
+      color: #FFF;
       font-weight: 700;
       font-size: 0.95rem;
       letter-spacing: 0.05em;
-      border: none;
-      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 24px -4px rgba(124, 58, 237, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
       margin-top: 8px;
     }
     .btn-login:hover {
+      background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.35);
+      box-shadow: 0 12px 30px -4px rgba(139, 92, 246, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.6);
     }
     .error-alert {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.4);
+      background: rgba(239, 68, 68, 0.18);
+      border: 1px solid rgba(239, 68, 68, 0.45);
       color: #FCA5A5;
       padding: 12px 14px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.86rem;
       margin-bottom: 20px;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.2);
     }
   </style>
 </head>
 <body>
+
+  <!-- Ambient Floating Mesh Orbs -->
+  <div class="ambient-mesh" aria-hidden="true">
+    <div class="ambient-orb ambient-orb--1"></div>
+    <div class="ambient-orb ambient-orb--2"></div>
+    <div class="ambient-orb ambient-orb--3"></div>
+    <div class="ambient-orb ambient-orb--4"></div>
+  </div>
 
   <div class="login-box">
     

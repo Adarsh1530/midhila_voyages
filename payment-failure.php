@@ -18,26 +18,28 @@ $waUrl = build_whatsapp_url($agencyWhatsApp, $waMsg);
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<section class="section-padding" style="background-color:var(--color-ivory);padding-top:calc(var(--header-height) + 40px);">
+<section class="section-padding" style="background:transparent;padding-top:calc(var(--header-height) + 50px);position:relative;z-index:2;">
   <div class="container container-narrow">
-    <div style="background:#FFF;padding:clamp(28px, 6vw, 56px);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid #FCA5A5;text-align:center;">
+    <div class="glass-card card-3d glass-specular" style="background:rgba(255,255,255,0.8);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:clamp(32px, 6vw, 56px);border-radius:28px;box-shadow:0 24px 50px -10px rgba(239,68,68,0.15), inset 0 1px 1px rgba(255,255,255,0.85);border:1.5px solid rgba(239,68,68,0.3);text-align:center;">
       
-      <div style="width:68px;height:68px;border-radius:50%;background:#FEF2F2;color:#E53E3E;font-size:2.2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+      <div style="width:72px;height:72px;border-radius:50%;background:rgba(239,68,68,0.12);border:1.5px solid rgba(239,68,68,0.3);color:#DC2626;font-size:2.4rem;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 24px rgba(239,68,68,0.2);">
         ⚠
       </div>
 
-      <span class="section-subtitle" style="color:#E53E3E;">Transaction Incomplete</span>
-      <h1 style="font-size:clamp(1.8rem, 3.5vw, 2.4rem);color:var(--color-navy);margin-bottom:12px;">Payment Could Not Be Completed</h1>
-      <p class="lead-text" style="margin-bottom:28px;">
+      <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,0.12);padding:4px 14px;border-radius:var(--radius-pill);border:1px solid rgba(239,68,68,0.25);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:#DC2626;font-weight:700;margin-bottom:12px;">
+        Transaction Incomplete
+      </div>
+      <h1 style="font-size:clamp(1.8rem, 3.5vw, 2.4rem);color:var(--color-navy);margin-bottom:12px;font-weight:700;">Payment Could Not Be Completed</h1>
+      <p class="lead-text" style="margin-bottom:28px;color:var(--color-text-body);font-size:1.05rem;">
         Your transaction was declined by the issuing bank or interrupted during authorization. 
         <?php if (!empty($ref)): ?>
           No money has been debited for reference <strong>#<?= e($ref) ?></strong>.
         <?php endif; ?>
       </p>
 
-      <div style="background:var(--color-ivory-warm);border-radius:var(--radius-md);padding:24px;max-width:540px;margin:0 auto 36px;text-align:left;font-size:0.92rem;color:var(--color-text-body);border:1px solid rgba(0,0,0,0.06);">
-        <h4 style="color:var(--color-navy);margin-bottom:10px;font-size:1.05rem;">Common Reasons for Payment Failure:</h4>
-        <ul style="margin-left:20px;line-height:1.7;list-style-type:disc;">
+      <div style="background:rgba(196,181,253,0.1);backdrop-filter:blur(12px);border-radius:18px;padding:24px;max-width:540px;margin:0 auto 36px;text-align:left;font-size:0.94rem;color:var(--color-text-body);border:1px solid rgba(196,181,253,0.25);">
+        <h4 style="color:var(--color-navy);margin-bottom:12px;font-size:1.05rem;font-weight:700;">Common Reasons for Payment Interruption:</h4>
+        <ul style="margin-left:20px;line-height:1.75;list-style-type:disc;">
           <li>Temporary network timeout or OTP expiration.</li>
           <li>Daily online banking or card transaction limit reached.</li>
           <li>International cards needing two-factor authentication approval.</li>
@@ -54,8 +56,8 @@ require_once __DIR__ . '/includes/header.php';
         </a>
       </div>
 
-      <div style="margin-top:24px;font-size:0.85rem;color:var(--color-text-muted);">
-        Or call our accounts desk: <a href="tel:<?= preg_replace('/[^0-9+]/', '', $agencyPhone) ?>" style="color:var(--color-navy);font-weight:600;"><?= e($agencyPhone) ?></a>
+      <div style="margin-top:24px;font-size:0.88rem;color:var(--color-text-muted);">
+        Or call our accounts desk: <a href="tel:<?= preg_replace('/[^0-9+]/', '', $agencyPhone) ?>" style="color:var(--color-navy);font-weight:700;"><?= e($agencyPhone) ?></a>
       </div>
 
     </div>

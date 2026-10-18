@@ -150,19 +150,19 @@ require_once __DIR__ . '/includes/header.php';
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
   </div>
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:760px;">
-    <div style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-gold);margin-bottom:12px;font-weight:600;">Personalized Trip Planning</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;">Plan Your Journey</h1>
+    <div class="float-slow" style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-lavender);margin-bottom:12px;font-weight:700;background:rgba(196,181,253,0.12);padding:6px 16px;border-radius:var(--radius-pill);border:1px solid rgba(196,181,253,0.3);">✨ Personalized Trip Planning</div>
+    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;text-shadow:0 0 20px rgba(196,181,253,0.25);">Plan Your Journey</h1>
     <p class="lead-text" style="color:#CBD5E0;">Share your ideal dates, companion counts, and preferences. Our travel specialists will craft your personalized proposal.</p>
   </div>
 </section>
 
 <!-- Main Planner Section -->
-<section class="section-padding" style="background-color:var(--color-ivory);">
+<section class="section-padding" style="background-color:transparent;">
   <div class="container container-narrow">
 
     <?php if ($submittedRecord): ?>
       <!-- SUCCESS CONFIRMATION STATE -->
-      <div style="background:#FFF;padding:clamp(32px, 6vw, 56px);border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);border:2px solid var(--color-gold);text-align:center;animation:slideInRight 0.4s ease;">
+      <div class="glass-card" style="padding:clamp(32px, 6vw, 56px);border-radius:var(--radius-lg);text-align:center;animation:slideInRight 0.4s ease;">
         <div style="width:72px;height:72px;border-radius:50%;background:rgba(0,168,150,0.15);color:var(--color-teal);font-size:2.4rem;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
           ✓
         </div>
@@ -174,11 +174,11 @@ require_once __DIR__ . '/includes/header.php';
           Your trip requirements have been safely registered under reference:
         </p>
         
-        <div style="display:inline-block;background:var(--color-navy-card);color:var(--color-gold-bright);padding:10px 24px;border-radius:var(--radius-pill);font-family:var(--font-serif);font-size:1.3rem;font-weight:700;letter-spacing:0.1em;margin-bottom:30px;">
+        <div style="display:inline-block;background:var(--color-navy-card);color:var(--color-lavender);padding:10px 24px;border-radius:var(--radius-pill);font-family:var(--font-serif);font-size:1.3rem;font-weight:700;letter-spacing:0.1em;margin-bottom:30px;box-shadow:0 0 20px rgba(139,92,246,0.3);">
           <?= e($submittedRecord['reference']) ?>
         </div>
 
-        <div style="background:var(--color-ivory-warm);border-radius:var(--radius-md);padding:24px;max-width:580px;margin:0 auto 36px;text-align:left;font-size:0.95rem;color:var(--color-text-body);border:1px solid rgba(0,0,0,0.06);">
+        <div style="background:rgba(237,233,254,0.6);backdrop-filter:blur(8px);border-radius:var(--radius-md);padding:24px;max-width:580px;margin:0 auto 36px;text-align:left;font-size:0.95rem;color:var(--color-text-body);border:1px solid rgba(196,181,253,0.35);">
           <h4 style="color:var(--color-navy);margin-bottom:8px;font-size:1.05rem;">Next Step: Connect on WhatsApp</h4>
           <p style="margin-bottom:14px;line-height:1.6;">
             We have prepared a pre-filled WhatsApp message summarizing your submitted travel preferences. Click the button below to open your chat with our specialist.
@@ -200,7 +200,7 @@ require_once __DIR__ . '/includes/header.php';
     <?php else: ?>
 
       <!-- ENQUIRY FORM -->
-      <div style="background:#FFF;padding:clamp(28px, 5vw, 48px);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid var(--color-border);">
+      <div class="glass-card" style="padding:clamp(28px, 5vw, 48px);border-radius:var(--radius-lg);">
         
         <?php if (!empty($errors)): ?>
           <div style="background:#FEF2F2;border-left:4px solid #E53E3E;padding:14px 18px;border-radius:var(--radius-sm);color:#991B1B;font-size:0.9rem;margin-bottom:28px;">

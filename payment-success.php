@@ -146,10 +146,18 @@ require_once __DIR__ . '/includes/header.php';
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
+@media screen {
+  .invoice-card {
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    border: 1.5px solid rgba(196, 181, 253, 0.45) !important;
+    box-shadow: 0 24px 50px -10px rgba(139, 92, 246, 0.18), inset 0 1px 1px 0 rgba(255, 255, 255, 0.85) !important;
+  }
 }
 </style>
 
-<section class="section-padding voucher-section" style="background-color:var(--color-ivory);padding-top:calc(var(--header-height) + 40px);padding-bottom:60px;">
+<section class="section-padding voucher-section" style="background:transparent;padding-top:calc(var(--header-height) + 50px);padding-bottom:60px;position:relative;z-index:2;">
   <div class="container container-narrow voucher-container">
     
     <!-- EXACT INVOICE CARD (Targeted for A4 Print) -->

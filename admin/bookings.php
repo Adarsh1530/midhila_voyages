@@ -92,7 +92,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     </p>
   </div>
   <div style="display:flex;gap:10px;align-items:center;">
-    <span style="font-size:0.82rem;background:#FFF;border:1px solid var(--admin-border);padding:6px 14px;border-radius:20px;color:var(--admin-muted);font-weight:600;">
+    <span style="font-size:0.82rem;background:rgba(255,255,255,0.08);border:1px solid rgba(196,181,253,0.25);padding:6px 16px;border-radius:20px;color:var(--admin-muted);font-weight:600;backdrop-filter:blur(10px);">
       Total: <strong style="color:var(--admin-navy);"><?= number_format($kpiTotal) ?></strong>
     </span>
   </div>
@@ -106,7 +106,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div class="admin-stat-value"><?= number_format($kpiTotal) ?></div>
       <div class="admin-stat-sub">Lifetime reservations</div>
     </div>
-    <div class="admin-stat-icon" style="background:#EFF6FF;color:#1D4ED8;">
+    <div class="admin-stat-icon" style="background:rgba(139,92,246,0.15);border:1px solid rgba(196,181,253,0.3);color:var(--admin-lavender);">
       🎫
     </div>
   </div>
@@ -114,10 +114,10 @@ require_once __DIR__ . '/includes/admin-header.php';
   <div class="admin-stat-card">
     <div>
       <div class="admin-stat-label">Confirmed</div>
-      <div class="admin-stat-value" style="color:#059669;"><?= number_format($kpiConfirmed) ?></div>
+      <div class="admin-stat-value" style="color:#86EFAC;"><?= number_format($kpiConfirmed) ?></div>
       <div class="admin-stat-sub">Ready to travel</div>
     </div>
-    <div class="admin-stat-icon" style="background:#ECFDF5;color:#059669;">
+    <div class="admin-stat-icon" style="background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#86EFAC;">
       ✅
     </div>
   </div>
@@ -125,10 +125,10 @@ require_once __DIR__ . '/includes/admin-header.php';
   <div class="admin-stat-card">
     <div>
       <div class="admin-stat-label">Pending Review</div>
-      <div class="admin-stat-value" style="color:#D97706;"><?= number_format($kpiPending) ?></div>
+      <div class="admin-stat-value" style="color:#FDE68A;"><?= number_format($kpiPending) ?></div>
       <div class="admin-stat-sub">Awaiting confirmation</div>
     </div>
-    <div class="admin-stat-icon" style="background:#FEF3C7;color:#D97706;">
+    <div class="admin-stat-icon" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:#FDE68A;">
       ⏳
     </div>
   </div>
@@ -139,7 +139,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div class="admin-stat-value" style="color:var(--admin-navy);"><?= format_price($kpiRevenue) ?></div>
       <div class="admin-stat-sub">Paid &amp; deposit revenue</div>
     </div>
-    <div class="admin-stat-icon" style="background:#F0FDFA;color:#0D9488;">
+    <div class="admin-stat-icon" style="background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3);color:#7DD3FC;">
       💰
     </div>
   </div>

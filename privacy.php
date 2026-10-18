@@ -16,18 +16,20 @@ $agencyAddress = get_setting('office_address', 'Midhila Voyages, Travel & Touris
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:60px;color:#FFF;">
-  <div class="container" style="text-align:center;max-width:760px;">
-    <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-gold);margin-bottom:12px;font-weight:600;">Legal &amp; Trust</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.2rem, 4vw, 3.2rem);margin-bottom:12px;">Privacy Policy</h1>
-    <p style="color:#CBD5E0;font-size:0.95rem;">Last Updated: October 2026</p>
+<section style="position:relative;background:linear-gradient(180deg, rgba(6,11,24,0.92) 0%, rgba(10,17,40,0.85) 100%);padding-top:calc(var(--header-height) + 50px);padding-bottom:60px;color:#FFF;border-bottom:1px solid rgba(196,181,253,0.18);">
+  <div class="container" style="text-align:center;max-width:780px;">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(196,181,253,0.12);backdrop-filter:blur(16px);border:1px solid rgba(196,181,253,0.3);padding:6px 16px;border-radius:var(--radius-pill);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--color-lavender);margin-bottom:14px;font-weight:600;box-shadow:0 0 20px rgba(139,92,246,0.2);">
+      <span>✦ Legal &amp; Trust</span>
+    </div>
+    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.2rem, 4.5vw, 3.4rem);margin-bottom:12px;">Privacy Policy</h1>
+    <p style="color:#CBD5E1;font-size:0.95rem;">Last Updated: October 2026 &bull; Midhila Voyages</p>
   </div>
 </section>
 
-<section class="section-padding" style="background-color:var(--color-ivory);">
-  <div class="container container-narrow" style="background:#FFF;padding:clamp(28px, 5vw, 56px);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);line-height:1.8;color:var(--color-text-body);">
+<section class="section-padding" style="background:transparent;position:relative;z-index:2;">
+  <div class="container container-narrow glass-card glass-specular" style="background:rgba(255,255,255,0.8);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:clamp(32px, 5vw, 56px);border-radius:28px;box-shadow:0 20px 48px -10px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.85);border:1px solid rgba(196,181,253,0.38);line-height:1.85;color:var(--color-text-body);">
     
-    <h2 style="font-size:1.45rem;color:var(--color-navy);margin-bottom:12px;">1. Introduction &amp; Commitment</h2>
+    <h2 style="font-size:1.45rem;color:var(--color-navy);margin-bottom:12px;font-weight:700;">1. Introduction &amp; Commitment</h2>
     <p style="margin-bottom:20px;">
       At <?= e($agencyName) ?>, we value your privacy and trust. This Privacy Policy outlines the types of personal data we gather when you browse our website, submit an itinerary enquiry, contact us through WhatsApp, or confirm a tour booking, and explains how this information is handled securely.
     </p>

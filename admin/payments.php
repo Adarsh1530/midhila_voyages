@@ -70,7 +70,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     </p>
   </div>
   <div style="display:flex;gap:10px;align-items:center;">
-    <span style="font-size:0.82rem;background:#ECFDF5;border:1px solid #A7F3D0;padding:6px 14px;border-radius:20px;color:#065F46;font-weight:600;">
+    <span style="font-size:0.82rem;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.35);padding:6px 16px;border-radius:20px;color:#86EFAC;font-weight:600;backdrop-filter:blur(10px);box-shadow:0 0 16px rgba(34,197,94,0.2);">
       Gateway: <strong>Razorpay (Active)</strong>
     </span>
   </div>
@@ -84,7 +84,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div class="admin-stat-value" style="color:var(--admin-navy);"><?= format_price($kpiCollected) ?></div>
       <div class="admin-stat-sub">Verified online payments</div>
     </div>
-    <div class="admin-stat-icon" style="background:#ECFDF5;color:#059669;">
+    <div class="admin-stat-icon" style="background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#86EFAC;">
       💳
     </div>
   </div>
@@ -92,10 +92,10 @@ require_once __DIR__ . '/includes/admin-header.php';
   <div class="admin-stat-card">
     <div>
       <div class="admin-stat-label">Captured Payments</div>
-      <div class="admin-stat-value" style="color:#059669;"><?= number_format($kpiCapturedCount) ?></div>
+      <div class="admin-stat-value" style="color:#86EFAC;"><?= number_format($kpiCapturedCount) ?></div>
       <div class="admin-stat-sub">Successful checkouts</div>
     </div>
-    <div class="admin-stat-icon" style="background:#F0FDFA;color:#0D9488;">
+    <div class="admin-stat-icon" style="background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3);color:#7DD3FC;">
       ✅
     </div>
   </div>
@@ -103,10 +103,10 @@ require_once __DIR__ . '/includes/admin-header.php';
   <div class="admin-stat-card">
     <div>
       <div class="admin-stat-label">Pending Orders</div>
-      <div class="admin-stat-value" style="color:#D97706;"><?= number_format($kpiPendingCount) ?></div>
+      <div class="admin-stat-value" style="color:#FDE68A;"><?= number_format($kpiPendingCount) ?></div>
       <div class="admin-stat-sub">Awaiting customer auth</div>
     </div>
-    <div class="admin-stat-icon" style="background:#FEF3C7;color:#D97706;">
+    <div class="admin-stat-icon" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:#FDE68A;">
       ⏳
     </div>
   </div>
@@ -114,10 +114,10 @@ require_once __DIR__ . '/includes/admin-header.php';
   <div class="admin-stat-card">
     <div>
       <div class="admin-stat-label">Failed / Aborted</div>
-      <div class="admin-stat-value" style="color:#DC2626;"><?= number_format($kpiFailedCount) ?></div>
+      <div class="admin-stat-value" style="color:#FCA5A5;"><?= number_format($kpiFailedCount) ?></div>
       <div class="admin-stat-sub">Declined or abandoned</div>
     </div>
-    <div class="admin-stat-icon" style="background:#FEF2F2;color:#DC2626;">
+    <div class="admin-stat-icon" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#FCA5A5;">
       ⚠️
     </div>
   </div>

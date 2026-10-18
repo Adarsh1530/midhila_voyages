@@ -37,28 +37,28 @@ require_once __DIR__ . '/includes/header.php';
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
   </div>
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:760px;">
-    <div style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-gold);margin-bottom:12px;font-weight:600;">Boundless Horizons</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;">Curated Travel Destinations</h1>
+    <div class="float-slow" style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-lavender);margin-bottom:12px;font-weight:700;background:rgba(196,181,253,0.12);padding:6px 16px;border-radius:var(--radius-pill);border:1px solid rgba(196,181,253,0.3);">✨ Boundless Horizons</div>
+    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;text-shadow:0 0 20px rgba(196,181,253,0.25);">Curated Travel Destinations</h1>
     <p class="lead-text" style="color:#CBD5E0;">Explore enchanting landscapes across India and globally celebrated vacation paradises.</p>
   </div>
 </section>
 
 <!-- Filter Tabs & Listing Grid -->
-<section class="section-padding" style="background-color:var(--color-ivory);">
+<section class="section-padding" style="background-color:transparent;">
   <div class="container">
     
-    <!-- Filter Tabs -->
+    <!-- Filter Tabs (Frosted Glass Pills) -->
     <div style="display:flex;justify-content:center;gap:12px;margin-bottom:48px;flex-wrap:wrap;">
       <a href="<?= BASE_URL ?>/destinations.php?cat=all" 
-         class="btn <?= ($filterCat === 'all') ? 'btn-primary' : 'btn-outline-gold' ?>" style="border-radius:var(--radius-pill);">
+         class="btn <?= ($filterCat === 'all') ? 'btn-primary' : 'btn-outline-white' ?>" style="border-radius:var(--radius-pill);padding:10px 22px;">
         All Destinations (<?= count($destinations) ?>)
       </a>
       <a href="<?= BASE_URL ?>/destinations.php?cat=domestic" 
-         class="btn <?= ($filterCat === 'domestic') ? 'btn-primary' : 'btn-outline-gold' ?>" style="border-radius:var(--radius-pill);">
+         class="btn <?= ($filterCat === 'domestic') ? 'btn-primary' : 'btn-outline-white' ?>" style="border-radius:var(--radius-pill);padding:10px 22px;">
         Incredible India (Domestic)
       </a>
       <a href="<?= BASE_URL ?>/destinations.php?cat=international" 
-         class="btn <?= ($filterCat === 'international') ? 'btn-primary' : 'btn-outline-gold' ?>" style="border-radius:var(--radius-pill);">
+         class="btn <?= ($filterCat === 'international') ? 'btn-primary' : 'btn-outline-white' ?>" style="border-radius:var(--radius-pill);padding:10px 22px;">
         Global Wonders (International)
       </a>
     </div>
@@ -67,7 +67,7 @@ require_once __DIR__ . '/includes/header.php';
     <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));gap:30px;">
       <?php foreach ($destinations as $idx => $dest): ?>
         <div class="card-perspective reveal-fade-up stagger-<?= ($idx % 3) + 1 ?>">
-          <a href="<?= BASE_URL ?>/destination.php?slug=<?= e($dest['slug']) ?>" class="dest-card card-3d">
+          <a href="<?= BASE_URL ?>/destination.php?slug=<?= e($dest['slug']) ?>" class="dest-card card-3d glass-specular">
             <img src="<?= e(get_image_url($dest['featured_image'])) ?>" alt="<?= e($dest['alt_text'] ?: $dest['name']) ?>" class="dest-card__bg" loading="lazy" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
             <div class="dest-card__overlay"></div>
             

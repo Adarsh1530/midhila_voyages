@@ -52,6 +52,14 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 </head>
 <body>
 
+  <!-- Ambient Floating Mesh Orbs -->
+  <div class="ambient-mesh" aria-hidden="true">
+    <div class="ambient-orb ambient-orb--1"></div>
+    <div class="ambient-orb ambient-orb--2"></div>
+    <div class="ambient-orb ambient-orb--3"></div>
+    <div class="ambient-orb ambient-orb--4"></div>
+  </div>
+
   <!-- Site Navigation Header -->
   <header class="site-header" id="siteHeader">
     <div class="container header-container">

@@ -36,10 +36,10 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div style="display:inline-block;padding:5px 18px;border-radius:var(--radius-pill);background:rgba(212,175,55,0.15);border:1px solid var(--color-gold);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-gold-bright);margin-bottom:16px;">
-      Sacred Vedic Yatras &bull; Divine Sanctuaries
+    <div class="float-slow" style="display:inline-block;padding:6px 18px;border-radius:var(--radius-pill);background:rgba(196,181,253,0.15);border:1px solid rgba(196,181,253,0.35);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-lavender);margin-bottom:16px;font-weight:700;">
+      ✨ Sacred Vedic Yatras &bull; Divine Sanctuaries
     </div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4.5vw, 3.8rem);margin-bottom:18px;">
+    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4.5vw, 3.8rem);margin-bottom:18px;text-shadow:0 0 24px rgba(196,181,253,0.25);">
       Journeys of Faith, Serenity &amp; Devotion
     </h1>
     <p class="lead-text" style="color:#CBD5E0;margin-bottom:32px;">
@@ -47,7 +47,7 @@ require_once __DIR__ . '/includes/header.php';
     </p>
 
     <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
-      <a href="#pilgrimPackages" class="btn btn-primary btn-lg">Explore Sacred Circuits</a>
+      <a href="#pilgrimPackages" class="btn btn-primary btn-lg pulse-luminous">Explore Sacred Circuits</a>
       <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to arrange a family/group pilgrimage tour.")) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-teal btn-lg">
         <span>Group Yatra Enquiry</span>
       </a>
@@ -56,7 +56,7 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Sacred Circuits Featured Packages -->
-<section class="section-padding" id="pilgrimPackages" style="background-color:var(--color-ivory);">
+<section class="section-padding" id="pilgrimPackages" style="background-color:transparent;">
   <div class="container">
     
     <div class="section-header section-header--center">
@@ -86,25 +86,25 @@ require_once __DIR__ . '/includes/header.php';
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:24px;text-align:left;">
         
-        <div style="background:var(--color-navy-card);padding:24px;border-radius:var(--radius-md);border:1px solid rgba(197,160,89,0.25);">
-          <h4 style="font-size:1.1rem;color:var(--color-gold);margin-bottom:8px;">Elder-Friendly Pacing</h4>
-          <p style="font-size:0.88rem;color:#A0AEC0;line-height:1.6;">No rushed early schedules or excessive continuous driving. Planned rest pauses and hotels close to temple darshan gates.</p>
+        <div class="glass-card--dark card-3d glass-specular" style="padding:26px;border-radius:var(--radius-md);">
+          <h4 style="font-size:1.1rem;color:var(--color-lavender);margin-bottom:8px;font-weight:700;">Elder-Friendly Pacing</h4>
+          <p style="font-size:0.88rem;color:#CBD5E0;line-height:1.6;">No rushed early schedules or excessive continuous driving. Planned rest pauses and hotels close to temple darshan gates.</p>
         </div>
 
-        <div style="background:var(--color-navy-card);padding:24px;border-radius:var(--radius-md);border:1px solid rgba(197,160,89,0.25);">
-          <h4 style="font-size:1.1rem;color:var(--color-gold);margin-bottom:8px;">Pure Vegetarian Meals</h4>
-          <p style="font-size:0.88rem;color:#A0AEC0;line-height:1.6;">Arrangements at vetted Sattvic and authentic South &amp; North Indian vegetarian dining establishments.</p>
+        <div class="glass-card--dark card-3d glass-specular" style="padding:26px;border-radius:var(--radius-md);">
+          <h4 style="font-size:1.1rem;color:var(--color-periwinkle);margin-bottom:8px;font-weight:700;">Pure Vegetarian Meals</h4>
+          <p style="font-size:0.88rem;color:#CBD5E0;line-height:1.6;">Arrangements at vetted Sattvic and authentic South &amp; North Indian vegetarian dining establishments.</p>
         </div>
 
-        <div style="background:var(--color-navy-card);padding:24px;border-radius:var(--radius-md);border:1px solid rgba(197,160,89,0.25);">
-          <h4 style="font-size:1.1rem;color:var(--color-gold);margin-bottom:8px;">Darshan Protocol Support</h4>
-          <p style="font-size:0.88rem;color:#A0AEC0;line-height:1.6;">Guidance regarding temple dress codes, puja timings, special queue access, and holy bath rituals.</p>
+        <div class="glass-card--dark card-3d glass-specular" style="padding:26px;border-radius:var(--radius-md);">
+          <h4 style="font-size:1.1rem;color:var(--color-icy-blue);margin-bottom:8px;font-weight:700;">Darshan Protocol Support</h4>
+          <p style="font-size:0.88rem;color:#CBD5E0;line-height:1.6;">Guidance regarding temple dress codes, puja timings, special queue access, and holy bath rituals.</p>
         </div>
 
       </div>
 
       <div style="margin-top:48px;">
-        <a href="<?= BASE_URL ?>/enquiry.php?category=pilgrimage" class="btn btn-primary btn-lg">Plan Custom Pilgrimage Yatra</a>
+        <a href="<?= BASE_URL ?>/enquiry.php?category=pilgrimage" class="btn btn-primary btn-lg pulse-luminous">Plan Custom Pilgrimage Yatra</a>
       </div>
     </div>
   </div>

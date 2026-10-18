@@ -60,54 +60,59 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- Destination Cinematic Hero -->
-<section style="position:relative;min-height:55vh;background-color:var(--color-navy-deep);display:flex;align-items:flex-end;padding-top:calc(var(--header-height) + 40px);padding-bottom:50px;color:#FFF;overflow:hidden;">
+<section style="position:relative;min-height:58vh;background:linear-gradient(180deg, rgba(6,11,24,0.9) 0%, rgba(10,17,40,0.85) 100%);display:flex;align-items:flex-end;padding-top:calc(var(--header-height) + 40px);padding-bottom:56px;color:#FFF;overflow:hidden;border-bottom:1px solid rgba(196,181,253,0.18);">
   <div style="position:absolute;inset:0;">
-    <img src="<?= e(get_image_url($dest['featured_image'])) ?>" alt="<?= e($dest['alt_text'] ?: $dest['name']) ?>" style="width:100%;height:100%;object-fit:cover;opacity:0.4;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.5) 0%, rgba(6,16,30,0.85) 75%, var(--color-navy-deep) 100%);"></div>
+    <img src="<?= e(get_image_url($dest['featured_image'])) ?>" alt="<?= e($dest['alt_text'] ?: $dest['name']) ?>" style="width:100%;height:100%;object-fit:cover;opacity:0.45;transform:scale(1.04);transition:transform 8s ease;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,11,24,0.45) 0%, rgba(6,11,24,0.85) 75%, var(--color-navy-deep) 100%);"></div>
   </div>
 
   <div class="container" style="position:relative;z-index:2;">
     <!-- Breadcrumbs -->
-    <nav aria-label="Breadcrumb" style="margin-bottom:14px;font-size:0.85rem;color:var(--color-gold);">
-      <a href="<?= BASE_URL ?>/index.php" style="color:#CBD5E0;">Home</a> &nbsp;/&nbsp;
-      <a href="<?= BASE_URL ?>/destinations.php" style="color:#CBD5E0;">Destinations</a> &nbsp;/&nbsp;
-      <span><?= e($dest['name']) ?></span>
+    <nav aria-label="Breadcrumb" style="margin-bottom:14px;font-size:0.85rem;display:flex;align-items:center;gap:8px;">
+      <a href="<?= BASE_URL ?>/index.php" style="color:var(--color-periwinkle);transition:color 0.2s;">Home</a> <span style="opacity:0.5;">/</span>
+      <a href="<?= BASE_URL ?>/destinations.php" style="color:var(--color-periwinkle);transition:color 0.2s;">Destinations</a> <span style="opacity:0.5;">/</span>
+      <span style="color:#FFF;font-weight:600;"><?= e($dest['name']) ?></span>
     </nav>
 
-    <div style="display:inline-block;background:rgba(255,255,255,0.1);padding:4px 14px;border-radius:var(--radius-pill);border:1px solid var(--color-border-gold);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-gold-bright);margin-bottom:12px;">
-      <?= strtoupper(e($dest['category'])) ?> &bull; <?= e($dest['region_state']) ?>, <?= e($dest['country']) ?>
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(196,181,253,0.15);backdrop-filter:blur(16px);padding:5px 16px;border-radius:var(--radius-pill);border:1px solid rgba(196,181,253,0.35);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--color-icy);margin-bottom:14px;font-weight:700;box-shadow:0 0 20px rgba(139,92,246,0.25);">
+      <span>✦ <?= strtoupper(e($dest['category'])) ?> &bull; <?= e($dest['region_state']) ?>, <?= e($dest['country']) ?></span>
     </div>
 
-    <h1 class="editorial-headline" style="color:#FFF;margin-bottom:12px;font-size:clamp(2.4rem, 4.5vw, 3.8rem);">
+    <h1 class="editorial-headline" style="color:#FFF;margin-bottom:12px;font-size:clamp(2.5rem, 5vw, 4rem);text-shadow:0 4px 16px rgba(0,0,0,0.6);">
       <?= e($dest['name']) ?>
     </h1>
     <?php if (!empty($dest['tagline'])): ?>
-      <p class="lead-text" style="color:#E2E8F0;max-width:720px;font-size:1.15rem;"><?= e($dest['tagline']) ?></p>
+      <p class="lead-text" style="color:#E2E8F0;max-width:740px;font-size:1.18rem;line-height:1.6;text-shadow:0 2px 8px rgba(0,0,0,0.5);"><?= e($dest['tagline']) ?></p>
     <?php endif; ?>
   </div>
 </section>
 
 <!-- Destination Detailed Overview -->
-<section class="section-padding" style="background-color:var(--color-ivory);">
+<section class="section-padding" style="background:transparent;position:relative;z-index:2;">
   <div class="container">
     <div class="detail-layout-grid">
       
       <!-- Main Content -->
       <div>
-        <h2 class="section-title" style="font-size:1.85rem;">About <?= e($dest['name']) ?></h2>
-        <div style="font-size:1.02rem;line-height:1.8;color:var(--color-text-body);margin-bottom:36px;">
-          <?= nl2br(e($dest['description'])) ?>
+        <div class="glass-card glass-specular" style="background:rgba(255,255,255,0.78);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:36px;border-radius:24px;border:1px solid rgba(196,181,253,0.35);box-shadow:0 16px 40px -8px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.8);margin-bottom:36px;">
+          <h2 class="section-title" style="font-size:1.85rem;margin-bottom:18px;">About <?= e($dest['name']) ?></h2>
+          <div style="font-size:1.04rem;line-height:1.85;color:var(--color-text-body);">
+            <?= nl2br(e($dest['description'])) ?>
+          </div>
         </div>
 
         <!-- Highlights Grid -->
         <?php if (!empty($highlights)): ?>
-          <div style="background:#FFF;padding:32px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);margin-bottom:40px;">
-            <h3 style="font-size:1.25rem;margin-bottom:18px;color:var(--color-navy);">Key Experience Highlights</h3>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;">
+          <div class="glass-card glass-specular" style="background:rgba(255,255,255,0.78);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:34px;border-radius:24px;border:1px solid rgba(196,181,253,0.35);box-shadow:0 16px 40px -8px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.8);margin-bottom:40px;">
+            <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-violet);font-weight:700;margin-bottom:8px;">
+              Curated Vignettes
+            </div>
+            <h3 style="font-size:1.35rem;margin-bottom:20px;color:var(--color-navy);">Key Experience Highlights</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;">
               <?php foreach ($highlights as $hl): ?>
-                <div style="display:flex;align-items:center;gap:10px;font-size:0.95rem;color:var(--color-text-headline);">
-                  <span style="color:var(--color-teal);font-weight:700;">✓</span>
-                  <span><?= e($hl) ?></span>
+                <div style="display:flex;align-items:center;gap:12px;font-size:0.96rem;color:var(--color-text-headline);padding:10px 14px;border-radius:12px;background:rgba(196,181,253,0.12);border:1px solid rgba(196,181,253,0.25);">
+                  <span style="color:var(--color-violet);font-weight:700;font-size:1.1rem;">✦</span>
+                  <span style="font-weight:500;"><?= e($hl) ?></span>
                 </div>
               <?php endforeach; ?>
             </div>
@@ -117,33 +122,36 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Sidebar Quick Info & Action Card -->
       <div>
-        <div style="position:sticky;top:100px;background:#FFF;padding:30px;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid var(--color-border);">
-          <h3 style="font-size:1.2rem;margin-bottom:20px;color:var(--color-navy);border-bottom:1px solid var(--color-border);padding-bottom:12px;">Travel Quick Facts</h3>
+        <div class="glass-card card-3d glass-specular" style="position:sticky;top:100px;background:linear-gradient(135deg, rgba(255,255,255,0.88) 0%, rgba(243,238,255,0.8) 100%);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:34px 28px;border-radius:24px;box-shadow:0 24px 50px -10px rgba(139,92,246,0.18), inset 0 1px 1px rgba(255,255,255,0.85);border:1px solid rgba(196,181,253,0.45);">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;border-bottom:1px solid rgba(196,181,253,0.25);padding-bottom:14px;">
+            <h3 style="font-size:1.25rem;color:var(--color-navy);font-weight:700;margin:0;">Travel Quick Facts</h3>
+            <span style="font-size:1.2rem;color:var(--color-violet);">🧭</span>
+          </div>
           
-          <div style="margin-bottom:16px;">
-            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-muted);">Region / State</div>
-            <div style="font-weight:600;color:var(--color-navy);"><?= e($dest['region_state']) ?>, <?= e($dest['country']) ?></div>
+          <div style="margin-bottom:18px;">
+            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);font-weight:700;">Region / State</div>
+            <div style="font-weight:600;color:var(--color-navy);font-size:1rem;margin-top:2px;"><?= e($dest['region_state']) ?>, <?= e($dest['country']) ?></div>
           </div>
 
           <?php if (!empty($dest['best_time_to_visit'])): ?>
-            <div style="margin-bottom:16px;">
-              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-muted);">Best Time to Visit</div>
-              <div style="font-weight:600;color:var(--color-navy);"><?= e($dest['best_time_to_visit']) ?></div>
+            <div style="margin-bottom:18px;">
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);font-weight:700;">Best Time to Visit</div>
+              <div style="font-weight:600;color:var(--color-navy);font-size:1rem;margin-top:2px;"><?= e($dest['best_time_to_visit']) ?></div>
             </div>
           <?php endif; ?>
 
           <?php if ($dest['latitude'] && $dest['longitude']): ?>
-            <div style="margin-bottom:20px;">
-              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-muted);">Geographic Coordinates</div>
-              <div style="font-weight:600;font-size:0.88rem;color:var(--color-teal-dark);"><?= e($dest['latitude']) ?>° N, <?= e($dest['longitude']) ?>° E</div>
+            <div style="margin-bottom:22px;">
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);font-weight:700;">Geographic Coordinates</div>
+              <div style="font-weight:600;font-size:0.92rem;color:var(--color-violet);margin-top:2px;"><?= e($dest['latitude']) ?>° N, <?= e($dest['longitude']) ?>° E</div>
             </div>
           <?php endif; ?>
 
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:24px;border-top:1px solid var(--color-border);padding-top:20px;">
-            <a href="<?= BASE_URL ?>/enquiry.php?destination=<?= urlencode($dest['name']) ?>" class="btn btn-primary" style="width:100%;">
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;border-top:1px solid rgba(196,181,253,0.25);padding-top:20px;">
+            <a href="<?= BASE_URL ?>/enquiry.php?destination=<?= urlencode($dest['name']) ?>" class="btn btn-primary" style="width:100%;justify-content:center;">
               Plan Trip to <?= e($dest['name']) ?>
             </a>
-            <a href="<?= e($waDestUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-teal" style="width:100%;">
+            <a href="<?= e($waDestUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-teal" style="width:100%;justify-content:center;">
               <span>WhatsApp Specialist</span>
             </a>
           </div>

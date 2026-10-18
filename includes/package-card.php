@@ -29,7 +29,7 @@ $pkgDetailUrl = BASE_URL . '/package.php?slug=' . urlencode($pkgSlug);
      data-title="<?= e(strtolower($pkgTitle)) ?>"
      data-destination="<?= e(strtolower($pkgDest)) ?>">
   
-  <article class="package-card card-3d">
+  <article class="package-card card-3d glass-specular">
     
     <!-- Media & Badges -->
     <div class="package-card__media">

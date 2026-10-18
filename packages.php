@@ -85,21 +85,21 @@ require_once __DIR__ . '/includes/header.php';
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
   </div>
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:760px;">
-    <div style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-gold);margin-bottom:12px;font-weight:600;">Tailored Expeditions</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;">Curated Tour Packages</h1>
+    <div class="float-slow" style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-lavender);margin-bottom:12px;font-weight:700;background:rgba(196,181,253,0.12);padding:6px 16px;border-radius:var(--radius-pill);border:1px solid rgba(196,181,253,0.3);">✨ Tailored Expeditions</div>
+    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;text-shadow:0 0 20px rgba(196,181,253,0.25);">Curated Tour Packages</h1>
     <p class="lead-text" style="color:#CBD5E0;">Explore our diverse portfolio of domestic holidays, international vacations, and sacred pilgrimage circuits.</p>
   </div>
 </section>
 
-<!-- Filter & Search Controls -->
-<section style="background:#FFF;border-bottom:1px solid var(--color-border);padding:24px 0;">
+<!-- Filter & Search Controls (Frosted Glass Floating Bar) -->
+<section style="background:rgba(255, 255, 255, 0.72);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(196, 181, 253, 0.35);padding:24px 0;box-shadow:inset 0 1px 1px 0 rgba(255,255,255,0.8), 0 8px 24px rgba(10, 17, 40, 0.05);position:sticky;top:var(--header-height);z-index:90;">
   <div class="container">
     <form action="<?= BASE_URL ?>/packages.php" method="GET" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)) auto;gap:14px;align-items:end;">
       
       <!-- Destination Filter -->
       <div>
-        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-text-muted);margin-bottom:6px;">Destination</label>
-        <select name="destination" style="width:100%;padding:10px 14px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.9rem;background:#FFF;">
+        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Destination</label>
+        <select name="destination" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
           <option value="">All Destinations</option>
           <?php foreach ($dests as $d): ?>
             <option value="<?= e($d['slug']) ?>" <?= ($destinationFilter === $d['slug'] || $destinationFilter === $d['name']) ? 'selected' : '' ?>>
@@ -111,8 +111,8 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Category Filter -->
       <div>
-        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-text-muted);margin-bottom:6px;">Experience Style</label>
-        <select name="category" style="width:100%;padding:10px 14px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.9rem;background:#FFF;">
+        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Experience Style</label>
+        <select name="category" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
           <option value="">All Categories</option>
           <?php foreach ($cats as $c): ?>
             <option value="<?= e($c['slug']) ?>" <?= ($categoryFilter === $c['slug'] || $categoryFilter === $c['name']) ? 'selected' : '' ?>>
@@ -124,14 +124,14 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Keyword Search -->
       <div>
-        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-text-muted);margin-bottom:6px;">Keyword</label>
-        <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="e.g. Houseboat, Desert, Temple" style="width:100%;padding:10px 14px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.9rem;">
+        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Keyword</label>
+        <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="e.g. Houseboat, Desert, Temple" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
       </div>
 
       <!-- Sorting -->
       <div>
-        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-text-muted);margin-bottom:6px;">Sort By</label>
-        <select name="sort" style="width:100%;padding:10px 14px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.9rem;background:#FFF;">
+        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Sort By</label>
+        <select name="sort" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
           <option value="featured" <?= ($sort === 'featured') ? 'selected' : '' ?>>Featured First</option>
           <option value="price_asc" <?= ($sort === 'price_asc') ? 'selected' : '' ?>>Price: Low to High</option>
           <option value="price_desc" <?= ($sort === 'price_desc') ? 'selected' : '' ?>>Price: High to Low</option>
@@ -155,7 +155,7 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Package Listing Grid -->
-<section class="section-padding" style="background-color:var(--color-ivory);">
+<section class="section-padding" style="background-color:transparent;">
   <div class="container">
     
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;">
@@ -165,7 +165,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <?php if (empty($packages)): ?>
-      <div style="text-align:center;padding:70px 20px;background:#FFF;border-radius:var(--radius-lg);border:1px dashed var(--color-border);">
+      <div class="glass-card" style="text-align:center;padding:70px 20px;border-radius:var(--radius-lg);">
         <h3 style="font-size:1.4rem;color:var(--color-navy);margin-bottom:8px;">No packages match your criteria</h3>
         <p style="color:var(--color-text-muted);margin-bottom:24px;">Try loosening your filters or enquire with our specialists for a bespoke itinerary.</p>
         <a href="<?= BASE_URL ?>/packages.php" class="btn btn-primary">Clear Filters</a>

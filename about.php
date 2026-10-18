@@ -16,21 +16,21 @@ $agencyPhone = get_setting('primary_phone', '+91 12345 67890');
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Banner Header -->
+<<!-- Banner Header -->
 <section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;">
   <div style="position:absolute;inset:0;opacity:0.25;">
     <img src="https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1800&q=80" alt="Misty mountain valley" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
   </div>
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:760px;">
-    <div style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-gold);margin-bottom:12px;font-weight:600;">Our Story &amp; Purpose</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;">The Heart Behind Midhila Voyages</h1>
+    <div class="float-slow" style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-lavender);margin-bottom:12px;font-weight:700;background:rgba(196,181,253,0.12);padding:6px 16px;border-radius:var(--radius-pill);border:1px solid rgba(196,181,253,0.3);">✨ Our Story &amp; Purpose</div>
+    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;text-shadow:0 0 20px rgba(196,181,253,0.25);">The Heart Behind Midhila Voyages</h1>
     <p class="lead-text" style="color:#CBD5E0;">We cultivate deep encounters with landscapes, cultural heritages, and sacred traditions through personalized, thoughtful travel design.</p>
   </div>
 </section>
 
 <!-- Brand Philosophy Section -->
-<section class="section-padding" style="background-color:var(--color-ivory);">
+<section class="section-padding" style="background-color:transparent;">
   <div class="container">
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:clamp(40px, 6vw, 70px);align-items:center;">
       
@@ -50,11 +50,11 @@ require_once __DIR__ . '/includes/header.php';
 
       <div class="reveal-fade-right">
         <div style="position:relative;">
-          <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xl);border:6px solid #FFF;">
+          <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xl);border:6px solid rgba(255,255,255,0.8);">
             <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1000&q=80" alt="Kerala traditional houseboat" style="width:100%;height:440px;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
           </div>
-          <div style="position:absolute;bottom:-20px;right:-15px;background:var(--color-navy-card);color:#FFF;padding:22px 26px;border-radius:var(--radius-md);box-shadow:var(--shadow-lg);border:1px solid var(--color-border-gold);max-width:280px;">
-            <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--color-gold);margin-bottom:4px;">100% Dedicated Care</div>
+          <div class="card-3d float-slow glass-specular" style="position:absolute;bottom:-20px;right:-15px;background:rgba(14,23,46,0.85);backdrop-filter:blur(20px);color:#FFF;padding:22px 26px;border-radius:var(--radius-md);box-shadow:0 20px 40px rgba(0,0,0,0.4);border:1px solid rgba(196,181,253,0.35);max-width:280px;">
+            <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--color-lavender);margin-bottom:4px;font-weight:700;">100% Dedicated Care</div>
             <div style="font-size:0.82rem;color:#CBD5E0;">Real travel consultants answering your calls and WhatsApp messages.</div>
           </div>
         </div>
@@ -76,32 +76,31 @@ require_once __DIR__ . '/includes/header.php';
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:28px;">
       
-      <div class="card-3d" style="background:var(--color-navy-card);padding:36px 28px;border-radius:var(--radius-lg);border:1px solid rgba(197,160,89,0.25);">
-        <div style="font-size:2rem;color:var(--color-gold);margin-bottom:16px;">✦</div>
+      <div class="glass-card--dark card-3d glass-specular" style="padding:36px 28px;border-radius:var(--radius-lg);">
+        <div style="font-size:2rem;color:var(--color-lavender);margin-bottom:16px;">✦</div>
         <h3 style="font-size:1.25rem;color:#FFF;margin-bottom:12px;">Uncompromising Integrity</h3>
-        <p style="font-size:0.9rem;color:#A0AEC0;line-height:1.65;">We quote clear, honest prices. What is included and excluded is written unambiguously in your proposal before you pay a single rupee.</p>
+        <p style="font-size:0.9rem;color:#CBD5E0;line-height:1.65;">We quote clear, honest prices. What is included and excluded is written unambiguously in your proposal before you pay a single rupee.</p>
       </div>
 
-      <div class="card-3d" style="background:var(--color-navy-card);padding:36px 28px;border-radius:var(--radius-lg);border:1px solid rgba(197,160,89,0.25);">
-        <div style="font-size:2rem;color:var(--color-teal-bright);margin-bottom:16px;">✦</div>
+      <div class="glass-card--dark card-3d glass-specular" style="padding:36px 28px;border-radius:var(--radius-lg);">
+        <div style="font-size:2rem;color:var(--color-periwinkle);margin-bottom:16px;">✦</div>
         <h3 style="font-size:1.25rem;color:#FFF;margin-bottom:12px;">Human-Centric Planning</h3>
-        <p style="font-size:0.9rem;color:#A0AEC0;line-height:1.65;">You will never be handed off to an impersonal automated chatbot for trip design. A knowledgeable travel specialist listens to your wishes.</p>
+        <p style="font-size:0.9rem;color:#CBD5E0;line-height:1.65;">You will never be handed off to an impersonal automated chatbot for trip design. A knowledgeable travel specialist listens to your wishes.</p>
       </div>
 
-      <div class="card-3d" style="background:var(--color-navy-card);padding:36px 28px;border-radius:var(--radius-lg);border:1px solid rgba(197,160,89,0.25);">
-        <div style="font-size:2rem;color:var(--color-gold);margin-bottom:16px;">✦</div>
+      <div class="glass-card--dark card-3d glass-specular" style="padding:36px 28px;border-radius:var(--radius-lg);">
+        <div style="font-size:2rem;color:var(--color-lavender);margin-bottom:16px;">✦</div>
         <h3 style="font-size:1.25rem;color:#FFF;margin-bottom:12px;">Reverent Pilgrimages</h3>
-        <p style="font-size:0.9rem;color:#A0AEC0;line-height:1.65;">We treat religious yatras with the devotion they deserve. Senior-friendly vehicles, pure vegetarian dining choices, and respectful pacing.</p>
+        <p style="font-size:0.9rem;color:#CBD5E0;line-height:1.65;">We treat religious yatras with the devotion they deserve. Senior-friendly vehicles, pure vegetarian dining choices, and respectful pacing.</p>
       </div>
 
-      <div class="card-3d" style="background:var(--color-navy-card);padding:36px 28px;border-radius:var(--radius-lg);border:1px solid rgba(197,160,89,0.25);">
-        <div style="font-size:2rem;color:var(--color-teal-bright);margin-bottom:16px;">✦</div>
+      <div class="glass-card--dark card-3d glass-specular" style="padding:36px 28px;border-radius:var(--radius-lg);">
+        <div style="font-size:2rem;color:var(--color-icy-blue);margin-bottom:16px;">✦</div>
         <h3 style="font-size:1.25rem;color:#FFF;margin-bottom:12px;">Vetted Network</h3>
-        <p style="font-size:0.9rem;color:#A0AEC0;line-height:1.65;">We work exclusively with registered hotel partners, licensed houseboats, and professional chauffeurs who prioritize passenger safety.</p>
+        <p style="font-size:0.9rem;color:#CBD5E0;line-height:1.65;">We work exclusively with registered hotel partners, licensed houseboats, and professional chauffeurs who prioritize passenger safety.</p>
       </div>
 
     </div>
-
   </div>
 </section>
 
