@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06101E" />
+      <stop offset="50%" stop-color="#0A192F" />
+      <stop offset="100%" stop-color="#0D223F" />
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E2B472" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#E2B472" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad)" />
+
+  <!-- Subtle glow -->
+  <circle cx="400" cy="270" r="160" fill="url(#goldGlow)" />
+
+  <!-- Compass Star Illustration -->
+  <g transform="translate(400, 260)">
+    <!-- Outer decorative ring -->
+    <circle cx="0" cy="0" r="90" fill="none" stroke="#E2B472" stroke-width="1.5" stroke-dasharray="3 5" opacity="0.6" />
+    <circle cx="0" cy="0" r="76" fill="none" stroke="#2DD4BF" stroke-width="1" opacity="0.4" />
+    
+    <!-- Horizon Line & Route Arc -->
+    <path d="M -130 35 C -60 -10, 60 70, 130 20" fill="none" stroke="#2DD4BF" stroke-width="2" stroke-dasharray="6 4" opacity="0.7" />
+    
+    <!-- 8-Pointed Star / Compass Rose -->
+    <!-- North Point (Gold) -->
+    <polygon points="0,-70 12,-16 0,0 -12,-16" fill="#E2B472" />
+    <!-- South Point (Navy / Teal) -->
+    <polygon points="0,70 12,16 0,0 -12,16" fill="#14B8A6" opacity="0.8" />
+    <!-- East Point -->
+    <polygon points="70,0 16,12 0,0 16,-12" fill="#E2B472" opacity="0.9" />
+    <!-- West Point -->
+    <polygon points="-70,0 -16,12 0,0 -16,-12" fill="#14B8A6" opacity="0.8" />
+    
+    <!-- Intermediate Points -->
+    <polygon points="36,-36 6,-12 0,0 12,-6" fill="#E2B472" opacity="0.6" />
+    <polygon points="-36,-36 -6,-12 0,0 -12,-6" fill="#E2B472" opacity="0.6" />
+    <polygon points="36,36 6,12 0,0 12,6" fill="#14B8A6" opacity="0.5" />
+    <polygon points="-36,36 -6,12 0,0 -12,6" fill="#14B8A6" opacity="0.5" />
+
+    <!-- Center Compass Pivot -->
+    <circle cx="0" cy="0" r="9" fill="#06101E" stroke="#E2B472" stroke-width="2.5" />
+    <circle cx="0" cy="0" r="3.5" fill="#E2B472" />
+  </g>
+
+  <!-- Brand Typography -->
+  <text x="400" y="420" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="24" font-weight="700" fill="#E2B472" letter-spacing="4" text-anchor="middle">MIDHILA VOYAGES</text>
+  <text x="400" y="452" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="13" font-weight="500" fill="#94A3B8" letter-spacing="3" text-anchor="middle">IMAGE PREVIEW PENDING</text>
+</svg>

@@ -1,0 +1,24 @@
+# MIDHILA VOYAGES — Apache Configuration & Security Headers
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /MIDHILA%20TRAVELS/
+
+    # Block access to hidden files and sensitive directories
+    RewriteRule "(^|/)\.(?!well-known)" - [F]
+    RewriteRule "^database/" - [F,L]
+
+    # Clean URL routing for destination details (optional fallback)
+    # RewriteRule ^destination/([a-zA-Z0-9_-]+)/?$ destination.php?slug=$1 [QSA,L]
+    # RewriteRule ^package/([a-zA-Z0-9_-]+)/?$ package.php?slug=$1 [QSA,L]
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Disable Directory Browsing
+Options -Indexes
