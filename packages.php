@@ -91,8 +91,8 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 </section>
 
-<!-- Filter & Search Controls (Frosted Glass Floating Bar) -->
-<section style="background:rgba(255, 255, 255, 0.72);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(196, 181, 253, 0.35);padding:24px 0;box-shadow:inset 0 1px 1px 0 rgba(255,255,255,0.8), 0 8px 24px rgba(10, 17, 40, 0.05);position:sticky;top:var(--header-height);z-index:90;">
+<!-- Filter & Search Controls (Frosted Glass Bar) -->
+<section style="background:rgba(255, 255, 255, 0.72);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(196, 181, 253, 0.35);padding:24px 0;box-shadow:inset 0 1px 1px 0 rgba(255,255,255,0.8), 0 8px 24px rgba(10, 17, 40, 0.05);position:relative;z-index:10;">
   <div class="container">
     <form action="<?= BASE_URL ?>/packages.php" method="GET" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)) auto;gap:14px;align-items:end;">
       
