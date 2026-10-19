@@ -80,7 +80,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
     <div>
       <label style="font-size:0.75rem;font-weight:700;color:var(--admin-muted);display:block;margin-bottom:4px;">Status Filter</label>
-      <select name="status" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
+      <select name="status" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;background:#FFF;">
         <option value="">All Statuses</option>
         <option value="new" <?= ($statusFilter === 'new') ? 'selected' : '' ?>>New</option>
         <option value="in_progress" <?= ($statusFilter === 'in_progress') ? 'selected' : '' ?>>In Progress</option>

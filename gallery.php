@@ -45,7 +45,7 @@ require_once __DIR__ . '/includes/header.php';
         All Photos (<?= count($gallery) ?>)
       </button>
       <?php foreach ($categories as $cat): ?>
-        <button type="button" class="gallery-filter-btn btn" data-filter="<?= e($cat) ?>" style="border-radius:var(--radius-pill);padding:9px 24px;font-size:0.88rem;text-transform:capitalize;background:var(--glass-surface);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:var(--color-navy);border:1px solid var(--glass-border);box-shadow:var(--glass-inner-highlight), var(--shadow-sm);cursor:pointer;transition:all 0.3s ease;">
+        <button type="button" class="gallery-filter-btn btn" data-filter="<?= e($cat) ?>" style="border-radius:var(--radius-pill);padding:9px 24px;font-size:0.88rem;text-transform:capitalize;background:rgba(255,255,255,0.7);backdrop-filter:blur(16px);color:var(--color-navy);border:1px solid rgba(196,181,253,0.35);box-shadow:0 4px 16px rgba(0,0,0,0.05);cursor:pointer;transition:all 0.3s ease;">
           <?= e($cat) ?>
         </button>
       <?php endforeach; ?>

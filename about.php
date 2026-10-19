@@ -16,8 +16,8 @@ $agencyPhone = get_setting('primary_phone', '+91 12345 67890');
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Banner Header -->
-<section style="position:relative;background:rgba(6,11,24,0.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;border-bottom:1px solid rgba(196,181,253,0.2);">
+<<!-- Banner Header -->
+<section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;">
   <div style="position:absolute;inset:0;opacity:0.25;">
     <img src="https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1800&q=80" alt="Misty mountain valley" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
@@ -50,10 +50,10 @@ require_once __DIR__ . '/includes/header.php';
 
       <div class="reveal-fade-right">
         <div style="position:relative;">
-          <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xl), 0 0 35px rgba(196,181,253,0.3);border:2px solid rgba(255,255,255,0.75);">
+          <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xl);border:6px solid rgba(255,255,255,0.8);">
             <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1000&q=80" alt="Kerala traditional houseboat" style="width:100%;height:440px;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
           </div>
-          <div class="card-3d float-slow glass-specular" style="position:absolute;bottom:-20px;right:-15px;background:var(--glass-surface-dark);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);color:#FFF;padding:22px 26px;border-radius:var(--radius-md);box-shadow:var(--glass-inner-highlight-dark), 0 20px 40px rgba(0,0,0,0.4);border:1px solid var(--glass-border-dark);max-width:280px;">
+          <div class="card-3d float-slow glass-specular" style="position:absolute;bottom:-20px;right:-15px;background:rgba(14,23,46,0.85);backdrop-filter:blur(20px);color:#FFF;padding:22px 26px;border-radius:var(--radius-md);box-shadow:0 20px 40px rgba(0,0,0,0.4);border:1px solid rgba(196,181,253,0.35);max-width:280px;">
             <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--color-lavender);margin-bottom:4px;font-weight:700;">100% Dedicated Care</div>
             <div style="font-size:0.82rem;color:#CBD5E0;">Real travel consultants answering your calls and WhatsApp messages.</div>
           </div>
@@ -105,7 +105,7 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Call to Action Banner -->
-<section class="section-padding" style="text-align:center;">
+<section class="section-padding" style="background-color:var(--color-ivory);text-align:center;">
   <div class="container container-narrow">
     <span class="section-subtitle">Let's Connect</span>
     <h2 class="section-title">Ready to Design Your Next Expedition?</h2>

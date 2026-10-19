@@ -144,7 +144,7 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- Banner Header -->
-<section style="position:relative;background:rgba(6,11,24,0.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;border-bottom:1px solid rgba(196,181,253,0.2);">
+<section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;">
   <div style="position:absolute;inset:0;opacity:0.25;">
     <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80" alt="Travel horizon" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
@@ -215,7 +215,7 @@ require_once __DIR__ . '/includes/header.php';
 
           <?php if ($pkgDetails): ?>
             <input type="hidden" name="package_id" value="<?= (int)$pkgDetails['id'] ?>">
-            <div style="background:rgba(196,181,253,0.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 20px;border-radius:var(--radius-md);border:1px solid rgba(196,181,253,0.35);margin-bottom:28px;display:flex;align-items:center;gap:12px;">
+            <div style="background:var(--color-ivory-warm);padding:14px 20px;border-radius:var(--radius-md);border:1px solid var(--color-border-gold);margin-bottom:28px;display:flex;align-items:center;gap:12px;">
               <span style="font-size:1.4rem;color:var(--color-gold);">✦</span>
               <div>
                 <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-muted);">Enquiring for package</span>
@@ -226,7 +226,7 @@ require_once __DIR__ . '/includes/header.php';
 
           <!-- Step 1: Traveller Information -->
           <div style="margin-bottom:32px;">
-            <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:18px;border-bottom:1px solid rgba(196,181,253,0.25);padding-bottom:10px;">
+            <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:18px;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
               1. Your Contact Details
             </h3>
 
@@ -235,13 +235,13 @@ require_once __DIR__ . '/includes/header.php';
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Full Name *</label>
                 <input type="text" name="full_name" id="full_name" required placeholder="e.g. Ananya Sharma" 
                        value="<?= e($_POST['full_name'] ?? '') ?>"
-                       style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                       style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Phone Number *</label>
                 <input type="tel" name="phone" id="phone" required placeholder="+91 12345 67890" 
                        value="<?= e($_POST['phone'] ?? '') ?>"
-                       style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                       style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
               </div>
             </div>
 
@@ -250,27 +250,27 @@ require_once __DIR__ . '/includes/header.php';
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">WhatsApp Number (If different)</label>
                 <input type="tel" name="whatsapp" placeholder="WhatsApp contact number" 
                        value="<?= e($_POST['whatsapp'] ?? '') ?>"
-                       style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                       style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Email Address</label>
                 <input type="email" name="email" placeholder="name@example.com" 
                        value="<?= e($_POST['email'] ?? '') ?>"
-                       style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                       style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
               </div>
             </div>
           </div>
 
           <!-- Step 2: Trip Horizon & Preferences -->
           <div style="margin-bottom:32px;">
-            <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:18px;border-bottom:1px solid rgba(196,181,253,0.25);padding-bottom:10px;">
+            <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:18px;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
               2. Destination &amp; Journey Dates
             </h3>
 
             <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:20px;margin-bottom:18px;">
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Preferred Destination</label>
-                <select name="destination_id" id="destination_id" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                <select name="destination_id" id="destination_id" style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;background:#FFF;outline:none;">
                   <option value="">-- Select Destination or Other --</option>
                   <?php foreach ($destinations as $d): ?>
                     <option value="<?= (int)$d['id'] ?>" <?= ($preDest === $d['name'] || (isset($_POST['destination_id']) && $_POST['destination_id'] == $d['id'])) ? 'selected' : '' ?>>
@@ -282,7 +282,7 @@ require_once __DIR__ . '/includes/header.php';
 
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Travel Category</label>
-                <select name="travel_category" id="travel_category" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                <select name="travel_category" id="travel_category" style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;background:#FFF;outline:none;">
                   <?php foreach ($categories as $c): ?>
                     <option value="<?= e($c['name']) ?>" <?= ($preCat === $c['slug'] || $preCat === $c['name']) ? 'selected' : '' ?>>
                       <?= e($c['name']) ?>
@@ -297,20 +297,20 @@ require_once __DIR__ . '/includes/header.php';
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Preferred Departure Date</label>
                 <input type="date" name="departure_date" id="departure_date" 
                        value="<?= e($_POST['departure_date'] ?? '') ?>"
-                       style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                       style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Preferred Return Date</label>
                 <input type="date" name="return_date" id="return_date" 
                        value="<?= e($_POST['return_date'] ?? '') ?>"
-                       style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                       style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
               </div>
             </div>
           </div>
 
           <!-- Step 3: Travellers & Accommodation -->
           <div style="margin-bottom:32px;">
-            <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:18px;border-bottom:1px solid rgba(196,181,253,0.25);padding-bottom:10px;">
+            <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:18px;border-bottom:1px solid var(--color-border);padding-bottom:10px;">
               3. Travellers &amp; Comfort Preferences
             </h3>
 
@@ -319,17 +319,17 @@ require_once __DIR__ . '/includes/header.php';
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Adults (12+ yrs) *</label>
                 <input type="number" name="adults_count" id="adults_count" min="1" max="60" required 
                        value="<?= (int)($_POST['adults_count'] ?? 2) ?>"
-                       style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                       style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Children (Under 12 yrs)</label>
                 <input type="number" name="children_count" id="children_count" min="0" max="30" 
                        value="<?= (int)($_POST['children_count'] ?? 0) ?>"
-                       style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                       style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Estimated Budget</label>
-                <select name="budget_range" id="budget_range" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                <select name="budget_range" id="budget_range" style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;background:#FFF;outline:none;">
                   <option value="Standard Comfort (₹15,000 – ₹25,000 / person)">Standard Comfort (₹15,000 – ₹25,000 / person)</option>
                   <option value="Premium 4-Star (₹25,000 – ₹45,000 / person)">Premium 4-Star (₹25,000 – ₹45,000 / person)</option>
                   <option value="Luxury / 5-Star (₹45,000+ / person)">Luxury / 5-Star (₹45,000+ / person)</option>
@@ -341,7 +341,7 @@ require_once __DIR__ . '/includes/header.php';
             <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:20px;">
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Preferred Stay Category</label>
-                <select name="accommodation_preference" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                <select name="accommodation_preference" style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;background:#FFF;outline:none;">
                   <option value="Premium 4-Star Resorts & Hotels">Premium 4-Star Resorts &amp; Hotels</option>
                   <option value="5-Star Luxury Resorts / Overwater Villa">5-Star Luxury Resorts / Overwater Villa</option>
                   <option value="Heritage Homestay / Boutique Stay">Heritage Homestay / Boutique Stay</option>
@@ -351,7 +351,7 @@ require_once __DIR__ . '/includes/header.php';
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Preferred Contact Channel</label>
-                <select name="preferred_contact_method" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+                <select name="preferred_contact_method" style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;background:#FFF;outline:none;">
                   <option value="whatsapp">WhatsApp (Recommended)</option>
                   <option value="phone">Phone Call</option>
                   <option value="email">Email</option>
@@ -364,7 +364,7 @@ require_once __DIR__ . '/includes/header.php';
           <div style="margin-bottom:32px;">
             <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Special Requirements, Dietary Needs or Sightseeing Wishlist</label>
             <textarea name="travel_requirements" rows="4" placeholder="Let us know if you need senior citizen ground floor rooms, wheelchair assistance, pure vegetarian meals, candlelight dinner, or specific temple darshan wishes..." 
-                      style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;resize:vertical;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;"><?= e($_POST['travel_requirements'] ?? '') ?></textarea>
+                      style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;resize:vertical;outline:none;"><?= e($_POST['travel_requirements'] ?? '') ?></textarea>
           </div>
 
           <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">

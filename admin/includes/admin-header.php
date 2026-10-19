@@ -99,7 +99,7 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
     
     body {
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-      background-color: transparent !important;
+      background-color: var(--admin-bg);
       color: var(--admin-text);
       display: flex;
       min-height: 100vh;
@@ -112,17 +112,17 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
     /* Frosted Glass Sidebar */
     .admin-sidebar {
       width: 260px;
-      background: rgba(10, 17, 40, 0.65) !important;
-      backdrop-filter: blur(28px) saturate(190%) !important;
-      -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+      background: var(--admin-sidebar);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
       color: #94A3B8;
       display: flex;
       flex-direction: column;
       flex-shrink: 0;
-      border-right: 1px solid rgba(196, 181, 253, 0.22) !important;
+      border-right: 1px solid var(--admin-border);
       position: relative;
       z-index: 10;
-      box-shadow: 4px 0 30px rgba(0, 0, 0, 0.4), inset -1px 0 1px rgba(255, 255, 255, 0.08);
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.35);
     }
     
     .admin-brand {
@@ -205,10 +205,10 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
     
     .admin-topbar {
       height: 70px;
-      background: rgba(10, 17, 40, 0.58) !important;
-      backdrop-filter: blur(24px) saturate(190%) !important;
-      -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
-      border-bottom: 1px solid rgba(196, 181, 253, 0.2) !important;
+      background: rgba(10, 17, 40, 0.65);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--admin-border);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -216,7 +216,7 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25), inset 0 -1px 1px rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
     
     .admin-content {
@@ -306,25 +306,25 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
 
     /* Frosted Glass Cards */
     .admin-card {
-      background: linear-gradient(135deg, rgba(14, 23, 46, 0.58) 0%, rgba(18, 30, 58, 0.44) 100%) !important;
-      backdrop-filter: blur(24px) saturate(190%) !important;
-      -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+      background: var(--admin-card);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-radius: 16px;
-      border: 1px solid rgba(196, 181, 253, 0.26) !important;
+      border: 1px solid var(--admin-card-border);
       padding: 24px;
-      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22), 0 20px 48px -10px rgba(0, 0, 0, 0.45);
+      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12), 0 20px 48px -10px rgba(0, 0, 0, 0.4);
       margin-bottom: 24px;
       position: relative;
     }
 
     /* Frosted Glass Data Tables */
     .admin-table-container {
-      background: linear-gradient(135deg, rgba(14, 23, 46, 0.58) 0%, rgba(18, 30, 58, 0.44) 100%) !important;
-      backdrop-filter: blur(24px) saturate(190%) !important;
-      -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+      background: var(--admin-card);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-radius: 16px;
-      border: 1px solid rgba(196, 181, 253, 0.26) !important;
-      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22), 0 20px 48px -10px rgba(0, 0, 0, 0.45);
+      border: 1px solid var(--admin-card-border);
+      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12), 0 20px 48px -10px rgba(0, 0, 0, 0.4);
       overflow: hidden;
       margin-bottom: 28px;
     }
@@ -709,58 +709,16 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
       border-color: var(--admin-periwinkle);
       box-shadow: 0 0 0 3px rgba(141, 164, 239, 0.25);
     }
-
-    /* Modal Dialogs (Glassmorphism & Crisp White Text) */
-    .admin-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(6, 11, 24, 0.78);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .admin-modal-card {
-      background: rgba(14, 23, 46, 0.92);
-      backdrop-filter: blur(32px) saturate(200%);
-      -webkit-backdrop-filter: blur(32px) saturate(200%);
-      border: 1px solid rgba(196, 181, 253, 0.35);
-      border-radius: 18px;
-      padding: 28px;
-      color: #F8FAFC;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.18);
-      width: 100%;
-      position: relative;
-    }
-    .admin-modal-card h1, .admin-modal-card h2, .admin-modal-card h3, .admin-modal-card h4 {
-      color: #FFFFFF !important;
-    }
-    .admin-modal-card label {
-      color: #F1F5F9 !important;
-    }
   </style>
 </head>
 <body>
 
-  <!-- =====================================================================
-       ADMIN NOCTURNAL SCENIC BACKDROP STAGE
-       Atmospheric photography visible beneath frosted glass tables & cards
-       ===================================================================== -->
-  <div class="admin-scenic-backdrop" aria-hidden="true">
-    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=85" 
-         alt="Nocturnal Horizon Scenery" 
-         class="admin-scenic-backdrop__photo"
-         onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85';">
-    <div class="admin-scenic-backdrop__overlay"></div>
-    <div class="ambient-mesh">
-      <div class="ambient-orb ambient-orb--1"></div>
-      <div class="ambient-orb ambient-orb--2"></div>
-      <div class="ambient-orb ambient-orb--3"></div>
-      <div class="ambient-orb ambient-orb--4"></div>
-    </div>
+  <!-- Ambient Floating Mesh Orbs -->
+  <div class="ambient-mesh" aria-hidden="true">
+    <div class="ambient-orb ambient-orb--1"></div>
+    <div class="ambient-orb ambient-orb--2"></div>
+    <div class="ambient-orb ambient-orb--3"></div>
+    <div class="ambient-orb ambient-orb--4"></div>
   </div>
 
   <!-- Sidebar -->

@@ -185,7 +185,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- =====================================================================
      SECTION A: BRAND INTRODUCTION (Editorial Asymmetric Layout)
      ===================================================================== -->
-<section class="section-padding" id="brandIntro">
+<section class="section-padding" id="brandIntro" style="background-color:var(--color-ivory);">
   <div class="container">
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:clamp(36px, 6vw, 80px);align-items:center;">
       
@@ -202,11 +202,11 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Trust Highlights Grid -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px;">
-          <div style="border-left:3px solid var(--color-gold);padding-left:14px;background:rgba(255,255,255,0.25);backdrop-filter:blur(10px);padding:12px 14px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;border-top:1px solid rgba(255,255,255,0.4);border-bottom:1px solid rgba(255,255,255,0.4);">
+          <div style="border-left:3px solid var(--color-gold);padding-left:14px;">
             <h4 style="font-size:1.05rem;color:var(--color-navy);margin-bottom:4px;">Bespoke Planning</h4>
             <p style="font-size:0.85rem;color:var(--color-text-muted);">Itineraries customized to your family rhythm and individual preferences.</p>
           </div>
-          <div style="border-left:3px solid var(--color-teal);padding-left:14px;background:rgba(255,255,255,0.25);backdrop-filter:blur(10px);padding:12px 14px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;border-top:1px solid rgba(255,255,255,0.4);border-bottom:1px solid rgba(255,255,255,0.4);">
+          <div style="border-left:3px solid var(--color-teal);padding-left:14px;">
             <h4 style="font-size:1.05rem;color:var(--color-navy);margin-bottom:4px;">Sacred Tourism</h4>
             <p style="font-size:0.85rem;color:var(--color-text-muted);">Devotional circuits arranged with senior comfort, clean transit, and peaceful darshans.</p>
           </div>
@@ -221,7 +221,7 @@ require_once __DIR__ . '/includes/header.php';
       <!-- Right Column: Asymmetric Layered Image Frame -->
       <div class="reveal-fade-right" style="position:relative;">
         <!-- Large Arch Image Frame -->
-        <div style="width:85%;margin-left:auto;height:480px;border-radius:var(--radius-arch);overflow:hidden;box-shadow:var(--shadow-xl), 0 0 35px rgba(196,181,253,0.3);border:2px solid rgba(255,255,255,0.75);">
+        <div style="width:85%;margin-left:auto;height:480px;border-radius:var(--radius-arch);overflow:hidden;box-shadow:var(--shadow-xl);border:6px solid #FFF;">
           <img src="https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1000&q=80" 
                alt="Misty tea gardens of Munnar in Kerala" 
                style="width:100%;height:100%;object-fit:cover;"
@@ -229,7 +229,7 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <!-- Overlapping Offset Polaroid Badge -->
-        <div class="card-3d" style="position:absolute;bottom:-20px;left:0;width:55%;background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:14px;border-radius:var(--radius-md);box-shadow:var(--glass-inner-highlight), var(--shadow-xl);border:1px solid var(--glass-border);">
+        <div class="card-3d" style="position:absolute;bottom:-20px;left:0;width:55%;background:#FFF;padding:14px;border-radius:var(--radius-md);box-shadow:var(--shadow-lg);border:1px solid var(--color-border-gold);">
           <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80" 
                alt="Ancient temple gopuram" 
                style="width:100%;height:140px;object-fit:cover;border-radius:var(--radius-sm);margin-bottom:10px;"
@@ -294,7 +294,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- =====================================================================
      SECTION C: TOUR PACKAGE DISCOVERY (Filter Tabs & Search)
      ===================================================================== -->
-<section class="section-padding">
+<section class="section-padding" style="background-color:var(--color-ivory);">
   <div class="container">
     
     <div class="section-header section-header--center">
@@ -308,11 +308,11 @@ require_once __DIR__ . '/includes/header.php';
       
       <!-- Tabs -->
       <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;">
-        <button type="button" class="package-filter-tab is-active" data-category-slug="all" style="padding:9px 22px;border-radius:var(--radius-pill);font-size:0.86rem;font-weight:600;border:1px solid rgba(196,181,253,0.35);background:rgba(255,255,255,0.45);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--color-navy);cursor:pointer;transition:all var(--transition-fast);">
+        <button type="button" class="package-filter-tab is-active" data-category-slug="all" style="padding:8px 20px;border-radius:var(--radius-pill);font-size:0.86rem;font-weight:600;border:1px solid var(--color-border);background:#FFF;color:var(--color-navy);cursor:pointer;transition:all var(--transition-fast);">
           All Packages
         </button>
         <?php foreach ($categories as $cat): ?>
-          <button type="button" class="package-filter-tab" data-category-slug="<?= e($cat['slug']) ?>" style="padding:9px 22px;border-radius:var(--radius-pill);font-size:0.86rem;font-weight:600;border:1px solid rgba(196,181,253,0.35);background:rgba(255,255,255,0.3);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--color-navy);cursor:pointer;transition:all var(--transition-fast);">
+          <button type="button" class="package-filter-tab" data-category-slug="<?= e($cat['slug']) ?>" style="padding:8px 20px;border-radius:var(--radius-pill);font-size:0.86rem;font-weight:600;border:1px solid var(--color-border);background:#FFF;color:var(--color-navy);cursor:pointer;transition:all var(--transition-fast);">
             <?= e($cat['name']) ?>
           </button>
         <?php endforeach; ?>
@@ -321,7 +321,7 @@ require_once __DIR__ . '/includes/header.php';
       <!-- Live Search Input -->
       <div style="width:100%;max-width:440px;position:relative;">
         <input type="text" id="packageSearch" placeholder="Search by destination or package name..." 
-               style="width:100%;padding:12px 18px 12px 42px;border:1px solid rgba(196,181,253,0.4);border-radius:var(--radius-pill);font-size:0.9rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:var(--glass-inner-highlight), var(--shadow-sm);outline:none;color:var(--color-navy);">
+               style="width:100%;padding:12px 18px 12px 42px;border:1px solid var(--color-border);border-radius:var(--radius-pill);font-size:0.9rem;background:#FFF;box-shadow:var(--shadow-sm);outline:none;">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--color-text-muted);">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
@@ -337,7 +337,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- Empty State for Live Filter -->
-    <div id="packageEmptyState" style="display:none;text-align:center;padding:60px 20px;background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-radius:var(--radius-lg);margin-top:24px;border:1px dashed rgba(196,181,253,0.45);box-shadow:var(--shadow-md);">
+    <div id="packageEmptyState" style="display:none;text-align:center;padding:60px 20px;background:#FFF;border-radius:var(--radius-lg);margin-top:24px;border:1px dashed var(--color-border);">
       <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 16px;color:var(--color-gold);"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
       <h3 style="font-size:1.3rem;margin-bottom:8px;">No packages match your search</h3>
       <p style="color:var(--color-text-muted);margin-bottom:20px;">Try adjusting your keywords or category filters, or enquire for a custom travel plan.</p>
@@ -408,7 +408,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- =====================================================================
      SECTION E: WHY CHOOSE MIDHILA VOYAGES (Trust Signals)
      ===================================================================== -->
-<section class="section-padding">
+<section class="section-padding" style="background-color:var(--color-ivory-warm);">
   <div class="container">
     
     <div class="section-header section-header--center">
@@ -419,32 +419,32 @@ require_once __DIR__ . '/includes/header.php';
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:28px;">
       
-      <div class="reveal-fade-up stagger-1 why-card" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:32px 26px;border-radius:var(--radius-lg);box-shadow:var(--glass-inner-highlight), var(--shadow-md);border:1px solid var(--glass-border);transition:transform var(--transition-base), box-shadow var(--transition-base);height:100%;display:flex;flex-direction:column;">
-        <div style="width:52px;height:52px;border-radius:12px;background:var(--color-gold-soft);color:var(--color-gold-dark);display:flex;align-items:center;justify-content:center;margin-bottom:18px;border:1px solid rgba(197,160,89,0.35);">
+      <div class="reveal-fade-up stagger-1 why-card" style="background:#FFF;padding:32px 26px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);transition:transform var(--transition-base);height:100%;display:flex;flex-direction:column;">
+        <div style="width:52px;height:52px;border-radius:12px;background:var(--color-gold-soft);color:var(--color-gold-dark);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
           <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
         <h3 style="font-size:1.2rem;margin-bottom:10px;color:var(--color-navy);">Personalized Itinerary Design</h3>
         <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.6;margin-top:auto;">No rigid cookie-cutter formulas. Every schedule is tailored to your pace, dietary needs, and travel style.</p>
       </div>
 
-      <div class="reveal-fade-up stagger-2 why-card" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:32px 26px;border-radius:var(--radius-lg);box-shadow:var(--glass-inner-highlight), var(--shadow-md);border:1px solid var(--glass-border);transition:transform var(--transition-base), box-shadow var(--transition-base);height:100%;display:flex;flex-direction:column;">
-        <div style="width:52px;height:52px;border-radius:12px;background:rgba(0,168,150,0.15);color:var(--color-teal);display:flex;align-items:center;justify-content:center;margin-bottom:18px;border:1px solid rgba(0,168,150,0.3);">
+      <div class="reveal-fade-up stagger-2 why-card" style="background:#FFF;padding:32px 26px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);transition:transform var(--transition-base);height:100%;display:flex;flex-direction:column;">
+        <div style="width:52px;height:52px;border-radius:12px;background:rgba(0,168,150,0.12);color:var(--color-teal);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
           <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         </div>
         <h3 style="font-size:1.2rem;margin-bottom:10px;color:var(--color-navy);">Transparent Package Details</h3>
         <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.6;margin-top:auto;">Explicit listings of inclusions, vehicle types, stay categories, and exclusions with zero hidden surprises.</p>
       </div>
 
-      <div class="reveal-fade-up stagger-3 why-card" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:32px 26px;border-radius:var(--radius-lg);box-shadow:var(--glass-inner-highlight), var(--shadow-md);border:1px solid var(--glass-border);transition:transform var(--transition-base), box-shadow var(--transition-base);height:100%;display:flex;flex-direction:column;">
-        <div style="width:52px;height:52px;border-radius:12px;background:rgba(124,58,237,0.15);color:var(--color-periwinkle-dark);display:flex;align-items:center;justify-content:center;margin-bottom:18px;border:1px solid rgba(196,181,253,0.35);">
+      <div class="reveal-fade-up stagger-3 why-card" style="background:#FFF;padding:32px 26px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);transition:transform var(--transition-base);height:100%;display:flex;flex-direction:column;">
+        <div style="width:52px;height:52px;border-radius:12px;background:rgba(10,25,47,0.08);color:var(--color-navy);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
           <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <h3 style="font-size:1.2rem;margin-bottom:10px;color:var(--color-navy);">Multi-Generational Harmony</h3>
         <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.6;margin-top:auto;">Thoughtfully balanced for grandparents, parents, and youngsters with comfortable transit breaks.</p>
       </div>
 
-      <div class="reveal-fade-up stagger-4 why-card" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:32px 26px;border-radius:var(--radius-lg);box-shadow:var(--glass-inner-highlight), var(--shadow-md);border:1px solid var(--glass-border);transition:transform var(--transition-base), box-shadow var(--transition-base);height:100%;display:flex;flex-direction:column;">
-        <div style="width:52px;height:52px;border-radius:12px;background:rgba(37,211,102,0.15);color:#25D366;display:flex;align-items:center;justify-content:center;margin-bottom:18px;border:1px solid rgba(37,211,102,0.3);">
+      <div class="reveal-fade-up stagger-4 why-card" style="background:#FFF;padding:32px 26px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);transition:transform var(--transition-base);height:100%;display:flex;flex-direction:column;">
+        <div style="width:52px;height:52px;border-radius:12px;background:rgba(37,211,102,0.12);color:#25D366;display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
           <svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/></svg>
         </div>
         <h3 style="font-size:1.2rem;margin-bottom:10px;color:var(--color-navy);">Responsive WhatsApp Support</h3>
@@ -459,7 +459,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- =====================================================================
      SECTION F: HOW THE JOURNEY WORKS (5-Step Visual Process)
      ===================================================================== -->
-<section class="section-padding" style="background:rgba(6,11,24,0.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#FFF;">
+<section class="section-padding" style="background-color:var(--color-navy-deep);color:#FFF;">
   <div class="container">
     
     <div class="section-header section-header--center">
@@ -471,34 +471,34 @@ require_once __DIR__ . '/includes/header.php';
     <!-- 5 Steps with Connecting Line -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));gap:24px;position:relative;">
       
-      <div class="reveal-fade-up stagger-1 process-step-card" style="background:linear-gradient(135deg, rgba(20,32,60,0.55) 0%, rgba(14,23,46,0.4) 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(196,181,253,0.3);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;box-shadow:inset 0 1px 1px rgba(255,255,255,0.2), 0 12px 30px rgba(0,0,0,0.35);">
-        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#FFF;text-shadow:0 1px 2px rgba(0,0,0,0.5);font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">1</div>
+      <div class="reveal-fade-up stagger-1 process-step-card" style="background:rgba(17,34,64,0.8);border:1px solid rgba(197,160,89,0.25);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--color-gold);color:#06101E;font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;">1</div>
         <h4 style="font-size:1.05rem;color:#FFF;margin-bottom:8px;">Choose Destination</h4>
-        <p style="font-size:0.85rem;color:#CBD5E1;margin-top:auto;">Browse our curated packages or share your wishlist destination.</p>
+        <p style="font-size:0.85rem;color:#A0AEC0;margin-top:auto;">Browse our curated packages or share your wishlist destination.</p>
       </div>
 
-      <div class="reveal-fade-up stagger-2 process-step-card" style="background:linear-gradient(135deg, rgba(20,32,60,0.55) 0%, rgba(14,23,46,0.4) 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(196,181,253,0.3);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;box-shadow:inset 0 1px 1px rgba(255,255,255,0.2), 0 12px 30px rgba(0,0,0,0.35);">
-        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#FFF;text-shadow:0 1px 2px rgba(0,0,0,0.5);font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">2</div>
+      <div class="reveal-fade-up stagger-2 process-step-card" style="background:rgba(17,34,64,0.8);border:1px solid rgba(197,160,89,0.25);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--color-gold);color:#06101E;font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;">2</div>
         <h4 style="font-size:1.05rem;color:#FFF;margin-bottom:8px;">Share Preferences</h4>
-        <p style="font-size:0.85rem;color:#CBD5E1;margin-top:auto;">Tell us your tentative dates, traveller count, and comfort style.</p>
+        <p style="font-size:0.85rem;color:#A0AEC0;margin-top:auto;">Tell us your tentative dates, traveller count, and comfort style.</p>
       </div>
 
-      <div class="reveal-fade-up stagger-3 process-step-card" style="background:linear-gradient(135deg, rgba(20,32,60,0.55) 0%, rgba(14,23,46,0.4) 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(196,181,253,0.3);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;box-shadow:inset 0 1px 1px rgba(255,255,255,0.2), 0 12px 30px rgba(0,0,0,0.35);">
-        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#FFF;text-shadow:0 1px 2px rgba(0,0,0,0.5);font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">3</div>
+      <div class="reveal-fade-up stagger-3 process-step-card" style="background:rgba(17,34,64,0.8);border:1px solid rgba(197,160,89,0.25);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--color-gold);color:#06101E;font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;">3</div>
         <h4 style="font-size:1.05rem;color:#FFF;margin-bottom:8px;">Receive Proposal</h4>
-        <p style="font-size:0.85rem;color:#CBD5E1;margin-top:auto;">Review an itemized day-by-day itinerary with transparent costs.</p>
+        <p style="font-size:0.85rem;color:#A0AEC0;margin-top:auto;">Review an itemized day-by-day itinerary with transparent costs.</p>
       </div>
 
-      <div class="reveal-fade-up stagger-4 process-step-card" style="background:linear-gradient(135deg, rgba(20,32,60,0.55) 0%, rgba(14,23,46,0.4) 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(196,181,253,0.3);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;box-shadow:inset 0 1px 1px rgba(255,255,255,0.2), 0 12px 30px rgba(0,0,0,0.35);">
-        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#FFF;text-shadow:0 1px 2px rgba(0,0,0,0.5);font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">4</div>
+      <div class="reveal-fade-up stagger-4 process-step-card" style="background:rgba(17,34,64,0.8);border:1px solid rgba(197,160,89,0.25);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--color-gold);color:#06101E;font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;">4</div>
         <h4 style="font-size:1.05rem;color:#FFF;margin-bottom:8px;">Confirm &amp; Deposit</h4>
-        <p style="font-size:0.85rem;color:#CBD5E1;margin-top:auto;">Lock in your hotel reservations and receive official vouchers.</p>
+        <p style="font-size:0.85rem;color:#A0AEC0;margin-top:auto;">Lock in your hotel reservations and receive official vouchers.</p>
       </div>
 
-      <div class="reveal-fade-up stagger-5 process-step-card" style="background:linear-gradient(135deg, rgba(20,32,60,0.55) 0%, rgba(14,23,46,0.4) 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(196,181,253,0.3);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;box-shadow:inset 0 1px 1px rgba(255,255,255,0.2), 0 12px 30px rgba(0,0,0,0.35);">
-        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #02C39A, #00A896);color:#FFF;font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(0,168,150,0.4);">5</div>
+      <div class="reveal-fade-up stagger-5 process-step-card" style="background:rgba(17,34,64,0.8);border:1px solid rgba(197,160,89,0.25);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--color-teal);color:#FFF;font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;">5</div>
         <h4 style="font-size:1.05rem;color:#FFF;margin-bottom:8px;">Embark &amp; Savor</h4>
-        <p style="font-size:0.85rem;color:#CBD5E1;margin-top:auto;">Enjoy continuous on-trip coordination for total peace of mind.</p>
+        <p style="font-size:0.85rem;color:#A0AEC0;margin-top:auto;">Enjoy continuous on-trip coordination for total peace of mind.</p>
       </div>
 
     </div>
@@ -509,7 +509,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- =====================================================================
      SECTION G: TRAVEL GALLERY PREVIEW
      ===================================================================== -->
-<section class="section-padding">
+<section class="section-padding" style="background-color:var(--color-ivory);">
   <div class="container">
     
     <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;">
@@ -530,9 +530,9 @@ require_once __DIR__ . '/includes/header.php';
              data-full="<?= e(get_image_url($item['image_url'])) ?>"
              data-title="<?= e($item['title']) ?>"
              data-location="<?= e($item['location_name']) ?>"
-             style="position:relative;height:280px;border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;box-shadow:var(--shadow-md);border:1px solid rgba(255,255,255,0.4);">
-          <img src="<?= e(get_image_url($item['image_url'])) ?>" alt="<?= e($item['alt_text']) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);" loading="lazy" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-          <div style="position:absolute;inset:0;background:linear-gradient(180deg, transparent 40%, rgba(6,16,30,0.85) 100%);backdrop-filter:blur(2px);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;color:#FFF;">
+             style="position:relative;height:280px;border-radius:var(--radius-md);overflow:hidden;cursor:pointer;box-shadow:var(--shadow-sm);">
+          <img src="<?= e(get_image_url($item['image_url'])) ?>" alt="<?= e($item['alt_text']) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" loading="lazy" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg, transparent 40%, rgba(6,16,30,0.85) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;color:#FFF;">
             <span style="font-size:0.75rem;color:var(--color-gold);text-transform:uppercase;letter-spacing:0.1em;"><?= e($item['location_name']) ?></span>
             <h4 style="font-size:1.1rem;color:#FFF;margin-top:2px;"><?= e($item['title']) ?></h4>
           </div>
@@ -544,13 +544,13 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Lightbox Modal Component (Accessible) -->
-<div id="galleryLightbox" class="lightbox-modal" style="position:fixed;inset:0;background:rgba(6,16,30,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;">
+<div id="galleryLightbox" class="lightbox-modal" style="position:fixed;inset:0;background:rgba(6,16,30,0.95);backdrop-filter:blur(10px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;">
   <button class="lightbox__close" style="position:absolute;top:24px;right:24px;color:#FFF;font-size:2rem;line-height:1;background:none;border:none;cursor:pointer;" aria-label="Close Lightbox">&times;</button>
   <button class="lightbox__prev" style="position:absolute;left:24px;color:#FFF;font-size:2rem;background:none;border:none;cursor:pointer;" aria-label="Previous image">&#10094;</button>
   <button class="lightbox__next" style="position:absolute;right:24px;color:#FFF;font-size:2rem;background:none;border:none;cursor:pointer;" aria-label="Next image">&#10095;</button>
   
   <div style="max-width:900px;width:100%;text-align:center;">
-    <img src="" alt="" class="lightbox__image" style="max-height:75vh;margin:0 auto;border-radius:var(--radius-md);box-shadow:var(--shadow-xl);border:1px solid rgba(255,255,255,0.3);">
+    <img src="" alt="" class="lightbox__image" style="max-height:75vh;margin:0 auto;border-radius:var(--radius-sm);box-shadow:var(--shadow-xl);">
     <div style="margin-top:16px;">
       <h3 class="lightbox__title" style="color:#FFF;font-size:1.3rem;"></h3>
       <p class="lightbox__location" style="color:var(--color-gold);font-size:0.9rem;"></p>
@@ -565,7 +565,7 @@ require_once __DIR__ . '/includes/header.php';
      SECTION H: TESTIMONIALS (Verified Experiences)
      ===================================================================== -->
 <?php if (!empty($testimonials)): ?>
-<section class="section-padding">
+<section class="section-padding" style="background-color:var(--color-ivory-warm);">
   <div class="container">
     
     <div class="section-header section-header--center">
@@ -576,23 +576,23 @@ require_once __DIR__ . '/includes/header.php';
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:28px;">
       <?php foreach ($testimonials as $idx => $t): ?>
-        <div class="reveal-fade-up stagger-<?= ($idx % 3) + 1 ?>" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:32px;border-radius:var(--radius-lg);box-shadow:var(--glass-inner-highlight), var(--shadow-md);border:1px solid var(--glass-border);display:flex;flex-direction:column;justify-content:space-between;">
+        <div class="reveal-fade-up stagger-<?= ($idx % 3) + 1 ?>" style="background:#FFF;padding:32px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--color-border);display:flex;flex-direction:column;justify-content:space-between;">
           <div>
             <!-- Star Rating -->
             <div style="color:var(--color-gold);font-size:1.1rem;margin-bottom:14px;">
               <?= str_repeat('★', (int)$t['rating']) ?>
             </div>
-            <p style="font-style:italic;color:var(--color-text-body);line-height:1.7;margin-bottom:20px;font-size:0.95rem;">
+            <p style="font-style:italic;color:var(--color-text-body);line-height:1.7;margin-bottom:20px;">
               &ldquo;<?= e($t['feedback']) ?>&rdquo;
             </p>
           </div>
 
-          <div style="border-top:1px solid rgba(196,181,253,0.3);padding-top:16px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="border-top:1px solid var(--color-border);padding-top:16px;display:flex;align-items:center;justify-content:space-between;">
             <div>
               <div style="font-weight:700;color:var(--color-navy);"><?= e($t['client_name']) ?></div>
               <div style="font-size:0.8rem;color:var(--color-text-muted);"><?= e($t['location'] ?: 'Traveller') ?></div>
             </div>
-            <span style="font-size:0.75rem;background:rgba(0,168,150,0.15);color:var(--color-teal);padding:4px 12px;border-radius:var(--radius-pill);font-weight:600;border:1px solid rgba(0,168,150,0.3);">Verified Tour</span>
+            <span style="font-size:0.75rem;background:rgba(0,168,150,0.1);color:var(--color-teal);padding:3px 10px;border-radius:var(--radius-pill);font-weight:600;">Verified Tour</span>
           </div>
         </div>
       <?php endforeach; ?>
@@ -605,7 +605,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- =====================================================================
      SECTION I: FREQUENTLY ASKED QUESTIONS
      ===================================================================== -->
-<section class="section-padding">
+<section class="section-padding" style="background-color:var(--color-ivory);">
   <div class="container container-narrow">
     
     <div class="section-header section-header--center">
@@ -616,12 +616,12 @@ require_once __DIR__ . '/includes/header.php';
 
     <div class="faq-accordion" style="display:flex;flex-direction:column;gap:14px;">
       <?php foreach ($faqs as $idx => $faq): ?>
-        <details class="faq-item reveal-fade-up" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-radius:var(--radius-md);padding:18px 24px;box-shadow:var(--glass-inner-highlight), var(--shadow-sm);transition:all var(--transition-base);">
+        <details class="faq-item reveal-fade-up" style="background:#FFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:18px 24px;box-shadow:var(--shadow-sm);">
           <summary style="font-family:var(--font-serif);font-size:1.05rem;font-weight:700;color:var(--color-navy);cursor:pointer;outline:none;display:flex;justify-content:space-between;align-items:center;">
             <span><?= e($faq['question']) ?></span>
-            <span style="color:var(--color-periwinkle-dark);font-size:1.4rem;font-weight:400;margin-left:12px;">+</span>
+            <span style="color:var(--color-gold);font-size:1.4rem;font-weight:400;margin-left:12px;">+</span>
           </summary>
-          <div style="padding-top:14px;color:var(--color-text-body);line-height:1.7;font-size:0.95rem;border-top:1px solid rgba(196,181,253,0.25);margin-top:12px;">
+          <div style="padding-top:14px;color:var(--color-text-body);line-height:1.7;font-size:0.95rem;border-top:1px solid rgba(0,0,0,0.05);margin-top:12px;">
             <?= nl2br(e($faq['answer'])) ?>
           </div>
         </details>

@@ -265,7 +265,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:18px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Destination *</label>
-          <select name="destination_id" required style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
+          <select name="destination_id" required style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
             <option value="">-- Choose Destination --</option>
             <?php foreach ($dests as $d): ?>
               <option value="<?= (int)$d['id'] ?>" <?= (($package['destination_id'] ?? 0) == $d['id']) ? 'selected' : '' ?>>
@@ -277,7 +277,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Category *</label>
-          <select name="category_id" required style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
+          <select name="category_id" required style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
             <option value="">-- Choose Category --</option>
             <?php foreach ($cats as $c): ?>
               <option value="<?= (int)$c['id'] ?>" <?= (($package['category_id'] ?? 0) == $c['id']) ? 'selected' : '' ?>>
@@ -362,10 +362,10 @@ require_once __DIR__ . '/includes/admin-header.php';
       </div>
 
       <!-- Image Source Selection -->
-      <div style="background:rgba(15,23,42,0.45);padding:18px;border-radius:12px;border:1px solid rgba(196,181,253,0.25);margin-bottom:20px;backdrop-filter:blur(10px);">
+      <div style="background:var(--admin-bg);padding:18px;border-radius:8px;border:1px solid var(--admin-border);margin-bottom:20px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:8px;">Featured Package Photograph *</label>
         
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;background:rgba(10,17,40,0.5);padding:12px;border-radius:8px;border:1px solid rgba(196,181,253,0.25);">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;background:#FFF;padding:12px;border-radius:6px;border:1px solid var(--admin-border);">
           <img id="pkgImagePreview" src="<?= e(get_image_url($package['featured_image'] ?? '')) ?>" alt="Preview" style="width:100px;height:70px;object-fit:cover;border-radius:4px;border:1px solid var(--admin-border);" onerror="this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
           <div>
             <div style="font-size:0.85rem;font-weight:600;color:var(--admin-navy);">Featured Image Preview</div>
@@ -394,7 +394,7 @@ require_once __DIR__ . '/includes/admin-header.php';
           <?php if (!empty($packageImages)): ?>
             <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(110px, 1fr));gap:12px;margin-bottom:14px;">
               <?php foreach ($packageImages as $pImg): ?>
-                <div style="background:rgba(10,17,40,0.5);padding:6px;border-radius:8px;border:1px solid rgba(196,181,253,0.25);text-align:center;">
+                <div style="background:#FFF;padding:6px;border-radius:6px;border:1px solid var(--admin-border);text-align:center;">
                   <img src="<?= e(get_image_url($pImg['image_url'])) ?>" alt="" style="width:100%;height:65px;object-fit:cover;border-radius:4px;margin-bottom:4px;" onerror="this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
                   <label style="font-size:0.7rem;color:#EF4444;display:flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;">
                     <input type="checkbox" name="delete_package_images[]" value="<?= (int)$pImg['id'] ?>">

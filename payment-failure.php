@@ -20,9 +20,9 @@ require_once __DIR__ . '/includes/header.php';
 
 <section class="section-padding" style="background:transparent;padding-top:calc(var(--header-height) + 50px);position:relative;z-index:2;">
   <div class="container container-narrow">
-    <div class="glass-card card-3d glass-specular" style="background:rgba(255,255,255,0.48);backdrop-filter:blur(28px) saturate(190%);-webkit-backdrop-filter:blur(28px) saturate(190%);padding:clamp(32px, 6vw, 56px);border-radius:28px;box-shadow:0 24px 60px rgba(10,17,40,0.25), inset 0 1px 1px rgba(255,255,255,0.95);border:1.5px solid rgba(255,255,255,0.75);text-align:center;">
+    <div class="glass-card card-3d glass-specular" style="background:rgba(255,255,255,0.8);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:clamp(32px, 6vw, 56px);border-radius:28px;box-shadow:0 24px 50px -10px rgba(239,68,68,0.15), inset 0 1px 1px rgba(255,255,255,0.85);border:1.5px solid rgba(239,68,68,0.3);text-align:center;">
       
-      <div style="width:72px;height:72px;border-radius:50%;background:rgba(239,68,68,0.15);border:1.5px solid rgba(239,68,68,0.35);color:#DC2626;font-size:2.4rem;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 24px rgba(239,68,68,0.2);">
+      <div style="width:72px;height:72px;border-radius:50%;background:rgba(239,68,68,0.12);border:1.5px solid rgba(239,68,68,0.3);color:#DC2626;font-size:2.4rem;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 24px rgba(239,68,68,0.2);">
         ⚠
       </div>
 
@@ -37,7 +37,7 @@ require_once __DIR__ . '/includes/header.php';
         <?php endif; ?>
       </p>
 
-      <div style="background:rgba(237,233,254,0.35);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:18px;padding:24px;max-width:540px;margin:0 auto 36px;text-align:left;font-size:0.94rem;color:var(--color-text-body);border:1px solid rgba(196,181,253,0.4);box-shadow:inset 0 1px 1px rgba(255,255,255,0.75);">
+      <div style="background:rgba(196,181,253,0.1);backdrop-filter:blur(12px);border-radius:18px;padding:24px;max-width:540px;margin:0 auto 36px;text-align:left;font-size:0.94rem;color:var(--color-text-body);border:1px solid rgba(196,181,253,0.25);">
         <h4 style="color:var(--color-navy);margin-bottom:12px;font-size:1.05rem;font-weight:700;">Common Reasons for Payment Interruption:</h4>
         <ul style="margin-left:20px;line-height:1.75;list-style-type:disc;">
           <li>Temporary network timeout or OTP expiration.</li>

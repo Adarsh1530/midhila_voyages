@@ -113,7 +113,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
       <div style="margin-bottom:14px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:4px;">Role Level</label>
-        <select name="role" style="width:100%;padding:9px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
+        <select name="role" style="width:100%;padding:9px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;background:#FFF;">
           <option value="super_admin" <?= (($editUser['role'] ?? '') === 'super_admin') ? 'selected' : '' ?>>Super Administrator</option>
           <option value="manager" <?= (($editUser['role'] ?? '') === 'manager') ? 'selected' : '' ?>>Travel Manager</option>
           <option value="editor" <?= (($editUser['role'] ?? '') === 'editor') ? 'selected' : '' ?>>Content Editor</option>

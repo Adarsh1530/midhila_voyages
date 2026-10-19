@@ -29,11 +29,11 @@
   --color-pink: #F472B6;
   --color-pink-soft: rgba(244, 114, 182, 0.3);
 
-  /* Deep Contrast Obsidian & Navy — Upgraded to Crisp Luminous White for Glassmorphic Text */
-  --color-navy: #FFFFFF;
+  /* Deep Contrast Obsidian & Navy */
+  --color-navy: #0A1128;
   --color-navy-deep: #060B18;
   --color-navy-card: rgba(14, 23, 46, 0.75);
-  --color-navy-light: #F8FAFC;
+  --color-navy-light: #162447;
   
   /* Retained Heritage Accents */
   --color-teal: #00A896;
@@ -44,25 +44,25 @@
   --color-gold-light: #EBD49B;
   --color-gold-soft: rgba(197, 160, 89, 0.18);
   
-  /* Frosted Glass Surfaces (Ultra-Realistic Translucency) */
-  --glass-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(243, 238, 255, 0.28) 50%, rgba(224, 231, 255, 0.22) 100%);
-  --glass-surface-card: linear-gradient(135deg, rgba(255, 255, 255, 0.48) 0%, rgba(243, 238, 255, 0.3) 50%, rgba(224, 231, 255, 0.24) 100%);
-  --glass-surface-dense: rgba(255, 255, 255, 0.68);
-  --glass-surface-dark: linear-gradient(135deg, rgba(14, 23, 46, 0.6) 0%, rgba(10, 17, 40, 0.45) 100%);
-  --glass-surface-darker: rgba(6, 11, 24, 0.78);
+  /* Frosted Glass Surfaces */
+  --glass-surface: rgba(255, 255, 255, 0.68);
+  --glass-surface-card: rgba(255, 255, 255, 0.74);
+  --glass-surface-dense: rgba(255, 255, 255, 0.88);
+  --glass-surface-dark: rgba(14, 23, 46, 0.72);
+  --glass-surface-darker: rgba(6, 11, 24, 0.86);
 
-  --glass-border: rgba(255, 255, 255, 0.7);
-  --glass-border-light: rgba(255, 255, 255, 0.9);
-  --glass-border-dark: rgba(196, 181, 253, 0.28);
-  --glass-border-glow: rgba(141, 164, 239, 0.65);
-  --glass-border-violet: rgba(139, 92, 246, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --glass-border-light: rgba(255, 255, 255, 0.85);
+  --glass-border-dark: rgba(196, 181, 253, 0.22);
+  --glass-border-glow: rgba(141, 164, 239, 0.55);
+  --glass-border-violet: rgba(139, 92, 246, 0.45);
 
-  --glass-inner-highlight: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 1px 0 rgba(196, 181, 253, 0.25);
-  --glass-inner-highlight-dark: inset 0 1px 1px 0 rgba(255, 255, 255, 0.28);
+  --glass-inner-highlight: inset 0 1px 1px 0 rgba(255, 255, 255, 0.85), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04);
+  --glass-inner-highlight-dark: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
 
-  --glass-blur: blur(24px) saturate(190%);
-  --glass-blur-heavy: blur(34px) saturate(200%);
-  --glass-blur-soft: blur(14px) saturate(160%);
+  --glass-blur: blur(20px) saturate(180%);
+  --glass-blur-heavy: blur(32px) saturate(200%);
+  --glass-blur-soft: blur(12px) saturate(150%);
 
   /* Backgrounds & Neutrals */
   --color-ivory: #F8F9FD;
@@ -73,12 +73,12 @@
   --color-border-dark: rgba(255, 255, 255, 0.12);
   --color-border-gold: rgba(197, 160, 89, 0.35);
 
-  /* Typography — Luminous High Contrast for Glassmorphism */
-  --color-text-headline: #FFFFFF;
-  --color-text-body: #F1F5F9;
-  --color-text-muted: #CBD5E1;
-  --color-text-white: #FFFFFF;
-  --color-text-gold: #DFBA73;
+  /* Typography */
+  --color-text-headline: #0A1128;
+  --color-text-body: #334155;
+  --color-text-muted: #64748B;
+  --color-text-white: #F8FAFC;
+  --color-text-gold: #C5A059;
 
   /* Font Families */
   --font-serif: 'Cinzel', Georgia, serif;
@@ -125,8 +125,8 @@ html {
 
 body {
   font-family: var(--font-sans);
-  color: #F1F5F9 !important;
-  background-color: transparent !important;
+  color: var(--color-text-body);
+  background-color: var(--color-ivory);
   line-height: 1.65;
   overflow-x: hidden;
   position: relative;
@@ -187,7 +187,6 @@ ul, ol {
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-inner-highlight), var(--shadow-md);
   border-radius: var(--radius-lg);
-  color: #F1F5F9;
   position: relative;
 }
 
@@ -198,7 +197,7 @@ ul, ol {
   border: 1px solid var(--glass-border-dark);
   box-shadow: var(--glass-inner-highlight-dark), var(--shadow-xl);
   border-radius: var(--radius-lg);
-  color: #FFFFFF;
+  color: var(--color-white);
   position: relative;
 }
 
@@ -209,7 +208,6 @@ ul, ol {
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-inner-highlight), var(--shadow-sm);
   border-radius: var(--radius-lg);
-  color: #F1F5F9;
   transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
   position: relative;
 }
@@ -220,20 +218,10 @@ ul, ol {
   box-shadow: var(--glass-inner-highlight), var(--shadow-glow);
 }
 
-.glass-card h1, .glass-card h2, .glass-card h3, .glass-card h4, .glass-card h5, .glass-card h6,
-.glass-panel h1, .glass-panel h2, .glass-panel h3, .glass-panel h4, .glass-panel h5, .glass-panel h6 {
-  color: #FFFFFF !important;
-}
-
-.glass-card strong, .glass-card b,
-.glass-panel strong, .glass-panel b {
-  color: #FFFFFF;
-}
-
-/* Typography Hierarchy — Luminous Crisp White */
+/* Typography Hierarchy */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
-  color: #FFFFFF !important;
+  color: var(--color-text-headline);
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -244,13 +232,11 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.15;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #FFFFFF !important;
 }
 
 .section-title {
   font-size: clamp(1.85rem, 3.5vw, 2.75rem);
   margin-bottom: 16px;
-  color: #FFFFFF !important;
 }
 
 .section-subtitle {
@@ -259,7 +245,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: #C4B5FD !important;
+  color: var(--color-periwinkle-dark);
   margin-bottom: 12px;
   display: inline-flex;
   align-items: center;
@@ -282,7 +268,7 @@ h1, h2, h3, h4, h5, h6 {
 .lead-text {
   font-size: 1.15rem;
   line-height: 1.7;
-  color: #CBD5E1 !important;
+  color: var(--color-text-muted);
 }
 
 /* =====================================================================
@@ -633,13 +619,10 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: clamp(60px, 8vw, 110px);
   position: relative;
   z-index: 2;
-  background: transparent !important;
 }
 
 .section-dark {
-  background-color: rgba(6, 11, 24, 0.55) !important;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background-color: var(--color-navy-deep);
   color: var(--color-white);
   position: relative;
 }
@@ -799,13 +782,13 @@ h1, h2, h3, h4, h5, h6 {
    FROSTED GLASS TOUR PACKAGE CARDS
    ===================================================================== */
 .package-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.46) 0%, rgba(243, 238, 255, 0.28) 50%, rgba(224, 231, 255, 0.2) 100%);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 1px 0 rgba(196, 181, 253, 0.2), 0 16px 36px -8px rgba(10, 17, 40, 0.12), 0 0 20px rgba(196, 181, 253, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.85), 0 16px 36px -8px rgba(10, 17, 40, 0.1);
   display: flex;
   flex-direction: column;
   transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
@@ -815,8 +798,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .package-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(141, 164, 239, 0.75);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 1), 0 24px 50px -10px rgba(139, 92, 246, 0.28), 0 0 28px rgba(186, 230, 253, 0.35);
+  border-color: rgba(141, 164, 239, 0.65);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), 0 24px 50px -10px rgba(139, 92, 246, 0.22), 0 0 24px rgba(186, 230, 253, 0.25);
 }
 
 .package-card__media {
@@ -885,7 +868,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #C4B5FD !important;
+  color: var(--color-periwinkle-dark);
   margin-bottom: 6px;
 }
 
@@ -893,20 +876,16 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.25rem;
   line-height: 1.35;
   margin-bottom: 10px;
-  color: #FFFFFF !important;
-}
-
-.package-card__title a {
-  color: #FFFFFF !important;
+  color: var(--color-text-headline);
 }
 
 .package-card__title a:hover {
-  color: #C4B5FD !important;
+  color: var(--color-violet-dark);
 }
 
 .package-card__desc {
   font-size: 0.88rem;
-  color: #CBD5E1 !important;
+  color: var(--color-text-muted);
   line-height: 1.55;
   margin-bottom: 16px;
   display: -webkit-box;
@@ -924,14 +903,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .inclusion-pill {
   font-size: 0.72rem;
-  color: #FFFFFF !important;
-  background: rgba(255, 255, 255, 0.12) !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 4px 12px;
+  color: var(--color-navy);
+  background: rgba(237, 233, 254, 0.6);
+  backdrop-filter: blur(6px);
+  padding: 3px 10px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  font-weight: 600;
+  border: 1px solid rgba(196, 181, 253, 0.35);
+  font-weight: 500;
 }
 
 .package-card__footer {
@@ -951,7 +929,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .package-card__price-label {
   font-size: 0.72rem;
-  color: #CBD5E1 !important;
+  color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -960,13 +938,13 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-size: 1.35rem;
   font-weight: 700;
-  color: #FFFFFF !important;
+  color: var(--color-navy);
 }
 
 .package-card__price--quote {
   font-size: 0.96rem;
   font-weight: 600;
-  color: #C4B5FD !important;
+  color: var(--color-violet);
 }
 
 .package-card__actions {
@@ -976,7 +954,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* =====================================================================
-   FROSTED FORM CONTROLS & INPUTS — CRISP WHITE TEXT
+   FROSTED FORM CONTROLS & INPUTS
    ===================================================================== */
 input[type="text"],
 input[type="email"],
@@ -986,34 +964,23 @@ input[type="date"],
 select,
 textarea {
   width: 100%;
-  background: rgba(10, 17, 40, 0.65) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1.5px solid rgba(196, 181, 253, 0.35) !important;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(196, 181, 253, 0.45);
   border-radius: var(--radius-md);
   padding: 12px 16px;
-  color: #FFFFFF !important;
+  color: var(--color-navy);
   transition: all var(--transition-fast);
   outline: none;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: rgba(203, 213, 225, 0.7) !important;
-}
-
-select option {
-  background: #0B132B !important;
-  color: #FFFFFF !important;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  background: rgba(10, 17, 40, 0.85) !important;
-  border-color: #A5B4FC !important;
-  box-shadow: 0 0 0 4px rgba(141, 164, 239, 0.3), 0 4px 16px rgba(99, 102, 241, 0.25) !important;
-  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-periwinkle);
+  box-shadow: 0 0 0 4px rgba(141, 164, 239, 0.25), 0 4px 12px rgba(99, 102, 241, 0.12);
 }
 
 /* Detail Page 2-Column Responsive Grid */
@@ -1072,33 +1039,17 @@ textarea:focus {
 .why-card,
 .testimonial-card,
 .faq-item {
-  background: rgba(14, 23, 46, 0.55);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
   border-radius: var(--radius-lg);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.35), 0 16px 36px -8px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.85), 0 16px 36px -8px rgba(10, 17, 40, 0.08);
   transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 28px;
-  color: #F1F5F9 !important;
-}
-
-.process-step-card h1, .process-step-card h2, .process-step-card h3, .process-step-card h4,
-.why-card h1, .why-card h2, .why-card h3, .why-card h4,
-.testimonial-card h1, .testimonial-card h2, .testimonial-card h3, .testimonial-card h4,
-.faq-item h1, .faq-item h2, .faq-item h3, .faq-item h4,
-.faq-item summary {
-  color: #FFFFFF !important;
-}
-
-.process-step-card p,
-.why-card p,
-.testimonial-card p,
-.faq-item div {
-  color: #CBD5E1 !important;
 }
 
 .process-step-card:hover,
@@ -1106,33 +1057,8 @@ textarea:focus {
 .testimonial-card:hover,
 .faq-item:hover {
   transform: translateY(-6px);
-  border-color: rgba(141, 164, 239, 0.65);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.6), 0 24px 48px -10px rgba(139, 92, 246, 0.35), 0 0 20px rgba(186, 230, 253, 0.25);
-}
-
-.package-filter-tab {
-  color: #FFFFFF !important;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.package-filter-tab.is-active {
-  background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%) !important;
-  color: #FFFFFF !important;
-  border-color: rgba(255, 255, 255, 0.45) !important;
-  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35) !important;
-}
-
-.package-filter-tab:not(.is-active) {
-  background: rgba(10, 17, 40, 0.45) !important;
-  color: #CBD5E1 !important;
-  border-color: rgba(196, 181, 253, 0.3) !important;
-}
-
-.package-filter-tab:not(.is-active):hover {
-  background: rgba(20, 28, 58, 0.65) !important;
-  color: #FFFFFF !important;
-  border-color: rgba(196, 181, 253, 0.5) !important;
+  border-color: rgba(141, 164, 239, 0.55);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), 0 24px 48px -10px rgba(139, 92, 246, 0.18), 0 0 20px rgba(186, 230, 253, 0.25);
 }
 
 /* Floating WhatsApp Quick Action Button */
@@ -1218,14 +1144,13 @@ textarea:focus {
    FROSTED GLASS FOOTER
    ===================================================================== */
 .site-footer {
-  background: rgba(6, 11, 24, 0.72);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
-  color: #CBD5E1;
+  background: rgba(6, 11, 24, 0.92);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  color: #A0AEC0;
   padding-top: 80px;
   padding-bottom: 30px;
-  border-top: 1px solid rgba(196, 181, 253, 0.25);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 0 -10px 40px rgba(0, 0, 0, 0.35);
+  border-top: 1px solid rgba(196, 181, 253, 0.2);
   position: relative;
   z-index: 2;
 }
@@ -1306,56 +1231,6 @@ textarea:focus {
 
 .footer-legal-links a:hover {
   color: var(--color-lavender);
-}
-
-/* =====================================================================
-   UNIVERSAL HIGH-CONTRAST WHITE TEXT FOR GLASS SURFACES
-   Ensures all cards, headings, labels, and text are 100% readable white
-   ===================================================================== */
-.glass-card,
-.glass-panel,
-.package-card,
-.process-step-card,
-.why-card,
-.testimonial-card,
-.faq-item,
-.detail-layout-grid,
-.section-padding,
-form,
-details {
-  color: #F1F5F9;
-}
-
-.glass-card h1, .glass-card h2, .glass-card h3, .glass-card h4, .glass-card h5, .glass-card h6,
-.glass-panel h1, .glass-panel h2, .glass-panel h3, .glass-panel h4, .glass-panel h5, .glass-panel h6,
-.section-title,
-.editorial-headline,
-.package-card__title,
-.package-card__title a,
-.detail-layout-grid h1, .detail-layout-grid h2, .detail-layout-grid h3, .detail-layout-grid h4,
-details summary {
-  color: #FFFFFF !important;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
-}
-
-.glass-card strong,
-.glass-card b,
-.glass-panel strong,
-.detail-layout-grid strong {
-  color: #FFFFFF !important;
-}
-
-.glass-card label,
-.glass-panel label,
-form label {
-  color: #FFFFFF !important;
-  font-weight: 600;
-}
-
-.glass-card p,
-.glass-panel p,
-.lead-text {
-  color: #CBD5E1 !important;
 }
 
 /* =====================================================================

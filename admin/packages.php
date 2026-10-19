@@ -84,7 +84,7 @@ require_once __DIR__ . '/includes/admin-header.php';
   <form method="GET" action="<?= ADMIN_URL ?>/packages.php" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)) auto;gap:12px;align-items:end;">
     <div>
       <label style="font-size:0.75rem;font-weight:700;color:var(--admin-muted);display:block;margin-bottom:4px;">Filter Destination</label>
-      <select name="dest_id" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
+      <select name="dest_id" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;background:#FFF;">
         <option value="">All Destinations</option>
         <?php foreach ($dests as $d): ?>
           <option value="<?= (int)$d['id'] ?>" <?= ($destFilter == $d['id']) ? 'selected' : '' ?>><?= e($d['name']) ?></option>
@@ -94,7 +94,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
     <div>
       <label style="font-size:0.75rem;font-weight:700;color:var(--admin-muted);display:block;margin-bottom:4px;">Filter Category</label>
-      <select name="cat_id" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
+      <select name="cat_id" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;background:#FFF;">
         <option value="">All Categories</option>
         <?php foreach ($cats as $c): ?>
           <option value="<?= (int)$c['id'] ?>" <?= ($catFilter == $c['id']) ? 'selected' : '' ?>><?= e($c['name']) ?></option>

@@ -245,7 +245,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
               <!-- Gateway -->
               <td>
-                <span style="font-size:0.72rem;font-weight:700;background:rgba(255,255,255,0.12);padding:3px 8px;border-radius:6px;color:#FFFFFF;letter-spacing:0.04em;border:1px solid rgba(255,255,255,0.2);">
+                <span style="font-size:0.72rem;font-weight:700;background:#F1F5F9;padding:3px 8px;border-radius:4px;color:#334155;letter-spacing:0.04em;">
                   <?= strtoupper(e($pay['payment_gateway'])) ?>
                 </span>
               </td>
@@ -292,7 +292,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                 <a href="<?= BASE_URL ?>/payment-success.php?ref=<?= e($pay['booking_reference']) ?>" 
                    target="_blank" 
                    class="admin-btn admin-btn-outline admin-btn-sm" 
-                   style="white-space:nowrap;padding:5px 10px;font-size:0.8rem;" 
+                   style="background:#FFF;white-space:nowrap;padding:5px 10px;font-size:0.8rem;" 
                    title="View &amp; Print A4 Passenger Voucher">
                   📄 Voucher
                 </a>

@@ -53,22 +53,12 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 </head>
 <body>
 
-  <!-- =====================================================================
-       GLOBAL SCENIC PHOTOGRAPHIC BACKDROP STAGE
-       High-resolution travel photography visible through translucent glass
-       ===================================================================== -->
-  <div class="scenic-backdrop-stage" aria-hidden="true">
-    <img src="<?= e($customBackdropPhoto ?? 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2000&q=85') ?>" 
-         alt="Scenic Travel Scenery" 
-         class="scenic-backdrop-stage__photo"
-         onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=2000&q=85';">
-    <div class="scenic-backdrop-stage__overlay"></div>
-    <div class="ambient-mesh">
-      <div class="ambient-orb ambient-orb--1"></div>
-      <div class="ambient-orb ambient-orb--2"></div>
-      <div class="ambient-orb ambient-orb--3"></div>
-      <div class="ambient-orb ambient-orb--4"></div>
-    </div>
+  <!-- Ambient Floating Mesh Orbs -->
+  <div class="ambient-mesh" aria-hidden="true">
+    <div class="ambient-orb ambient-orb--1"></div>
+    <div class="ambient-orb ambient-orb--2"></div>
+    <div class="ambient-orb ambient-orb--3"></div>
+    <div class="ambient-orb ambient-orb--4"></div>
   </div>
 
   <!-- Site Navigation Header -->

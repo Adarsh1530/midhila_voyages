@@ -79,7 +79,7 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- Banner Header -->
-<section style="position:relative;background:rgba(6,11,24,0.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;border-bottom:1px solid rgba(196,181,253,0.2);">
+<section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;">
   <div style="position:absolute;inset:0;opacity:0.25;">
     <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1800&q=80" alt="Exotic landscape" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
@@ -92,14 +92,14 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Filter & Search Controls (Frosted Glass Bar) -->
-<section style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-bottom:1px solid var(--glass-border);padding:24px 0;box-shadow:var(--glass-inner-highlight), var(--shadow-sm);position:relative;z-index:10;">
+<section style="background:rgba(255, 255, 255, 0.72);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(196, 181, 253, 0.35);padding:24px 0;box-shadow:inset 0 1px 1px 0 rgba(255,255,255,0.8), 0 8px 24px rgba(10, 17, 40, 0.05);position:relative;z-index:10;">
   <div class="container">
     <form action="<?= BASE_URL ?>/packages.php" method="GET" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)) auto;gap:14px;align-items:end;">
       
       <!-- Destination Filter -->
       <div>
         <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Destination</label>
-        <select name="destination" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+        <select name="destination" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
           <option value="">All Destinations</option>
           <?php foreach ($dests as $d): ?>
             <option value="<?= e($d['slug']) ?>" <?= ($destinationFilter === $d['slug'] || $destinationFilter === $d['name']) ? 'selected' : '' ?>>
@@ -112,7 +112,7 @@ require_once __DIR__ . '/includes/header.php';
       <!-- Category Filter -->
       <div>
         <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Experience Style</label>
-        <select name="category" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+        <select name="category" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
           <option value="">All Categories</option>
           <?php foreach ($cats as $c): ?>
             <option value="<?= e($c['slug']) ?>" <?= ($categoryFilter === $c['slug'] || $categoryFilter === $c['name']) ? 'selected' : '' ?>>
@@ -125,13 +125,13 @@ require_once __DIR__ . '/includes/header.php';
       <!-- Keyword Search -->
       <div>
         <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Keyword</label>
-        <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="e.g. Houseboat, Desert, Temple" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+        <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="e.g. Houseboat, Desert, Temple" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
       </div>
 
       <!-- Sorting -->
       <div>
         <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Sort By</label>
-        <select name="sort" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
+        <select name="sort" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
           <option value="featured" <?= ($sort === 'featured') ? 'selected' : '' ?>>Featured First</option>
           <option value="price_asc" <?= ($sort === 'price_asc') ? 'selected' : '' ?>>Price: Low to High</option>
           <option value="price_desc" <?= ($sort === 'price_desc') ? 'selected' : '' ?>>Price: High to Low</option>
