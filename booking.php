@@ -36,7 +36,7 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- Banner Header -->
-<section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:60px;color:#FFF;overflow:hidden;">
+<section style="position:relative;background:linear-gradient(180deg, rgba(15,23,42,0.7) 0%, rgba(30,27,75,0.45) 100%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.12);padding-top:calc(var(--header-height) + 50px);padding-bottom:60px;color:#FFF;overflow:hidden;">
   <div class="container" style="text-align:center;max-width:760px;position:relative;z-index:2;">
     <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-gold);margin-bottom:12px;font-weight:600;">Secure Reservation</div>
     <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.2rem, 4vw, 3.4rem);margin-bottom:12px;">Confirm Your Booking</h1>
@@ -60,7 +60,7 @@ require_once __DIR__ . '/includes/header.php';
           <!-- Package Selection -->
           <div style="margin-bottom:20px;">
             <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Select Package *</label>
-            <select name="package_id" id="bookingPackageSelect" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
+            <select name="package_id" id="bookingPackageSelect" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.5);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);outline:none;">
               <?php foreach ($packages as $pkg): ?>
                 <option value="<?= (int)$pkg['id'] ?>" 
                         data-price="<?= (float)$pkg['starting_price'] ?>"
@@ -74,33 +74,33 @@ require_once __DIR__ . '/includes/header.php';
           <div class="form-grid-2">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Full Name *</label>
-              <input type="text" name="customer_name" id="bkgName" required placeholder="e.g. Priya Nair" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
+              <input type="text" name="customer_name" id="bkgName" required placeholder="e.g. Priya Nair" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.5);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);outline:none;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Phone / WhatsApp *</label>
-              <input type="tel" name="customer_phone" id="bkgPhone" required placeholder="+91 12345 67890" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
+              <input type="tel" name="customer_phone" id="bkgPhone" required placeholder="+91 12345 67890" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.5);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);outline:none;">
             </div>
           </div>
 
           <div class="form-grid-2">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Email Address *</label>
-              <input type="email" name="customer_email" id="bkgEmail" required placeholder="priya@example.com" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
+              <input type="email" name="customer_email" id="bkgEmail" required placeholder="priya@example.com" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.5);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);outline:none;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Travel Departure Date *</label>
-              <input type="date" name="travel_date" id="bkgDate" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
+              <input type="date" name="travel_date" id="bkgDate" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.5);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);outline:none;">
             </div>
           </div>
 
           <div class="form-grid-2">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Number of Travellers *</label>
-              <input type="number" name="travellers_count" id="bkgTravellers" min="1" max="50" value="2" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
+              <input type="number" name="travellers_count" id="bkgTravellers" min="1" max="50" value="2" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.5);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);outline:none;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Payment Selection</label>
-              <select name="payment_type" id="bkgPaymentType" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;">
+              <select name="payment_type" id="bkgPaymentType" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.5);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);outline:none;">
                 <option value="deposit">Initial Tour Deposit (₹5,000 / person)</option>
                 <option value="full">Pay Full Package Cost</option>
               </select>
@@ -109,7 +109,7 @@ require_once __DIR__ . '/includes/header.php';
 
           <div style="margin-bottom:28px;">
             <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Special Requests or Flight Timings</label>
-            <textarea name="special_requests" id="bkgNotes" rows="3" placeholder="Airport pickup timing, vegetarian meal preference, room preferences..." style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.4);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.85);outline:none;resize:vertical;"></textarea>
+            <textarea name="special_requests" id="bkgNotes" rows="3" placeholder="Airport pickup timing, vegetarian meal preference, room preferences..." style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.5);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);outline:none;resize:vertical;"></textarea>
           </div>
 
           <div id="bookingErrorAlert" style="display:none;background:rgba(239,68,68,0.15);border-left:4px solid #E53E3E;padding:12px 16px;border-radius:var(--radius-md);color:#991B1B;font-size:0.9rem;margin-bottom:20px;"></div>
@@ -176,23 +176,23 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Pre-Payment Interactive Confirmation Modal -->
-<div id="paymentConfirmModal" style="position:fixed;inset:0;background:rgba(6,11,24,0.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:2150;display:none;align-items:center;justify-content:center;padding:20px;">
-  <div class="glass-card" style="max-width:520px;width:100%;padding:32px;border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);max-height:92vh;overflow-y:auto;background:rgba(255,255,255,0.92);">
-    <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;border-bottom:1px solid var(--color-border);padding-bottom:16px;">
-      <div style="width:48px;height:48px;border-radius:50%;background:rgba(0,168,150,0.12);color:var(--color-teal);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">
+<div id="paymentConfirmModal" style="position:fixed;inset:0;background:rgba(6,11,24,0.7);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:2150;display:none;align-items:center;justify-content:center;padding:20px;">
+  <div class="glass-card" style="max-width:520px;width:100%;padding:32px;border-radius:var(--radius-lg);box-shadow:0 24px 60px rgba(10,17,40,0.35), inset 0 1px 1px rgba(255,255,255,0.95);max-height:92vh;overflow-y:auto;background:rgba(255,255,255,0.45);backdrop-filter:blur(30px) saturate(190%);-webkit-backdrop-filter:blur(30px) saturate(190%);border:1.5px solid rgba(255,255,255,0.75);">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;border-bottom:1px solid rgba(196,181,253,0.35);padding-bottom:16px;">
+      <div style="width:48px;height:48px;border-radius:50%;background:rgba(0,168,150,0.15);color:var(--color-teal);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">
         🛡️
       </div>
       <div>
-        <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-gold-dark);font-weight:700;">Final Review</span>
+        <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-violet-dark);font-weight:700;">Final Review</span>
         <h3 style="font-size:1.3rem;color:var(--color-navy);margin:0;line-height:1.2;">Confirm Your Booking &amp; Payment</h3>
       </div>
     </div>
 
-    <div style="background:var(--color-ivory-warm);border-radius:var(--radius-md);padding:18px 20px;margin-bottom:20px;border:1px solid var(--color-border-gold);">
+    <div style="background:rgba(237,233,254,0.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:var(--radius-md);padding:18px 20px;margin-bottom:20px;border:1px solid rgba(196,181,253,0.45);box-shadow:inset 0 1px 1px rgba(255,255,255,0.8);">
       <div style="font-size:0.82rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-text-muted);margin-bottom:4px;">Selected Tour Package</div>
       <div id="confPkgTitle" style="font-size:1.05rem;font-weight:700;color:var(--color-navy);margin-bottom:14px;">-</div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.88rem;border-top:1px dashed var(--color-border);padding-top:12px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.88rem;border-top:1px dashed rgba(196,181,253,0.4);padding-top:12px;">
         <div>
           <span style="color:var(--color-text-muted);display:block;font-size:0.78rem;">Lead Traveller:</span>
           <strong id="confGuest" style="color:var(--color-navy);">-</strong>
@@ -212,12 +212,12 @@ require_once __DIR__ . '/includes/header.php';
       </div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#F8FAFC;border-radius:var(--radius-sm);margin-bottom:12px;font-size:0.92rem;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(255,255,255,0.5);border-radius:var(--radius-sm);margin-bottom:12px;font-size:0.92rem;border:1px solid rgba(255,255,255,0.65);">
       <span style="color:var(--color-text-muted);">Total Tour Price:</span>
       <strong id="confTotalPrice" style="color:var(--color-navy);font-size:1.05rem;">-</strong>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:rgba(0,168,150,0.1);border-radius:var(--radius-md);margin-bottom:20px;border:1px solid rgba(0,168,150,0.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:linear-gradient(135deg, rgba(0,168,150,0.15) 0%, rgba(99,102,241,0.15) 100%);backdrop-filter:blur(10px);border-radius:var(--radius-md);margin-bottom:20px;border:1px solid rgba(0,168,150,0.35);">
       <div>
         <span style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-teal-dark);font-weight:700;display:block;">Amount Payable Now</span>
         <span id="confPayTypeBadge" style="font-size:0.75rem;color:var(--color-text-muted);">-</span>
@@ -241,15 +241,15 @@ require_once __DIR__ . '/includes/header.php';
 </div>
 
 <!-- Test Mode Simulation Modal (for seamless local XAMPP testing) -->
-<div id="testPaymentModal" style="position:fixed;inset:0;background:rgba(6,16,30,0.85);backdrop-filter:blur(8px);z-index:2200;display:none;align-items:center;justify-content:center;padding:20px;">
-  <div style="background:#FFF;border-radius:var(--radius-lg);max-width:480px;width:100%;padding:32px;box-shadow:var(--shadow-xl);text-align:center;">
+<div id="testPaymentModal" style="position:fixed;inset:0;background:rgba(6,16,30,0.7);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:2200;display:none;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:rgba(255,255,255,0.48);backdrop-filter:blur(30px) saturate(190%);-webkit-backdrop-filter:blur(30px) saturate(190%);border:1.5px solid rgba(255,255,255,0.75);box-shadow:0 24px 60px rgba(10,17,40,0.35), inset 0 1px 1px rgba(255,255,255,0.95);border-radius:var(--radius-lg);max-width:480px;width:100%;padding:32px;text-align:center;">
     <div style="width:56px;height:56px;border-radius:50%;background:rgba(197,160,89,0.2);color:var(--color-gold-dark);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.6rem;">
       💳
     </div>
     <span class="section-subtitle">Gateway Sandbox</span>
     <h3 style="font-size:1.4rem;color:var(--color-navy);margin-bottom:12px;">Complete Test Payment</h3>
     <p style="font-size:0.92rem;color:var(--color-text-body);margin-bottom:20px;">
-      Simulating Razorpay test mode payment of <strong id="modalPayAmount" style="color:var(--color-teal);"></strong> for booking reference <code id="modalBkgRef" style="background:#F1F5F9;padding:2px 8px;border-radius:4px;"></code>.
+      Simulating Razorpay test mode payment of <strong id="modalPayAmount" style="color:var(--color-teal);"></strong> for booking reference <code id="modalBkgRef" style="background:rgba(255,255,255,0.6);padding:2px 8px;border-radius:4px;border:1px solid rgba(196,181,253,0.4);"></code>.
     </p>
 
     <div style="display:flex;flex-direction:column;gap:12px;">

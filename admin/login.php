@@ -69,13 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .login-box {
       width: 100%;
       max-width: 440px;
-      background: rgba(14, 23, 46, 0.78);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
-      border: 1px solid rgba(196, 181, 253, 0.28);
-      border-radius: 20px;
-      padding: 42px 36px;
-      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), 0 30px 60px -10px rgba(0, 0, 0, 0.6);
+      background: rgba(14, 23, 46, 0.45);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 24px;
+      padding: 44px 38px;
+      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4), 0 32px 70px -10px rgba(0, 0, 0, 0.65);
       position: relative;
       z-index: 5;
     }
@@ -116,18 +116,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .form-group input {
       width: 100%;
       padding: 12px 16px;
-      background: rgba(10, 17, 40, 0.75);
-      border: 1.5px solid rgba(196, 181, 253, 0.3);
-      border-radius: 10px;
+      background: rgba(10, 17, 40, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(196, 181, 253, 0.35);
+      border-radius: 12px;
       color: #FFF;
       font-size: 0.95rem;
       outline: none;
       transition: all 0.2s;
     }
     .form-group input:focus {
-      background: rgba(10, 17, 40, 0.95);
+      background: rgba(10, 17, 40, 0.75);
       border-color: #8DA4EF;
-      box-shadow: 0 0 0 3px rgba(141, 164, 239, 0.25);
+      box-shadow: 0 0 0 3px rgba(141, 164, 239, 0.3);
     }
     .btn-login {
       width: 100%;
@@ -138,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       font-size: 0.95rem;
       letter-spacing: 0.05em;
       border: 1px solid rgba(255, 255, 255, 0.35);
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       box-shadow: 0 8px 24px -4px rgba(124, 58, 237, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.4);
       transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
@@ -163,12 +165,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-  <!-- Ambient Floating Mesh Orbs -->
-  <div class="ambient-mesh" aria-hidden="true">
-    <div class="ambient-orb ambient-orb--1"></div>
-    <div class="ambient-orb ambient-orb--2"></div>
-    <div class="ambient-orb ambient-orb--3"></div>
-    <div class="ambient-orb ambient-orb--4"></div>
+  <!-- Scenic Photographic Stage & Ambient Orbs -->
+  <div class="admin-scenic-backdrop" aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;">
+    <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=80');background-size:cover;background-position:center;opacity:0.38;filter:saturate(130%) contrast(105%);transform:scale(1.02);animation:scenicBreathe 28s ease-in-out infinite alternate;"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(circle at 18% 25%, rgba(139,92,246,0.3) 0%, transparent 55%), radial-gradient(circle at 82% 75%, rgba(99,102,241,0.28) 0%, transparent 60%), linear-gradient(180deg, rgba(7,13,30,0.65) 0%, rgba(10,17,40,0.85) 100%);"></div>
+    <div class="ambient-mesh" aria-hidden="true">
+      <div class="ambient-orb ambient-orb--1"></div>
+      <div class="ambient-orb ambient-orb--2"></div>
+      <div class="ambient-orb ambient-orb--3"></div>
+      <div class="ambient-orb ambient-orb--4"></div>
+    </div>
   </div>
 
   <div class="login-box">

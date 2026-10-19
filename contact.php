@@ -81,7 +81,7 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- Banner Header -->
-<section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;">
+<section style="position:relative;background:rgba(6,11,24,0.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;border-bottom:1px solid rgba(196,181,253,0.2);">
   <div style="position:absolute;inset:0;opacity:0.25;">
     <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1800&q=80" alt="Contact us" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
@@ -162,7 +162,7 @@ require_once __DIR__ . '/includes/header.php';
         <p style="font-size:0.92rem;color:var(--color-text-muted);margin-bottom:28px;">Fill in your contact details below and our travel team will respond promptly.</p>
 
         <?php if (!empty($errors)): ?>
-          <div style="background:#FEF2F2;border-left:4px solid #E53E3E;padding:14px 18px;border-radius:var(--radius-sm);color:#991B1B;font-size:0.9rem;margin-bottom:24px;">
+          <div style="background:rgba(239,68,68,0.15);border-left:4px solid #EF4444;padding:14px 18px;border-radius:var(--radius-sm);color:#FCA5A5;font-size:0.9rem;margin-bottom:24px;border:1px solid rgba(239,68,68,0.3);">
             <?php foreach ($errors as $err): ?>
               <div>• <?= e($err) ?></div>
             <?php endforeach; ?>
@@ -176,7 +176,7 @@ require_once __DIR__ . '/includes/header.php';
             <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Your Full Name *</label>
             <input type="text" name="name" required placeholder="e.g. Ramesh Menon" 
                    value="<?= e($_POST['name'] ?? '') ?>"
-                   style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
+                   style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
           </div>
 
           <div class="form-grid-2">
@@ -184,19 +184,19 @@ require_once __DIR__ . '/includes/header.php';
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Phone / WhatsApp *</label>
               <input type="tel" name="phone" required placeholder="+91 12345 67890" 
                      value="<?= e($_POST['phone'] ?? '') ?>"
-                     style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
+                     style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Email Address</label>
               <input type="email" name="email" placeholder="name@example.com" 
                      value="<?= e($_POST['email'] ?? '') ?>"
-                     style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
+                     style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
             </div>
           </div>
 
           <div style="margin-bottom:18px;">
             <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Subject / Topic</label>
-            <select name="subject" style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;background:#FFF;outline:none;">
+            <select name="subject" style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;">
               <option value="General Travel Enquiry">General Travel Enquiry</option>
               <option value="Domestic Holiday Package">Domestic Holiday Package</option>
               <option value="International Tour Package">International Tour Package</option>
@@ -209,7 +209,7 @@ require_once __DIR__ . '/includes/header.php';
           <div style="margin-bottom:24px;">
             <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Your Message / Trip Requirements *</label>
             <textarea name="message" rows="4" required placeholder="Tell us about your preferred destinations, dates, number of travellers, or questions..." 
-                      style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;resize:vertical;outline:none;"><?= e($_POST['message'] ?? '') ?></textarea>
+                      style="width:100%;padding:12px 16px;border:1.5px solid rgba(196,181,253,0.35);border-radius:var(--radius-md);font-size:0.95rem;resize:vertical;background:rgba(255,255,255,0.48);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);outline:none;color:var(--color-navy);font-weight:500;"><?= e($_POST['message'] ?? '') ?></textarea>
           </div>
 
           <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">

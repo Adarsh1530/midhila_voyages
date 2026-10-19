@@ -46,11 +46,13 @@ require_once __DIR__ . '/includes/header.php';
 <style>
 /* Dedicated Print & Screen Styling for Invoice */
 .invoice-card {
-  background: #FFF;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 24px 60px rgba(10, 17, 40, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.95);
   padding: clamp(28px, 5vw, 44px);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xl);
-  border: 2px solid var(--color-gold);
   position: relative;
   box-sizing: border-box;
 }
@@ -146,13 +148,22 @@ require_once __DIR__ . '/includes/header.php';
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
+}
+
 @media screen {
   .invoice-card {
-    background: rgba(255, 255, 255, 0.88) !important;
-    backdrop-filter: blur(28px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-    border: 1.5px solid rgba(196, 181, 253, 0.45) !important;
-    box-shadow: 0 24px 50px -10px rgba(139, 92, 246, 0.18), inset 0 1px 1px 0 rgba(255, 255, 255, 0.85) !important;
+    background: rgba(255, 255, 255, 0.48) !important;
+    backdrop-filter: blur(28px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.75) !important;
+    box-shadow: 0 24px 60px rgba(10, 17, 40, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.95) !important;
+  }
+  .invoice-details-box {
+    background: rgba(237, 233, 254, 0.4) !important;
+    border: 1px solid rgba(196, 181, 253, 0.45) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
   }
 }
 </style>

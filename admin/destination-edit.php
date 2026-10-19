@@ -165,7 +165,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Category *</label>
-          <select name="category" style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
+          <select name="category" style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
             <option value="domestic" <?= (($destination['category'] ?? '') === 'domestic') ? 'selected' : '' ?>>Domestic (Incredible India)</option>
             <option value="international" <?= (($destination['category'] ?? '') === 'international') ? 'selected' : '' ?>>International</option>
           </select>
@@ -222,10 +222,10 @@ require_once __DIR__ . '/includes/admin-header.php';
       </div>
 
       <!-- Image Source Selection -->
-      <div style="background:var(--admin-bg);padding:18px;border-radius:8px;border:1px solid var(--admin-border);margin-bottom:24px;">
+      <div style="background:rgba(15,23,42,0.45);padding:18px;border-radius:12px;border:1px solid rgba(196,181,253,0.25);margin-bottom:24px;backdrop-filter:blur(10px);">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:8px;">Featured Photography *</label>
         
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;background:#FFF;padding:12px;border-radius:6px;border:1px solid var(--admin-border);">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;background:rgba(10,17,40,0.5);padding:12px;border-radius:8px;border:1px solid rgba(196,181,253,0.25);">
           <img id="destImagePreview" src="<?= e(get_image_url($destination['featured_image'] ?? '')) ?>" alt="Preview" style="width:100px;height:70px;object-fit:cover;border-radius:4px;border:1px solid var(--admin-border);" onerror="this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
           <div>
             <div style="font-size:0.85rem;font-weight:600;color:var(--admin-navy);">Live Preview</div>

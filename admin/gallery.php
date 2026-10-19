@@ -145,7 +145,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="margin-bottom:16px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Category</label>
         <?php $currentCat = $editPhoto['category'] ?? 'destinations'; ?>
-        <select name="category" style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
+        <select name="category" style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
           <option value="destinations" <?= $currentCat === 'destinations' ? 'selected' : '' ?>>Destinations</option>
           <option value="pilgrimages" <?= $currentCat === 'pilgrimages' ? 'selected' : '' ?>>Pilgrimages</option>
           <option value="nature" <?= $currentCat === 'nature' ? 'selected' : '' ?>>Nature &amp; Wildlife</option>
@@ -155,7 +155,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       </div>
 
       <!-- Live Photo Preview -->
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;background:var(--admin-bg);padding:10px;border-radius:6px;border:1px solid var(--admin-border);">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;background:rgba(10,17,40,0.5);padding:10px;border-radius:8px;border:1px solid rgba(196,181,253,0.25);">
         <img id="galleryPreview" src="<?= e(get_image_url($editPhoto['image_url'] ?? '')) ?>" alt="Preview" style="width:90px;height:65px;object-fit:cover;border-radius:4px;border:1px solid var(--admin-border);" onerror="this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
         <div>
           <div style="font-size:0.82rem;font-weight:600;color:var(--admin-navy);">Photo Preview</div>

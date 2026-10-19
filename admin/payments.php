@@ -292,7 +292,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                 <a href="<?= BASE_URL ?>/payment-success.php?ref=<?= e($pay['booking_reference']) ?>" 
                    target="_blank" 
                    class="admin-btn admin-btn-outline admin-btn-sm" 
-                   style="background:#FFF;white-space:nowrap;padding:5px 10px;font-size:0.8rem;" 
+                   style="white-space:nowrap;padding:5px 10px;font-size:0.8rem;" 
                    title="View &amp; Print A4 Passenger Voucher">
                   📄 Voucher
                 </a>

@@ -69,7 +69,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
       <div style="margin-bottom:14px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:4px;">Category *</label>
-        <select name="category" style="width:100%;padding:9px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;background:#FFF;">
+        <select name="category" style="width:100%;padding:9px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
           <?php foreach (['General', 'Booking', 'Pilgrimage', 'Payments', 'Documents'] as $cat): ?>
             <option value="<?= e($cat) ?>" <?= (($editFaq['category'] ?? '') === $cat) ? 'selected' : '' ?>><?= e($cat) ?></option>
           <?php endforeach; ?>

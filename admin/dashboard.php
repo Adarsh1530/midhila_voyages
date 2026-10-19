@@ -63,7 +63,7 @@ $recentBookings = $db->query("
 
   <div class="admin-card" style="border-left:4px solid #10B981;padding:20px;">
     <span style="font-size:0.75rem;text-transform:uppercase;color:var(--admin-muted);font-weight:700;letter-spacing:0.06em;">Captured Revenue</span>
-    <div style="font-size:1.85rem;font-weight:700;color:#047857;margin-top:4px;"><?= format_price($totalCapturedPayments) ?></div>
+    <div style="font-size:1.85rem;font-weight:700;color:#34D399;margin-top:4px;"><?= format_price($totalCapturedPayments) ?></div>
     <div style="font-size:0.8rem;color:var(--admin-muted);margin-top:4px;">Verified transactions</div>
   </div>
 

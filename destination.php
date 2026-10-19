@@ -94,7 +94,7 @@ require_once __DIR__ . '/includes/header.php';
       
       <!-- Main Content -->
       <div>
-        <div class="glass-card glass-specular" style="background:rgba(255,255,255,0.78);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:36px;border-radius:24px;border:1px solid rgba(196,181,253,0.35);box-shadow:0 16px 40px -8px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.8);margin-bottom:36px;">
+        <div class="glass-card glass-specular" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:36px;border-radius:24px;border:1px solid var(--glass-border);box-shadow:var(--glass-inner-highlight), var(--shadow-md);margin-bottom:36px;">
           <h2 class="section-title" style="font-size:1.85rem;margin-bottom:18px;">About <?= e($dest['name']) ?></h2>
           <div style="font-size:1.04rem;line-height:1.85;color:var(--color-text-body);">
             <?= nl2br(e($dest['description'])) ?>
@@ -103,16 +103,16 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Highlights Grid -->
         <?php if (!empty($highlights)): ?>
-          <div class="glass-card glass-specular" style="background:rgba(255,255,255,0.78);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:34px;border-radius:24px;border:1px solid rgba(196,181,253,0.35);box-shadow:0 16px 40px -8px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.8);margin-bottom:40px;">
+          <div class="glass-card glass-specular" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:34px;border-radius:24px;border:1px solid var(--glass-border);box-shadow:var(--glass-inner-highlight), var(--shadow-md);margin-bottom:40px;">
             <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-violet);font-weight:700;margin-bottom:8px;">
               Curated Vignettes
             </div>
             <h3 style="font-size:1.35rem;margin-bottom:20px;color:var(--color-navy);">Key Experience Highlights</h3>
             <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;">
               <?php foreach ($highlights as $hl): ?>
-                <div style="display:flex;align-items:center;gap:12px;font-size:0.96rem;color:var(--color-text-headline);padding:10px 14px;border-radius:12px;background:rgba(196,181,253,0.12);border:1px solid rgba(196,181,253,0.25);">
+                <div style="display:flex;align-items:center;gap:12px;font-size:0.96rem;color:var(--color-text-headline);padding:10px 14px;border-radius:12px;background:rgba(196,181,253,0.18);border:1px solid rgba(196,181,253,0.35);">
                   <span style="color:var(--color-violet);font-weight:700;font-size:1.1rem;">✦</span>
-                  <span style="font-weight:500;"><?= e($hl) ?></span>
+                  <span style="font-weight:600;"><?= e($hl) ?></span>
                 </div>
               <?php endforeach; ?>
             </div>
@@ -122,7 +122,7 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Sidebar Quick Info & Action Card -->
       <div>
-        <div class="glass-card card-3d glass-specular" style="position:sticky;top:100px;background:linear-gradient(135deg, rgba(255,255,255,0.88) 0%, rgba(243,238,255,0.8) 100%);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:34px 28px;border-radius:24px;box-shadow:0 24px 50px -10px rgba(139,92,246,0.18), inset 0 1px 1px rgba(255,255,255,0.85);border:1px solid rgba(196,181,253,0.45);">
+        <div class="glass-card card-3d glass-specular" style="position:sticky;top:100px;background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:34px 28px;border-radius:24px;box-shadow:var(--glass-inner-highlight), var(--shadow-xl);border:1px solid var(--glass-border);">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;border-bottom:1px solid rgba(196,181,253,0.25);padding-bottom:14px;">
             <h3 style="font-size:1.25rem;color:var(--color-navy);font-weight:700;margin:0;">Travel Quick Facts</h3>
             <span style="font-size:1.2rem;color:var(--color-violet);">🧭</span>

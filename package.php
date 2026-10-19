@@ -134,13 +134,13 @@ require_once __DIR__ . '/includes/header.php';
       <div>
         
         <!-- Short Synopsis -->
-        <div class="glass-card glass-specular" style="background:rgba(255,255,255,0.78);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:36px;border-radius:24px;border:1px solid rgba(196,181,253,0.35);box-shadow:0 16px 40px -8px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.8);margin-bottom:36px;">
+        <div class="glass-card glass-specular" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:36px;border-radius:24px;border:1px solid var(--glass-border);box-shadow:var(--glass-inner-highlight), var(--shadow-md);margin-bottom:36px;">
           <h2 style="font-size:1.55rem;color:var(--color-navy);margin-bottom:16px;font-weight:700;">Tour Overview</h2>
           <p style="font-size:1.04rem;line-height:1.85;color:var(--color-text-body);margin-bottom:20px;">
             <?= nl2br(e($package['overview'] ?: $package['short_description'])) ?>
           </p>
           <?php if (!empty($package['seasonal_info'])): ?>
-            <div style="display:inline-flex;align-items:center;gap:10px;padding:12px 20px;background:rgba(196,181,253,0.12);border-radius:14px;border:1px solid rgba(196,181,253,0.25);font-size:0.92rem;color:var(--color-navy);">
+            <div style="display:inline-flex;align-items:center;gap:10px;padding:12px 20px;background:rgba(196,181,253,0.18);border-radius:14px;border:1px solid rgba(196,181,253,0.35);font-size:0.92rem;color:var(--color-navy);">
               <span style="font-size:1.2rem;">🌤</span>
               <span><strong>Optimal Seasonality:</strong> <?= e($package['seasonal_info']) ?></span>
             </div>
@@ -152,13 +152,13 @@ require_once __DIR__ . '/includes/header.php';
           <h2 class="section-title" style="font-size:1.85rem;margin-bottom:24px;">Day-by-Day Itinerary</h2>
           
           <?php if (empty($itineraries)): ?>
-            <div class="glass-card" style="padding:24px;border-radius:18px;background:rgba(255,255,255,0.6);text-align:center;">
+            <div class="glass-card" style="padding:24px;border-radius:18px;background:var(--glass-surface-card);text-align:center;">
               <p style="color:var(--color-text-muted);">Detailed itinerary will be provided upon enquiry by our travel designers.</p>
             </div>
           <?php else: ?>
             <div style="display:flex;flex-direction:column;gap:20px;">
               <?php foreach ($itineraries as $itin): ?>
-                <div class="glass-card card-3d glass-specular" style="background:rgba(255,255,255,0.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(196,181,253,0.32);border-radius:20px;padding:26px 28px;box-shadow:0 12px 32px -6px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.8);border-left:5px solid var(--color-violet);">
+                <div class="glass-card card-3d glass-specular" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-radius:20px;padding:26px 28px;box-shadow:var(--glass-inner-highlight), var(--shadow-md);border-left:5px solid var(--color-violet);">
                   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
                     <span style="background:linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%);color:#FFF;font-size:0.75rem;font-weight:700;padding:4px 14px;border-radius:var(--radius-pill);box-shadow:0 4px 12px rgba(124,58,237,0.3);">
                       DAY <?= e($itin['day_number']) ?>
@@ -184,7 +184,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="form-grid-2" style="margin-bottom:40px;display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:24px;">
           
           <!-- Inclusions -->
-          <div class="glass-card glass-specular" style="background:rgba(255,255,255,0.78);backdrop-filter:blur(20px);padding:30px;border-radius:22px;border:1px solid rgba(34,197,94,0.3);box-shadow:0 12px 32px -6px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.8);">
+          <div class="glass-card glass-specular" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:30px;border-radius:22px;border:1px solid rgba(34,197,94,0.4);box-shadow:var(--glass-inner-highlight), var(--shadow-md);">
             <h3 style="font-size:1.2rem;color:#047857;margin-bottom:18px;display:flex;align-items:center;gap:8px;font-weight:700;">
               <span>✓ What Is Included</span>
             </h3>
@@ -199,7 +199,7 @@ require_once __DIR__ . '/includes/header.php';
           </div>
 
           <!-- Exclusions -->
-          <div class="glass-card glass-specular" style="background:rgba(255,255,255,0.78);backdrop-filter:blur(20px);padding:30px;border-radius:22px;border:1px solid rgba(239,68,68,0.3);box-shadow:0 12px 32px -6px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.8);">
+          <div class="glass-card glass-specular" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:30px;border-radius:22px;border:1px solid rgba(239,68,68,0.4);box-shadow:var(--glass-inner-highlight), var(--shadow-md);">
             <h3 style="font-size:1.2rem;color:#B91C1C;margin-bottom:18px;display:flex;align-items:center;gap:8px;font-weight:700;">
               <span>✕ What Is Not Included</span>
             </h3>
@@ -217,11 +217,11 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Tour Photo Gallery (if supplementary images exist) -->
         <?php if (!empty($packageGallery)): ?>
-          <div class="glass-card glass-specular" style="background:rgba(255,255,255,0.78);backdrop-filter:blur(20px);padding:32px;border-radius:22px;border:1px solid rgba(196,181,253,0.35);margin-bottom:40px;">
+          <div class="glass-card glass-specular" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:32px;border-radius:22px;border:1px solid var(--glass-border);margin-bottom:40px;box-shadow:var(--glass-inner-highlight), var(--shadow-md);">
             <h3 style="font-size:1.35rem;color:var(--color-navy);margin-bottom:18px;font-weight:700;">Tour Photography Gallery</h3>
             <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));gap:16px;">
               <?php foreach ($packageGallery as $pgImg): ?>
-                <div style="border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.1);aspect-ratio:4/3;background:var(--color-navy-deep);">
+                <div style="border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.1);aspect-ratio:4/3;background:var(--color-navy-deep);border:1px solid rgba(255,255,255,0.4);">
                   <img src="<?= e(get_image_url($pgImg['image_url'])) ?>" alt="<?= e($pgImg['caption'] ?: $package['title']) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'" onerror="this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
                 </div>
               <?php endforeach; ?>
@@ -233,7 +233,7 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Sticky Sidebar Booking Box -->
       <div>
-        <div class="glass-card card-3d glass-specular" style="position:sticky;top:100px;background:linear-gradient(135deg, rgba(255,255,255,0.88) 0%, rgba(243,238,255,0.8) 100%);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:34px 28px;border-radius:24px;box-shadow:0 24px 50px -10px rgba(139,92,246,0.18), inset 0 1px 1px rgba(255,255,255,0.85);border:1px solid rgba(196,181,253,0.45);">
+        <div class="glass-card card-3d glass-specular" style="position:sticky;top:100px;background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:34px 28px;border-radius:24px;box-shadow:var(--glass-inner-highlight), var(--shadow-xl);border:1px solid var(--glass-border);">
           
           <div style="margin-bottom:22px;border-bottom:1px solid rgba(196,181,253,0.25);padding-bottom:18px;">
             <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);font-weight:700;">Package Tariff</span>

@@ -52,16 +52,91 @@
 }
 
 /* =====================================================================
-   2. AMBIENT BACKGROUND MESH & DRIFTING ORBS
-   Continuous organic motion beneath frosted glass surfaces
+   2. IMMERSIVE SCENIC PHOTOGRAPHIC BACKDROP STAGE & AMBIENT MESH
+   Continuous high-resolution travel photography visible through real glass
    ===================================================================== */
-.ambient-mesh {
+.scenic-backdrop-stage {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;
+  background-color: #070D1E;
+}
+
+.scenic-backdrop-stage__photo {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: 0.65;
+  filter: saturate(135%) brightness(0.95) contrast(1.05);
+  animation: scenicBreathe 65s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes scenicBreathe {
+  0% { transform: scale(1) translate3d(0, 0, 0); }
+  50% { transform: scale(1.05) translate3d(-1%, -1.2%, 0); }
+  100% { transform: scale(1.02) translate3d(1%, 0.8%, 0); }
+}
+
+.scenic-backdrop-stage__overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 15%, rgba(196, 181, 253, 0.26) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 30%, rgba(141, 164, 239, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 85%, rgba(186, 230, 253, 0.18) 0%, transparent 65%),
+    linear-gradient(180deg, rgba(7, 13, 30, 0.15) 0%, rgba(7, 13, 30, 0.32) 50%, rgba(6, 11, 24, 0.58) 100%);
+  pointer-events: none;
+}
+
+/* Admin Nocturnal Scenic Backdrop */
+.admin-scenic-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #060B18;
+}
+
+.admin-scenic-backdrop__photo {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.35;
+  filter: saturate(125%) brightness(0.7) contrast(1.1);
+  animation: scenicBreathe 75s ease-in-out infinite alternate;
+}
+
+.admin-scenic-backdrop__overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 80% 10%, rgba(139, 92, 246, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 75%, rgba(141, 164, 239, 0.18) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(6, 11, 24, 0.72) 0%, rgba(6, 11, 24, 0.88) 100%);
+  pointer-events: none;
+}
+
+.ambient-mesh {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
   overflow: hidden;
   opacity: 0.85;
 }

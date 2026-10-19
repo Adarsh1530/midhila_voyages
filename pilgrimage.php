@@ -29,7 +29,7 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- Pilgrimage Portal Cinematic Hero -->
-<section style="position:relative;background:linear-gradient(180deg, #06101E 0%, #0A192F 100%);padding-top:calc(var(--header-height) + 50px);padding-bottom:80px;color:#FFF;overflow:hidden;">
+<section style="position:relative;background:rgba(6,11,24,0.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding-top:calc(var(--header-height) + 50px);padding-bottom:80px;color:#FFF;overflow:hidden;border-bottom:1px solid rgba(196,181,253,0.2);">
   <div style="position:absolute;inset:0;opacity:0.28;">
     <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1800&q=80" alt="Varanasi Ganga Aarti evening lamps" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
     <div style="position:absolute;inset:0;background:radial-gradient(circle at center, transparent 0%, #06101E 85%);"></div>

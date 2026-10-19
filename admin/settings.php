@@ -128,7 +128,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:4px;">Gateway Mode</label>
-          <select name="payment_mode" style="width:100%;padding:9px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;background:#FFF;">
+          <select name="payment_mode" style="width:100%;padding:9px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
             <option value="test" <?= (($settings['payment_mode'] ?? 'test') === 'test') ? 'selected' : '' ?>>Test Mode (Sandbox)</option>
             <option value="live" <?= (($settings['payment_mode'] ?? '') === 'live') ? 'selected' : '' ?>>Live Mode (Production)</option>
           </select>

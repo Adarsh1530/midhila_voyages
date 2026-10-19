@@ -91,7 +91,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <form method="POST" action="" style="display:flex;align-items:center;gap:8px;">
           <?= csrf_field() ?>
           <input type="hidden" name="update_status" value="1">
-          <select name="status" style="padding:6px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.85rem;background:#FFF;">
+          <select name="status" style="padding:6px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.85rem;">
             <option value="new" <?= ($enquiry['status'] === 'new') ? 'selected' : '' ?>>New</option>
             <option value="in_progress" <?= ($enquiry['status'] === 'in_progress') ? 'selected' : '' ?>>In Progress</option>
             <option value="contacted" <?= ($enquiry['status'] === 'contacted') ? 'selected' : '' ?>>Contacted</option>
@@ -121,7 +121,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         </div>
       </div>
 
-      <div style="background:var(--admin-bg);padding:20px;border-radius:8px;border:1px solid var(--admin-border);margin-bottom:24px;">
+      <div style="background:rgba(15,23,42,0.45);padding:20px;border-radius:12px;border:1px solid rgba(196,181,253,0.25);margin-bottom:24px;backdrop-filter:blur(10px);">
         <h4 style="font-size:0.95rem;color:var(--admin-navy);margin-bottom:12px;">Trip Parameters</h4>
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:16px;">
           <div>
@@ -158,7 +158,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <?php if (!empty($enquiry['travel_requirements'])): ?>
         <div style="margin-bottom:20px;">
           <span style="font-size:0.75rem;color:var(--admin-muted);text-transform:uppercase;font-weight:700;">Special Requirements &amp; Notes:</span>
-          <div style="background:#FFF;padding:16px;border-radius:6px;border:1px solid var(--admin-border);margin-top:6px;font-size:0.95rem;line-height:1.7;">
+          <div style="background:rgba(10,17,40,0.5);padding:16px;border-radius:10px;border:1px solid rgba(196,181,253,0.25);margin-top:6px;font-size:0.95rem;line-height:1.7;">
             <?= nl2br(e($enquiry['travel_requirements'])) ?>
           </div>
         </div>

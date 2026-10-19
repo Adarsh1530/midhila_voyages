@@ -75,7 +75,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:4px;">Rating (1 to 5)</label>
-          <select name="rating" style="width:100%;padding:9px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;background:#FFF;">
+          <select name="rating" style="width:100%;padding:9px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
             <option value="5">★★★★★ (5 Stars)</option>
             <option value="4">★★★★☆ (4 Stars)</option>
             <option value="3">★★★☆☆ (3 Stars)</option>
