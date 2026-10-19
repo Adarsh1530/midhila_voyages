@@ -472,25 +472,25 @@ require_once __DIR__ . '/includes/header.php';
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));gap:24px;position:relative;">
       
       <div class="reveal-fade-up stagger-1 process-step-card" style="background:linear-gradient(135deg, rgba(20,32,60,0.55) 0%, rgba(14,23,46,0.4) 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(196,181,253,0.3);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;box-shadow:inset 0 1px 1px rgba(255,255,255,0.2), 0 12px 30px rgba(0,0,0,0.35);">
-        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#06101E;font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">1</div>
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#FFF;text-shadow:0 1px 2px rgba(0,0,0,0.5);font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">1</div>
         <h4 style="font-size:1.05rem;color:#FFF;margin-bottom:8px;">Choose Destination</h4>
         <p style="font-size:0.85rem;color:#CBD5E1;margin-top:auto;">Browse our curated packages or share your wishlist destination.</p>
       </div>
 
       <div class="reveal-fade-up stagger-2 process-step-card" style="background:linear-gradient(135deg, rgba(20,32,60,0.55) 0%, rgba(14,23,46,0.4) 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(196,181,253,0.3);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;box-shadow:inset 0 1px 1px rgba(255,255,255,0.2), 0 12px 30px rgba(0,0,0,0.35);">
-        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#06101E;font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">2</div>
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#FFF;text-shadow:0 1px 2px rgba(0,0,0,0.5);font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">2</div>
         <h4 style="font-size:1.05rem;color:#FFF;margin-bottom:8px;">Share Preferences</h4>
         <p style="font-size:0.85rem;color:#CBD5E1;margin-top:auto;">Tell us your tentative dates, traveller count, and comfort style.</p>
       </div>
 
       <div class="reveal-fade-up stagger-3 process-step-card" style="background:linear-gradient(135deg, rgba(20,32,60,0.55) 0%, rgba(14,23,46,0.4) 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(196,181,253,0.3);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;box-shadow:inset 0 1px 1px rgba(255,255,255,0.2), 0 12px 30px rgba(0,0,0,0.35);">
-        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#06101E;font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">3</div>
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#FFF;text-shadow:0 1px 2px rgba(0,0,0,0.5);font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">3</div>
         <h4 style="font-size:1.05rem;color:#FFF;margin-bottom:8px;">Receive Proposal</h4>
         <p style="font-size:0.85rem;color:#CBD5E1;margin-top:auto;">Review an itemized day-by-day itinerary with transparent costs.</p>
       </div>
 
       <div class="reveal-fade-up stagger-4 process-step-card" style="background:linear-gradient(135deg, rgba(20,32,60,0.55) 0%, rgba(14,23,46,0.4) 100%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(196,181,253,0.3);border-radius:var(--radius-md);padding:24px 20px;text-align:center;height:100%;display:flex;flex-direction:column;box-shadow:inset 0 1px 1px rgba(255,255,255,0.2), 0 12px 30px rgba(0,0,0,0.35);">
-        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#06101E;font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">4</div>
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg, #DFBA73, #C5A059);color:#FFF;text-shadow:0 1px 2px rgba(0,0,0,0.5);font-family:var(--font-serif);font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.1rem;flex-shrink:0;box-shadow:0 0 16px rgba(197,160,89,0.4);">4</div>
         <h4 style="font-size:1.05rem;color:#FFF;margin-bottom:8px;">Confirm &amp; Deposit</h4>
         <p style="font-size:0.85rem;color:#CBD5E1;margin-top:auto;">Lock in your hotel reservations and receive official vouchers.</p>
       </div>

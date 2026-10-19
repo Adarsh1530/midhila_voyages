@@ -709,6 +709,38 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
       border-color: var(--admin-periwinkle);
       box-shadow: 0 0 0 3px rgba(141, 164, 239, 0.25);
     }
+
+    /* Modal Dialogs (Glassmorphism & Crisp White Text) */
+    .admin-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 11, 24, 0.78);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .admin-modal-card {
+      background: rgba(14, 23, 46, 0.92);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border: 1px solid rgba(196, 181, 253, 0.35);
+      border-radius: 18px;
+      padding: 28px;
+      color: #F8FAFC;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+      width: 100%;
+      position: relative;
+    }
+    .admin-modal-card h1, .admin-modal-card h2, .admin-modal-card h3, .admin-modal-card h4 {
+      color: #FFFFFF !important;
+    }
+    .admin-modal-card label {
+      color: #F1F5F9 !important;
+    }
   </style>
 </head>
 <body>

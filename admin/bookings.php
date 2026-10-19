@@ -257,12 +257,12 @@ require_once __DIR__ . '/includes/admin-header.php';
                 </div>
                 <div style="margin-top:4px;display:flex;gap:6px;flex-wrap:wrap;">
                   <?php if (!empty($bk['duration_days'])): ?>
-                    <span style="font-size:0.72rem;background:#F1F5F9;padding:2px 6px;border-radius:4px;color:#475569;font-weight:600;">
+                    <span style="font-size:0.72rem;background:rgba(255,255,255,0.12);padding:2px 8px;border-radius:4px;color:#FFFFFF;font-weight:600;border:1px solid rgba(255,255,255,0.22);">
                       <?= (int)$bk['duration_days'] ?>D / <?= (int)$bk['duration_nights'] ?>N
                     </span>
                   <?php endif; ?>
                   <?php if (!empty($bk['destination_name'])): ?>
-                    <span style="font-size:0.72rem;background:#FEF3C7;color:#92400E;padding:2px 6px;border-radius:4px;font-weight:600;">
+                    <span style="font-size:0.72rem;background:rgba(197,160,89,0.2);color:#DFBA73;padding:2px 8px;border-radius:4px;font-weight:600;border:1px solid rgba(197,160,89,0.35);">
                       📍 <?= e($bk['destination_name']) ?>
                     </span>
                   <?php endif; ?>

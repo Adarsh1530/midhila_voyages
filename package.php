@@ -184,14 +184,14 @@ require_once __DIR__ . '/includes/header.php';
         <div class="form-grid-2" style="margin-bottom:40px;display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:24px;">
           
           <!-- Inclusions -->
-          <div class="glass-card glass-specular" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:30px;border-radius:22px;border:1px solid rgba(34,197,94,0.4);box-shadow:var(--glass-inner-highlight), var(--shadow-md);">
-            <h3 style="font-size:1.2rem;color:#047857;margin-bottom:18px;display:flex;align-items:center;gap:8px;font-weight:700;">
+          <div class="glass-card glass-specular" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:30px;border-radius:22px;border:1px solid rgba(74,222,128,0.4);box-shadow:var(--glass-inner-highlight), var(--shadow-md);">
+            <h3 style="font-size:1.2rem;color:#86EFAC !important;margin-bottom:18px;display:flex;align-items:center;gap:8px;font-weight:700;">
               <span>✓ What Is Included</span>
             </h3>
-            <ul style="display:flex;flex-direction:column;gap:12px;font-size:0.92rem;color:var(--color-text-body);">
+            <ul style="display:flex;flex-direction:column;gap:12px;font-size:0.92rem;color:#F1F5F9;">
               <?php foreach ($inclusions as $inc): ?>
                 <li style="display:flex;align-items:flex-start;gap:10px;">
-                  <span style="color:#059669;font-weight:700;">•</span>
+                  <span style="color:#86EFAC;font-weight:700;">•</span>
                   <span><?= e($inc) ?></span>
                 </li>
               <?php endforeach; ?>
@@ -199,14 +199,14 @@ require_once __DIR__ . '/includes/header.php';
           </div>
 
           <!-- Exclusions -->
-          <div class="glass-card glass-specular" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:30px;border-radius:22px;border:1px solid rgba(239,68,68,0.4);box-shadow:var(--glass-inner-highlight), var(--shadow-md);">
-            <h3 style="font-size:1.2rem;color:#B91C1C;margin-bottom:18px;display:flex;align-items:center;gap:8px;font-weight:700;">
+          <div class="glass-card glass-specular" style="background:var(--glass-surface-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);padding:30px;border-radius:22px;border:1px solid rgba(248,113,113,0.4);box-shadow:var(--glass-inner-highlight), var(--shadow-md);">
+            <h3 style="font-size:1.2rem;color:#FCA5A5 !important;margin-bottom:18px;display:flex;align-items:center;gap:8px;font-weight:700;">
               <span>✕ What Is Not Included</span>
             </h3>
-            <ul style="display:flex;flex-direction:column;gap:12px;font-size:0.92rem;color:var(--color-text-body);">
+            <ul style="display:flex;flex-direction:column;gap:12px;font-size:0.92rem;color:#F1F5F9;">
               <?php foreach ($exclusions as $exc): ?>
                 <li style="display:flex;align-items:flex-start;gap:10px;">
-                  <span style="color:#DC2626;font-weight:700;">•</span>
+                  <span style="color:#FCA5A5;font-weight:700;">•</span>
                   <span><?= e($exc) ?></span>
                 </li>
               <?php endforeach; ?>

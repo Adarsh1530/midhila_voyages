@@ -136,6 +136,10 @@ require_once __DIR__ . '/includes/header.php';
     gap: 16px 24px !important;
   }
 
+  #printableInvoice, #printableInvoice * {
+    color: #06101E !important;
+  }
+
   .invoice-badge {
     background: rgba(0, 168, 150, 0.12) !important;
     color: #008A7B !important;
@@ -152,18 +156,25 @@ require_once __DIR__ . '/includes/header.php';
 
 @media screen {
   .invoice-card {
-    background: rgba(255, 255, 255, 0.48) !important;
+    background: rgba(14, 23, 46, 0.82) !important;
     backdrop-filter: blur(28px) saturate(190%) !important;
     -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.75) !important;
-    box-shadow: 0 24px 60px rgba(10, 17, 40, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.95) !important;
+    border: 1.5px solid rgba(196, 181, 253, 0.35) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15) !important;
+    color: #FFFFFF !important;
   }
   .invoice-details-box {
-    background: rgba(237, 233, 254, 0.4) !important;
-    border: 1px solid rgba(196, 181, 253, 0.45) !important;
+    background: rgba(10, 17, 40, 0.65) !important;
+    border: 1px solid rgba(196, 181, 253, 0.25) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08) !important;
+  }
+  .invoice-badge {
+    background: rgba(20, 184, 166, 0.2) !important;
+    color: #5EEAD4 !important;
+    border: 1px solid rgba(20, 184, 166, 0.45) !important;
+    box-shadow: 0 0 12px rgba(20, 184, 166, 0.25) !important;
   }
 }
 </style>

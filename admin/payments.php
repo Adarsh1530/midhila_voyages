@@ -245,7 +245,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
               <!-- Gateway -->
               <td>
-                <span style="font-size:0.72rem;font-weight:700;background:#F1F5F9;padding:3px 8px;border-radius:4px;color:#334155;letter-spacing:0.04em;">
+                <span style="font-size:0.72rem;font-weight:700;background:rgba(255,255,255,0.12);padding:3px 8px;border-radius:6px;color:#FFFFFF;letter-spacing:0.04em;border:1px solid rgba(255,255,255,0.2);">
                   <?= strtoupper(e($pay['payment_gateway'])) ?>
                 </span>
               </td>
