@@ -28,11 +28,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 340px;
-  height: 340px;
+  width: 520px;
+  height: 520px;
   border-radius: 50%;
-  border: 1px solid rgba(197, 160, 89, 0.25);
-  box-shadow: inset 0 0 50px rgba(197, 160, 89, 0.05);
+  border: 1.5px solid rgba(197, 160, 89, 0.35);
+  box-shadow: inset 0 0 60px rgba(197, 160, 89, 0.08), 0 0 40px rgba(197, 160, 89, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,8 +45,8 @@
   animation: slowOrbit 28s linear infinite;
 }
 
-.fallback-globe__ring--1 { width: 90%; height: 90%; transform: rotateX(65deg); }
-.fallback-globe__ring--2 { width: 80%; height: 80%; transform: rotateY(65deg); animation-duration: 36s; animation-direction: reverse; }
+.fallback-globe__ring--1 { width: 92%; height: 92%; transform: rotateX(65deg); }
+.fallback-globe__ring--2 { width: 85%; height: 85%; transform: rotateY(65deg); animation-duration: 36s; animation-direction: reverse; }
 
 @keyframes slowOrbit {
   0% { transform: rotate(0deg); }
@@ -54,7 +54,7 @@
 }
 
 /* =====================================================================
-   2. CURATED HERO MEMOIRS (Perfect Visual Framing & Organic Drift)
+   2. CURATED HERO MEMOIRS (Nestled Inside the Maximized Globe)
    ===================================================================== */
 .hero-memoirs-frame {
   position: relative;
@@ -69,7 +69,7 @@
   position: absolute;
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 20px 48px -10px rgba(15, 23, 42, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 48px -10px rgba(15, 23, 42, 0.14), 0 2px 8px rgba(0, 0, 0, 0.04);
   border: 4px solid #FFFFFF;
   background: #FFFFFF;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -84,32 +84,35 @@
   display: block;
 }
 
+/* Primary Feature (Kerala Backwaters) - inside globe right quadrant */
 .hero-memoir--1,
 .floating-memoir--1 {
-  top: 15px;
-  right: 15px;
-  width: 250px;
-  height: 340px;
+  top: 14%;
+  right: 11%;
+  width: 235px;
+  height: 330px;
   z-index: 3;
   animation: floatDriftA 16s ease-in-out infinite alternate;
 }
 
+/* Secondary Feature (Vedic Temple) - inside globe lower-left quadrant */
 .hero-memoir--2,
 .floating-memoir--2 {
-  bottom: 25px;
-  left: 20px;
-  width: 230px;
-  height: 175px;
+  bottom: 12%;
+  left: 12%;
+  width: 215px;
+  height: 170px;
   z-index: 4;
   animation: floatDriftB 20s ease-in-out infinite alternate;
 }
 
+/* Tertiary Feature (Ganga Ghat Sunrise) - inside globe upper-left quadrant */
 .hero-memoir--3,
 .floating-memoir--3 {
-  top: 55px;
-  left: 35px;
-  width: 170px;
-  height: 220px;
+  top: 15%;
+  left: 13%;
+  width: 165px;
+  height: 215px;
   z-index: 2;
   animation: floatDriftC 18s ease-in-out infinite alternate;
 }

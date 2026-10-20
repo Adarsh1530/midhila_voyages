@@ -35,7 +35,7 @@
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-      camera.position.z = 24;
+      camera.position.z = 21; // Maximized camera distance for grand spherical presence
 
       const renderer = new THREE.WebGLRenderer({
         canvas: container,
@@ -46,33 +46,33 @@
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      // Golden Travel Globe Group
+      // Golden Travel Globe Group (Maximized Ambient Presence)
       const globeGroup = new THREE.Group();
       scene.add(globeGroup);
 
-      // Inner Wireframe Sphere (subtle golden coordinate mesh)
-      const sphereGeo = new THREE.SphereGeometry(7.5, 32, 24);
+      // Inner Wireframe Sphere (Prominent Luxury Gold Coordinate Mesh)
+      const sphereGeo = new THREE.SphereGeometry(8.6, 36, 28);
       const sphereMat = new THREE.MeshBasicMaterial({
         color: 0xC5A059,
         wireframe: true,
         transparent: true,
-        opacity: 0.16
+        opacity: 0.28
       });
       const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
       globeGroup.add(sphereMesh);
 
-      // Orbital Route Rings
+      // Orbital Route & Meridian Rings
       const ringMat = new THREE.LineBasicMaterial({
-        color: 0x9A7836,
+        color: 0xB88E3E,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.45,
         linewidth: 1.5
       });
 
       const createRing = (radius, rotX, rotY) => {
         const points = [];
-        for (let i = 0; i <= 64; i++) {
-          const theta = (i / 64) * Math.PI * 2;
+        for (let i = 0; i <= 80; i++) {
+          const theta = (i / 80) * Math.PI * 2;
           points.push(new THREE.Vector3(Math.cos(theta) * radius, Math.sin(theta) * radius, 0));
         }
         const geo = new THREE.BufferGeometry().setFromPoints(points);
@@ -82,18 +82,24 @@
         return line;
       };
 
-      globeGroup.add(createRing(8.2, Math.PI / 4, 0));
-      globeGroup.add(createRing(8.5, -Math.PI / 3, Math.PI / 6));
+      // Grand Orbital Latitude, Longitude & Equator Rings
+      globeGroup.add(createRing(8.9, Math.PI / 4, 0));
+      globeGroup.add(createRing(9.2, -Math.PI / 3, Math.PI / 6));
+      globeGroup.add(createRing(8.7, Math.PI / 2, 0)); // Equator
+      globeGroup.add(createRing(8.7, 0, Math.PI / 2)); // Prime Meridian
+      globeGroup.add(createRing(9.5, Math.PI / 6, Math.PI / 3)); // Celestial orbit
 
-      // Coordinate Waypoints (Glow points for Kerala, Rameswaram, Varanasi, Himalayas)
-      const waypointGeo = new THREE.SphereGeometry(0.2, 12, 12);
-      const waypointMat = new THREE.MeshBasicMaterial({ color: 0xC5A059 });
+      // Coordinate Waypoint Nodes (Glowing Travel Coordinate Pins)
+      const waypointGeo = new THREE.SphereGeometry(0.32, 16, 16);
+      const waypointMat = new THREE.MeshBasicMaterial({ color: 0xD4AF37 });
 
       const waypoints = [
-        [4.8, 3.2, 4.5],
-        [-3.5, 5.2, 3.8],
-        [2.1, -4.8, 5.0],
-        [-5.0, -2.5, 4.2]
+        [5.4, 3.6, 5.2],
+        [-4.0, 6.0, 4.3],
+        [2.4, -5.5, 5.8],
+        [-5.6, -3.0, 4.8],
+        [1.2, 6.5, 5.2],
+        [6.4, -2.2, 5.0]
       ];
 
       waypoints.forEach(([x, y, z]) => {
