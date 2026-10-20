@@ -163,10 +163,6 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Day-by-Day Itinerary -->
         <div style="margin-bottom:44px;">
-          <div class="chapter-badge">
-            <span class="chapter-number">Route Breakdown</span>
-            <span class="chapter-coordinates">Sequential Day Plans</span>
-          </div>
           <h2 class="editorial-headline-large" style="font-size:2rem;margin-bottom:24px;">Day-by-Day Itinerary</h2>
 
           <?php if (empty($itineraries)): ?>
@@ -199,7 +195,7 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <!-- Inclusions & Exclusions Grid -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:44px;">
+        <div class="responsive-2col" style="margin-bottom:44px;">
           <!-- Inclusions -->
           <div style="background:#FFFFFF;border:1px solid rgba(16, 124, 65, 0.25);border-radius:var(--radius-md);padding:28px;box-shadow:var(--shadow-ambient);">
             <h3 style="font-size:1.15rem;color:#0F5132;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
@@ -316,14 +312,10 @@ require_once __DIR__ . '/includes/header.php';
 <section class="section-padding" style="background:#FFFFFF;">
   <div class="container">
     <div style="margin-bottom:40px;">
-      <div class="chapter-badge">
-        <span class="chapter-number">Companion Routes</span>
-        <span class="chapter-coordinates">Related Itineraries</span>
-      </div>
       <h2 class="editorial-headline-large" style="font-size:2.2rem;">You May Also Appreciate</h2>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(350px, 1fr));gap:32px;">
+    <div class="packages-grid">
       <?php foreach ($relatedPackages as $package): ?>
         <?php include __DIR__ . '/includes/package-card.php'; ?>
       <?php endforeach; ?>

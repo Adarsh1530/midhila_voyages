@@ -34,10 +34,6 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div class="chapter-badge" style="justify-content:center;">
-      <span class="chapter-number">Guidance &bull; Assistance</span>
-      <span class="chapter-coordinates">Transparent Policies</span>
-    </div>
     <h1 class="editorial-headline-large" style="margin-bottom:16px;">
       Frequently Asked Questions
     </h1>

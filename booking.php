@@ -46,10 +46,6 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div class="chapter-badge" style="justify-content:center;">
-      <span class="chapter-number">Reservation Gateway</span>
-      <span class="chapter-coordinates">Secure Checkout</span>
-    </div>
     <h1 class="editorial-headline-large" style="margin-bottom:14px;">Confirm Your Booking</h1>
     <p class="editorial-subtext" style="margin:0 auto;">
       Lock in your preferred departure dates with an initial booking deposit or complete payment. Official digital vouchers generated instantly.
@@ -103,7 +99,7 @@ require_once __DIR__ . '/includes/header.php';
             </select>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label">Full Name *</label>
               <input type="text" name="customer_name" id="bkgName" class="editorial-input" required placeholder="e.g. Priya Nair">
@@ -114,7 +110,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label">Email Address *</label>
               <input type="email" name="customer_email" id="bkgEmail" class="editorial-input" required placeholder="priya@domain.com">
@@ -125,7 +121,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label">Number of Travellers *</label>
               <input type="number" name="travellers_count" id="bkgTravellers" min="1" max="50" value="2" class="editorial-input" required>

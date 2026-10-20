@@ -86,10 +86,6 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div class="chapter-badge" style="justify-content:center;">
-      <span class="chapter-number">Connect with Us</span>
-      <span class="chapter-coordinates">Kerala Headquarters</span>
-    </div>
     <h1 class="editorial-headline-large" style="margin-bottom:16px;">
       Direct Agency Assistance
     </h1>
@@ -129,7 +125,7 @@ require_once __DIR__ . '/includes/header.php';
         <form action="<?= BASE_URL ?>/contact.php" method="POST">
           <?= csrf_field() ?>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label">Your Name *</label>
               <input type="text" name="name" class="editorial-input" placeholder="e.g. Adarsh" required>
@@ -141,7 +137,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label">Email Address</label>
               <input type="email" name="email" class="editorial-input" placeholder="you@domain.com">

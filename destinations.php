@@ -41,10 +41,6 @@ require_once __DIR__ . '/includes/header.php';
   </div>
   
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div class="chapter-badge" style="justify-content:center;">
-      <span class="chapter-number">Chapter II &bull; Horizons</span>
-      <span class="chapter-coordinates">Geographic Sanctuaries</span>
-    </div>
     <h1 class="editorial-headline-large" style="margin-bottom:16px;">
       Curated Travel Destinations
     </h1>
@@ -75,7 +71,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- Destinations Grid -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(360px, 1fr));gap:32px;">
+    <div class="destinations-grid">
       <?php if (!empty($destinations)): ?>
         <?php foreach ($destinations as $dest): 
           $destSlug = $dest['slug'] ?? ('destination-' . $dest['id']);

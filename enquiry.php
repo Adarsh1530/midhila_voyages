@@ -133,10 +133,6 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div class="chapter-badge" style="justify-content:center;">
-      <span class="chapter-number">Chapter VII &bull; The Horizon</span>
-      <span class="chapter-coordinates">Bespoke Concierge Curation</span>
-    </div>
     <h1 class="editorial-headline-large" style="margin-bottom:14px;">
       Plan Your Custom Journey
     </h1>
@@ -218,7 +214,7 @@ require_once __DIR__ . '/includes/header.php';
             1. Destination &amp; Journey Dates
           </h3>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label">Selected Destination *</label>
               <select name="destination_name" class="editorial-select" required>
@@ -245,7 +241,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label">Estimated Departure Date</label>
               <input type="date" name="departure_date" class="editorial-input">
@@ -289,7 +285,7 @@ require_once __DIR__ . '/includes/header.php';
             3. Lead Traveler Details
           </h3>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label">Full Name *</label>
               <input type="text" name="full_name" class="editorial-input" placeholder="e.g. Adarsh" required>
@@ -301,7 +297,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label">WhatsApp Number</label>
               <input type="tel" name="whatsapp" class="editorial-input" placeholder="If different from calling number">

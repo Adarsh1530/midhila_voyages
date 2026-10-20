@@ -27,10 +27,6 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div class="chapter-badge" style="justify-content:center;">
-      <span class="chapter-number">Concierge Capabilities</span>
-      <span class="chapter-coordinates">Bespoke Hospitality</span>
-    </div>
     <h1 class="editorial-headline-large" style="margin-bottom:16px;">
       Seamless Travel Curation
     </h1>
@@ -47,7 +43,7 @@ require_once __DIR__ . '/includes/header.php';
 <section class="section-padding" style="background:#FFFFFF;">
   <div class="container">
     
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:32px;">
+    <div class="services-grid">
       
       <!-- Service 1 -->
       <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:36px;box-shadow:var(--shadow-card);">

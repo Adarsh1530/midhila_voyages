@@ -143,12 +143,6 @@ require_once __DIR__ . '/includes/header.php';
   <div class="container" style="position:relative;z-index:3;">
     <div style="max-width:760px;">
       
-      <!-- Chapter Eyebrow -->
-      <div class="chapter-badge">
-        <span class="chapter-number">Chapter I &bull; The Awakening</span>
-        <span class="chapter-coordinates">8° 29' N, 76° 57' E &bull; Kerala &bull; Kashi</span>
-      </div>
-
       <!-- Main Display Headline -->
       <h1 class="editorial-headline-hero">
         Travelled by Scroll.<br>
@@ -158,39 +152,9 @@ require_once __DIR__ . '/includes/header.php';
       </h1>
 
       <!-- Editorial Subtext -->
-      <p class="editorial-subtext" style="margin-bottom:36px;">
+      <p class="editorial-subtext">
         Where bespoke travel is an art of quiet luxury, reverence, and unhurried discovery. Handcrafted journeys across India’s most storied sanctuaries.
       </p>
-
-      <!-- Conversion Call-to-Actions -->
-      <div style="display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:48px;">
-        <a href="#signature-journeys" class="btn-cinematic-primary">
-          <span>Explore Portfolios</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 13 12 18 17 13"></polyline><line x1="12" y1="6" x2="12" y2="18"></line></svg>
-        </a>
-
-        <a href="<?= BASE_URL ?>/enquiry.php" class="btn-cinematic-outline">
-          <span>Plan Custom Itinerary</span>
-        </a>
-
-        <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to plan a bespoke holiday.")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" title="Direct WhatsApp Consultation">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/>
-          </svg>
-          <span>WhatsApp Concierge</span>
-        </a>
-      </div>
-
-      <!-- Quick Horizon Filter Bar (Pure White Surface) -->
-      <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-pill);padding:10px 16px;box-shadow:var(--shadow-card);display:inline-flex;align-items:center;flex-wrap:wrap;gap:12px;max-width:100%;">
-        <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold-deep);padding-left:10px;">
-          Curated Circuits:
-        </span>
-        <a href="<?= BASE_URL ?>/packages.php?category=pilgrimage" class="filter-pill" style="padding:6px 14px;font-size:0.78rem;">Pilgrim Tours</a>
-        <a href="<?= BASE_URL ?>/destination.php?slug=kerala" class="filter-pill" style="padding:6px 14px;font-size:0.78rem;">Kerala Houseboats</a>
-        <a href="<?= BASE_URL ?>/destination.php?slug=tamil-nadu" class="filter-pill" style="padding:6px 14px;font-size:0.78rem;">Tamil Nadu Circuits</a>
-        <a href="<?= BASE_URL ?>/packages.php?category=honeymoon" class="filter-pill" style="padding:6px 14px;font-size:0.78rem;">Romantic Escapes</a>
-      </div>
 
     </div>
   </div>
@@ -214,13 +178,9 @@ require_once __DIR__ . '/includes/header.php';
 
   <div class="container">
     
-    <!-- Chapter Header -->
+    <!-- Destinations Header -->
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:60px;">
       <div>
-        <div class="chapter-badge">
-          <span class="chapter-number">Chapter II &bull; Horizons</span>
-          <span class="chapter-coordinates">Geographic Sanctuaries</span>
-        </div>
         <h2 class="editorial-headline-large">
           Six Sacred Lands.<br>
           <span style="font-family:var(--font-editorial);font-style:italic;font-weight:400;color:var(--color-text-secondary);">
@@ -241,11 +201,11 @@ require_once __DIR__ . '/includes/header.php';
     <div class="dest-chapter-grid">
       <?php if (!empty($featuredDestinations)): ?>
         <?php foreach ($featuredDestinations as $idx => $dest): 
-          $colSpan = ($idx === 0 || $idx === 3) ? 'grid-column: span 7;' : 'grid-column: span 5;';
+          $colClass = ($idx === 0 || $idx === 3) ? 'dest-col-7' : 'dest-col-5';
           $destImg = !empty($dest['featured_image']) ? $dest['featured_image'] : (ASSETS_URL . '/images/placeholder.svg');
           $destSlug = $dest['slug'] ?? ('destination-' . $dest['id']);
         ?>
-          <div class="dest-showcase-card reveal-fade-up stagger-<?= ($idx % 3) + 1 ?>" style="<?= $colSpan ?>">
+          <div class="dest-showcase-card <?= $colClass ?> reveal-fade-up stagger-<?= ($idx % 3) + 1 ?>">
             <div class="dest-showcase-card__img-wrap" style="height:320px;">
               <a href="<?= BASE_URL ?>/destination.php?slug=<?= urlencode($destSlug) ?>" aria-label="Explore <?= e($dest['name']) ?>">
                 <img src="<?= e($destImg) ?>" 
@@ -290,13 +250,9 @@ require_once __DIR__ . '/includes/header.php';
   
   <div class="container">
     
-    <!-- Chapter Header -->
+    <!-- Portfolios Header -->
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:50px;">
       <div>
-        <div class="chapter-badge">
-          <span class="chapter-number">Chapter III &bull; Portfolios</span>
-          <span class="chapter-coordinates">Curated Signature Itineraries</span>
-        </div>
         <h2 class="editorial-headline-large">
           Handcrafted Journeys.<br>
           <span style="font-family:var(--font-editorial);font-style:italic;font-weight:400;color:var(--color-text-secondary);">
@@ -326,7 +282,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- Tour Packages Grid (100% Opacity Verified Photography) -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(350px, 1fr));gap:32px;">
+    <div class="packages-grid">
       <?php if (!empty($packages)): ?>
         <?php foreach ($packages as $package): ?>
           <?php include __DIR__ . '/includes/package-card.php'; ?>
@@ -344,7 +300,7 @@ require_once __DIR__ . '/includes/header.php';
 <div class="section-divider-hairline"></div>
 
 <!-- =====================================================================
-     CHAPTER IV: THE SACRED CIRCUIT (PILGRIMAGE TOURS)
+     THE SACRED CIRCUIT (PILGRIMAGE TOURS)
      ===================================================================== -->
 <section class="section-padding" style="position:relative;background:#FFFFFF;">
   
@@ -359,9 +315,9 @@ require_once __DIR__ . '/includes/header.php';
   <div class="container">
     
     <div class="pilgrim-banner">
-      <div style="display:grid;grid-template-columns:repeat(12, 1fr);gap:40px;align-items:center;">
+      <div class="pilgrim-banner__grid">
         
-        <div style="grid-column:span 7;">
+        <div class="pilgrim-banner__left">
           <div class="pilgrim-temple-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
             <span>Sacred Vedic Circuit &bull; Tamil Nadu &amp; Kashi</span>
@@ -379,7 +335,7 @@ require_once __DIR__ . '/includes/header.php';
           </p>
 
           <!-- Inclusion Highlights from the Official Poster -->
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:30px;font-size:0.86rem;color:var(--color-text-body);">
+          <div class="pilgrim-inclusions-grid">
             <div style="display:flex;align-items:center;gap:8px;">
               <span style="color:#059669;font-weight:700;">✓</span> Dedicated Chauffeured Transport
             </div>
@@ -405,7 +361,7 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <!-- Featured Price Badge & Image Frame -->
-        <div style="grid-column:span 5;text-align:center;">
+        <div class="pilgrim-banner__right">
           <div style="background:#FFFFFF;border:2px solid rgba(197, 160, 89, 0.4);border-radius:var(--radius-lg);padding:32px 24px;box-shadow:var(--shadow-card);">
             <span style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Special Yatra Package</span>
             <div style="font-size:3rem;font-weight:800;color:var(--color-text-headline);line-height:1;margin:12px 0 6px;">
@@ -439,10 +395,6 @@ require_once __DIR__ . '/includes/header.php';
   <div class="container">
     
     <div style="text-align:center;max-width:760px;margin:0 auto 60px;">
-      <div class="chapter-badge" style="justify-content:center;">
-        <span class="chapter-number">Chapter V &bull; The Craft</span>
-        <span class="chapter-coordinates">Bespoke Concierge Philosophy</span>
-      </div>
       <h2 class="editorial-headline-large">
         Hospitality Defined by Stillness, Depth &amp; Care.
       </h2>
@@ -452,7 +404,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- 4 Pillars Grid -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:32px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 260px), 1fr));gap:32px;">
       
       <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px 28px;box-shadow:var(--shadow-ambient);">
         <div style="font-size:1.6rem;color:var(--color-gold-deep);margin-bottom:16px;">✦</div>
@@ -494,21 +446,17 @@ require_once __DIR__ . '/includes/header.php';
 <div class="section-divider-hairline"></div>
 
 <!-- =====================================================================
-     CHAPTER VI: EXPLORER MEMOIRS & TRUST
+     EXPLORER MEMOIRS & TRUST
      ===================================================================== -->
 <?php if (!empty($testimonials)): ?>
 <section class="section-padding" style="position:relative;background:#FFFFFF;">
   <div class="container">
     
     <div style="text-align:center;max-width:700px;margin:0 auto 50px;">
-      <div class="chapter-badge" style="justify-content:center;">
-        <span class="chapter-number">Chapter VI &bull; Memoirs</span>
-        <span class="chapter-coordinates">Voices of Pilgrims &amp; Voyagers</span>
-      </div>
       <h2 class="editorial-headline-large">Journeys Remembered.</h2>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:28px;">
+    <div class="packages-grid">
       <?php foreach ($testimonials as $t): ?>
         <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px 28px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;justify-content:space-between;">
           <div>
@@ -534,17 +482,13 @@ require_once __DIR__ . '/includes/header.php';
 <?php endif; ?>
 
 <!-- =====================================================================
-     CHAPTER VII: COMMENCE YOUR JOURNEY (ENQUIRY CONCIERGE)
+     COMMENCE YOUR JOURNEY (ENQUIRY CONCIERGE)
      ===================================================================== -->
 <section class="section-padding" style="position:relative;background:#FFFFFF;">
   <div class="container container-narrow">
     
     <div class="editorial-form-panel">
       <div style="text-align:center;margin-bottom:36px;">
-        <div class="chapter-badge" style="justify-content:center;">
-          <span class="chapter-number">Chapter VII &bull; The Horizon</span>
-          <span class="chapter-coordinates">Bespoke Travel Inquiry</span>
-        </div>
         <h2 style="font-size:clamp(1.8rem, 3.2vw, 2.6rem);margin-bottom:12px;">Plan Your Bespoke Journey</h2>
         <p style="font-size:0.95rem;color:var(--color-text-secondary);max-width:540px;margin:0 auto;">
           Tell our travel specialists your preferred destinations, dates, and rhythm. We respond within hours with a tailored itinerary.
@@ -554,7 +498,7 @@ require_once __DIR__ . '/includes/header.php';
       <form action="<?= BASE_URL ?>/enquiry.php" method="POST">
         <?= csrf_field() ?>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div class="form-row-2col">
           <div class="editorial-form-group">
             <label class="editorial-label">Your Name *</label>
             <input type="text" name="name" class="editorial-input" placeholder="e.g. Adarsh" required>
@@ -566,7 +510,7 @@ require_once __DIR__ . '/includes/header.php';
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div class="form-row-2col">
           <div class="editorial-form-group">
             <label class="editorial-label">Email Address *</label>
             <input type="email" name="email" class="editorial-input" placeholder="you@domain.com" required>

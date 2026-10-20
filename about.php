@@ -26,10 +26,6 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div class="chapter-badge" style="justify-content:center;">
-      <span class="chapter-number">The Story &bull; Origins</span>
-      <span class="chapter-coordinates">Kerala &bull; Sacred Corridors</span>
-    </div>
     <h1 class="editorial-headline-large" style="margin-bottom:16px;">
       The Midhila Voyages Philosophy
     </h1>
@@ -59,7 +55,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- 4 Foundational Pillars -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:60px;">
+    <div class="responsive-2col" style="gap:28px;margin-bottom:60px;">
       
       <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px;">
         <span style="font-size:1.4rem;color:var(--color-gold-deep);margin-bottom:10px;display:block;">01</span>

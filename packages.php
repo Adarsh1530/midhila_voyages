@@ -89,10 +89,6 @@ require_once __DIR__ . '/includes/header.php';
   </div>
   
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div class="chapter-badge" style="justify-content:center;">
-      <span class="chapter-number">Portfolios &bull; Curated Circuits</span>
-      <span class="chapter-coordinates">Verified Itineraries</span>
-    </div>
     <h1 class="editorial-headline-large" style="margin-bottom:16px;">
       Signature Tour Packages
     </h1>
@@ -187,7 +183,7 @@ require_once __DIR__ . '/includes/header.php';
         <a href="<?= BASE_URL ?>/packages.php" class="btn-cinematic-primary">Reset All Filters</a>
       </div>
     <?php else: ?>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(350px, 1fr));gap:32px;">
+      <div class="packages-grid">
         <?php foreach ($packages as $package): ?>
           <?php include __DIR__ . '/includes/package-card.php'; ?>
         <?php endforeach; ?>

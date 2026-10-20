@@ -26,10 +26,6 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 
   <div class="container" style="text-align:center;max-width:820px;position:relative;z-index:2;">
-    <div class="chapter-badge" style="justify-content:center;">
-      <span class="chapter-number">Governance</span>
-      <span class="chapter-coordinates">Terms of Service</span>
-    </div>
     <h1 class="editorial-headline-large" style="margin-bottom:12px;">Terms &amp; Conditions</h1>
     <p class="editorial-subtext" style="margin:0 auto;">Effective Date: October 2026 &bull; Midhila Voyages</p>
   </div>

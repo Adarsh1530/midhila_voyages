@@ -124,10 +124,6 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Highlights Grid -->
         <?php if (!empty($highlights)): ?>
           <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:34px;box-shadow:var(--shadow-ambient);margin-bottom:40px;">
-            <div class="chapter-badge">
-              <span class="chapter-number">Vignettes</span>
-              <span class="chapter-coordinates">Curated Experiences</span>
-            </div>
             <h3 style="font-size:1.35rem;margin-bottom:20px;">Signature Highlights</h3>
             <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;">
               <?php foreach ($highlights as $hl): ?>
@@ -201,10 +197,6 @@ require_once __DIR__ . '/includes/header.php';
   <div class="container">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;flex-wrap:wrap;gap:20px;">
       <div>
-        <div class="chapter-badge">
-          <span class="chapter-number">Curated Portfolios</span>
-          <span class="chapter-coordinates"><?= e($dest['name']) ?> Circuits</span>
-        </div>
         <h2 class="editorial-headline-large" style="font-size:2.2rem;">
           Itineraries in <?= e($dest['name']) ?>
         </h2>
@@ -221,7 +213,7 @@ require_once __DIR__ . '/includes/header.php';
         <a href="<?= e($waDestUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">Chat with Our Specialist</a>
       </div>
     <?php else: ?>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(350px, 1fr));gap:32px;">
+      <div class="packages-grid">
         <?php foreach ($packages as $package): ?>
           <?php include __DIR__ . '/includes/package-card.php'; ?>
         <?php endforeach; ?>

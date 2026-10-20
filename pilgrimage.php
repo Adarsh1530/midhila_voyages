@@ -39,11 +39,6 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div class="chapter-badge" style="justify-content:center;">
-      <span class="chapter-number">Sacred Sanctuaries</span>
-      <span class="chapter-coordinates">Divine Yatras &bull; Vedic Trails</span>
-    </div>
-    
     <h1 class="editorial-headline-large" style="margin-bottom:18px;">
       Journeys of Faith, Serenity &amp; Devotion
     </h1>
@@ -133,7 +128,7 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <!-- Tour Tariff, Dates & Inclusions Breakdown -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px;">
+      <div class="responsive-2col" style="align-items:center;background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:clamp(20px, 3vw, 32px);">
         <div>
           <span style="font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Fixed Transparent Tariff</span>
           <div style="font-size:2.8rem;font-weight:800;color:var(--color-text-headline);line-height:1;margin:6px 0;">
@@ -174,10 +169,6 @@ require_once __DIR__ . '/includes/header.php';
     
     <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;flex-wrap:wrap;gap:20px;">
       <div>
-        <div class="chapter-badge">
-          <span class="chapter-number">Pilgrim Portfolios</span>
-          <span class="chapter-coordinates">Spiritual Yatras</span>
-        </div>
         <h2 class="editorial-headline-large" style="font-size:2.2rem;">All Sacred Pilgrimage Circuits</h2>
       </div>
 
@@ -186,7 +177,7 @@ require_once __DIR__ . '/includes/header.php';
       </a>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(350px, 1fr));gap:32px;">
+    <div class="packages-grid">
       <?php if (!empty($pilgrimPackages)): ?>
         <?php foreach ($pilgrimPackages as $package): ?>
           <?php include __DIR__ . '/includes/package-card.php'; ?>
