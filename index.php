@@ -89,60 +89,107 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- =====================================================================
-     HERO SECTION (CINEMATIC LUXURY ON PURE WHITE)
+     CHAPTER I: THE DEPARTURE (CINEMATIC HERO ON PURE WHITE)
      ===================================================================== -->
-<section class="section-hero" id="heroSection">
+<section class="section-hero" style="position:relative;min-height:92vh;display:flex;align-items:center;padding-top:calc(var(--header-height) + 40px);padding-bottom:80px;background:#FFFFFF;overflow:hidden;">
   
-  <!-- Giant Borderless Free-Size Three.js Travel Globe Layer (Overlaying Elegantly Across Canvas & Text) -->
+  <!-- Subtle Background Destination Layer (35% Opacity with Soft White Radial Mask) -->
+  <div class="cinematic-bg-layer cinematic-bg-mask-radial" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1920&q=80" 
+         alt="" 
+         class="cinematic-bg-layer__img" 
+         style="opacity:0.32;">
+  </div>
+
+  <!-- Delicate Geographical Texture Grid Watermark -->
+  <div class="geo-texture-grid" aria-hidden="true"></div>
+
+  <!-- 3D Interactive Travel Scene Canvas (Three.js Golden Coordinate Globe) -->
   <div class="travel-scene-wrapper" aria-hidden="true">
     <canvas id="travelSceneCanvas"></canvas>
+    
+    <!-- Fallback CSS/SVG 3D Wireframe Rings -->
     <div class="fallback-globe">
       <div class="fallback-globe__ring fallback-globe__ring--1"></div>
       <div class="fallback-globe__ring fallback-globe__ring--2"></div>
     </div>
   </div>
 
-  <div class="container hero-container">
-    <div class="hero-grid">
-      
-      <!-- Left Column: Crystal-Clear Editorial Headline & Subtext -->
-      <div class="hero-content">
-        <h1 class="editorial-headline-hero">
-          Travelled by Scroll.<br>
-          <span class="editorial-headline-hero__sub">
-            Unfolding Sacred &amp; Sublime Horizons.
-          </span>
-        </h1>
+  <!-- Floating Photographic Memoirs (Natural Parallax Floating Depth) -->
+  <div class="floating-memoirs" aria-hidden="true">
+    <!-- Memoir 1: Kerala Backwaters -->
+    <div class="floating-memoir floating-memoir--1">
+      <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=600&q=80" 
+           alt="Kerala Tranquil Waters" 
+           loading="lazy">
+    </div>
 
-        <p class="editorial-subtext">
-          Where bespoke travel is an art of quiet luxury, reverence, and unhurried discovery. Handcrafted journeys across India’s most storied sanctuaries.
-        </p>
+    <!-- Memoir 2: Sacred Temple Gopuram -->
+    <div class="floating-memoir floating-memoir--2">
+      <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80" 
+           alt="Sacred Architecture" 
+           loading="lazy">
+    </div>
+
+    <!-- Memoir 3: Varanasi Dawn Ghat -->
+    <div class="floating-memoir floating-memoir--3">
+      <img src="https://images.unsplash.com/photo-1561359313-0639aad49ca6?auto=format&fit=crop&w=500&q=80" 
+           alt="Ganga Sunrise" 
+           loading="lazy">
+    </div>
+  </div>
+
+  <!-- Hero Content Layer -->
+  <div class="container" style="position:relative;z-index:3;">
+    <div style="max-width:760px;">
+      
+      <!-- Chapter Eyebrow -->
+      <div class="chapter-badge">
+        <span class="chapter-number">Chapter I &bull; The Awakening</span>
+        <span class="chapter-coordinates">8° 29' N, 76° 57' E &bull; Kerala &bull; Kashi</span>
       </div>
 
-      <!-- Right Column: Curated Destination Photo Memoirs Layered in Front of Giant Globe -->
-      <div class="hero-visual">
-        <div class="hero-memoirs-frame" aria-hidden="true">
-          <!-- Memoir 1: Kerala Backwaters (Primary Feature) -->
-          <div class="hero-memoir hero-memoir--1">
-            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=650&q=80" 
-                 alt="Kerala Tranquil Waters" 
-                 loading="eager">
-          </div>
+      <!-- Main Display Headline -->
+      <h1 class="editorial-headline-hero">
+        Travelled by Scroll.<br>
+        <span style="font-family:var(--font-editorial);font-style:italic;font-weight:400;color:var(--color-gold-deep);">
+          Unfolding Sacred &amp; Sublime Horizons.
+        </span>
+      </h1>
 
-          <!-- Memoir 2: Sacred Temple Gopuram (Secondary Layer) -->
-          <div class="hero-memoir hero-memoir--2">
-            <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=550&q=80" 
-                 alt="Sacred Architecture" 
-                 loading="lazy">
-          </div>
+      <!-- Editorial Subtext -->
+      <p class="editorial-subtext" style="margin-bottom:36px;">
+        Where bespoke travel is an art of quiet luxury, reverence, and unhurried discovery. Handcrafted journeys across India’s most storied sanctuaries.
+      </p>
 
-          <!-- Memoir 3: Varanasi Dawn Ghat (Tertiary Layer) -->
-          <div class="hero-memoir hero-memoir--3">
-            <img src="https://images.unsplash.com/photo-1561359313-0639aad49ca6?auto=format&fit=crop&w=500&q=80" 
-                 alt="Ganga Sunrise" 
-                 loading="lazy">
-          </div>
-        </div>
+      <!-- Conversion Call-to-Actions -->
+      <div style="display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:48px;">
+        <a href="#signature-journeys" class="btn-cinematic-primary">
+          <span>Explore Portfolios</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 13 12 18 17 13"></polyline><line x1="12" y1="6" x2="12" y2="18"></line></svg>
+        </a>
+
+        <a href="<?= BASE_URL ?>/enquiry.php" class="btn-cinematic-outline">
+          <span>Plan Custom Itinerary</span>
+        </a>
+
+        <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to plan a bespoke holiday.")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" title="Direct WhatsApp Consultation">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/>
+          </svg>
+          <span>WhatsApp Concierge</span>
+        </a>
+      </div>
+
+      <!-- Quick Horizon Filter Bar (Pure White Surface) -->
+      <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-pill);padding:10px 16px;box-shadow:var(--shadow-card);display:inline-flex;align-items:center;flex-wrap:wrap;gap:12px;max-width:100%;">
+        <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold-deep);padding-left:10px;">
+          Curated Circuits:
+        </span>
+        <a href="<?= BASE_URL ?>/packages.php?category=pilgrimage" class="filter-pill" style="padding:6px 14px;font-size:0.78rem;">Pilgrim Tours</a>
+        <a href="<?= BASE_URL ?>/destination.php?slug=kerala" class="filter-pill" style="padding:6px 14px;font-size:0.78rem;">Kerala Houseboats</a>
+        <a href="<?= BASE_URL ?>/destination.php?slug=tamil-nadu" class="filter-pill" style="padding:6px 14px;font-size:0.78rem;">Tamil Nadu Circuits</a>
+        <a href="<?= BASE_URL ?>/packages.php?category=honeymoon" class="filter-pill" style="padding:6px 14px;font-size:0.78rem;">Romantic Escapes</a>
       </div>
 
     </div>
@@ -279,7 +326,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- Tour Packages Grid (100% Opacity Verified Photography) -->
-    <div class="packages-grid">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(350px, 1fr));gap:32px;">
       <?php if (!empty($packages)): ?>
         <?php foreach ($packages as $package): ?>
           <?php include __DIR__ . '/includes/package-card.php'; ?>
@@ -312,9 +359,9 @@ require_once __DIR__ . '/includes/header.php';
   <div class="container">
     
     <div class="pilgrim-banner">
-      <div class="pilgrim-banner__grid">
+      <div style="display:grid;grid-template-columns:repeat(12, 1fr);gap:40px;align-items:center;">
         
-        <div class="pilgrim-banner__left">
+        <div style="grid-column:span 7;">
           <div class="pilgrim-temple-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
             <span>Sacred Vedic Circuit &bull; Tamil Nadu &amp; Kashi</span>
@@ -332,7 +379,7 @@ require_once __DIR__ . '/includes/header.php';
           </p>
 
           <!-- Inclusion Highlights from the Official Poster -->
-          <div class="pilgrim-inclusions-grid">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:30px;font-size:0.86rem;color:var(--color-text-body);">
             <div style="display:flex;align-items:center;gap:8px;">
               <span style="color:#059669;font-weight:700;">✓</span> Dedicated Chauffeured Transport
             </div>
@@ -358,7 +405,7 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <!-- Featured Price Badge & Image Frame -->
-        <div class="pilgrim-banner__right">
+        <div style="grid-column:span 5;text-align:center;">
           <div style="background:#FFFFFF;border:2px solid rgba(197, 160, 89, 0.4);border-radius:var(--radius-lg);padding:32px 24px;box-shadow:var(--shadow-card);">
             <span style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Special Yatra Package</span>
             <div style="font-size:3rem;font-weight:800;color:var(--color-text-headline);line-height:1;margin:12px 0 6px;">
@@ -507,7 +554,7 @@ require_once __DIR__ . '/includes/header.php';
       <form action="<?= BASE_URL ?>/enquiry.php" method="POST">
         <?= csrf_field() ?>
 
-        <div class="form-row-2col">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
           <div class="editorial-form-group">
             <label class="editorial-label">Your Name *</label>
             <input type="text" name="name" class="editorial-input" placeholder="e.g. Adarsh" required>
@@ -519,7 +566,7 @@ require_once __DIR__ . '/includes/header.php';
           </div>
         </div>
 
-        <div class="form-row-2col">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
           <div class="editorial-form-group">
             <label class="editorial-label">Email Address *</label>
             <input type="email" name="email" class="editorial-input" placeholder="you@domain.com" required>

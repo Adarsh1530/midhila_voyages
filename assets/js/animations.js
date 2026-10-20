@@ -30,16 +30,12 @@
     if (!container || typeof THREE === 'undefined') return;
 
     try {
-      const width = container.clientWidth || 1000;
-      const height = container.clientHeight || 1000;
+      const width = container.clientWidth || 600;
+      const height = container.clientHeight || 600;
 
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 2000);
-      camera.position.z = 23; // Grand scale, borderless free-size globe presence
-
-      // Hide CSS fallback rings once WebGL initializes
-      const fallback = container.parentElement ? container.parentElement.querySelector('.fallback-globe') : null;
-      if (fallback) fallback.style.display = 'none';
+      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+      camera.position.z = 24;
 
       const renderer = new THREE.WebGLRenderer({
         canvas: container,
@@ -50,33 +46,33 @@
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      // Golden Travel Globe Group (Giant Borderless Presence)
+      // Golden Travel Globe Group
       const globeGroup = new THREE.Group();
       scene.add(globeGroup);
 
-      // Inner Wireframe Sphere (Giant Luxury Gold Coordinate Mesh)
-      const sphereGeo = new THREE.SphereGeometry(9.6, 40, 32);
+      // Inner Wireframe Sphere (subtle golden coordinate mesh)
+      const sphereGeo = new THREE.SphereGeometry(7.5, 32, 24);
       const sphereMat = new THREE.MeshBasicMaterial({
         color: 0xC5A059,
         wireframe: true,
         transparent: true,
-        opacity: 0.28
+        opacity: 0.16
       });
       const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
       globeGroup.add(sphereMesh);
 
-      // Orbital Route & Meridian Rings
+      // Orbital Route Rings
       const ringMat = new THREE.LineBasicMaterial({
-        color: 0xB88E3E,
+        color: 0x9A7836,
         transparent: true,
-        opacity: 0.45,
+        opacity: 0.35,
         linewidth: 1.5
       });
 
       const createRing = (radius, rotX, rotY) => {
         const points = [];
-        for (let i = 0; i <= 80; i++) {
-          const theta = (i / 80) * Math.PI * 2;
+        for (let i = 0; i <= 64; i++) {
+          const theta = (i / 64) * Math.PI * 2;
           points.push(new THREE.Vector3(Math.cos(theta) * radius, Math.sin(theta) * radius, 0));
         }
         const geo = new THREE.BufferGeometry().setFromPoints(points);
@@ -86,24 +82,18 @@
         return line;
       };
 
-      // Grand Orbital Latitude, Longitude & Equator Rings
-      globeGroup.add(createRing(9.9, Math.PI / 4, 0));
-      globeGroup.add(createRing(10.2, -Math.PI / 3, Math.PI / 6));
-      globeGroup.add(createRing(9.7, Math.PI / 2, 0)); // Equator
-      globeGroup.add(createRing(9.7, 0, Math.PI / 2)); // Prime Meridian
-      globeGroup.add(createRing(10.5, Math.PI / 6, Math.PI / 3)); // Celestial orbit
+      globeGroup.add(createRing(8.2, Math.PI / 4, 0));
+      globeGroup.add(createRing(8.5, -Math.PI / 3, Math.PI / 6));
 
-      // Coordinate Waypoint Nodes (Glowing Travel Coordinate Pins)
-      const waypointGeo = new THREE.SphereGeometry(0.32, 16, 16);
-      const waypointMat = new THREE.MeshBasicMaterial({ color: 0xD4AF37 });
+      // Coordinate Waypoints (Glow points for Kerala, Rameswaram, Varanasi, Himalayas)
+      const waypointGeo = new THREE.SphereGeometry(0.2, 12, 12);
+      const waypointMat = new THREE.MeshBasicMaterial({ color: 0xC5A059 });
 
       const waypoints = [
-        [5.8, 4.0, 5.6],
-        [-4.5, 6.8, 4.8],
-        [2.7, -6.2, 6.5],
-        [-6.3, -3.4, 5.4],
-        [1.4, 7.3, 5.8],
-        [7.2, -2.5, 5.6]
+        [4.8, 3.2, 4.5],
+        [-3.5, 5.2, 3.8],
+        [2.1, -4.8, 5.0],
+        [-5.0, -2.5, 4.2]
       ];
 
       waypoints.forEach(([x, y, z]) => {
@@ -172,7 +162,7 @@
       gsap.registerPlugin(ScrollTrigger);
 
       // Parallax on Floating Photo Memoirs
-      gsap.utils.toArray('.hero-memoir, .floating-memoir').forEach((el, i) => {
+      gsap.utils.toArray('.floating-memoir').forEach((el, i) => {
         const speed = (i + 1) * 35;
         gsap.to(el, {
           y: -speed,
