@@ -158,7 +158,7 @@ require_once __DIR__ . '/includes/header.php';
       </h1>
 
       <!-- Editorial Subtext -->
-      <p class="editorial-subtext" style="margin-bottom:36px;max-width:580px;">
+      <p class="editorial-subtext" style="margin-bottom:36px;">
         Where bespoke travel is an art of quiet luxury, reverence, and unhurried discovery. Handcrafted journeys across India’s most storied sanctuaries.
       </p>
 
