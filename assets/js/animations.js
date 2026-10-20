@@ -162,7 +162,7 @@
       gsap.registerPlugin(ScrollTrigger);
 
       // Parallax on Floating Photo Memoirs
-      gsap.utils.toArray('.floating-memoir').forEach((el, i) => {
+      gsap.utils.toArray('.hero-memoir, .floating-memoir').forEach((el, i) => {
         const speed = (i + 1) * 35;
         gsap.to(el, {
           y: -speed,

@@ -1,73 +1,218 @@
 /**
- * MIDHILA VOYAGES — Responsive Breakpoints & Device Adaptations
- * Target breakpoints: 360px, 390px, 430px, 768px, 1024px, 1440px, 1920px
+ * MIDHILA VOYAGES — Unified Responsive Engine
+ * Seamless Auto-Responsiveness across PC, Laptop, Tablet & Mobile
+ * Breakpoints: 360px, 390px, 480px, 640px, 768px, 992px, 1140px, 1440px, 1920px
  */
 
 /* =====================================================================
-   Large Desktop / Ultra-wide (1440px and 1920px+)
+   1. Ultra-Wide & Large Desktop Displays (>= 1440px)
    ===================================================================== */
 @media (min-width: 1440px) {
   :root {
     --container-max: 1400px;
   }
-  .editorial-headline {
-    font-size: 4.4rem;
-  }
 }
 
 @media (min-width: 1920px) {
   :root {
-    --container-max: 1600px;
-  }
-  .editorial-headline {
-    font-size: 5rem;
-  }
-  .section-title {
-    font-size: 3.2rem;
+    --container-max: 1560px;
   }
 }
 
 /* =====================================================================
-   Laptop / Small Desktop / Tablet (max-width: 1140px)
+   2. Small Desktop / Laptops (max-width: 1200px)
+   ===================================================================== */
+@media (max-width: 1200px) {
+  .hero-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 32px;
+  }
+
+  .hero-visual {
+    height: 480px;
+    max-width: 480px;
+  }
+
+  .hero-memoir--1 { width: 230px; height: 310px; right: 10px; top: 15px; }
+  .hero-memoir--2 { width: 210px; height: 160px; left: 15px; bottom: 20px; }
+  .hero-memoir--3 { width: 155px; height: 200px; left: 25px; top: 45px; }
+
+  .dest-chapter-grid {
+    gap: 20px;
+  }
+}
+
+/* =====================================================================
+   3. Small Laptops / Landscape Tablets (max-width: 1140px)
    ===================================================================== */
 @media (max-width: 1140px) {
   .nav-menu {
-    display: none !important; /* Hidden on tablet & mobile; accessible via mobile drawer */
+    display: none !important; /* Collapses to drawer to avoid crowding */
   }
+
   .mobile-toggle,
   .mobile-nav-toggle {
     display: flex !important;
   }
+
   .brand-logo {
     margin-right: 0 !important;
   }
+
   .header-actions {
     margin-left: auto !important;
   }
 }
 
 /* =====================================================================
-   Tablets (max-width: 768px)
+   4. Portrait Tablets (max-width: 992px)
+   ===================================================================== */
+@media (max-width: 992px) {
+  .section-padding {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  /* Hero Auto-Stacking */
+  .section-hero {
+    min-height: auto;
+    padding-top: calc(var(--header-height) + 24px);
+    padding-bottom: 50px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px;
+    text-align: left;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .editorial-subtext {
+    max-width: 100%;
+  }
+
+  .hero-visual {
+    height: 420px;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  /* Destinations Grid Auto-Stacking */
+  .dest-chapter-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px;
+  }
+
+  .dest-showcase-card {
+    grid-column: span 1 !important;
+  }
+
+  .dest-showcase-card__img-wrap {
+    height: 260px;
+  }
+
+  /* Sacred Circuit Auto-Stacking */
+  .pilgrim-banner__grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px;
+  }
+
+  .pilgrim-banner__left,
+  .pilgrim-banner__right {
+    grid-column: span 1 !important;
+  }
+
+  .pilgrim-banner__right {
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Package Detail 2-Column Collapse */
+  .package-detail-layout {
+    grid-template-columns: 1fr !important;
+    gap: 36px;
+  }
+
+  .package-booking-card {
+    position: relative !important;
+    top: auto !important;
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+/* =====================================================================
+   5. Mobile Tablets & Large Handhelds (max-width: 768px)
    ===================================================================== */
 @media (max-width: 768px) {
   :root {
     --header-height: 72px;
   }
 
-  .nav-menu {
+  .container {
+    padding-left: clamp(16px, 4vw, 24px);
+    padding-right: clamp(16px, 4vw, 24px);
+  }
+
+  /* Header CTA hides on mobile to keep clean status bar */
+  .btn-header-cta,
+  .header-actions .btn-plan {
     display: none !important;
   }
 
-  .mobile-toggle,
-  .mobile-nav-toggle {
-    display: flex !important;
+  /* Typography Scales */
+  .editorial-headline-hero {
+    font-size: clamp(2rem, 7.5vw, 2.75rem);
+    line-height: 1.15;
+    margin-bottom: 16px;
   }
 
-  .btn-header-cta,
-  .header-actions .btn-plan {
-    display: none !important; /* Kept in mobile drawer to save header real estate */
+  .editorial-headline-large {
+    font-size: clamp(1.85rem, 6vw, 2.5rem);
+    line-height: 1.18;
+    margin-bottom: 16px;
   }
 
+  .editorial-subtext {
+    font-size: 1.08rem;
+    line-height: 1.55;
+  }
+
+  /* Hero Visual Compact Scaling */
+  .hero-visual {
+    height: 330px;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .hero-memoir--1 { width: 175px; height: 235px; right: 5px; top: 10px; }
+  .hero-memoir--2 { width: 155px; height: 120px; left: 10px; bottom: 15px; }
+  .hero-memoir--3 { width: 125px; height: 160px; left: 18px; top: 35px; }
+
+  /* Inclusions List */
+  .pilgrim-inclusions-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+  }
+
+  /* Forms Auto-Stacking */
+  .form-row-2col {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Filter Bar on Packages */
+  .filter-bar form {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+
+  /* Footer Layout */
   .footer-top {
     grid-template-columns: 1fr 1fr;
     gap: 32px;
@@ -80,131 +225,95 @@
   .footer-bottom {
     flex-direction: column;
     text-align: center;
-    gap: 16px;
+    gap: 14px;
   }
 
   .footer-legal-links {
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 }
 
 /* =====================================================================
-   Mobile Large (max-width: 430px)
+   6. Standard Handheld Mobile (max-width: 640px)
    ===================================================================== */
-@media (max-width: 430px) {
-  .container {
-    padding-left: 18px;
-    padding-right: 18px;
+@media (max-width: 640px) {
+  .section-padding {
+    padding-top: 64px;
+    padding-bottom: 64px;
   }
 
-  .brand-logo__name {
-    font-size: 1.15rem;
+  /* Single Column for Destinations */
+  .dest-chapter-grid {
+    grid-template-columns: 1fr !important;
   }
 
-  .brand-logo__img {
-    height: 38px;
-    max-width: 155px;
+  .dest-showcase-card__img-wrap {
+    height: 220px;
   }
 
-  .brand-logo__symbol {
-    width: 36px;
-    height: 36px;
+  /* Package Cards Grid */
+  .packages-grid {
+    grid-template-columns: 1fr !important;
   }
 
-  .editorial-headline {
-    font-size: 2.1rem;
-    line-height: 1.2;
-  }
-
-  .section-title {
-    font-size: 1.7rem;
-  }
-
-  .lead-text {
-    font-size: 0.98rem;
+  .editorial-form-panel {
+    padding: 24px 18px !important;
   }
 
   .footer-top {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     gap: 28px;
   }
 
   .footer-top .footer-col:last-child {
     grid-column: span 1;
   }
-
-  .hero-cta .btn,
-  .btn-block,
-  form button[type="submit"] {
-    width: 100%;
-  }
-
-  .package-card__footer {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
-  }
-
-  .package-card__actions {
-    width: 100%;
-    display: flex;
-    gap: 8px;
-  }
-
-  .package-card__actions .btn {
-    flex: 1;
-    min-width: 0;
-    justify-content: center;
-    padding: 10px 8px;
-    font-size: 0.8rem;
-  }
-
-  .fab-whatsapp {
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-  }
-
-  .fab-whatsapp__tooltip {
-    display: none;
-  }
 }
 
 /* =====================================================================
-   Mobile Standard (max-width: 390px)
+   7. Compact Mobile Screens (max-width: 430px)
    ===================================================================== */
-@media (max-width: 390px) {
-  .editorial-headline {
+@media (max-width: 430px) {
+  .brand-logo__img {
+    height: 38px;
+    max-width: 150px;
+  }
+
+  .editorial-headline-hero {
     font-size: 1.95rem;
   }
-  .dest-card {
-    height: 360px;
-    padding: 22px;
-  }
-  .dest-card__title {
-    font-size: 1.35rem;
-  }
-}
 
-/* =====================================================================
-   Mobile Compact (max-width: 360px)
-   ===================================================================== */
-@media (max-width: 360px) {
-  .brand-logo__name {
-    font-size: 1.05rem;
+  .hero-visual {
+    height: 290px;
+    max-width: 300px;
   }
-  .brand-logo__subtitle {
-    font-size: 0.58rem;
-  }
-  .editorial-headline {
-    font-size: 1.8rem;
-  }
-  .section-title {
-    font-size: 1.55rem;
-  }
-  .btn-sm {
+
+  .hero-memoir--1 { width: 155px; height: 200px; }
+  .hero-memoir--2 { width: 135px; height: 105px; }
+  .hero-memoir--3 { width: 110px; height: 140px; }
+
+  .filter-pill {
     padding: 6px 12px;
     font-size: 0.78rem;
   }
+}
+
+/* =====================================================================
+   8. Extra Small Screens (max-width: 360px)
+   ===================================================================== */
+@media (max-width: 360px) {
+  .editorial-headline-hero {
+    font-size: 1.75rem;
+  }
+
+  .hero-visual {
+    height: 260px;
+    max-width: 270px;
+  }
+
+  .hero-memoir--1 { width: 140px; height: 180px; }
+  .hero-memoir--2 { width: 120px; height: 95px; }
+  .hero-memoir--3 { width: 95px; height: 125px; }
 }

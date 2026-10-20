@@ -187,7 +187,7 @@ require_once __DIR__ . '/includes/header.php';
         <a href="<?= BASE_URL ?>/packages.php" class="btn-cinematic-primary">Reset All Filters</a>
       </div>
     <?php else: ?>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(350px, 1fr));gap:32px;">
+      <div class="packages-grid">
         <?php foreach ($packages as $package): ?>
           <?php include __DIR__ . '/includes/package-card.php'; ?>
         <?php endforeach; ?>
