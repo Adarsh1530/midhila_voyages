@@ -50,28 +50,58 @@ require_once __DIR__ . '/includes/header.php';
     <!-- Filter Tabs (Frosted Glass Pills) -->
     <div style="display:flex;justify-content:center;gap:12px;margin-bottom:48px;flex-wrap:wrap;">
       <a href="<?= BASE_URL ?>/destinations.php?cat=all" 
-         class="btn <?= ($filterCat === 'all') ? 'btn-primary' : 'btn-outline-white' ?>" style="border-radius:var(--radius-pill);padding:10px 22px;">
-        All Destinations (<?= count($destinations) ?>)
+         class="btn <?= ($filterCat === 'all') ? 'btn-vibrant-teal' : 'btn-outline-white' ?>" style="border-radius:var(--radius-pill);padding:10px 22px;">
+        All Horizons (<?= count($destinations) ?>)
       </a>
       <a href="<?= BASE_URL ?>/destinations.php?cat=domestic" 
-         class="btn <?= ($filterCat === 'domestic') ? 'btn-primary' : 'btn-outline-white' ?>" style="border-radius:var(--radius-pill);padding:10px 22px;">
+         class="btn <?= ($filterCat === 'domestic') ? 'btn-vibrant-coral' : 'btn-outline-white' ?>" style="border-radius:var(--radius-pill);padding:10px 22px;">
         Incredible India (Domestic)
       </a>
       <a href="<?= BASE_URL ?>/destinations.php?cat=international" 
-         class="btn <?= ($filterCat === 'international') ? 'btn-primary' : 'btn-outline-white' ?>" style="border-radius:var(--radius-pill);padding:10px 22px;">
-        Global Wonders (International)
+         class="btn <?= ($filterCat === 'international') ? 'btn-vibrant-sunset' : 'btn-outline-white' ?>" style="border-radius:var(--radius-pill);padding:10px 22px;">
+        Global Horizons (International)
       </a>
     </div>
 
     <!-- Destinations Grid -->
     <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));gap:30px;">
       <?php foreach ($destinations as $idx => $dest): ?>
-        <div class="card-perspective reveal-fade-up stagger-<?= ($idx % 3) + 1 ?>">
+        <?php
+          $dSlug = strtolower($dest['slug'] ?? '');
+          $dTagClass = 'dest-card__tag';
+          $dThemeClass = '';
+          if (strpos($dSlug, 'kerala') !== false) {
+              $dTagClass .= ' tag-kerala';
+              $dThemeClass = 'theme-kerala';
+          } elseif (strpos($dSlug, 'tamil') !== false) {
+              $dTagClass .= ' tag-tamilnadu';
+              $dThemeClass = 'theme-tamilnadu';
+          } elseif (strpos($dSlug, 'lakshadweep') !== false) {
+              $dTagClass .= ' tag-lakshadweep';
+              $dThemeClass = 'theme-lakshadweep';
+          } elseif (strpos($dSlug, 'andaman') !== false) {
+              $dTagClass .= ' tag-andaman';
+              $dThemeClass = 'theme-andaman';
+          } elseif (strpos($dSlug, 'varanasi') !== false || strpos($dSlug, 'kashi') !== false) {
+              $dTagClass .= ' tag-varanasi';
+              $dThemeClass = 'theme-varanasi';
+          } elseif (strpos($dSlug, 'himalaya') !== false || strpos($dSlug, 'kashmir') !== false || strpos($dSlug, 'manali') !== false) {
+              $dTagClass .= ' tag-himalayas';
+              $dThemeClass = 'theme-himalayas';
+          } elseif (strpos($dSlug, 'hyderabad') !== false) {
+              $dTagClass .= ' tag-hyderabad';
+              $dThemeClass = 'theme-hyderabad';
+          } elseif (strpos($dSlug, 'prayag') !== false || strpos($dSlug, 'ayodhya') !== false) {
+              $dTagClass .= ' tag-prayagraj';
+              $dThemeClass = 'theme-prayagraj';
+          }
+        ?>
+        <div class="card-perspective reveal-fade-up stagger-<?= ($idx % 3) + 1 ?> <?= e($dThemeClass) ?>">
           <a href="<?= BASE_URL ?>/destination.php?slug=<?= e($dest['slug']) ?>" class="dest-card card-3d glass-specular">
             <img src="<?= e(get_image_url($dest['featured_image'])) ?>" alt="<?= e($dest['alt_text'] ?: $dest['name']) ?>" class="dest-card__bg" loading="lazy" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
             <div class="dest-card__overlay"></div>
             
-            <span class="dest-card__tag"><?= strtoupper(e($dest['category'])) ?></span>
+            <span class="<?= e($dTagClass) ?>"><?= strtoupper(e($dest['category'])) ?></span>
 
             <div class="dest-card__content">
               <div class="dest-card__location">

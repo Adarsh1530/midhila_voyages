@@ -89,63 +89,98 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- =====================================================================
-     HERO SECTION
+     HERO SECTION (3D Scene, Multi-Hue Route Lines & Floating Destinations)
      ===================================================================== -->
-<section class="hero-section" style="position:relative;min-height:100vh;background-color:var(--color-navy-deep);display:flex;align-items:center;padding-top:calc(var(--header-height) + 40px);padding-bottom:80px;overflow:hidden;">
+<section class="hero-section hero-3d-scene" style="position:relative;min-height:100vh;background-color:var(--color-navy-deep);display:flex;align-items:center;padding-top:calc(var(--header-height) + 40px);padding-bottom:90px;overflow:hidden;">
   
-  <!-- Atmospheric Background Visual with Mask Reveal -->
+  <!-- Atmospheric Background Visual with Dynamic Mask Reveal -->
   <div style="position:absolute;inset:0;z-index:1;overflow:hidden;">
     <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85" 
          alt="Serene coastal travel horizon" 
-         style="width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.32;filter:brightness(0.7) contrast(1.1);transform:scale(1.05);"
+         style="width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.28;filter:brightness(0.7) contrast(1.15);transform:scale(1.05);"
          data-parallax-speed="0.08"
          onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-    <div style="position:absolute;inset:0;background:radial-gradient(circle at 60% 40%, rgba(0, 168, 150, 0.15) 0%, transparent 60%), linear-gradient(180deg, rgba(6, 16, 30, 0.7) 0%, rgba(6, 16, 30, 0.85) 65%, var(--color-navy-deep) 100%);"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(circle at 65% 35%, rgba(0, 196, 180, 0.18) 0%, rgba(255, 107, 107, 0.12) 40%, transparent 70%), linear-gradient(180deg, rgba(6, 16, 30, 0.65) 0%, rgba(6, 16, 30, 0.88) 65%, var(--color-navy-deep) 100%);"></div>
   </div>
 
-  <!-- Decorative Animated Route Lines & Floating Elements -->
-  <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0.25;" viewBox="0 0 1440 900" fill="none">
-    <path class="route-path" d="M-50,200 C300,100 450,450 720,320 C990,190 1200,600 1500,400" stroke="#C5A059" stroke-width="2" />
-    <circle cx="720" cy="320" r="6" fill="#00A896" />
-    <circle cx="720" cy="320" r="14" stroke="#00A896" stroke-width="1.5" stroke-dasharray="3 3" class="rotate-slow" />
+  <!-- Colorful Route Lines & Orbit Coordinates SVG -->
+  <svg class="hero-route-line-svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0.4;" viewBox="0 0 1440 900" fill="none">
+    <path class="hero-route-line" d="M-50,220 C280,80 460,480 750,310 C1040,140 1220,620 1520,380" stroke="url(#heroMultiHueGrad)" stroke-width="2.5" />
+    <circle cx="750" cy="310" r="7" fill="#00E5FF" class="route-pin-pulse" />
+    <circle cx="750" cy="310" r="16" stroke="#00E5FF" stroke-width="1.5" stroke-dasharray="3 3" class="rotate-slow" />
+    <circle cx="1080" cy="220" r="6" fill="#FF6B6B" />
+    <circle cx="340" cy="260" r="6" fill="#00C4B4" />
+    <defs>
+      <linearGradient id="heroMultiHueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#00C4B4"/>
+        <stop offset="35%" stop-color="#00E5FF"/>
+        <stop offset="65%" stop-color="#FFD166"/>
+        <stop offset="85%" stop-color="#FF6B6B"/>
+        <stop offset="100%" stop-color="#8338EC"/>
+      </linearGradient>
+    </defs>
   </svg>
 
+  <!-- 3D Floating Destination Cards (Right-Aligned Showcase) -->
+  <div class="hero-floating-card hero-floating-card--kerala card-3d glass-specular" style="display:none;@media(min-width:1080px){display:block;}">
+    <div style="position:relative;height:140px;overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=600&q=80" alt="Kerala backwaters" style="width:100%;height:100%;object-fit:cover;">
+      <span class="tag-kerala" style="position:absolute;top:10px;left:10px;font-size:0.68rem;padding:3px 10px;border-radius:var(--radius-pill);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Emerald Kerala</span>
+    </div>
+    <div style="padding:14px 16px;background:rgba(10,17,40,0.85);backdrop-filter:blur(10px);">
+      <div style="font-family:var(--font-serif);font-size:0.92rem;font-weight:700;color:#FFF;margin-bottom:2px;">Kumarakom Waters</div>
+      <div style="font-size:0.75rem;color:#A7F3D0;">Houseboat Cruising &bull; 4D/3N</div>
+    </div>
+  </div>
+
+  <div class="hero-floating-card hero-floating-card--andaman card-3d glass-specular" style="display:none;@media(min-width:1080px){display:block;}">
+    <div style="position:relative;height:130px;overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80" alt="Andaman Islands" style="width:100%;height:100%;object-fit:cover;">
+      <span class="tag-andaman" style="position:absolute;top:10px;left:10px;font-size:0.68rem;padding:3px 10px;border-radius:var(--radius-pill);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Tropical Andaman</span>
+    </div>
+    <div style="padding:14px 16px;background:rgba(10,17,40,0.85);backdrop-filter:blur(10px);">
+      <div style="font-family:var(--font-serif);font-size:0.92rem;font-weight:700;color:#FFF;margin-bottom:2px;">Havelock Coral Bays</div>
+      <div style="font-size:0.75rem;color:#7DD3FC;">Azure Lagoons &bull; 6D/5N</div>
+    </div>
+  </div>
+
   <div class="container" style="position:relative;z-index:3;">
-    <div style="max-width:840px;">
+    <div style="max-width:820px;">
       
       <!-- Coordinate & Horizon Pill -->
-      <div class="reveal-fade-up" style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.08);backdrop-filter:blur(8px);border:1px solid var(--color-border-gold);padding:6px 18px;border-radius:var(--radius-pill);margin-bottom:24px;">
-        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#02C39A;box-shadow:0 0 10px #02C39A;"></span>
-        <span style="font-size:0.8rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-gold);font-weight:600;">9.9312° N, 76.2673° E • Curated Journeys</span>
+      <div class="reveal-fade-up" style="display:inline-flex;align-items:center;gap:10px;background:rgba(0,196,180,0.12);backdrop-filter:blur(12px);border:1px solid rgba(0,196,180,0.4);padding:6px 20px;border-radius:var(--radius-pill);margin-bottom:24px;">
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#00C4B4;box-shadow:0 0 10px #00C4B4;"></span>
+        <span style="font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;color:#4EECD8;font-weight:700;">9.9312° N, 76.2673° E &bull; Curated Horizons</span>
       </div>
 
       <!-- Main Editorial Headline with Staggered Reveal -->
-      <h1 class="editorial-headline reveal-fade-up stagger-1" style="color:var(--color-white);margin-bottom:20px;">
+      <h1 class="editorial-headline reveal-fade-up stagger-1 hero-headline-anim" style="color:var(--color-white);margin-bottom:20px;font-size:clamp(2.6rem, 5.2vw, 4.5rem);line-height:1.08;letter-spacing:-0.02em;">
         <?= e($heroHeadline) ?>
       </h1>
 
       <!-- Supporting Statement -->
-      <p class="lead-text reveal-fade-up stagger-2" style="color:#CBD5E0;max-width:680px;margin-bottom:36px;font-size:1.18rem;">
+      <p class="lead-text reveal-fade-up stagger-2" style="color:#CBD5E0;max-width:680px;margin-bottom:36px;font-size:1.18rem;line-height:1.7;">
         <?= e($heroSubheading) ?>
       </p>
 
       <!-- Primary & Secondary CTAs -->
       <div class="reveal-fade-up stagger-3" style="display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-bottom:48px;">
-        <a href="<?= BASE_URL ?>/enquiry.php" class="btn btn-primary btn-lg pulse-gold">
-          <span>Plan Your Journey</span>
+        <a href="<?= BASE_URL ?>/packages.php" class="btn btn-vibrant-teal btn-lg">
+          <span>Explore Packages</span>
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
-        <a href="#featuredDestinations" class="btn btn-outline-white btn-lg">
-          <span>Explore Destinations</span>
+        <a href="<?= BASE_URL ?>/enquiry.php" class="btn btn-vibrant-coral btn-lg">
+          <span>Plan My Trip</span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </a>
       </div>
 
       <!-- Compact Travel Quick-Finder Bar -->
-      <div class="reveal-fade-up stagger-4 glass-specular" style="background:rgba(14, 23, 46, 0.72);backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(196, 181, 253, 0.35);border-radius:var(--radius-xl);padding:22px 28px;box-shadow:inset 0 1px 1px 0 rgba(255,255,255,0.25), 0 24px 50px -10px rgba(0,0,0,0.5);max-width:780px;">
+      <div class="reveal-fade-up stagger-4 glass-specular" style="background:rgba(10, 17, 40, 0.78);backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(0, 196, 180, 0.35);border-radius:var(--radius-xl);padding:22px 28px;box-shadow:inset 0 1px 1px 0 rgba(255,255,255,0.25), 0 24px 50px -10px rgba(0,0,0,0.55);max-width:800px;">
         <form action="<?= BASE_URL ?>/packages.php" method="GET" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)) auto;gap:16px;align-items:end;">
           <div>
-            <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-lavender);margin-bottom:6px;font-weight:700;">Where To?</label>
-            <select name="destination" style="width:100%;padding:11px 16px;background:rgba(10, 17, 40, 0.75);border:1.5px solid rgba(196, 181, 253, 0.35);border-radius:var(--radius-md);color:#FFF;font-size:0.9rem;outline:none;">
+            <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:#4EECD8;margin-bottom:6px;font-weight:700;">Destination</label>
+            <select name="destination" style="width:100%;padding:11px 16px;background:rgba(6, 16, 30, 0.85);border:1.5px solid rgba(0, 196, 180, 0.4);border-radius:var(--radius-md);color:#FFF;font-size:0.9rem;outline:none;">
               <option value="">All Destinations</option>
               <?php foreach ($featuredDestinations as $fd): ?>
                 <option value="<?= e($fd['slug']) ?>"><?= e($fd['name']) ?></option>
@@ -153,8 +188,8 @@ require_once __DIR__ . '/includes/header.php';
             </select>
           </div>
           <div>
-            <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-lavender);margin-bottom:6px;font-weight:700;">Trip Style</label>
-            <select name="category" style="width:100%;padding:11px 16px;background:rgba(10, 17, 40, 0.75);border:1.5px solid rgba(196, 181, 253, 0.35);border-radius:var(--radius-md);color:#FFF;font-size:0.9rem;outline:none;">
+            <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:#FFB4B4;margin-bottom:6px;font-weight:700;">Experience Style</label>
+            <select name="category" style="width:100%;padding:11px 16px;background:rgba(6, 16, 30, 0.85);border:1.5px solid rgba(255, 107, 107, 0.4);border-radius:var(--radius-md);color:#FFF;font-size:0.9rem;outline:none;">
               <option value="">All Experiences</option>
               <?php foreach ($categories as $cat): ?>
                 <option value="<?= e($cat['slug']) ?>"><?= e($cat['name']) ?></option>
@@ -162,8 +197,8 @@ require_once __DIR__ . '/includes/header.php';
             </select>
           </div>
           <div>
-            <button type="submit" class="btn btn-teal" style="width:100%;padding:12px 24px;">
-              <span>Find Tours</span>
+            <button type="submit" class="btn btn-vibrant-teal" style="width:100%;padding:12px 24px;">
+              <span>Search Tours</span>
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
           </div>
@@ -175,8 +210,8 @@ require_once __DIR__ . '/includes/header.php';
 
   <!-- Scroll Down Indicator -->
   <div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:3;text-align:center;">
-    <a href="#brandIntro" style="color:var(--color-gold);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0.8;">
-      <span>Discover More</span>
+    <a href="#brandIntro" style="color:var(--color-turquoise);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0.85;">
+      <span>Discover Horizons</span>
       <svg class="scroll-indicator-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </a>
   </div>
@@ -263,12 +298,42 @@ require_once __DIR__ . '/includes/header.php';
     <!-- Varied Composition Cards Grid -->
     <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:28px;">
       <?php foreach ($featuredDestinations as $idx => $dest): ?>
-        <div class="card-perspective reveal-fade-up stagger-<?= ($idx % 3) + 1 ?>">
-          <a href="<?= BASE_URL ?>/destination.php?slug=<?= e($dest['slug']) ?>" class="dest-card card-3d">
+        <?php
+          $destSlug = strtolower($dest['slug'] ?? '');
+          $destTagClass = 'dest-card__tag';
+          $destThemeClass = '';
+          if (strpos($destSlug, 'kerala') !== false) {
+              $destTagClass .= ' tag-kerala';
+              $destThemeClass = 'theme-kerala';
+          } elseif (strpos($destSlug, 'tamil') !== false) {
+              $destTagClass .= ' tag-tamilnadu';
+              $destThemeClass = 'theme-tamilnadu';
+          } elseif (strpos($destSlug, 'lakshadweep') !== false) {
+              $destTagClass .= ' tag-lakshadweep';
+              $destThemeClass = 'theme-lakshadweep';
+          } elseif (strpos($destSlug, 'andaman') !== false) {
+              $destTagClass .= ' tag-andaman';
+              $destThemeClass = 'theme-andaman';
+          } elseif (strpos($destSlug, 'varanasi') !== false || strpos($destSlug, 'kashi') !== false) {
+              $destTagClass .= ' tag-varanasi';
+              $destThemeClass = 'theme-varanasi';
+          } elseif (strpos($destSlug, 'himalaya') !== false || strpos($destSlug, 'kashmir') !== false || strpos($destSlug, 'manali') !== false) {
+              $destTagClass .= ' tag-himalayas';
+              $destThemeClass = 'theme-himalayas';
+          } elseif (strpos($destSlug, 'hyderabad') !== false) {
+              $destTagClass .= ' tag-hyderabad';
+              $destThemeClass = 'theme-hyderabad';
+          } elseif (strpos($destSlug, 'prayag') !== false || strpos($destSlug, 'ayodhya') !== false) {
+              $destTagClass .= ' tag-prayagraj';
+              $destThemeClass = 'theme-prayagraj';
+          }
+        ?>
+        <div class="card-perspective reveal-fade-up stagger-<?= ($idx % 3) + 1 ?> <?= e($destThemeClass) ?>">
+          <a href="<?= BASE_URL ?>/destination.php?slug=<?= e($dest['slug']) ?>" class="dest-card card-3d glass-specular">
             <img src="<?= e(get_image_url($dest['featured_image'])) ?>" alt="<?= e($dest['alt_text'] ?: $dest['name']) ?>" class="dest-card__bg" loading="lazy" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
             <div class="dest-card__overlay"></div>
             
-            <span class="dest-card__tag"><?= strtoupper(e($dest['category'])) ?></span>
+            <span class="<?= e($destTagClass) ?>"><?= strtoupper(e($dest['category'])) ?></span>
 
             <div class="dest-card__content">
               <div class="dest-card__location">
@@ -399,7 +464,98 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <div style="text-align:center;margin-top:40px;">
-      <a href="<?= BASE_URL ?>/pilgrimage.php" class="btn btn-primary btn-lg">Explore All Pilgrimage Circuits</a>
+      <a href="<?= BASE_URL ?>/pilgrimage.php" class="btn btn-vibrant-gold btn-lg">Explore All Pilgrimage Circuits</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- =====================================================================
+     SECTION D2: 6 BESPOKE TRAVEL SERVICES (Multi-Hue Visual Showcase)
+     ===================================================================== -->
+<section class="section-padding" style="background-color:var(--color-ivory);">
+  <div class="container">
+    
+    <div class="section-header section-header--center">
+      <span class="editorial-kicker kicker-tropical">Full-Spectrum Travel Architecture</span>
+      <h2 class="editorial-giant-title" style="font-size:clamp(2.2rem, 4vw, 3.2rem);">Curated Services Tailored to You</h2>
+      <p class="lead-text">From luxury island transfers and temple VIP darshans to bespoke private itineraries.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:28px;">
+      
+      <!-- Service 1: Bespoke Itineraries (Turquoise) -->
+      <div class="glass-card card-3d glass-specular reveal-fade-up stagger-1" style="padding:34px;border-radius:var(--radius-lg);border-top:4px solid var(--color-turquoise);">
+        <div style="width:54px;height:54px;border-radius:14px;background:rgba(0,196,180,0.15);color:var(--color-turquoise-dark);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+          <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:10px;">Bespoke Itinerary Planning</h3>
+        <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.65;margin-bottom:20px;">
+          Hand-crafted journey itineraries customized to your personal pace, family rhythm, and travel ambitions.
+        </p>
+        <a href="<?= BASE_URL ?>/enquiry.php" class="btn btn-vibrant-teal btn-sm">Start Planning</a>
+      </div>
+
+      <!-- Service 2: Curated Stays (Coral) -->
+      <div class="glass-card card-3d glass-specular reveal-fade-up stagger-2" style="padding:34px;border-radius:var(--radius-lg);border-top:4px solid var(--color-coral);">
+        <div style="width:54px;height:54px;border-radius:14px;background:rgba(255,107,107,0.15);color:var(--color-coral);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+          <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:10px;">Luxury Resorts &amp; Heritage Stays</h3>
+        <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.65;margin-bottom:20px;">
+          Vetted premium properties, private pool villas, tea plantation estates, and iconic seaside resorts.
+        </p>
+        <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like assistance with luxury stay reservations.")) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-vibrant-coral btn-sm">Enquire Stays</a>
+      </div>
+
+      <!-- Service 3: Temple VIP Darshans (Sacred Saffron) -->
+      <div class="glass-card card-3d glass-specular reveal-fade-up stagger-3" style="padding:34px;border-radius:var(--radius-lg);border-top:4px solid var(--dest-varanasi-primary);">
+        <div style="width:54px;height:54px;border-radius:14px;background:rgba(234,88,12,0.15);color:var(--dest-varanasi-primary);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+          <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:10px;">Sacred Temple VIP Darshans</h3>
+        <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.65;margin-bottom:20px;">
+          Smooth darshan arrangements, reverent assistance, and senior-friendly transit across ancient holy sanctums.
+        </p>
+        <a href="<?= BASE_URL ?>/pilgrimage.php" class="btn btn-vibrant-sunset btn-sm">Explore Pilgrimage</a>
+      </div>
+
+      <!-- Service 4: Houseboats & Island Charters (Aqua) -->
+      <div class="glass-card card-3d glass-specular reveal-fade-up stagger-4" style="padding:34px;border-radius:var(--radius-lg);border-top:4px solid var(--color-aqua-dark);">
+        <div style="width:54px;height:54px;border-radius:14px;background:rgba(6,182,212,0.15);color:var(--color-aqua-dark);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+          <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 12h20"/><path d="M20 12l-5 5H9l-5-5"/><path d="M12 2v10"/></svg>
+        </div>
+        <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:10px;">Island Transfers &amp; Cruises</h3>
+        <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.65;margin-bottom:20px;">
+          Alleppey luxury houseboats with private chefs, catamaran voyages, and island inter-atoll connections.
+        </p>
+        <a href="<?= BASE_URL ?>/package.php?slug=kerala-serenade-munnar-alleppey" class="btn btn-vibrant-aqua btn-sm">Cruises &amp; Islands</a>
+      </div>
+
+      <!-- Service 5: Chauffeur & Logistics (Emerald) -->
+      <div class="glass-card card-3d glass-specular reveal-fade-up stagger-5" style="padding:34px;border-radius:var(--radius-lg);border-top:4px solid var(--color-emerald);">
+        <div style="width:54px;height:54px;border-radius:14px;background:rgba(5,150,105,0.15);color:var(--color-emerald);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+          <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:10px;">Private Chauffeur &amp; Coaches</h3>
+        <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.65;margin-bottom:20px;">
+          Sanitised, premium AC sedans, Innova Crystas, and tempo travellers with courteous, route-savvy drivers.
+        </p>
+        <a href="<?= BASE_URL ?>/contact.php" class="btn btn-vibrant-emerald btn-sm">Book Chauffeur</a>
+      </div>
+
+      <!-- Service 6: Flights & Corporate Charters (Electric Violet) -->
+      <div class="glass-card card-3d glass-specular reveal-fade-up stagger-6" style="padding:34px;border-radius:var(--radius-lg);border-top:4px solid var(--color-violet);">
+        <div style="width:54px;height:54px;border-radius:14px;background:rgba(131,56,236,0.15);color:var(--color-violet);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+          <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </div>
+        <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:10px;">Flights &amp; Group Expeditions</h3>
+        <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.65;margin-bottom:20px;">
+          Complete ticketing coordination, group reservations, and corporate retreat management from takeoff to landing.
+        </p>
+        <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I need assistance with flights or corporate group charters.")) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-vibrant-violet btn-sm">Flight Coordination</a>
+      </div>
+
     </div>
 
   </div>

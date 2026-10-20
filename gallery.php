@@ -41,11 +41,11 @@ require_once __DIR__ . '/includes/header.php';
     
     <!-- Filter Tabs -->
     <div style="display:flex;justify-content:center;gap:12px;margin-bottom:48px;flex-wrap:wrap;">
-      <button type="button" class="gallery-filter-btn is-active btn" data-filter="all" style="border-radius:var(--radius-pill);padding:9px 24px;font-size:0.88rem;background:linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%);color:#FFF;border:1px solid rgba(255,255,255,0.35);box-shadow:0 6px 20px rgba(124,58,237,0.35), inset 0 1px 1px rgba(255,255,255,0.4);cursor:pointer;transition:all 0.3s ease;">
+      <button type="button" class="gallery-filter-btn is-active btn btn-vibrant-teal" data-filter="all" style="border-radius:var(--radius-pill);padding:9px 24px;font-size:0.88rem;cursor:pointer;transition:all 0.3s ease;">
         All Photos (<?= count($gallery) ?>)
       </button>
       <?php foreach ($categories as $cat): ?>
-        <button type="button" class="gallery-filter-btn btn" data-filter="<?= e($cat) ?>" style="border-radius:var(--radius-pill);padding:9px 24px;font-size:0.88rem;text-transform:capitalize;background:rgba(255,255,255,0.7);backdrop-filter:blur(16px);color:var(--color-navy);border:1px solid rgba(196,181,253,0.35);box-shadow:0 4px 16px rgba(0,0,0,0.05);cursor:pointer;transition:all 0.3s ease;">
+        <button type="button" class="gallery-filter-btn btn" data-filter="<?= e($cat) ?>" style="border-radius:var(--radius-pill);padding:9px 24px;font-size:0.88rem;text-transform:capitalize;background:rgba(255,255,255,0.85);backdrop-filter:blur(16px);color:var(--color-navy);border:1px solid rgba(0,196,180,0.35);box-shadow:0 4px 16px rgba(0,0,0,0.05);cursor:pointer;transition:all 0.3s ease;">
           <?= e($cat) ?>
         </button>
       <?php endforeach; ?>

@@ -16,15 +16,15 @@ $agencyPhone = get_setting('primary_phone', '+91 12345 67890');
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<<!-- Banner Header -->
+<!-- Banner Header -->
 <section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;">
   <div style="position:absolute;inset:0;opacity:0.25;">
     <img src="https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1800&q=80" alt="Misty mountain valley" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
   </div>
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:760px;">
-    <div class="float-slow" style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-lavender);margin-bottom:12px;font-weight:700;background:rgba(196,181,253,0.12);padding:6px 16px;border-radius:var(--radius-pill);border:1px solid rgba(196,181,253,0.3);">✨ Our Story &amp; Purpose</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;text-shadow:0 0 20px rgba(196,181,253,0.25);">The Heart Behind Midhila Voyages</h1>
+    <div class="float-slow" style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:#4EECD8;margin-bottom:12px;font-weight:700;background:rgba(0,196,180,0.12);padding:6px 18px;border-radius:var(--radius-pill);border:1px solid rgba(0,196,180,0.35);">✨ Our Story &amp; Purpose</div>
+    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;text-shadow:0 0 20px rgba(0,196,180,0.25);">The Heart Behind Midhila Voyages</h1>
     <p class="lead-text" style="color:#CBD5E0;">We cultivate deep encounters with landscapes, cultural heritages, and sacred traditions through personalized, thoughtful travel design.</p>
   </div>
 </section>

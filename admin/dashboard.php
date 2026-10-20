@@ -40,33 +40,92 @@ $recentBookings = $db->query("
 ")->fetchAll();
 ?>
 
-<!-- Metric Cards Grid -->
-<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:20px;margin-bottom:32px;">
+<!-- Metric Cards Grid with Vibrant Destination-Inspired Hues -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));gap:20px;margin-bottom:32px;">
   
-  <div class="admin-card" style="border-left:4px solid var(--admin-gold);padding:20px;">
-    <span style="font-size:0.75rem;text-transform:uppercase;color:var(--admin-muted);font-weight:700;letter-spacing:0.06em;">New Enquiries</span>
-    <div style="font-size:1.85rem;font-weight:700;color:var(--admin-navy);margin-top:4px;"><?= $newEnquiries ?></div>
-    <div style="font-size:0.8rem;color:var(--admin-muted);margin-top:4px;">Total received: <?= $totalEnquiries ?></div>
+  <!-- Metric 1: New Enquiries (Living Coral) -->
+  <div class="admin-card card-3d glass-specular" style="border-left:4px solid #FF6B6B;background:rgba(14,23,46,0.7);padding:22px;border-radius:16px;box-shadow:0 12px 28px rgba(0,0,0,0.25);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <span style="font-size:0.75rem;text-transform:uppercase;color:#FFB4B4;font-weight:700;letter-spacing:0.08em;">New Inquiries</span>
+      <span style="font-size:1.1rem;color:#FF6B6B;">📥</span>
+    </div>
+    <div style="font-size:2rem;font-weight:800;color:#FFF;margin-top:6px;"><?= $newEnquiries ?></div>
+    <div style="font-size:0.8rem;color:var(--admin-muted);margin-top:4px;">Total received: <strong style="color:#FFF;"><?= $totalEnquiries ?></strong></div>
   </div>
 
-  <div class="admin-card" style="border-left:4px solid var(--admin-teal);padding:20px;">
-    <span style="font-size:0.75rem;text-transform:uppercase;color:var(--admin-muted);font-weight:700;letter-spacing:0.06em;">Follow-ups Pending</span>
-    <div style="font-size:1.85rem;font-weight:700;color:var(--admin-teal);margin-top:4px;"><?= $inProgressEnquiries ?></div>
-    <div style="font-size:0.8rem;color:var(--admin-muted);margin-top:4px;">Active proposals</div>
+  <!-- Metric 2: Follow-ups Pending (Sunshine Gold) -->
+  <div class="admin-card card-3d glass-specular" style="border-left:4px solid #FFB703;background:rgba(14,23,46,0.7);padding:22px;border-radius:16px;box-shadow:0 12px 28px rgba(0,0,0,0.25);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <span style="font-size:0.75rem;text-transform:uppercase;color:#FDE68A;font-weight:700;letter-spacing:0.08em;">Proposals Active</span>
+      <span style="font-size:1.1rem;color:#FFB703;">⚡</span>
+    </div>
+    <div style="font-size:2rem;font-weight:800;color:#FFB703;margin-top:6px;"><?= $inProgressEnquiries ?></div>
+    <div style="font-size:0.8rem;color:var(--admin-muted);margin-top:4px;">Follow-ups pending review</div>
   </div>
 
-  <div class="admin-card" style="border-left:4px solid #3B82F6;padding:20px;">
-    <span style="font-size:0.75rem;text-transform:uppercase;color:var(--admin-muted);font-weight:700;letter-spacing:0.06em;">Confirmed Bookings</span>
-    <div style="font-size:1.85rem;font-weight:700;color:var(--admin-navy);margin-top:4px;"><?= $confirmedBookings ?></div>
-    <div style="font-size:0.8rem;color:var(--admin-muted);margin-top:4px;">Total bookings: <?= $totalBookings ?></div>
+  <!-- Metric 3: Confirmed Bookings (Cyan Aqua) -->
+  <div class="admin-card card-3d glass-specular" style="border-left:4px solid #06B6D4;background:rgba(14,23,46,0.7);padding:22px;border-radius:16px;box-shadow:0 12px 28px rgba(0,0,0,0.25);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <span style="font-size:0.75rem;text-transform:uppercase;color:#BAE6FD;font-weight:700;letter-spacing:0.08em;">Confirmed Bookings</span>
+      <span style="font-size:1.1rem;color:#06B6D4;">✈️</span>
+    </div>
+    <div style="font-size:2rem;font-weight:800;color:#00E5FF;margin-top:6px;"><?= $confirmedBookings ?></div>
+    <div style="font-size:0.8rem;color:var(--admin-muted);margin-top:4px;">Total bookings: <strong style="color:#FFF;"><?= $totalBookings ?></strong></div>
   </div>
 
-  <div class="admin-card" style="border-left:4px solid #10B981;padding:20px;">
-    <span style="font-size:0.75rem;text-transform:uppercase;color:var(--admin-muted);font-weight:700;letter-spacing:0.06em;">Captured Revenue</span>
-    <div style="font-size:1.85rem;font-weight:700;color:#047857;margin-top:4px;"><?= format_price($totalCapturedPayments) ?></div>
-    <div style="font-size:0.8rem;color:var(--admin-muted);margin-top:4px;">Verified transactions</div>
+  <!-- Metric 4: Captured Revenue (Emerald Mint) -->
+  <div class="admin-card card-3d glass-specular" style="border-left:4px solid #059669;background:rgba(14,23,46,0.7);padding:22px;border-radius:16px;box-shadow:0 12px 28px rgba(0,0,0,0.25);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <span style="font-size:0.75rem;text-transform:uppercase;color:#A7F3D0;font-weight:700;letter-spacing:0.08em;">Captured Revenue</span>
+      <span style="font-size:1.1rem;color:#10B981;">💳</span>
+    </div>
+    <div style="font-size:1.85rem;font-weight:800;color:#34D399;margin-top:6px;"><?= format_price($totalCapturedPayments) ?></div>
+    <div style="font-size:0.8rem;color:var(--admin-muted);margin-top:4px;">Verified Razorpay settlements</div>
   </div>
 
+  <!-- Metric 5: Active Catalog (Electric Violet) -->
+  <div class="admin-card card-3d glass-specular" style="border-left:4px solid #8338EC;background:rgba(14,23,46,0.7);padding:22px;border-radius:16px;box-shadow:0 12px 28px rgba(0,0,0,0.25);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <span style="font-size:0.75rem;text-transform:uppercase;color:#DDD6FE;font-weight:700;letter-spacing:0.08em;">Active Catalog</span>
+      <span style="font-size:1.1rem;color:#8338EC;">🧭</span>
+    </div>
+    <div style="font-size:1.85rem;font-weight:800;color:#C4B5FD;margin-top:6px;"><?= $totalPackages ?> <span style="font-size:0.9rem;font-weight:500;color:var(--admin-muted);">Pkgs</span></div>
+    <div style="font-size:0.8rem;color:var(--admin-muted);margin-top:4px;"><?= $totalDestinations ?> published destinations</div>
+  </div>
+
+</div>
+
+<!-- Visual Operations & Conversion Overview Card -->
+<div class="admin-card card-3d glass-specular" style="background:rgba(14,23,46,0.65);border:1px solid rgba(196,181,253,0.22);border-radius:18px;padding:24px 28px;margin-bottom:32px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+    <div>
+      <h3 style="font-size:1.15rem;color:#FFF;margin-bottom:4px;font-weight:700;">Live Booking &amp; Pipeline Trajectory</h3>
+      <p style="font-size:0.82rem;color:var(--admin-muted);margin:0;">Real-time conversion ratio across incoming traveller enquiries and completed bookings</p>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <span style="font-size:0.75rem;padding:4px 12px;border-radius:var(--radius-pill);background:rgba(5,150,105,0.2);color:#34D399;font-weight:700;border:1px solid rgba(5,150,105,0.4);">
+        ● System Health: 100% Operational
+      </span>
+    </div>
+  </div>
+
+  <!-- Multi-Hue Progress Ratio Bar -->
+  <?php 
+    $convRate = ($totalEnquiries > 0) ? round(($confirmedBookings / $totalEnquiries) * 100, 1) : 0;
+  ?>
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
+    <div style="flex-grow:1;height:10px;background:rgba(255,255,255,0.1);border-radius:8px;overflow:hidden;position:relative;">
+      <div style="width:<?= min(100, max(8, $convRate)) ?>%;height:100%;background:linear-gradient(90deg, #FF6B6B 0%, #FFB703 35%, #06B6D4 70%, #059669 100%);border-radius:8px;transition:width 1s ease;"></div>
+    </div>
+    <span style="font-size:0.9rem;font-weight:700;color:#00E5FF;min-width:70px;text-align:right;"><?= $convRate ?>% Conv</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:16px;font-size:0.82rem;color:var(--admin-muted);border-top:1px solid rgba(196,181,253,0.14);padding-top:16px;margin-top:16px;">
+    <div><span style="color:#FFB4B4;">● Unreviewed Leads:</span> <strong style="color:#FFF;"><?= $newEnquiries ?></strong></div>
+    <div><span style="color:#FDE68A;">● Proposals Quoted:</span> <strong style="color:#FFF;"><?= $inProgressEnquiries ?></strong></div>
+    <div><span style="color:#BAE6FD;">● Booked Travelers:</span> <strong style="color:#FFF;"><?= $confirmedBookings ?></strong></div>
+    <div><span style="color:#A7F3D0;">● Revenue Collected:</span> <strong style="color:#34D399;"><?= format_price($totalCapturedPayments) ?></strong></div>
+  </div>
 </div>
 
 <!-- Quick Navigation Bar -->

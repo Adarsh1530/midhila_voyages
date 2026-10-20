@@ -199,8 +199,26 @@ require_once __DIR__ . '/includes/header.php';
 
     <?php else: ?>
 
+      <!-- 3-Step Progress Indicator -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:32px;flex-wrap:wrap;">
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(0,196,180,0.15);border:1px solid rgba(0,196,180,0.4);border-radius:var(--radius-pill);font-size:0.8rem;font-weight:700;color:var(--color-navy);">
+          <span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:#00C4B4;color:#06101E;text-align:center;line-height:20px;font-size:0.75rem;">1</span>
+          <span>Contact Details</span>
+        </div>
+        <span style="color:#CBD5E0;">&bull;&bull;&bull;</span>
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(255,107,107,0.15);border:1px solid rgba(255,107,107,0.4);border-radius:var(--radius-pill);font-size:0.8rem;font-weight:700;color:var(--color-navy);">
+          <span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:#FF6B6B;color:#FFF;text-align:center;line-height:20px;font-size:0.75rem;">2</span>
+          <span>Destination &amp; Dates</span>
+        </div>
+        <span style="color:#CBD5E0;">&bull;&bull;&bull;</span>
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(255,183,3,0.15);border:1px solid rgba(255,183,3,0.4);border-radius:var(--radius-pill);font-size:0.8rem;font-weight:700;color:var(--color-navy);">
+          <span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:#FFB703;color:#06101E;text-align:center;line-height:20px;font-size:0.75rem;">3</span>
+          <span>Group &amp; Stay Style</span>
+        </div>
+      </div>
+
       <!-- ENQUIRY FORM -->
-      <div class="glass-card" style="padding:clamp(28px, 5vw, 48px);border-radius:var(--radius-lg);">
+      <div class="glass-card" style="background:var(--color-ivory-warm);backdrop-filter:blur(24px);padding:clamp(28px, 5vw, 48px);border-radius:var(--radius-lg);border:1px solid rgba(0,196,180,0.3);box-shadow:0 16px 40px -8px rgba(0,0,0,0.06);">
         
         <?php if (!empty($errors)): ?>
           <div style="background:#FEF2F2;border-left:4px solid #E53E3E;padding:14px 18px;border-radius:var(--radius-sm);color:#991B1B;font-size:0.9rem;margin-bottom:28px;">
@@ -368,11 +386,11 @@ require_once __DIR__ . '/includes/header.php';
           </div>
 
           <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
-            <button type="submit" class="btn btn-primary btn-lg" style="flex:1;min-width:240px;">
+            <button type="submit" class="btn btn-vibrant-coral btn-lg" style="flex:1;min-width:240px;">
               <span>Submit Enquiry &amp; Generate Itinerary</span>
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
-            <button type="button" id="whatsappPreviewBtn" data-phone="<?= e($agencyWhatsApp) ?>" class="btn btn-teal btn-lg">
+            <button type="button" id="whatsappPreviewBtn" data-phone="<?= e($agencyWhatsApp) ?>" class="btn btn-vibrant-teal btn-lg">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/></svg>
               <span>Instant WhatsApp Sync</span>
             </button>

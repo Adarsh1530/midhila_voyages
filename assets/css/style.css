@@ -1,80 +1,176 @@
 /**
- * MIDHILA VOYAGES — Core Design Tokens & Glassmorphism Design System
- * Palette: Lavender, Periwinkle Blue, Icy Blue, Soft Violet, Subtle Pink, Obsidian & Deep Navy
+ * MIDHILA VOYAGES — Multi-Hue Editorial Travel & 3D Glassmorphism Design System
+ * Inspired by Think Big Studio for editorial storytelling, layered motion, and cinematic depth.
+ * Spectrum: Tropical Turquoise, Aqua, Living Coral, Sunset Orange, Sunshine Yellow, 
+ * Radiant Magenta, Electric Violet, Rich Emerald, Zesty Lime, Sky Blue, Warm Ivory & Deep Navy.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
 :root {
   /* =====================================================================
-     GLASSMORPHISM PALETTE & DESIGN SYSTEM
+     1. EXTENDED 12-COLOR HIGH-CHROMATIC BRAND SPECTRUM
      ===================================================================== */
+  /* Tropical Turquoise */
+  --color-turquoise: #00C4B4;
+  --color-turquoise-light: #4EECD8;
+  --color-turquoise-dark: #028090;
+  --color-turquoise-glow: rgba(0, 196, 180, 0.45);
+
+  /* Aqua & Cyan */
+  --color-aqua: #00E5FF;
+  --color-aqua-light: #B2F5EA;
+  --color-aqua-dark: #06B6D4;
+  --color-aqua-glow: rgba(0, 229, 255, 0.45);
+
+  /* Living Coral & Peach */
+  --color-coral: #FF6B6B;
+  --color-coral-light: #FFB4B4;
+  --color-coral-peach: #FF8E72;
+  --color-coral-glow: rgba(255, 107, 107, 0.45);
+
+  /* Sunset Orange */
+  --color-sunset: #FF7A00;
+  --color-sunset-light: #FED7AA;
+  --color-sunset-deep: #F97316;
+  --color-sunset-glow: rgba(255, 122, 0, 0.45);
+
+  /* Sunshine Yellow & Warm Gold */
+  --color-sunshine: #FFD166;
+  --color-gold-warm: #FFB703;
+  --color-gold-bright: #DFBA73;
+  --color-gold: #C5A059;
+  --color-gold-glow: rgba(255, 209, 102, 0.45);
+
+  /* Radiant Magenta & Crimson */
+  --color-magenta: #F72585;
+  --color-magenta-light: #FBCFE8;
+  --color-crimson: #E01A4F;
+  --color-magenta-glow: rgba(247, 37, 133, 0.45);
+
+  /* Electric Violet & Purple */
+  --color-violet: #8338EC;
+  --color-violet-light: #DDD6FE;
+  --color-violet-deep: #7209B7;
+  --color-violet-glow: rgba(131, 56, 236, 0.45);
+
+  /* Rich Emerald & Mint */
+  --color-emerald: #059669;
+  --color-emerald-light: #A7F3D0;
+  --color-mint: #10B981;
+  --color-emerald-glow: rgba(5, 150, 105, 0.45);
+
+  /* Zesty Lime */
+  --color-lime: #84CC16;
+  --color-lime-bright: #A3E635;
+  --color-lime-glow: rgba(132, 204, 22, 0.45);
+
+  /* Sky Blue & Azure */
+  --color-sky: #38BDF8;
+  --color-sky-deep: #0284C7;
+  --color-sky-glow: rgba(56, 189, 248, 0.45);
+
+  /* Warm Ivory & Cloud Surfaces */
+  --color-ivory: #FAF8F5;
+  --color-ivory-warm: #FFFDF9;
+  --color-ivory-sand: #F3EFEA;
+  --color-white: #FFFFFF;
+
+  /* Deep Contrast Obsidian & Midnight Navy */
+  --color-navy: #0A1128;
+  --color-navy-deep: #06101E;
+  --color-navy-card: rgba(10, 17, 40, 0.78);
+  --color-navy-light: #162447;
+  --color-dark-bg: #060B18;
+
+  /* Lavender & Periwinkle Accents */
   --color-lavender: #C4B5FD;
   --color-lavender-light: #EDE9FE;
-  --color-lavender-glow: rgba(196, 181, 253, 0.45);
-
   --color-periwinkle: #8DA4EF;
   --color-periwinkle-light: #C7D2FE;
   --color-periwinkle-dark: #6366F1;
-  --color-periwinkle-glow: rgba(141, 164, 239, 0.45);
 
-  --color-icy-blue: #BAE6FD;
-  --color-icy-glow: rgba(186, 230, 253, 0.55);
+  /* =====================================================================
+     2. REGIONAL DESTINATION PALETTES
+     ===================================================================== */
+  /* Kerala: Emerald / Turquoise / Backwater Gold */
+  --dest-kerala-primary: #059669;
+  --dest-kerala-accent: #00C4B4;
+  --dest-kerala-gold: #D97706;
+  --dest-kerala-gradient: linear-gradient(135deg, #059669 0%, #00C4B4 60%, #D97706 100%);
 
-  --color-violet: #8B5CF6;
-  --color-violet-light: #DDD6FE;
-  --color-violet-dark: #6D28D9;
-  --color-violet-glow: rgba(139, 92, 246, 0.45);
+  /* Tamil Nadu: Temple Terracotta / Sacred Saffron / Warm Ivory */
+  --dest-tamilnadu-primary: #C2410C;
+  --dest-tamilnadu-accent: #EA580C;
+  --dest-tamilnadu-bg: #FAF8F5;
+  --dest-tamilnadu-gradient: linear-gradient(135deg, #9A3412 0%, #EA580C 50%, #F59E0B 100%);
 
-  --color-pink: #F472B6;
-  --color-pink-soft: rgba(244, 114, 182, 0.3);
+  /* Lakshadweep: Coral Reef Aqua / Living Coral / Pearl White */
+  --dest-lakshadweep-primary: #06B6D4;
+  --dest-lakshadweep-accent: #FF6B6B;
+  --dest-lakshadweep-light: #E0F2FE;
+  --dest-lakshadweep-gradient: linear-gradient(135deg, #0284C7 0%, #06B6D4 50%, #FF6B6B 100%);
 
-  /* Deep Contrast Obsidian & Navy */
-  --color-navy: #0A1128;
-  --color-navy-deep: #060B18;
-  --color-navy-card: rgba(14, 23, 46, 0.75);
-  --color-navy-light: #162447;
-  
-  /* Retained Heritage Accents */
-  --color-teal: #00A896;
-  --color-teal-bright: #02C39A;
-  --color-teal-dark: #028090;
-  --color-gold: #C5A059;
-  --color-gold-bright: #DFBA73;
-  --color-gold-light: #EBD49B;
-  --color-gold-soft: rgba(197, 160, 89, 0.18);
-  
-  /* Frosted Glass Surfaces */
-  --glass-surface: rgba(255, 255, 255, 0.68);
-  --glass-surface-card: rgba(255, 255, 255, 0.74);
-  --glass-surface-dense: rgba(255, 255, 255, 0.88);
-  --glass-surface-dark: rgba(14, 23, 46, 0.72);
-  --glass-surface-darker: rgba(6, 11, 24, 0.86);
+  /* Andaman: Tropical Blue / Island Green / Sunset Orange */
+  --dest-andaman-primary: #0284C7;
+  --dest-andaman-accent: #10B981;
+  --dest-andaman-sunset: #FF7A00;
+  --dest-andaman-gradient: linear-gradient(135deg, #0369A1 0%, #0284C7 40%, #10B981 75%, #FF7A00 100%);
 
-  --glass-border: rgba(255, 255, 255, 0.65);
-  --glass-border-light: rgba(255, 255, 255, 0.85);
-  --glass-border-dark: rgba(196, 181, 253, 0.22);
-  --glass-border-glow: rgba(141, 164, 239, 0.55);
-  --glass-border-violet: rgba(139, 92, 246, 0.45);
+  /* Hyderabad: Sandstone Ochre / Nizam Gold / Royal Burgundy */
+  --dest-hyderabad-primary: #D97706;
+  --dest-hyderabad-gold: #EAB308;
+  --dest-hyderabad-burgundy: #881337;
+  --dest-hyderabad-gradient: linear-gradient(135deg, #881337 0%, #B45309 60%, #EAB308 100%);
 
-  --glass-inner-highlight: inset 0 1px 1px 0 rgba(255, 255, 255, 0.85), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04);
-  --glass-inner-highlight-dark: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+  /* Varanasi: Sacred Saffron / Holy Amber / Ganga Midnight Blue */
+  --dest-varanasi-primary: #EA580C;
+  --dest-varanasi-amber: #F59E0B;
+  --dest-varanasi-navy: #1E1B4B;
+  --dest-varanasi-gradient: linear-gradient(135deg, #1E1B4B 0%, #C2410C 50%, #F59E0B 100%);
+
+  /* Prayagraj: Sangam River Blue / Sunrise Gold / Sacred White */
+  --dest-prayagraj-primary: #0284C7;
+  --dest-prayagraj-gold: #FBBF24;
+  --dest-prayagraj-light: #FFFFFF;
+  --dest-prayagraj-gradient: linear-gradient(135deg, #0369A1 0%, #0284C7 50%, #FBBF24 100%);
+
+  /* Himalayas: Sky Blue / Glacier White / Alpine Green */
+  --dest-himalayas-primary: #38BDF8;
+  --dest-himalayas-glacier: #F8FAFC;
+  --dest-himalayas-alpine: #15803D;
+  --dest-himalayas-gradient: linear-gradient(135deg, #0284C7 0%, #38BDF8 50%, #15803D 100%);
+
+  /* =====================================================================
+     3. FROSTED GLASS SURFACES & ILLUMINATION
+     ===================================================================== */
+  --glass-surface: rgba(255, 255, 255, 0.72);
+  --glass-surface-card: rgba(255, 255, 255, 0.82);
+  --glass-surface-dense: rgba(255, 255, 255, 0.94);
+  --glass-surface-dark: rgba(10, 17, 40, 0.78);
+  --glass-surface-darker: rgba(6, 16, 30, 0.92);
+
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-border-light: rgba(255, 255, 255, 0.95);
+  --glass-border-dark: rgba(255, 255, 255, 0.14);
+  --glass-border-turquoise: rgba(0, 196, 180, 0.45);
+  --glass-border-coral: rgba(255, 107, 107, 0.45);
+  --glass-border-gold: rgba(255, 183, 3, 0.45);
+
+  --glass-inner-highlight: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04);
+  --glass-inner-highlight-dark: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
 
   --glass-blur: blur(20px) saturate(180%);
   --glass-blur-heavy: blur(32px) saturate(200%);
   --glass-blur-soft: blur(12px) saturate(150%);
 
-  /* Backgrounds & Neutrals */
-  --color-ivory: #F8F9FD;
-  --color-ivory-warm: #F1F4FD;
-  --color-white: #FFFFFF;
-  --color-dark-bg: #070D1E;
+  /* Borders & Shadows */
   --color-border: rgba(196, 181, 253, 0.35);
   --color-border-dark: rgba(255, 255, 255, 0.12);
   --color-border-gold: rgba(197, 160, 89, 0.35);
 
   /* Typography */
-  --color-text-headline: #0A1128;
+  --color-text-headline: #06101E;
   --color-text-body: #334155;
   --color-text-muted: #64748B;
   --color-text-white: #F8FAFC;
@@ -84,14 +180,17 @@
   --font-serif: 'Cinzel', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* Elevations & Glass Shadows */
+  /* Shadows */
   --shadow-sm: 0 4px 16px rgba(10, 17, 40, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.5);
   --shadow-md: 0 12px 32px -4px rgba(10, 17, 40, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.6);
   --shadow-lg: 0 20px 48px -8px rgba(10, 17, 40, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.7);
   --shadow-xl: 0 28px 64px -12px rgba(10, 17, 40, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.8);
-  --shadow-glow: 0 20px 50px -10px rgba(139, 92, 246, 0.3), 0 0 30px rgba(141, 164, 239, 0.25);
-  --shadow-gold: 0 12px 36px rgba(197, 160, 89, 0.28);
-  --shadow-teal: 0 12px 36px rgba(0, 168, 150, 0.28);
+  --shadow-glow: 0 20px 50px -10px rgba(0, 196, 180, 0.35), 0 0 30px rgba(255, 107, 107, 0.2);
+  --shadow-turquoise: 0 12px 36px rgba(0, 196, 180, 0.35);
+  --shadow-coral: 0 12px 36px rgba(255, 107, 107, 0.35);
+  --shadow-sunset: 0 12px 36px rgba(255, 122, 0, 0.35);
+  --shadow-gold: 0 12px 36px rgba(255, 183, 3, 0.35);
+  --shadow-violet: 0 12px 36px rgba(131, 56, 236, 0.35);
 
   /* Layout & Spacing */
   --container-max: 1320px;
@@ -444,32 +543,131 @@ h1, h2, h3, h4, h5, h6 {
 /* Futuristic Luminous Gradient Button (Lavender / Periwinkle / Violet) */
 .btn-primary,
 .btn-plan {
-  background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 50%, #2563EB 100%);
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.55), 0 8px 24px -4px rgba(99, 102, 241, 0.45);
+  background: linear-gradient(135deg, #028090 0%, #00C4B4 50%, #00E5FF 100%);
+  color: #06101E;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8), 0 8px 24px -4px rgba(0, 196, 180, 0.45);
 }
 
 .btn-primary:hover,
 .btn-plan:hover {
-  background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 50%, #3B82F6 100%);
+  background: linear-gradient(135deg, #00C4B4 0%, #00E5FF 100%);
   transform: translateY(-2px);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.75), 0 14px 34px -4px rgba(139, 92, 246, 0.55), 0 0 24px rgba(141, 164, 239, 0.45);
-  color: #FFFFFF;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9), 0 14px 34px -4px rgba(0, 196, 180, 0.6), 0 0 24px rgba(0, 229, 255, 0.5);
+  color: #06101E;
 }
 
+/* =====================================================================
+   MULTI-HUE VIBRANT ACCENT BUTTONS
+   ===================================================================== */
+/* Tropical Turquoise */
+.btn-vibrant-teal,
 .btn-teal {
-  background: linear-gradient(135deg, #028090 0%, #00A896 50%, #02C39A 100%);
+  background: linear-gradient(135deg, #028090 0%, #00C4B4 50%, #02C39A 100%);
   color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.5), 0 8px 24px -4px rgba(0, 168, 150, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.6), 0 8px 24px -4px rgba(0, 196, 180, 0.4);
 }
 
+.btn-vibrant-teal:hover,
 .btn-teal:hover {
-  background: linear-gradient(135deg, #00A896 0%, #02C39A 100%);
+  background: linear-gradient(135deg, #00C4B4 0%, #4EECD8 100%);
+  color: #06101E;
   transform: translateY(-2px);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.7), 0 12px 30px -4px rgba(2, 195, 154, 0.5);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.85), 0 12px 30px -4px rgba(0, 196, 180, 0.55);
+}
+
+/* Living Coral */
+.btn-vibrant-coral {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E72 50%, #FF7A00 100%);
   color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.6), 0 8px 24px -4px rgba(255, 107, 107, 0.45);
+}
+
+.btn-vibrant-coral:hover {
+  background: linear-gradient(135deg, #FF8E72 0%, #FF6B6B 100%);
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8), 0 12px 30px -4px rgba(255, 107, 107, 0.6);
+  color: #FFFFFF;
+}
+
+/* Sunset Orange */
+.btn-vibrant-sunset {
+  background: linear-gradient(135deg, #FF7A00 0%, #F97316 50%, #FFB703 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.6), 0 8px 24px -4px rgba(255, 122, 0, 0.45);
+}
+
+.btn-vibrant-sunset:hover {
+  background: linear-gradient(135deg, #F97316 0%, #FF7A00 100%);
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8), 0 12px 30px -4px rgba(255, 122, 0, 0.6);
+  color: #FFFFFF;
+}
+
+/* Sunrise Warm Gold */
+.btn-vibrant-gold {
+  background: linear-gradient(135deg, #D97706 0%, #FFB703 50%, #FFD166 100%);
+  color: #06101E;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8), 0 8px 24px -4px rgba(255, 183, 3, 0.45);
+}
+
+.btn-vibrant-gold:hover {
+  background: linear-gradient(135deg, #FFB703 0%, #FFD166 100%);
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9), 0 12px 30px -4px rgba(255, 183, 3, 0.6);
+  color: #06101E;
+}
+
+/* Rich Emerald */
+.btn-vibrant-emerald {
+  background: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.6), 0 8px 24px -4px rgba(5, 150, 105, 0.45);
+}
+
+.btn-vibrant-emerald:hover {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8), 0 12px 30px -4px rgba(5, 150, 105, 0.6);
+  color: #FFFFFF;
+}
+
+/* Electric Violet & Radiant Magenta */
+.btn-vibrant-violet {
+  background: linear-gradient(135deg, #8338EC 0%, #7209B7 50%, #F72585 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.6), 0 8px 24px -4px rgba(131, 56, 236, 0.45);
+}
+
+.btn-vibrant-violet:hover {
+  background: linear-gradient(135deg, #7209B7 0%, #8338EC 100%);
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8), 0 12px 30px -4px rgba(131, 56, 236, 0.6);
+  color: #FFFFFF;
+}
+
+/* Lagoon Aqua */
+.btn-vibrant-aqua {
+  background: linear-gradient(135deg, #0284C7 0%, #06B6D4 50%, #00E5FF 100%);
+  color: #06101E;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.8), 0 8px 24px -4px rgba(6, 182, 212, 0.45);
+}
+
+.btn-vibrant-aqua:hover {
+  background: linear-gradient(135deg, #06B6D4 0%, #00E5FF 100%);
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9), 0 12px 30px -4px rgba(6, 182, 212, 0.6);
+  color: #06101E;
 }
 
 .btn-outline-gold {
@@ -646,6 +844,258 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 720px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* =====================================================================
+   REGIONAL DESTINATION COLOR IDENTITIES & THEMES
+   ===================================================================== */
+/* Kerala: Emerald / Turquoise / Backwater Gold */
+.theme-kerala,
+[data-region="kerala"] {
+  --region-primary: #059669;
+  --region-accent: #00C4B4;
+  --region-highlight: #D97706;
+  --region-glow: rgba(5, 150, 105, 0.45);
+}
+.theme-kerala .dest-card__tag,
+.tag-kerala {
+  background: rgba(5, 150, 105, 0.3) !important;
+  color: #A7F3D0 !important;
+  border-color: rgba(0, 196, 180, 0.5) !important;
+}
+
+/* Tamil Nadu: Temple Terracotta / Sacred Saffron / Warm Ivory */
+.theme-tamilnadu,
+[data-region="tamil-nadu"] {
+  --region-primary: #C2410C;
+  --region-accent: #EA580C;
+  --region-highlight: #F59E0B;
+  --region-glow: rgba(194, 65, 12, 0.45);
+}
+.theme-tamilnadu .dest-card__tag,
+.tag-tamilnadu {
+  background: rgba(194, 65, 12, 0.3) !important;
+  color: #FED7AA !important;
+  border-color: rgba(234, 88, 12, 0.5) !important;
+}
+
+/* Lakshadweep: Coral Reef Aqua / Living Coral / Pearl White */
+.theme-lakshadweep,
+[data-region="lakshadweep"] {
+  --region-primary: #06B6D4;
+  --region-accent: #FF6B6B;
+  --region-highlight: #FFFFFF;
+  --region-glow: rgba(6, 182, 212, 0.45);
+}
+.theme-lakshadweep .dest-card__tag,
+.tag-lakshadweep {
+  background: rgba(6, 182, 212, 0.3) !important;
+  color: #BAE6FD !important;
+  border-color: rgba(255, 107, 107, 0.5) !important;
+}
+
+/* Andaman: Tropical Blue / Island Green / Sunset Orange */
+.theme-andaman,
+[data-region="andaman"] {
+  --region-primary: #0284C7;
+  --region-accent: #10B981;
+  --region-highlight: #FF7A00;
+  --region-glow: rgba(2, 132, 199, 0.45);
+}
+.theme-andaman .dest-card__tag,
+.tag-andaman {
+  background: rgba(2, 132, 199, 0.3) !important;
+  color: #7DD3FC !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+}
+
+/* Hyderabad: Sandstone Ochre / Nizam Gold / Royal Burgundy */
+.theme-hyderabad,
+[data-region="hyderabad"] {
+  --region-primary: #D97706;
+  --region-accent: #EAB308;
+  --region-highlight: #881337;
+  --region-glow: rgba(217, 119, 6, 0.45);
+}
+.theme-hyderabad .dest-card__tag,
+.tag-hyderabad {
+  background: rgba(217, 119, 6, 0.3) !important;
+  color: #FDE68A !important;
+  border-color: rgba(234, 179, 8, 0.5) !important;
+}
+
+/* Varanasi: Sacred Saffron / Holy Amber / Ganga Midnight Blue */
+.theme-varanasi,
+[data-region="varanasi"] {
+  --region-primary: #EA580C;
+  --region-accent: #F59E0B;
+  --region-highlight: #1E1B4B;
+  --region-glow: rgba(234, 88, 12, 0.45);
+}
+.theme-varanasi .dest-card__tag,
+.tag-varanasi {
+  background: rgba(234, 88, 12, 0.3) !important;
+  color: #FED7AA !important;
+  border-color: rgba(245, 158, 11, 0.5) !important;
+}
+
+/* Prayagraj: Sangam River Blue / Sunrise Gold / Sacred White */
+.theme-prayagraj,
+[data-region="prayagraj"] {
+  --region-primary: #0284C7;
+  --region-accent: #FBBF24;
+  --region-highlight: #FFFFFF;
+  --region-glow: rgba(2, 132, 199, 0.45);
+}
+.theme-prayagraj .dest-card__tag,
+.tag-prayagraj {
+  background: rgba(2, 132, 199, 0.3) !important;
+  color: #BAE6FD !important;
+  border-color: rgba(251, 191, 36, 0.5) !important;
+}
+
+/* Himalayas: Sky Blue / Glacier White / Alpine Green */
+.theme-himalayas,
+[data-region="himalayas"] {
+  --region-primary: #38BDF8;
+  --region-accent: #F8FAFC;
+  --region-highlight: #15803D;
+  --region-glow: rgba(56, 189, 248, 0.45);
+}
+.theme-himalayas .dest-card__tag,
+.tag-himalayas {
+  background: rgba(56, 189, 248, 0.3) !important;
+  color: #E0F2FE !important;
+  border-color: rgba(21, 128, 61, 0.5) !important;
+}
+
+/* =====================================================================
+   EXPERIENCE STYLE IDENTITIES
+   ===================================================================== */
+.exp-pilgrimage {
+  background: linear-gradient(135deg, rgba(234, 88, 12, 0.15), rgba(245, 158, 11, 0.1));
+  border-color: rgba(234, 88, 12, 0.4) !important;
+  color: #C2410C !important;
+}
+.exp-family {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(2, 132, 199, 0.1));
+  border-color: rgba(245, 158, 11, 0.4) !important;
+  color: #B45309 !important;
+}
+.exp-honeymoon {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(247, 37, 133, 0.1));
+  border-color: rgba(255, 107, 107, 0.4) !important;
+  color: #E11D48 !important;
+}
+.exp-adventure {
+  background: linear-gradient(135deg, rgba(132, 204, 22, 0.15), rgba(255, 122, 0, 0.1));
+  border-color: rgba(132, 204, 22, 0.4) !important;
+  color: #4D7C0F !important;
+}
+.exp-nature {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.15), rgba(0, 196, 180, 0.1));
+  border-color: rgba(5, 150, 105, 0.4) !important;
+  color: #047857 !important;
+}
+.exp-island {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(255, 142, 114, 0.1));
+  border-color: rgba(6, 182, 212, 0.4) !important;
+  color: #0E7490 !important;
+}
+
+/* =====================================================================
+   EDITORIAL & ASYMMETRIC STORYTELLING (Think Big Studio Style)
+   ===================================================================== */
+.editorial-kicker {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 20px;
+}
+
+.kicker-kerala { background: rgba(5, 150, 105, 0.12); color: #059669; border: 1px solid rgba(5, 150, 105, 0.3); }
+.kicker-tamilnadu { background: rgba(194, 65, 12, 0.12); color: #C2410C; border: 1px solid rgba(194, 65, 12, 0.3); }
+.kicker-lakshadweep { background: rgba(6, 182, 212, 0.12); color: #0284C7; border: 1px solid rgba(6, 182, 212, 0.3); }
+.kicker-andaman { background: rgba(2, 132, 199, 0.12); color: #0284C7; border: 1px solid rgba(2, 132, 199, 0.3); }
+.kicker-varanasi { background: rgba(234, 88, 12, 0.12); color: #EA580C; border: 1px solid rgba(234, 88, 12, 0.3); }
+.kicker-himalayas { background: rgba(56, 189, 248, 0.12); color: #0284C7; border: 1px solid rgba(56, 189, 248, 0.3); }
+.kicker-tropical { background: rgba(0, 196, 180, 0.12); color: #00A896; border: 1px solid rgba(0, 196, 180, 0.3); }
+
+.editorial-giant-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-navy);
+}
+
+.editorial-story-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .editorial-story-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.editorial-img-collage {
+  position: relative;
+  border-radius: var(--radius-xl);
+}
+
+.collage-main-img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 60px -15px rgba(6, 16, 30, 0.25);
+}
+
+.collage-floating-badge {
+  position: absolute;
+  bottom: -24px;
+  right: -24px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  padding: 20px 26px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 40px rgba(6, 16, 30, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 290px;
+}
+
+@media (max-width: 640px) {
+  .collage-floating-badge {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 16px;
+  }
+}
+
+.mask-curved {
+  border-radius: 40px 140px 40px 140px;
+  overflow: hidden;
+}
+
+.mask-organic {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  overflow: hidden;
 }
 
 /* =====================================================================

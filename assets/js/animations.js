@@ -1,14 +1,30 @@
 /**
  * MIDHILA VOYAGES — 3D Tilt, Dynamic Specular Light & Motion Engine
+ * - Short voyage globe loader dismissal (< 1.1s)
  * - Smooth 3D perspective transforms with mouse-tracking specular highlights
- * - IntersectionObserver scroll reveals
- * - Automatic ambient mesh injector
+ * - GSAP ScrollTrigger timeline reveals with IntersectionObserver fallback
  * - Parallax and smooth micro-interactions
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   // Respect user preference for reduced motion
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 0. Short Animated Globe Voyage Loader Dismissal (< 1.1s)
+  const loader = document.getElementById('voyageLoader') || document.querySelector('.voyage-loader');
+  if (loader) {
+    if (prefersReducedMotion) {
+      loader.classList.add('is-hidden');
+    } else {
+      setTimeout(() => {
+        loader.classList.add('is-hidden');
+        setTimeout(() => {
+          if (loader.parentNode) loader.remove();
+        }, 600);
+      }, 950);
+    }
+  }
+
   if (prefersReducedMotion) return;
 
   // 1. Ambient Background Mesh Auto-Injector (if not explicitly in HTML)
@@ -25,7 +41,47 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.prepend(mesh);
   }
 
-  // 2. Intersection Observer for Scroll Reveals
+  // 2. GSAP ScrollTrigger Integration with Graceful Vanilla Fallback
+  if (typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined') {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+
+    // Hero timeline reveal
+    const heroTl = window.gsap.timeline({ defaults: { ease: 'power3.out' } });
+    if (document.querySelector('.hero-headline-anim')) {
+      heroTl.fromTo('.hero-headline-anim', 
+        { opacity: 0, y: 40 }, 
+        { opacity: 1, y: 0, duration: 1.1, delay: 0.2 }
+      );
+    }
+
+    if (document.querySelector('.hero-floating-card')) {
+      heroTl.fromTo('.hero-floating-card', 
+        { opacity: 0, scale: 0.85, y: 30 }, 
+        { opacity: 1, scale: 1, y: 0, stagger: 0.18, duration: 1 }, 
+        '-=0.7'
+      );
+    }
+
+    // ScrollTrigger for route line SVG stroke
+    const routeSvg = document.querySelector('.hero-route-line-svg');
+    if (routeSvg) {
+      window.gsap.fromTo('.hero-route-line',
+        { strokeDashoffset: 800 },
+        {
+          strokeDashoffset: 0,
+          duration: 3,
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: routeSvg,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    }
+  }
+
+  // 3. Intersection Observer for Scroll Reveals
   const revealElements = document.querySelectorAll('.reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-zoom-in, .mask-reveal');
   if ('IntersectionObserver' in window && revealElements.length > 0) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -46,10 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach((el) => el.classList.add('is-revealed'));
   }
 
-  // 3. Interactive 3D Tilt Engine with Real-Time Specular Glare Tracking
+  // 4. Interactive 3D Tilt Engine with Real-Time Specular Glare Tracking
   const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
   if (!isTouchDevice) {
-    const tiltTargets = document.querySelectorAll('.card-3d, .package-card, .dest-card, .glass-specular, .service-card');
+    const tiltTargets = document.querySelectorAll('.card-3d, .package-card, .dest-card, .glass-specular, .service-card, .editorial-card');
     
     tiltTargets.forEach((card) => {
       let isHovered = false;
@@ -98,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Parallax Depth on Selected Visual Elements
+  // 5. Parallax Depth on Selected Visual Elements
   const parallaxNodes = document.querySelectorAll('[data-parallax-speed]');
   if (parallaxNodes.length > 0 && !isTouchDevice) {
     let ticking = false;
@@ -106,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!ticking) {
         requestAnimationFrame(() => {
           const scrollY = window.scrollY;
-          if (scrollY < window.innerHeight * 2) {
+          if (scrollY < window.innerHeight * 2.5) {
             parallaxNodes.forEach((node) => {
               const speed = parseFloat(node.getAttribute('data-parallax-speed')) || 0.12;
               const offset = scrollY * speed;
@@ -120,9 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // 5. Interactive Magnetic Buttons (.btn-magnetic)
+  // 6. Interactive Magnetic Buttons (.btn-magnetic)
   if (!isTouchDevice) {
-    const magneticBtns = document.querySelectorAll('.btn-primary, .btn-plan, .btn-teal');
+    const magneticBtns = document.querySelectorAll('.btn-primary, .btn-plan, .btn-vibrant-teal, .btn-vibrant-coral, .btn-vibrant-sunset, .btn-vibrant-gold');
     magneticBtns.forEach((btn) => {
       btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();

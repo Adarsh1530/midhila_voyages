@@ -69,7 +69,7 @@ require_once __DIR__ . '/includes/header.php';
     <div class="glass-card card-3d glass-specular" style="background:linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(243,238,255,0.75) 100%);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:40px 32px;border-radius:24px;border:1px solid rgba(196,181,253,0.4);box-shadow:0 24px 50px -10px rgba(139,92,246,0.18), inset 0 1px 1px rgba(255,255,255,0.8);text-align:center;margin-top:54px;">
       <h3 style="font-size:1.45rem;color:var(--color-navy);margin-bottom:10px;font-weight:700;">Have a Question Not Addressed Above?</h3>
       <p style="color:var(--color-text-muted);margin-bottom:24px;font-size:1.02rem;max-width:560px;margin-left:auto;margin-right:auto;">Our travel designers and pilgrimage advisors will be pleased to assist with customized requirements or special arrangements.</p>
-      <a href="<?= BASE_URL ?>/contact.php" class="btn btn-primary" style="padding:12px 32px;font-size:0.95rem;">Contact Travel Specialist</a>
+      <a href="<?= BASE_URL ?>/contact.php" class="btn btn-vibrant-teal" style="padding:12px 32px;font-size:0.95rem;">Contact Travel Specialist</a>
     </div>
 
   </div>

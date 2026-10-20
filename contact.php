@@ -149,7 +149,7 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- WhatsApp Quick Link -->
         <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to enquire with your travel desk.")) ?>" 
-           target="_blank" rel="noopener noreferrer" class="btn btn-teal btn-lg" style="width:100%;">
+           target="_blank" rel="noopener noreferrer" class="btn btn-vibrant-teal btn-lg" style="width:100%;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/></svg>
           <span>Quick WhatsApp Consultation</span>
         </a>
@@ -157,7 +157,7 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <!-- Right Column: Interactive Form -->
-      <div class="glass-card" style="padding:clamp(28px, 5vw, 44px);border-radius:var(--radius-lg);">
+      <div class="glass-card" style="background:var(--color-ivory-warm);padding:clamp(28px, 5vw, 44px);border-radius:var(--radius-lg);border:1px solid rgba(0,196,180,0.3);">
         <h3 style="font-size:1.55rem;color:var(--color-navy);margin-bottom:8px;">Send Us a Message</h3>
         <p style="font-size:0.92rem;color:var(--color-text-muted);margin-bottom:28px;">Fill in your contact details below and our travel team will respond promptly.</p>
 
@@ -176,7 +176,7 @@ require_once __DIR__ . '/includes/header.php';
             <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Your Full Name *</label>
             <input type="text" name="name" required placeholder="e.g. Ramesh Menon" 
                    value="<?= e($_POST['name'] ?? '') ?>"
-                   style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
+                   style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFF;outline:none;">
           </div>
 
           <div class="form-grid-2">
@@ -184,19 +184,19 @@ require_once __DIR__ . '/includes/header.php';
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Phone / WhatsApp *</label>
               <input type="tel" name="phone" required placeholder="+91 12345 67890" 
                      value="<?= e($_POST['phone'] ?? '') ?>"
-                     style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
+                     style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFF;outline:none;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Email Address</label>
               <input type="email" name="email" placeholder="name@example.com" 
                      value="<?= e($_POST['email'] ?? '') ?>"
-                     style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none;">
+                     style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFF;outline:none;">
             </div>
           </div>
 
           <div style="margin-bottom:18px;">
             <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Subject / Topic</label>
-            <select name="subject" style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;background:#FFF;outline:none;">
+            <select name="subject" style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFF;outline:none;">
               <option value="General Travel Enquiry">General Travel Enquiry</option>
               <option value="Domestic Holiday Package">Domestic Holiday Package</option>
               <option value="International Tour Package">International Tour Package</option>
@@ -209,10 +209,10 @@ require_once __DIR__ . '/includes/header.php';
           <div style="margin-bottom:24px;">
             <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Your Message / Trip Requirements *</label>
             <textarea name="message" rows="4" required placeholder="Tell us about your preferred destinations, dates, number of travellers, or questions..." 
-                      style="width:100%;padding:12px 16px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.95rem;resize:vertical;outline:none;"><?= e($_POST['message'] ?? '') ?></textarea>
+                      style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFF;resize:vertical;outline:none;"><?= e($_POST['message'] ?? '') ?></textarea>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">
+          <button type="submit" class="btn btn-vibrant-coral btn-lg" style="width:100%;">
             <span>Send Message</span>
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>

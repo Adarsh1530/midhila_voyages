@@ -47,10 +47,10 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
-        <a href="<?= BASE_URL ?>/booking.php" class="btn btn-primary btn-lg">
+        <a href="<?= BASE_URL ?>/booking.php" class="btn btn-vibrant-coral btn-lg">
           <span>Retry Payment</span>
         </a>
-        <a href="<?= e($waUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-teal btn-lg">
+        <a href="<?= e($waUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-vibrant-teal btn-lg">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/></svg>
           <span>Assistance via WhatsApp</span>
         </a>

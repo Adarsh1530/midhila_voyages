@@ -34,76 +34,76 @@ require_once __DIR__ . '/includes/header.php';
     
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:32px;">
       
-      <!-- Service 1: Bespoke Itineraries -->
-      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
-        <div style="width:56px;height:56px;border-radius:14px;background:rgba(196,181,253,0.2);color:var(--color-violet-dark);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <!-- Service 1: Bespoke Itineraries (Turquoise) -->
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);border-top:4px solid var(--color-turquoise);">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(0,196,180,0.15);color:var(--color-turquoise-dark);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
         <h3 style="font-size:1.35rem;color:var(--color-navy);margin-bottom:12px;">Bespoke Holiday Planning</h3>
-        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:18px;">
+        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:20px;">
           Personalized day-by-day itineraries tailored to your unique preferences, budget, and travel tempo. Whether solo, couple, or multi-generational family.
         </p>
-        <a href="<?= BASE_URL ?>/enquiry.php" class="btn btn-outline-gold btn-sm">Plan Custom Trip</a>
+        <a href="<?= BASE_URL ?>/enquiry.php" class="btn btn-vibrant-teal btn-sm">Plan Custom Trip</a>
       </div>
 
-      <!-- Service 2: Luxury Stays & Resorts -->
-      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
-        <div style="width:56px;height:56px;border-radius:14px;background:rgba(0,168,150,0.12);color:var(--color-teal);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <!-- Service 2: Luxury Stays & Resorts (Coral) -->
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);border-top:4px solid var(--color-coral);">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(255,107,107,0.15);color:var(--color-coral);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
         <h3 style="font-size:1.35rem;color:var(--color-navy);margin-bottom:12px;">Curated Stays &amp; Resorts</h3>
-        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:18px;">
+        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:20px;">
           Direct reservations at vetted 4-star and 5-star properties, heritage plantation bungalows, private pool villas in Bali, and overwater villas in Maldives.
         </p>
-        <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like assistance with luxury resort booking.")) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-outline-gold btn-sm">Enquire Stays</a>
+        <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like assistance with luxury resort booking.")) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-vibrant-coral btn-sm">Enquire Stays</a>
       </div>
 
-      <!-- Service 3: Kerala Houseboat Cruises -->
-      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
-        <div style="width:56px;height:56px;border-radius:14px;background:rgba(10,25,47,0.08);color:var(--color-navy);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <!-- Service 3: Kerala Houseboat Cruises (Emerald) -->
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);border-top:4px solid var(--color-emerald);">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(5,150,105,0.15);color:var(--color-emerald);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         </div>
         <h3 style="font-size:1.35rem;color:var(--color-navy);margin-bottom:12px;">Private Houseboat Charters</h3>
-        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:18px;">
+        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:20px;">
           Exclusive, air-conditioned kettuvallams in Alleppey and Kumarakom staffed by an experienced captain, private chef, and cabin crew serving freshly cooked delicacies.
         </p>
-        <a href="<?= BASE_URL ?>/package.php?slug=kerala-serenade-munnar-alleppey" class="btn btn-outline-gold btn-sm">View Houseboat Package</a>
+        <a href="<?= BASE_URL ?>/package.php?slug=kerala-serenade-munnar-alleppey" class="btn btn-vibrant-emerald btn-sm">View Houseboat Package</a>
       </div>
 
-      <!-- Service 4: Private Chauffeur Transit -->
-      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
-        <div style="width:56px;height:56px;border-radius:14px;background:rgba(196,181,253,0.2);color:var(--color-violet-dark);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <!-- Service 4: Private Chauffeur Transit (Sunset Orange) -->
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);border-top:4px solid var(--color-sunset);">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(255,122,0,0.15);color:var(--color-sunset);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         </div>
         <h3 style="font-size:1.35rem;color:var(--color-navy);margin-bottom:12px;">Private AC Chauffeur Transit</h3>
-        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:18px;">
+        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:20px;">
           Impeccably clean, air-conditioned sedans, SUVs, and luxury coaches with professional, courteous drivers familiar with local routes and terrain.
         </p>
-        <a href="<?= BASE_URL ?>/contact.php" class="btn btn-outline-gold btn-sm">Request Transport</a>
+        <a href="<?= BASE_URL ?>/contact.php" class="btn btn-vibrant-sunset btn-sm">Request Transport</a>
       </div>
 
-      <!-- Service 5: Flight & Train Ticketing -->
-      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
-        <div style="width:56px;height:56px;border-radius:14px;background:rgba(0,168,150,0.12);color:var(--color-teal);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <!-- Service 5: Flight & Train Ticketing (Electric Violet) -->
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);border-top:4px solid var(--color-violet);">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(131,56,236,0.15);color:var(--color-violet);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </div>
         <h3 style="font-size:1.35rem;color:var(--color-navy);margin-bottom:12px;">Ticketing &amp; Transit Coordination</h3>
-        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:18px;">
+        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:20px;">
           Assistance with connecting domestic flights, international airline tickets, and confirmed train berths coordinated seamlessly with your itinerary.
         </p>
-        <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I need assistance with flight/train ticketing.")) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-outline-gold btn-sm">Ticket Assistance</a>
+        <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I need assistance with flight/train ticketing.")) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-vibrant-violet btn-sm">Ticket Assistance</a>
       </div>
 
-      <!-- Service 6: Visa & Entry Guidance -->
-      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);">
-        <div style="width:56px;height:56px;border-radius:14px;background:rgba(10,25,47,0.08);color:var(--color-navy);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <!-- Service 6: Visa & Entry Guidance (Lagoon Aqua) -->
+      <div class="glass-card card-3d glass-specular" style="padding:36px;border-radius:var(--radius-lg);border-top:4px solid var(--color-aqua-dark);">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(6,182,212,0.15);color:var(--color-aqua-dark);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
           <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </div>
         <h3 style="font-size:1.35rem;color:var(--color-navy);margin-bottom:12px;">Visa Guidance &amp; Clearances</h3>
-        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:18px;">
+        <p style="font-size:0.92rem;color:var(--color-text-muted);line-height:1.7;margin-bottom:20px;">
           Expert guidance on tourist visas for Dubai, Thailand, Singapore, and Indonesia, as well as official Lakshadweep entry permits and documentation.
         </p>
-        <a href="<?= BASE_URL ?>/contact.php" class="btn btn-outline-gold btn-sm">Enquire About Visas</a>
+        <a href="<?= BASE_URL ?>/contact.php" class="btn btn-vibrant-aqua btn-sm">Enquire About Visas</a>
       </div>
 
     </div>

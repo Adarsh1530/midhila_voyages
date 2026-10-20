@@ -29,17 +29,17 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- Pilgrimage Portal Cinematic Hero -->
-<section style="position:relative;background:linear-gradient(180deg, #06101E 0%, #0A192F 100%);padding-top:calc(var(--header-height) + 50px);padding-bottom:80px;color:#FFF;overflow:hidden;">
-  <div style="position:absolute;inset:0;opacity:0.28;">
+<section style="position:relative;background:radial-gradient(circle at 50% 30%, rgba(234, 88, 12, 0.22) 0%, rgba(245, 158, 11, 0.12) 40%, #06101E 85%);padding-top:calc(var(--header-height) + 50px);padding-bottom:80px;color:#FFF;overflow:hidden;border-bottom:1px solid rgba(234, 88, 12, 0.25);">
+  <div style="position:absolute;inset:0;opacity:0.32;">
     <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1800&q=80" alt="Varanasi Ganga Aarti evening lamps" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
     <div style="position:absolute;inset:0;background:radial-gradient(circle at center, transparent 0%, #06101E 85%);"></div>
   </div>
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div class="float-slow" style="display:inline-block;padding:6px 18px;border-radius:var(--radius-pill);background:rgba(196,181,253,0.15);border:1px solid rgba(196,181,253,0.35);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-lavender);margin-bottom:16px;font-weight:700;">
-      ✨ Sacred Vedic Yatras &bull; Divine Sanctuaries
+    <div class="float-slow" style="display:inline-block;padding:6px 20px;border-radius:var(--radius-pill);background:rgba(234,88,12,0.18);border:1px solid rgba(234,88,12,0.45);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:#FED7AA;margin-bottom:16px;font-weight:700;">
+      🕉️ Sacred Vedic Yatras &bull; Divine Sanctuaries
     </div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4.5vw, 3.8rem);margin-bottom:18px;text-shadow:0 0 24px rgba(196,181,253,0.25);">
+    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4.5vw, 3.8rem);margin-bottom:18px;text-shadow:0 0 24px rgba(245,158,11,0.3);">
       Journeys of Faith, Serenity &amp; Devotion
     </h1>
     <p class="lead-text" style="color:#CBD5E0;margin-bottom:32px;">
@@ -47,8 +47,8 @@ require_once __DIR__ . '/includes/header.php';
     </p>
 
     <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
-      <a href="#pilgrimPackages" class="btn btn-primary btn-lg pulse-luminous">Explore Sacred Circuits</a>
-      <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to arrange a family/group pilgrimage tour.")) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-teal btn-lg">
+      <a href="#pilgrimPackages" class="btn btn-vibrant-sunset btn-lg">Explore Sacred Circuits</a>
+      <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to arrange a family/group pilgrimage tour.")) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-vibrant-gold btn-lg">
         <span>Group Yatra Enquiry</span>
       </a>
     </div>

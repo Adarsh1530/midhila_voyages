@@ -92,14 +92,14 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Filter & Search Controls (Frosted Glass Bar) -->
-<section style="background:rgba(255, 255, 255, 0.72);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(196, 181, 253, 0.35);padding:24px 0;box-shadow:inset 0 1px 1px 0 rgba(255,255,255,0.8), 0 8px 24px rgba(10, 17, 40, 0.05);position:relative;z-index:10;">
+<section style="background:rgba(255, 255, 255, 0.85);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0, 196, 180, 0.25);padding:24px 0;box-shadow:inset 0 1px 1px 0 rgba(255,255,255,0.9), 0 8px 24px rgba(10, 17, 40, 0.05);position:relative;z-index:10;">
   <div class="container">
     <form action="<?= BASE_URL ?>/packages.php" method="GET" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)) auto;gap:14px;align-items:end;">
       
       <!-- Destination Filter -->
       <div>
         <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Destination</label>
-        <select name="destination" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
+        <select name="destination" style="width:100%;padding:10px 14px;border:1.5px solid rgba(0, 196, 180, 0.35);border-radius:var(--radius-md);font-size:0.9rem;background:var(--color-ivory-warm);outline:none;">
           <option value="">All Destinations</option>
           <?php foreach ($dests as $d): ?>
             <option value="<?= e($d['slug']) ?>" <?= ($destinationFilter === $d['slug'] || $destinationFilter === $d['name']) ? 'selected' : '' ?>>
@@ -112,7 +112,7 @@ require_once __DIR__ . '/includes/header.php';
       <!-- Category Filter -->
       <div>
         <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Experience Style</label>
-        <select name="category" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
+        <select name="category" style="width:100%;padding:10px 14px;border:1.5px solid rgba(255, 107, 107, 0.35);border-radius:var(--radius-md);font-size:0.9rem;background:var(--color-ivory-warm);outline:none;">
           <option value="">All Categories</option>
           <?php foreach ($cats as $c): ?>
             <option value="<?= e($c['slug']) ?>" <?= ($categoryFilter === $c['slug'] || $categoryFilter === $c['name']) ? 'selected' : '' ?>>
@@ -125,13 +125,13 @@ require_once __DIR__ . '/includes/header.php';
       <!-- Keyword Search -->
       <div>
         <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Keyword</label>
-        <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="e.g. Houseboat, Desert, Temple" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
+        <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="e.g. Munnar, Kashi, Beach" style="width:100%;padding:10px 14px;border:1.5px solid rgba(0, 196, 180, 0.35);border-radius:var(--radius-md);font-size:0.9rem;background:var(--color-ivory-warm);outline:none;">
       </div>
 
       <!-- Sorting -->
       <div>
         <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Sort By</label>
-        <select name="sort" style="width:100%;padding:10px 14px;border:1.5px solid rgba(196, 181, 253, 0.4);border-radius:var(--radius-md);font-size:0.9rem;background:rgba(255,255,255,0.85);outline:none;">
+        <select name="sort" style="width:100%;padding:10px 14px;border:1.5px solid rgba(255, 183, 3, 0.35);border-radius:var(--radius-md);font-size:0.9rem;background:var(--color-ivory-warm);outline:none;">
           <option value="featured" <?= ($sort === 'featured') ? 'selected' : '' ?>>Featured First</option>
           <option value="price_asc" <?= ($sort === 'price_asc') ? 'selected' : '' ?>>Price: Low to High</option>
           <option value="price_desc" <?= ($sort === 'price_desc') ? 'selected' : '' ?>>Price: High to Low</option>
@@ -142,7 +142,7 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Action Buttons -->
       <div style="display:flex;gap:8px;">
-        <button type="submit" class="btn btn-primary" style="padding:10px 20px;">
+        <button type="submit" class="btn btn-vibrant-teal" style="padding:10px 20px;">
           <span>Filter</span>
         </button>
         <a href="<?= BASE_URL ?>/packages.php" class="btn btn-outline-gold" style="padding:10px 16px;">

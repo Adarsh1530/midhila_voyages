@@ -40,6 +40,10 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
   <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/animations.css">
   <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/responsive.css">
 
+  <!-- GSAP & ScrollTrigger Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
   <!-- Open Graph Metadata -->
   <meta property="og:title" content="<?= e($pageTitle) ?>">
   <meta property="og:description" content="<?= e($pageDescription) ?>">
@@ -52,6 +56,23 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
   </script>
 </head>
 <body>
+
+  <!-- Short Animated Globe Voyage Loader (< 1.1s non-blocking) -->
+  <div class="voyage-loader" id="voyageLoader" aria-hidden="true">
+    <div class="globe-wrapper">
+      <div class="globe-sphere">
+        <div class="globe-ring globe-ring--equator"></div>
+        <div class="globe-ring globe-ring--meridian"></div>
+        <div class="globe-pin"></div>
+      </div>
+      <div class="globe-ring globe-ring--orbit"></div>
+    </div>
+    <div class="voyage-loader__title">MIDHILA VOYAGES</div>
+    <div class="voyage-loader__subtitle">Curating Horizons &bull; Sacred Trails</div>
+    <div class="voyage-loader__bar">
+      <div class="voyage-loader__progress"></div>
+    </div>
+  </div>
 
   <!-- Ambient Floating Mesh Orbs -->
   <div class="ambient-mesh" aria-hidden="true">

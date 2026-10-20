@@ -254,19 +254,19 @@ require_once __DIR__ . '/includes/header.php';
 
           <div style="display:flex;flex-direction:column;gap:12px;">
             <!-- Book Now / Pay Deposit Button -->
-            <a href="<?= BASE_URL ?>/booking.php?package_id=<?= (int)$package['id'] ?>" class="btn btn-primary" style="width:100%;justify-content:center;">
+            <a href="<?= BASE_URL ?>/booking.php?package_id=<?= (int)$package['id'] ?>" class="btn btn-vibrant-coral" style="width:100%;justify-content:center;">
               <span>Book / Reserve Trip</span>
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
 
             <!-- WhatsApp Direct Enquiry -->
-            <a href="<?= e($waPkgUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-teal" style="width:100%;justify-content:center;">
+            <a href="<?= e($waPkgUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-vibrant-teal" style="width:100%;justify-content:center;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/></svg>
               <span>Enquire on WhatsApp</span>
             </a>
 
             <!-- Custom Form Enquiry -->
-            <a href="<?= BASE_URL ?>/enquiry.php?package_id=<?= (int)$package['id'] ?>&destination=<?= urlencode($package['destination_name']) ?>" class="btn btn-outline-white" style="width:100%;justify-content:center;color:var(--color-navy);border-color:rgba(196,181,253,0.5);">
+            <a href="<?= BASE_URL ?>/enquiry.php?package_id=<?= (int)$package['id'] ?>&destination=<?= urlencode($package['destination_name']) ?>" class="btn btn-outline-gold" style="width:100%;justify-content:center;">
               <span>Custom Proposal Enquiry</span>
             </a>
           </div>
