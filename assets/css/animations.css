@@ -84,27 +84,52 @@
 }
 
 .floating-memoir--1 {
-  top: 18%;
-  right: 6%;
+  top: 15%;
+  right: 5%;
   width: 220px;
   height: 290px;
   animation: floatDriftA 16s ease-in-out infinite alternate;
 }
 
 .floating-memoir--2 {
-  bottom: 12%;
-  right: 28%;
-  width: 240px;
-  height: 160px;
+  bottom: 8%;
+  right: 14%;
+  width: 230px;
+  height: 155px;
   animation: floatDriftB 20s ease-in-out infinite alternate;
 }
 
+/* Memoir 3 (Ganga Sunrise / Varanasi Ghat): shifted cleanly to the right */
 .floating-memoir--3 {
-  top: 48%;
-  right: 44%;
-  width: 160px;
-  height: 210px;
+  top: 36%;
+  right: 28%;
+  width: 165px;
+  height: 215px;
   animation: floatDriftC 18s ease-in-out infinite alternate;
+}
+
+@media (max-width: 1140px) {
+  .floating-memoirs {
+    opacity: 0.5;
+  }
+  .floating-memoir--3 {
+    right: 12%;
+    top: 40%;
+  }
+  .floating-memoir--1 {
+    right: 4%;
+    top: 10%;
+  }
+  .floating-memoir--2 {
+    right: 8%;
+    bottom: 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-memoirs {
+    display: none !important;
+  }
 }
 
 @keyframes floatDriftA {
