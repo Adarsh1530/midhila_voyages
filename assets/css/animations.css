@@ -84,26 +84,26 @@
 }
 
 .floating-memoir--1 {
-  top: 18%;
-  right: 6%;
+  top: 14%;
+  right: 8%;
   width: 220px;
-  height: 290px;
+  height: 295px;
   animation: floatDriftA 16s ease-in-out infinite alternate;
 }
 
 .floating-memoir--2 {
-  bottom: 12%;
-  right: 28%;
+  bottom: 14%;
+  right: 9%;
   width: 240px;
-  height: 160px;
+  height: 165px;
   animation: floatDriftB 20s ease-in-out infinite alternate;
 }
 
 .floating-memoir--3 {
-  top: 48%;
-  right: 35%;
-  width: 160px;
-  height: 210px;
+  top: 36%;
+  right: 28%;
+  width: 165px;
+  height: 215px;
   animation: floatDriftC 18s ease-in-out infinite alternate;
 }
 
@@ -124,22 +124,25 @@
 
 @media (max-width: 1200px) {
   .floating-memoirs {
-    opacity: 0.75;
+    opacity: 0.85;
   }
   .floating-memoir--1 {
     width: 190px;
-    height: 250px;
-    right: 4%;
+    height: 255px;
+    top: 14%;
+    right: 6%;
   }
   .floating-memoir--2 {
-    width: 200px;
-    height: 140px;
-    right: 22%;
+    width: 205px;
+    height: 142px;
+    bottom: 12%;
+    right: 8%;
   }
   .floating-memoir--3 {
-    width: 140px;
-    height: 180px;
-    right: 32%;
+    width: 145px;
+    height: 190px;
+    top: 36%;
+    right: 24%;
   }
 }
 
