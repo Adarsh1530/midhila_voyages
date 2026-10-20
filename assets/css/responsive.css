@@ -103,6 +103,11 @@
     font-size: 1.15rem;
   }
 
+  .brand-logo__img {
+    height: 38px;
+    max-width: 155px;
+  }
+
   .brand-logo__symbol {
     width: 36px;
     height: 36px;

@@ -173,12 +173,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="login-box">
     
-    <div class="brand-logo">
-      <img src="<?= ASSETS_URL ?>/images/logo/symbol.svg" alt="Midhila Voyages Emblem" width="44" height="44">
-      <div>
-        <div class="brand-title">MIDHILA</div>
-        <div class="brand-sub">VOYAGES</div>
-      </div>
+    <div class="brand-logo" style="margin-bottom:24px;">
+      <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white.png" 
+           srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white@2x.png 2x" 
+           alt="Midhila Voyages" 
+           style="max-width:210px;height:52px;width:auto;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5));">
     </div>
 
     <div style="text-align:center;margin-bottom:24px;">

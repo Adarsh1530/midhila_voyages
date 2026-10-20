@@ -724,11 +724,12 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
   <!-- Sidebar -->
   <aside class="admin-sidebar">
     <div class="admin-brand">
-      <img src="<?= ASSETS_URL ?>/images/logo/symbol.svg" alt="Emblem" width="34" height="34">
-      <div>
-        <div class="admin-brand__title">MIDHILA</div>
-        <div style="font-size:0.65rem;letter-spacing:0.2em;color:var(--admin-lavender);">AGENCY PORTAL</div>
-      </div>
+      <a href="<?= ADMIN_URL ?>/dashboard.php" style="display:flex;align-items:center;text-decoration:none;">
+        <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white.png" 
+             srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white@2x.png 2x" 
+             alt="Midhila Voyages Admin" 
+             style="max-width:180px;height:42px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.45));">
+      </a>
     </div>
 
     <nav class="admin-nav">

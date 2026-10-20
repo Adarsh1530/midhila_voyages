@@ -70,11 +70,12 @@ $waFloatUrl = build_whatsapp_url($agencyWhatsApp, $waFloatMessage);
         <!-- Column 1: Brand Intro -->
         <div class="footer-col">
           <div class="brand-logo" style="margin-bottom: 20px;">
-            <img src="<?= ASSETS_URL ?>/images/logo/symbol.svg" alt="Midhila Voyages Emblem" class="brand-logo__symbol" width="40" height="40">
-            <div class="brand-logo__text">
-              <span class="brand-logo__name">MIDHILA</span>
-              <span class="brand-logo__subtitle">VOYAGES</span>
-            </div>
+            <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white.png" 
+                 srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white@2x.png 2x" 
+                 alt="Midhila Voyages" 
+                 class="brand-logo__img" 
+                 width="186" 
+                 height="50">
           </div>
           <p style="font-size:0.92rem;line-height:1.7;margin-bottom:20px;color:#A0AEC0;">
             A premier travel and pilgrimage management agency dedicated to curating bespoke domestic holidays, inspiring international escapes, and deeply reverent spiritual yatras with transparent planning.

@@ -88,11 +88,12 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
       
       <!-- Brand Logo -->
       <a href="<?= BASE_URL ?>/index.php" class="brand-logo" aria-label="Midhila Voyages Home">
-        <img src="<?= ASSETS_URL ?>/images/logo/symbol.svg" alt="Midhila Voyages Emblem" class="brand-logo__symbol" width="44" height="44">
-        <div class="brand-logo__text">
-          <span class="brand-logo__name">MIDHILA</span>
-          <span class="brand-logo__subtitle">VOYAGES</span>
-        </div>
+        <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white.png" 
+             srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white@2x.png 2x" 
+             alt="Midhila Voyages" 
+             class="brand-logo__img" 
+             width="176" 
+             height="48">
       </a>
 
       <!-- Desktop Navigation Menu -->
@@ -141,11 +142,12 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
     <div>
       <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);">
         <div class="brand-logo">
-          <img src="<?= ASSETS_URL ?>/images/logo/symbol.svg" alt="Midhila Voyages Emblem" class="brand-logo__symbol" width="36" height="36">
-          <div class="brand-logo__text">
-            <span class="brand-logo__name" style="font-size:1.1rem;">MIDHILA</span>
-            <span class="brand-logo__subtitle">VOYAGES</span>
-          </div>
+          <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white.png" 
+               srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white@2x.png 2x" 
+               alt="Midhila Voyages" 
+               class="brand-logo__img" 
+               width="154" 
+               height="42">
         </div>
         <button class="mobile-drawer__close" style="color:#FFF;font-size:1.8rem;line-height:1;" aria-label="Close menu">&times;</button>
       </div>

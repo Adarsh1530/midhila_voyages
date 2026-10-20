@@ -165,12 +165,13 @@ require_once __DIR__ . '/includes/header.php';
       
       <!-- Voucher Header -->
       <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px;border-bottom:1.5px solid var(--color-border);padding-bottom:20px;margin-bottom:22px;">
-        <div class="brand-logo" style="display:flex;align-items:center;gap:12px;">
-          <img src="<?= ASSETS_URL ?>/images/logo/symbol.svg" alt="Midhila Voyages Emblem" class="brand-logo__symbol" width="46" height="46" style="display:block;">
-          <div class="brand-logo__text">
-            <span class="brand-logo__name" style="color:var(--color-navy);font-size:1.3rem;font-weight:700;letter-spacing:0.04em;">MIDHILA</span>
-            <span class="brand-logo__subtitle" style="color:var(--color-gold);letter-spacing:0.22em;font-size:0.75rem;">VOYAGES</span>
-          </div>
+        <div class="brand-logo" style="display:flex;align-items:center;">
+          <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo.png" 
+               srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo@2x.png 2x" 
+               alt="Midhila Voyages" 
+               class="brand-logo__img" 
+               height="48" 
+               style="height:48px;width:auto;display:block;">
         </div>
 
         <div style="text-align:right;">
