@@ -96,6 +96,15 @@ require_once __DIR__ . '/includes/header.php';
   <!-- Delicate Geographical Texture Grid Watermark -->
   <div class="geo-texture-grid" aria-hidden="true"></div>
 
+  <!-- Giant Borderless Free-Size Three.js Travel Globe Layer -->
+  <div class="travel-scene-wrapper" aria-hidden="true">
+    <canvas id="travelSceneCanvas"></canvas>
+    <div class="fallback-globe">
+      <div class="fallback-globe__ring fallback-globe__ring--1"></div>
+      <div class="fallback-globe__ring fallback-globe__ring--2"></div>
+    </div>
+  </div>
+
   <div class="container hero-container">
     <div class="hero-grid">
       
@@ -113,19 +122,8 @@ require_once __DIR__ . '/includes/header.php';
         </p>
       </div>
 
-      <!-- Right Column: Dedicated Visual Showcase Frame (Images & 3D Globe) -->
+      <!-- Right Column: Curated Destination Photo Memoirs Layered in Front of Giant Globe -->
       <div class="hero-visual">
-        
-        <!-- 3D Interactive Three.js Golden Coordinate Sphere (Contained in Right Frame) -->
-        <div class="travel-scene-wrapper" aria-hidden="true">
-          <canvas id="travelSceneCanvas"></canvas>
-          <div class="fallback-globe">
-            <div class="fallback-globe__ring fallback-globe__ring--1"></div>
-            <div class="fallback-globe__ring fallback-globe__ring--2"></div>
-          </div>
-        </div>
-
-        <!-- Layered Destination Photo Memoirs Collage -->
         <div class="hero-memoirs-frame" aria-hidden="true">
           <!-- Memoir 1: Kerala Backwaters (Primary Feature) -->
           <div class="hero-memoir hero-memoir--1">
@@ -148,7 +146,6 @@ require_once __DIR__ . '/includes/header.php';
                  loading="lazy">
           </div>
         </div>
-
       </div>
 
     </div>
