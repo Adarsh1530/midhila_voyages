@@ -35,7 +35,11 @@
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 2000);
-      camera.position.z = 24; // Balanced camera distance for grand free-size globe
+      camera.position.z = 23; // Grand scale, borderless free-size globe presence
+
+      // Hide CSS fallback rings once WebGL initializes
+      const fallback = container.parentElement ? container.parentElement.querySelector('.fallback-globe') : null;
+      if (fallback) fallback.style.display = 'none';
 
       const renderer = new THREE.WebGLRenderer({
         canvas: container,

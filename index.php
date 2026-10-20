@@ -93,10 +93,7 @@ require_once __DIR__ . '/includes/header.php';
      ===================================================================== -->
 <section class="section-hero" id="heroSection">
   
-  <!-- Delicate Geographical Texture Grid Watermark -->
-  <div class="geo-texture-grid" aria-hidden="true"></div>
-
-  <!-- Giant Borderless Free-Size Three.js Travel Globe Layer -->
+  <!-- Giant Borderless Free-Size Three.js Travel Globe Layer (Overlaying Elegantly Across Canvas & Text) -->
   <div class="travel-scene-wrapper" aria-hidden="true">
     <canvas id="travelSceneCanvas"></canvas>
     <div class="fallback-globe">

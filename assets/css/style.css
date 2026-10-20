@@ -201,16 +201,9 @@ ul, ol {
   -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 80%);
 }
 
-/* Delicate geographical gridlines watermark (white & ultra-faint grey) */
+/* Pure clean white canvas - No background grid/boxes */
 .geo-texture-grid {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-size: 60px 60px;
-  background-image: 
-    linear-gradient(to right, rgba(15, 23, 42, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.025) 1px, transparent 1px);
-  z-index: 1;
+  display: none !important;
 }
 
 /* =====================================================================
@@ -287,6 +280,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   z-index: 5;
   max-width: 680px;
+  pointer-events: auto;
 }
 
 .editorial-headline-hero {
@@ -297,6 +291,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.015em;
   color: var(--color-text-headline);
   margin-bottom: 22px;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9), 0 0 16px rgba(255, 255, 255, 0.7);
 }
 
 .editorial-headline-hero__sub {
@@ -315,6 +310,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.5;
   color: var(--color-text-secondary);
   max-width: 640px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
 }
 
 .hero-visual {
