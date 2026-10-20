@@ -97,16 +97,8 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 
       <!-- Header Action Buttons -->
       <div class="header-actions">
-        <!-- WhatsApp Concierge Action -->
-        <a href="<?= e($globalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="header-whatsapp" title="Enquire on WhatsApp" aria-label="Chat with travel specialist on WhatsApp">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/>
-          </svg>
-          <span>WhatsApp</span>
-        </a>
-
         <!-- Plan My Journey Primary CTA -->
-        <a href="<?= BASE_URL ?>/enquiry.php" class="btn-cinematic-primary">
+        <a href="<?= BASE_URL ?>/enquiry.php" class="btn-cinematic-primary btn-header-cta">
           <span>Plan My Trip</span>
         </a>
 

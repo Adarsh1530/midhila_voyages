@@ -347,20 +347,23 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  gap: 16px;
 }
 
-/* Brand Logo Container */
+/* Brand Logo Container with generous spacing from Home nav */
 .brand-logo {
   display: flex;
   align-items: center;
   text-decoration: none;
   flex-shrink: 0;
+  margin-right: clamp(28px, 4vw, 64px);
+  padding: 4px 0;
 }
 
 .brand-logo__img {
-  height: 48px;
+  height: 46px;
   width: auto;
-  max-width: 195px;
+  max-width: 185px;
   object-fit: contain;
   display: block;
   transition: transform var(--transition-fast), opacity var(--transition-fast);
@@ -370,21 +373,25 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.02);
 }
 
-/* Navigation Menu */
+/* Centered & Well-Aligned Navigation Menu */
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 32px;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 32px);
+  margin: 0 auto;
+  flex-wrap: nowrap;
 }
 
 .nav-link {
   font-family: var(--font-sans);
   font-size: 0.88rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   color: var(--color-text-main);
   position: relative;
-  padding: 8px 0;
+  padding: 8px 4px;
+  white-space: nowrap;
   text-transform: capitalize;
   transition: color var(--transition-fast);
 }
@@ -410,32 +417,21 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
-/* Header Action Buttons */
+/* Header Action Buttons (Plan My Trip Right Aligned) */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
+  flex-shrink: 0;
+  margin-left: clamp(24px, 3.5vw, 56px);
 }
 
-.header-whatsapp {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.84rem;
-  font-weight: 700;
-  color: var(--color-whatsapp);
-  padding: 8px 16px;
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(18, 140, 126, 0.25);
-  background: rgba(18, 140, 126, 0.04);
-  transition: all var(--transition-fast);
-}
-
-.header-whatsapp:hover {
-  background: var(--color-whatsapp);
-  color: #FFFFFF;
-  border-color: var(--color-whatsapp);
-  box-shadow: 0 4px 16px rgba(18, 140, 126, 0.25);
+.btn-header-cta {
+  padding: 11px 24px !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.08em !important;
+  border-radius: var(--radius-pill) !important;
+  white-space: nowrap;
 }
 
 /* Mobile Toggle Hamburger */
@@ -451,6 +447,21 @@ h1, h2, h3, h4, h5, h6 {
   background: #FFFFFF;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
+}
+
+@media (max-width: 1140px) {
+  .nav-menu {
+    display: none !important;
+  }
+  .mobile-toggle {
+    display: flex !important;
+  }
+  .brand-logo {
+    margin-right: 0 !important;
+  }
+  .header-actions {
+    margin-left: auto !important;
+  }
 }
 
 .mobile-toggle__bar {

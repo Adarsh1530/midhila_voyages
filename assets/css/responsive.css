@@ -28,25 +28,21 @@
 }
 
 /* =====================================================================
-   Laptop / Small Desktop (max-width: 1024px)
+   Laptop / Small Desktop / Tablet (max-width: 1140px)
    ===================================================================== */
-@media (max-width: 1024px) {
+@media (max-width: 1140px) {
   .nav-menu {
-    gap: 18px;
+    display: none !important; /* Hidden on tablet & mobile; accessible via mobile drawer */
   }
-  .nav-link {
-    font-size: 0.86rem;
+  .mobile-toggle,
+  .mobile-nav-toggle {
+    display: flex !important;
   }
-  .header-actions .btn {
-    padding: 10px 20px;
-    font-size: 0.86rem;
+  .brand-logo {
+    margin-right: 0 !important;
   }
-  .footer-top {
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 36px;
-  }
-  .footer-top .footer-col:last-child {
-    grid-column: span 3;
+  .header-actions {
+    margin-left: auto !important;
   }
 }
 
@@ -59,15 +55,17 @@
   }
 
   .nav-menu {
-    display: none; /* Hidden on tablet & mobile; accessible via mobile drawer */
+    display: none !important;
   }
 
+  .mobile-toggle,
   .mobile-nav-toggle {
-    display: flex;
+    display: flex !important;
   }
 
+  .btn-header-cta,
   .header-actions .btn-plan {
-    display: none; /* Kept in mobile drawer to save header real estate */
+    display: none !important; /* Kept in mobile drawer to save header real estate */
   }
 
   .footer-top {
