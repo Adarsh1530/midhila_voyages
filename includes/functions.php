@@ -229,3 +229,19 @@ function get_image_url(?string $path, string $placeholder = ''): string {
     }
     return BASE_URL . '/' . ltrim($path, '/');
 }
+
+/**
+ * Truncate a string by number of words
+ */
+function truncate_words(?string $text, int $limit = 20, string $ellipsis = '...'): string {
+    if (empty($text)) {
+        return '';
+    }
+    $text = strip_tags($text);
+    $words = preg_split('/\s+/u', trim($text), $limit + 1);
+    if (count($words) > $limit) {
+        array_pop($words);
+        return implode(' ', $words) . $ellipsis;
+    }
+    return implode(' ', $words);
+}

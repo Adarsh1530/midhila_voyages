@@ -1,194 +1,246 @@
 /**
- * MIDHILA VOYAGES — 3D Tilt, Dynamic Specular Light & Motion Engine
- * - Short voyage globe loader dismissal (< 1.1s)
- * - Smooth 3D perspective transforms with mouse-tracking specular highlights
- * - GSAP ScrollTrigger timeline reveals with IntersectionObserver fallback
- * - Parallax and smooth micro-interactions
+ * MIDHILA VOYAGES — Cinematic Scroll & 3D Interactive Engine
+ * Inspired by Brand Motion's "Travelled by Scroll" (VAARĀ)
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Respect user preference for reduced motion
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function () {
+  'use strict';
 
-  // 0. Short Animated Globe Voyage Loader Dismissal (< 1.1s)
-  const loader = document.getElementById('voyageLoader') || document.querySelector('.voyage-loader');
-  if (loader) {
-    if (prefersReducedMotion) {
+  // 1. Fast, non-blocking Voyage Loader dismiss
+  function initLoader() {
+    const loader = document.getElementById('voyageLoader');
+    if (!loader) return;
+    const hideLoader = () => {
       loader.classList.add('is-hidden');
-    } else {
       setTimeout(() => {
-        loader.classList.add('is-hidden');
-        setTimeout(() => {
-          if (loader.parentNode) loader.remove();
-        }, 600);
-      }, 950);
+        if (loader.parentNode) loader.parentNode.removeChild(loader);
+      }, 550);
+    };
+    if (document.readyState === 'complete') {
+      setTimeout(hideLoader, 350);
+    } else {
+      window.addEventListener('load', () => setTimeout(hideLoader, 250));
+      setTimeout(hideLoader, 800); // Safety fallback
     }
   }
 
-  if (prefersReducedMotion) return;
+  // 2. Interactive Three.js 3D Travel Sphere on Pure White Canvas
+  function initThreeSphere() {
+    const container = document.getElementById('travelSceneCanvas');
+    if (!container || typeof THREE === 'undefined') return;
 
-  // 1. Ambient Background Mesh Auto-Injector (if not explicitly in HTML)
-  if (!document.querySelector('.ambient-mesh')) {
-    const mesh = document.createElement('div');
-    mesh.className = 'ambient-mesh';
-    mesh.setAttribute('aria-hidden', 'true');
-    mesh.innerHTML = `
-      <div class="ambient-orb ambient-orb--1"></div>
-      <div class="ambient-orb ambient-orb--2"></div>
-      <div class="ambient-orb ambient-orb--3"></div>
-      <div class="ambient-orb ambient-orb--4"></div>
-    `;
-    document.body.prepend(mesh);
-  }
+    try {
+      const width = container.clientWidth || 600;
+      const height = container.clientHeight || 600;
 
-  // 2. GSAP ScrollTrigger Integration with Graceful Vanilla Fallback
-  if (typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined') {
-    window.gsap.registerPlugin(window.ScrollTrigger);
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+      camera.position.z = 24;
 
-    // Hero timeline reveal
-    const heroTl = window.gsap.timeline({ defaults: { ease: 'power3.out' } });
-    if (document.querySelector('.hero-headline-anim')) {
-      heroTl.fromTo('.hero-headline-anim', 
-        { opacity: 0, y: 40 }, 
-        { opacity: 1, y: 0, duration: 1.1, delay: 0.2 }
-      );
+      const renderer = new THREE.WebGLRenderer({
+        canvas: container,
+        alpha: true,
+        antialias: true,
+        powerPreference: 'high-performance'
+      });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Golden Travel Globe Group
+      const globeGroup = new THREE.Group();
+      scene.add(globeGroup);
+
+      // Inner Wireframe Sphere (subtle golden coordinate mesh)
+      const sphereGeo = new THREE.SphereGeometry(7.5, 32, 24);
+      const sphereMat = new THREE.MeshBasicMaterial({
+        color: 0xC5A059,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.16
+      });
+      const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
+      globeGroup.add(sphereMesh);
+
+      // Orbital Route Rings
+      const ringMat = new THREE.LineBasicMaterial({
+        color: 0x9A7836,
+        transparent: true,
+        opacity: 0.35,
+        linewidth: 1.5
+      });
+
+      const createRing = (radius, rotX, rotY) => {
+        const points = [];
+        for (let i = 0; i <= 64; i++) {
+          const theta = (i / 64) * Math.PI * 2;
+          points.push(new THREE.Vector3(Math.cos(theta) * radius, Math.sin(theta) * radius, 0));
+        }
+        const geo = new THREE.BufferGeometry().setFromPoints(points);
+        const line = new THREE.Line(geo, ringMat);
+        line.rotation.x = rotX;
+        line.rotation.y = rotY;
+        return line;
+      };
+
+      globeGroup.add(createRing(8.2, Math.PI / 4, 0));
+      globeGroup.add(createRing(8.5, -Math.PI / 3, Math.PI / 6));
+
+      // Coordinate Waypoints (Glow points for Kerala, Rameswaram, Varanasi, Himalayas)
+      const waypointGeo = new THREE.SphereGeometry(0.2, 12, 12);
+      const waypointMat = new THREE.MeshBasicMaterial({ color: 0xC5A059 });
+
+      const waypoints = [
+        [4.8, 3.2, 4.5],
+        [-3.5, 5.2, 3.8],
+        [2.1, -4.8, 5.0],
+        [-5.0, -2.5, 4.2]
+      ];
+
+      waypoints.forEach(([x, y, z]) => {
+        const wp = new THREE.Mesh(waypointGeo, waypointMat);
+        wp.position.set(x, y, z);
+        globeGroup.add(wp);
+      });
+
+      // Mouse Parallax
+      let mouseX = 0, mouseY = 0;
+      let targetRotX = 0, targetRotY = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        const halfW = window.innerWidth / 2;
+        const halfH = window.innerHeight / 2;
+        mouseX = (e.clientX - halfW) / halfW;
+        mouseY = (e.clientY - halfH) / halfH;
+      }, { passive: true });
+
+      // Animation Loop
+      let animId;
+      const animate = () => {
+        animId = requestAnimationFrame(animate);
+
+        globeGroup.rotation.y += 0.0025;
+        targetRotX = mouseY * 0.25;
+        targetRotY = mouseX * 0.35;
+
+        globeGroup.rotation.x += (targetRotX - globeGroup.rotation.x) * 0.05;
+        globeGroup.rotation.z += (targetRotY - globeGroup.rotation.z) * 0.05;
+
+        renderer.render(scene, camera);
+      };
+      animate();
+
+      // Resize Handler
+      window.addEventListener('resize', () => {
+        const newW = container.clientWidth;
+        const newH = container.clientHeight;
+        if (!newW || !newH) return;
+        camera.aspect = newW / newH;
+        camera.updateProjectionMatrix();
+        renderer.setSize(newW, newH);
+      }, { passive: true });
+
+    } catch (e) {
+      console.warn('Three.js canvas initialized in fallback mode', e);
     }
-
-    if (document.querySelector('.hero-floating-card')) {
-      heroTl.fromTo('.hero-floating-card', 
-        { opacity: 0, scale: 0.85, y: 30 }, 
-        { opacity: 1, scale: 1, y: 0, stagger: 0.18, duration: 1 }, 
-        '-=0.7'
-      );
-    }
-
-    // ScrollTrigger for route line SVG stroke
-    const routeSvg = document.querySelector('.hero-route-line-svg');
-    if (routeSvg) {
-      window.gsap.fromTo('.hero-route-line',
-        { strokeDashoffset: 800 },
-        {
-          strokeDashoffset: 0,
-          duration: 3,
-          ease: 'power2.inOut',
-          scrollTrigger: {
-            trigger: routeSvg,
-            start: 'top 80%',
-            toggleActions: 'play none none none'
-          }
-        }
-      );
-    }
   }
 
-  // 3. Intersection Observer for Scroll Reveals
-  const revealElements = document.querySelectorAll('.reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-zoom-in, .mask-reveal');
-  if ('IntersectionObserver' in window && revealElements.length > 0) {
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      root: null,
-      rootMargin: '0px 0px -50px 0px',
-      threshold: 0.1
-    });
-
-    revealElements.forEach((el) => revealObserver.observe(el));
-  } else {
-    revealElements.forEach((el) => el.classList.add('is-revealed'));
-  }
-
-  // 4. Interactive 3D Tilt Engine with Real-Time Specular Glare Tracking
-  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-  if (!isTouchDevice) {
-    const tiltTargets = document.querySelectorAll('.card-3d, .package-card, .dest-card, .glass-specular, .service-card, .editorial-card');
-    
-    tiltTargets.forEach((card) => {
-      let isHovered = false;
-      let animationFrameId = null;
-
-      card.addEventListener('mouseenter', () => {
-        isHovered = true;
-        card.style.transition = 'transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease';
-      });
-
-      card.addEventListener('mousemove', (e) => {
-        if (!isHovered) return;
-        
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-        }
-
-        animationFrameId = requestAnimationFrame(() => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-
-          // Update CSS custom properties for specular glare reflection
-          card.style.setProperty('--mouse-x', `${x}px`);
-          card.style.setProperty('--mouse-y', `${y}px`);
-
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-
-          // Gentle tilt: clamp to +/- 7.5 deg
-          const rotateX = ((centerY - y) / centerY) * 7.5;
-          const rotateY = ((x - centerX) / centerX) * 7.5;
-
-          card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-8px)`;
-        });
-      });
-
-      card.addEventListener('mouseleave', () => {
-        isHovered = false;
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-        }
-        card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease';
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
-      });
-    });
-  }
-
-  // 5. Parallax Depth on Selected Visual Elements
-  const parallaxNodes = document.querySelectorAll('[data-parallax-speed]');
-  if (parallaxNodes.length > 0 && !isTouchDevice) {
-    let ticking = false;
+  // 3. Scroll Reveals & GSAP ScrollTrigger Orchestration
+  function initScrollAnimations() {
+    const header = document.getElementById('siteHeader');
     window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const scrollY = window.scrollY;
-          if (scrollY < window.innerHeight * 2.5) {
-            parallaxNodes.forEach((node) => {
-              const speed = parseFloat(node.getAttribute('data-parallax-speed')) || 0.12;
-              const offset = scrollY * speed;
-              node.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
-            });
-          }
-          ticking = false;
-        });
-        ticking = true;
+      if (header) {
+        if (window.scrollY > 40) {
+          header.classList.add('is-scrolled');
+        } else {
+          header.classList.remove('is-scrolled');
+        }
       }
     }, { passive: true });
+
+    // GSAP ScrollTrigger if loaded
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Parallax on Floating Photo Memoirs
+      gsap.utils.toArray('.floating-memoir').forEach((el, i) => {
+        const speed = (i + 1) * 35;
+        gsap.to(el, {
+          y: -speed,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el.closest('section') || el,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.2
+          }
+        });
+      });
+
+      // Chapter Reveals
+      gsap.utils.toArray('.reveal-fade-up').forEach((el) => {
+        gsap.fromTo(el, 
+          { opacity: 0, y: 32 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 88%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+
+    } else {
+      // Robust IntersectionObserver Fallback
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.reveal-fade-up, .reveal-mask-clip').forEach((el) => {
+        observer.observe(el);
+      });
+    }
   }
 
-  // 6. Interactive Magnetic Buttons (.btn-magnetic)
-  if (!isTouchDevice) {
-    const magneticBtns = document.querySelectorAll('.btn-primary, .btn-plan, .btn-vibrant-teal, .btn-vibrant-coral, .btn-vibrant-sunset, .btn-vibrant-gold');
-    magneticBtns.forEach((btn) => {
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = '';
-      });
+  // 4. Mobile Navigation Drawer
+  function initMobileNav() {
+    const toggle = document.getElementById('mobileToggle');
+    const drawer = document.getElementById('mobileDrawer');
+    const closeBtn = document.querySelector('.mobile-drawer__close');
+
+    if (!toggle || !drawer) return;
+
+    toggle.addEventListener('click', () => {
+      drawer.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    const closeDrawer = () => {
+      drawer.classList.remove('is-open');
+      document.body.style.overflow = '';
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    drawer.addEventListener('click', (e) => {
+      if (e.target.classList.contains('mobile-drawer__link')) closeDrawer();
     });
   }
-});
+
+  // Self Initialization
+  document.addEventListener('DOMContentLoaded', () => {
+    initLoader();
+    initThreeSphere();
+    initScrollAnimations();
+    initMobileNav();
+  });
+
+})();

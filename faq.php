@@ -1,6 +1,7 @@
 <?php
 /**
  * MIDHILA VOYAGES — Frequently Asked Questions
+ * Pure White Editorial Hospitality Canvas
  */
 
 require_once __DIR__ . '/includes/config.php';
@@ -8,7 +9,7 @@ require_once __DIR__ . '/includes/database.php';
 require_once __DIR__ . '/includes/functions.php';
 
 $pageTitle = 'Frequently Asked Questions | Midhila Voyages';
-$pageDescription = 'Find answers to common questions about booking, customized itineraries, pilgrimage arrangements, payments, and travel documents with Midhila Voyages.';
+$pageDescription = 'Transparent answers regarding tour packages, payment procedures, travel documents, and pilgrimage arrangements with Midhila Voyages.';
 
 $db = getDB();
 $faqs = $db->query("SELECT * FROM `faqs` WHERE `is_published` = 1 ORDER BY `display_order` ASC, `id` ASC")->fetchAll();
@@ -23,40 +24,47 @@ foreach ($faqs as $faq) {
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Banner Header -->
-<section style="position:relative;background:linear-gradient(180deg, rgba(6,11,24,0.92) 0%, rgba(10,17,40,0.85) 100%);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;border-bottom:1px solid rgba(196,181,253,0.18);">
-  <div style="position:absolute;inset:0;opacity:0.25;">
-    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80" alt="FAQ" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,11,24,0.7) 0%, rgba(10,17,40,0.92) 100%);"></div>
+<!-- FAQ Hero (Pure White with Subtle 35% Photo Layer) -->
+<section style="position:relative;background:#FFFFFF;padding-top:calc(var(--header-height) + 50px);padding-bottom:50px;overflow:hidden;border-bottom:1px solid var(--color-border);">
+  <div class="cinematic-bg-layer cinematic-bg-mask-radial" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80" 
+         alt="" 
+         class="cinematic-bg-layer__img" 
+         style="opacity:0.22;">
   </div>
-  <div class="container" style="position:relative;z-index:2;text-align:center;max-width:780px;">
-    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(196,181,253,0.12);backdrop-filter:blur(16px);border:1px solid rgba(196,181,253,0.3);padding:6px 16px;border-radius:var(--radius-pill);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--color-lavender);margin-bottom:14px;font-weight:600;box-shadow:0 0 20px rgba(139,92,246,0.2);">
-      <span>✦ Information &amp; Guidance</span>
+
+  <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
+    <div class="chapter-badge" style="justify-content:center;">
+      <span class="chapter-number">Guidance &bull; Assistance</span>
+      <span class="chapter-coordinates">Transparent Policies</span>
     </div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4.5vw, 3.8rem);margin-bottom:16px;">Frequently Asked Questions</h1>
-    <p class="lead-text" style="color:#CBD5E1;font-size:1.1rem;line-height:1.7;">Transparent, accurate answers regarding our tour packages, payment procedures, travel documents, and pilgrimage arrangements.</p>
+    <h1 class="editorial-headline-large" style="margin-bottom:16px;">
+      Frequently Asked Questions
+    </h1>
+    <p class="editorial-subtext" style="margin:0 auto;">
+      Clear, straightforward answers regarding booking, private chauffeured transfers, elderly pilgrimage care, and payment protection.
+    </p>
   </div>
 </section>
 
-<!-- FAQs Section -->
-<section class="section-padding" style="background:transparent;position:relative;z-index:2;">
+<!-- FAQs Accordion Section (Pure White Surface) -->
+<section class="section-padding" style="background:#FFFFFF;">
   <div class="container container-narrow">
     
     <?php foreach ($groupedFaqs as $category => $items): ?>
       <div style="margin-bottom:48px;">
-        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(196,181,253,0.12);padding:4px 14px;border-radius:var(--radius-pill);border:1px solid rgba(196,181,253,0.3);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-violet);font-weight:700;margin-bottom:10px;">
-          <?= e($category) ?> Inquiries
+        <div class="chapter-badge">
+          <span class="chapter-number"><?= e($category) ?> Questions</span>
         </div>
-        <h2 style="font-size:1.75rem;color:var(--color-navy);margin-bottom:22px;"><?= e($category) ?> Questions</h2>
         
         <div style="display:flex;flex-direction:column;gap:16px;">
           <?php foreach ($items as $item): ?>
-            <details class="faq-item glass-card glass-specular" style="background:rgba(255,255,255,0.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(196,181,253,0.35);border-radius:18px;padding:20px 26px;box-shadow:0 12px 30px -6px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.7);transition:all 0.3s cubic-bezier(0.16,1,0.3,1);">
-              <summary style="font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--color-navy);cursor:pointer;outline:none;display:flex;justify-content:space-between;align-items:center;user-select:none;">
-                <span style="padding-right:16px;"><?= e($item['question']) ?></span>
-                <span class="faq-toggle-icon" style="color:var(--color-violet);font-size:1.4rem;font-weight:600;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(196,181,253,0.2);transition:transform 0.3s ease;">+</span>
+            <details style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:22px 26px;box-shadow:var(--shadow-ambient);transition:all var(--transition-fast);">
+              <summary style="font-family:var(--font-serif);font-size:1.15rem;font-weight:600;color:var(--color-text-headline);cursor:pointer;outline:none;display:flex;justify-content:space-between;align-items:center;user-select:none;">
+                <span><?= e($item['question']) ?></span>
+                <span style="color:var(--color-gold-deep);font-size:1.3rem;font-weight:700;">+</span>
               </summary>
-              <div style="padding-top:16px;color:var(--color-text-body);line-height:1.8;font-size:0.98rem;border-top:1px solid rgba(196,181,253,0.2);margin-top:14px;">
+              <div style="padding-top:16px;color:var(--color-text-body);line-height:1.8;font-size:0.95rem;border-top:1px solid var(--color-border-hairline);margin-top:14px;">
                 <?= nl2br(e($item['answer'])) ?>
               </div>
             </details>
@@ -65,24 +73,16 @@ require_once __DIR__ . '/includes/header.php';
       </div>
     <?php endforeach; ?>
 
-    <!-- Ask Us Box -->
-    <div class="glass-card card-3d glass-specular" style="background:linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(243,238,255,0.75) 100%);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:40px 32px;border-radius:24px;border:1px solid rgba(196,181,253,0.4);box-shadow:0 24px 50px -10px rgba(139,92,246,0.18), inset 0 1px 1px rgba(255,255,255,0.8);text-align:center;margin-top:54px;">
-      <h3 style="font-size:1.45rem;color:var(--color-navy);margin-bottom:10px;font-weight:700;">Have a Question Not Addressed Above?</h3>
-      <p style="color:var(--color-text-muted);margin-bottom:24px;font-size:1.02rem;max-width:560px;margin-left:auto;margin-right:auto;">Our travel designers and pilgrimage advisors will be pleased to assist with customized requirements or special arrangements.</p>
-      <a href="<?= BASE_URL ?>/contact.php" class="btn btn-vibrant-teal" style="padding:12px 32px;font-size:0.95rem;">Contact Travel Specialist</a>
+    <!-- Still Have Questions Box -->
+    <div style="text-align:center;background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:40px;margin-top:60px;">
+      <h3 style="font-size:1.35rem;margin-bottom:8px;">Have a Question Not Listed Here?</h3>
+      <p style="font-size:0.95rem;color:var(--color-text-muted);margin-bottom:20px;">Our Kerala travel desk is available daily from 9:00 AM to 7:30 PM.</p>
+      <a href="<?= BASE_URL ?>/contact.php" class="btn-cinematic-primary">
+        <span>Speak to Our Travel Desk</span>
+      </a>
     </div>
 
   </div>
 </section>
-<style>
-details[open] .faq-toggle-icon {
-  transform: rotate(45deg);
-  background: rgba(139,92,246,0.25) !important;
-}
-details[open] {
-  border-color: rgba(141,164,239,0.6) !important;
-  box-shadow: 0 16px 40px -8px rgba(139,92,246,0.15), inset 0 1px 1px rgba(255,255,255,0.8) !important;
-}
-</style>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

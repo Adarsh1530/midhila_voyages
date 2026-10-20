@@ -1,13 +1,14 @@
 <?php
 /**
  * MIDHILA VOYAGES — Tour Packages Catalog
+ * Pure White Editorial Hospitality Canvas
  */
 
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/database.php';
 require_once __DIR__ . '/includes/functions.php';
 
-$pageTitle = 'Tour Packages | Domestic, International & Pilgrimage Itineraries | Midhila Voyages';
+$pageTitle = 'Tour Packages | Curated Domestic, International & Sacred Yatras | Midhila Voyages';
 $pageDescription = 'Browse all bespoke tour packages by Midhila Voyages. Filter by destination, category, duration, and budget for hassle-free travel planning.';
 
 $db = getDB();
@@ -56,10 +57,10 @@ if (!empty($searchQuery)) {
 // Sorting logic
 switch ($sort) {
     case 'price_asc':
-        $sql .= " ORDER BY p.is_price_on_request ASC, p.starting_price ASC";
+        $sql .= " ORDER BY p.is_price_on_request ASC, p.price ASC";
         break;
     case 'price_desc':
-        $sql .= " ORDER BY p.is_price_on_request ASC, p.starting_price DESC";
+        $sql .= " ORDER BY p.is_price_on_request ASC, p.price DESC";
         break;
     case 'duration_asc':
         $sql .= " ORDER BY p.duration_days ASC";
@@ -78,100 +79,115 @@ $packages = $stmt->fetchAll();
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Banner Header -->
-<section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;">
-  <div style="position:absolute;inset:0;opacity:0.25;">
-    <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1800&q=80" alt="Exotic landscape" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
+<!-- Editorial Catalog Hero (Pure White with 35% Subtle Destination Underlayer) -->
+<section style="position:relative;background:#FFFFFF;padding-top:calc(var(--header-height) + 50px);padding-bottom:50px;overflow:hidden;">
+  <div class="cinematic-bg-layer cinematic-bg-mask-radial" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1920&q=80" 
+         alt="" 
+         class="cinematic-bg-layer__img" 
+         style="opacity:0.25;">
   </div>
-  <div class="container" style="position:relative;z-index:2;text-align:center;max-width:760px;">
-    <div class="float-slow" style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-lavender);margin-bottom:12px;font-weight:700;background:rgba(196,181,253,0.12);padding:6px 16px;border-radius:var(--radius-pill);border:1px solid rgba(196,181,253,0.3);">✨ Tailored Expeditions</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;text-shadow:0 0 20px rgba(196,181,253,0.25);">Curated Tour Packages</h1>
-    <p class="lead-text" style="color:#CBD5E0;">Explore our diverse portfolio of domestic holidays, international vacations, and sacred pilgrimage circuits.</p>
+  
+  <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
+    <div class="chapter-badge" style="justify-content:center;">
+      <span class="chapter-number">Portfolios &bull; Curated Circuits</span>
+      <span class="chapter-coordinates">Verified Itineraries</span>
+    </div>
+    <h1 class="editorial-headline-large" style="margin-bottom:16px;">
+      Signature Tour Packages
+    </h1>
+    <p class="editorial-subtext" style="margin:0 auto;">
+      Every itinerary curated with verified private accommodations, chauffeured transfers, and transparent pricing.
+    </p>
   </div>
 </section>
 
-<!-- Filter & Search Controls (Frosted Glass Bar) -->
-<section style="background:rgba(255, 255, 255, 0.85);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0, 196, 180, 0.25);padding:24px 0;box-shadow:inset 0 1px 1px 0 rgba(255,255,255,0.9), 0 8px 24px rgba(10, 17, 40, 0.05);position:relative;z-index:10;">
+<!-- Filter & Search Controls (Non-Sticky, Relative Position) -->
+<section style="background:#FFFFFF;padding-bottom:20px;position:relative;z-index:5;">
   <div class="container">
-    <form action="<?= BASE_URL ?>/packages.php" method="GET" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)) auto;gap:14px;align-items:end;">
-      
-      <!-- Destination Filter -->
-      <div>
-        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Destination</label>
-        <select name="destination" style="width:100%;padding:10px 14px;border:1.5px solid rgba(0, 196, 180, 0.35);border-radius:var(--radius-md);font-size:0.9rem;background:var(--color-ivory-warm);outline:none;">
-          <option value="">All Destinations</option>
-          <?php foreach ($dests as $d): ?>
-            <option value="<?= e($d['slug']) ?>" <?= ($destinationFilter === $d['slug'] || $destinationFilter === $d['name']) ? 'selected' : '' ?>>
-              <?= e($d['name']) ?>
-            </option>
-          <?php endforeach; ?>
-        </select>
-      </div>
+    <div class="filter-bar">
+      <form action="<?= BASE_URL ?>/packages.php" method="GET" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)) auto;gap:16px;align-items:end;">
+        
+        <!-- Destination Filter -->
+        <div>
+          <label class="editorial-label">Destination</label>
+          <select name="destination" class="editorial-select">
+            <option value="">All Destinations</option>
+            <?php foreach ($dests as $d): ?>
+              <option value="<?= e($d['slug']) ?>" <?= ($destinationFilter === $d['slug'] || $destinationFilter === $d['name']) ? 'selected' : '' ?>>
+                <?= e($d['name']) ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+        </div>
 
-      <!-- Category Filter -->
-      <div>
-        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Experience Style</label>
-        <select name="category" style="width:100%;padding:10px 14px;border:1.5px solid rgba(255, 107, 107, 0.35);border-radius:var(--radius-md);font-size:0.9rem;background:var(--color-ivory-warm);outline:none;">
-          <option value="">All Categories</option>
-          <?php foreach ($cats as $c): ?>
-            <option value="<?= e($c['slug']) ?>" <?= ($categoryFilter === $c['slug'] || $categoryFilter === $c['name']) ? 'selected' : '' ?>>
-              <?= e($c['name']) ?>
-            </option>
-          <?php endforeach; ?>
-        </select>
-      </div>
+        <!-- Category Filter -->
+        <div>
+          <label class="editorial-label">Travel Style</label>
+          <select name="category" class="editorial-select">
+            <option value="">All Categories</option>
+            <?php foreach ($cats as $c): ?>
+              <option value="<?= e($c['slug']) ?>" <?= ($categoryFilter === $c['slug'] || $categoryFilter === $c['name']) ? 'selected' : '' ?>>
+                <?= e($c['name']) ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+        </div>
 
-      <!-- Keyword Search -->
-      <div>
-        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Keyword</label>
-        <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="e.g. Munnar, Kashi, Beach" style="width:100%;padding:10px 14px;border:1.5px solid rgba(0, 196, 180, 0.35);border-radius:var(--radius-md);font-size:0.9rem;background:var(--color-ivory-warm);outline:none;">
-      </div>
+        <!-- Keyword Search -->
+        <div>
+          <label class="editorial-label">Keyword</label>
+          <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="e.g. Rameswaram, Kerala" class="editorial-input">
+        </div>
 
-      <!-- Sorting -->
-      <div>
-        <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Sort By</label>
-        <select name="sort" style="width:100%;padding:10px 14px;border:1.5px solid rgba(255, 183, 3, 0.35);border-radius:var(--radius-md);font-size:0.9rem;background:var(--color-ivory-warm);outline:none;">
-          <option value="featured" <?= ($sort === 'featured') ? 'selected' : '' ?>>Featured First</option>
-          <option value="price_asc" <?= ($sort === 'price_asc') ? 'selected' : '' ?>>Price: Low to High</option>
-          <option value="price_desc" <?= ($sort === 'price_desc') ? 'selected' : '' ?>>Price: High to Low</option>
-          <option value="duration_asc" <?= ($sort === 'duration_asc') ? 'selected' : '' ?>>Duration: Shortest</option>
-          <option value="duration_desc" <?= ($sort === 'duration_desc') ? 'selected' : '' ?>>Duration: Longest</option>
-        </select>
-      </div>
+        <!-- Sorting -->
+        <div>
+          <label class="editorial-label">Sort Order</label>
+          <select name="sort" class="editorial-select">
+            <option value="featured" <?= ($sort === 'featured') ? 'selected' : '' ?>>Featured First</option>
+            <option value="price_asc" <?= ($sort === 'price_asc') ? 'selected' : '' ?>>Price: Low to High</option>
+            <option value="price_desc" <?= ($sort === 'price_desc') ? 'selected' : '' ?>>Price: High to Low</option>
+            <option value="duration_asc" <?= ($sort === 'duration_asc') ? 'selected' : '' ?>>Duration: Shortest</option>
+            <option value="duration_desc" <?= ($sort === 'duration_desc') ? 'selected' : '' ?>>Duration: Longest</option>
+          </select>
+        </div>
 
-      <!-- Action Buttons -->
-      <div style="display:flex;gap:8px;">
-        <button type="submit" class="btn btn-vibrant-teal" style="padding:10px 20px;">
-          <span>Filter</span>
-        </button>
-        <a href="<?= BASE_URL ?>/packages.php" class="btn btn-outline-gold" style="padding:10px 16px;">
-          <span>Reset</span>
-        </a>
-      </div>
+        <!-- Action Buttons -->
+        <div style="display:flex;gap:10px;">
+          <button type="submit" class="btn-cinematic-primary" style="padding:13px 22px;">
+            <span>Apply</span>
+          </button>
+          <a href="<?= BASE_URL ?>/packages.php" class="btn-cinematic-outline" style="padding:12px 18px;">
+            <span>Reset</span>
+          </a>
+        </div>
 
-    </form>
+      </form>
+    </div>
   </div>
 </section>
 
-<!-- Package Listing Grid -->
-<section class="section-padding" style="background-color:transparent;">
+<!-- Package Listing Grid (Pure White, 100% Full Opacity Photos) -->
+<section style="background:#FFFFFF;padding-bottom:100px;position:relative;">
   <div class="container">
     
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;">
-      <p style="font-size:0.92rem;color:var(--color-text-muted);">
-        Showing <strong><?= count($packages) ?></strong> active tour package<?= (count($packages) !== 1) ? 's' : '' ?>
-      </p>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;font-size:0.88rem;color:var(--color-text-muted);">
+      <div>
+        Showing <strong><?= count($packages) ?></strong> handcrafted itinerary<?= (count($packages) !== 1) ? 's' : '' ?>
+      </div>
+      <div>
+        Need custom dates? <a href="<?= BASE_URL ?>/enquiry.php" style="color:var(--color-gold-deep);font-weight:700;">Request Custom Plan &rarr;</a>
+      </div>
     </div>
 
     <?php if (empty($packages)): ?>
-      <div class="glass-card" style="text-align:center;padding:70px 20px;border-radius:var(--radius-lg);">
-        <h3 style="font-size:1.4rem;color:var(--color-navy);margin-bottom:8px;">No packages match your criteria</h3>
-        <p style="color:var(--color-text-muted);margin-bottom:24px;">Try loosening your filters or enquire with our specialists for a bespoke itinerary.</p>
-        <a href="<?= BASE_URL ?>/packages.php" class="btn btn-primary">Clear Filters</a>
+      <div style="text-align:center;padding:80px 20px;border:1px dashed var(--color-border);border-radius:var(--radius-md);background:#FAFAFA;">
+        <h3 style="font-size:1.35rem;margin-bottom:8px;">No packages match your specific criteria</h3>
+        <p style="color:var(--color-text-muted);margin-bottom:24px;">Try broadening your filter criteria or enquire directly with our travel specialists.</p>
+        <a href="<?= BASE_URL ?>/packages.php" class="btn-cinematic-primary">Reset All Filters</a>
       </div>
     <?php else: ?>
-      <div class="package-grid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:28px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(350px, 1fr));gap:32px;">
         <?php foreach ($packages as $package): ?>
           <?php include __DIR__ . '/includes/package-card.php'; ?>
         <?php endforeach; ?>

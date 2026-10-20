@@ -1,6 +1,7 @@
 <?php
 /**
  * MIDHILA VOYAGES — Dedicated Pilgrimage & Sacred Trails Portal
+ * Pure White Editorial Hospitality Canvas
  */
 
 require_once __DIR__ . '/includes/config.php';
@@ -8,7 +9,7 @@ require_once __DIR__ . '/includes/database.php';
 require_once __DIR__ . '/includes/functions.php';
 
 $pageTitle = 'Sacred Pilgrimage Tours | Divine Yatras & Temple Trails | Midhila Voyages';
-$pageDescription = 'Experience deeply reverent, comfortable pilgrimage journeys across Varanasi, Ayodhya, Tamil Nadu temple corridors, and Kerala shrines with Midhila Voyages.';
+$pageDescription = 'Experience deeply reverent, comfortable pilgrimage journeys across Rameswaram, Madurai, Thanjavur, Varanasi, and holy shrines with Midhila Voyages.';
 
 $db = getDB();
 
@@ -23,90 +24,180 @@ $stmt = $db->query("
 ");
 $pilgrimPackages = $stmt->fetchAll();
 
-$agencyWhatsApp = get_setting('whatsapp_number', '+911234567890');
+$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
 
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Pilgrimage Portal Cinematic Hero -->
-<section style="position:relative;background:radial-gradient(circle at 50% 30%, rgba(234, 88, 12, 0.22) 0%, rgba(245, 158, 11, 0.12) 40%, #06101E 85%);padding-top:calc(var(--header-height) + 50px);padding-bottom:80px;color:#FFF;overflow:hidden;border-bottom:1px solid rgba(234, 88, 12, 0.25);">
-  <div style="position:absolute;inset:0;opacity:0.32;">
-    <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1800&q=80" alt="Varanasi Ganga Aarti evening lamps" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-    <div style="position:absolute;inset:0;background:radial-gradient(circle at center, transparent 0%, #06101E 85%);"></div>
+<!-- Pilgrimage Portal Editorial Hero (Pure White with 35% Subtle Photo Layer) -->
+<section style="position:relative;background:#FFFFFF;padding-top:calc(var(--header-height) + 50px);padding-bottom:50px;overflow:hidden;border-bottom:1px solid var(--color-border);">
+  <div class="cinematic-bg-layer cinematic-bg-mask-radial" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1920&q=80" 
+         alt="" 
+         class="cinematic-bg-layer__img" 
+         style="opacity:0.25;">
   </div>
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <div class="float-slow" style="display:inline-block;padding:6px 20px;border-radius:var(--radius-pill);background:rgba(234,88,12,0.18);border:1px solid rgba(234,88,12,0.45);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:#FED7AA;margin-bottom:16px;font-weight:700;">
-      🕉️ Sacred Vedic Yatras &bull; Divine Sanctuaries
+    <div class="chapter-badge" style="justify-content:center;">
+      <span class="chapter-number">Sacred Sanctuaries</span>
+      <span class="chapter-coordinates">Divine Yatras &bull; Vedic Trails</span>
     </div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4.5vw, 3.8rem);margin-bottom:18px;text-shadow:0 0 24px rgba(245,158,11,0.3);">
+    
+    <h1 class="editorial-headline-large" style="margin-bottom:18px;">
       Journeys of Faith, Serenity &amp; Devotion
     </h1>
-    <p class="lead-text" style="color:#CBD5E0;margin-bottom:32px;">
-      Thoughtfully planned pilgrimage trails honoring your spiritual quest. Senior-citizen comfort, dedicated private transport, proximity to holy shrines, and respectful, unhurried pacing.
+    
+    <p class="editorial-subtext" style="margin:0 auto 32px;">
+      Thoughtfully planned pilgrimage trails honoring your spiritual quest. Elderly comfort, dedicated private AC transport, verified sanitized stays, and respectful unhurried pacing.
     </p>
 
     <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
-      <a href="#pilgrimPackages" class="btn btn-vibrant-sunset btn-lg">Explore Sacred Circuits</a>
-      <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to arrange a family/group pilgrimage tour.")) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-vibrant-gold btn-lg">
+      <a href="#pilgrimPackages" class="btn-cinematic-gold">
+        <span>Explore Sacred Circuits</span>
+      </a>
+      <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to arrange a family/group pilgrimage tour.")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
         <span>Group Yatra Enquiry</span>
       </a>
     </div>
   </div>
 </section>
 
-<!-- Sacred Circuits Featured Packages -->
-<section class="section-padding" id="pilgrimPackages" style="background-color:transparent;">
+<!-- Featured Pilgrim Tour (Directly Inspired by Official Agency Poster) -->
+<section style="background:#FFFFFF;padding-top:60px;padding-bottom:60px;position:relative;">
   <div class="container">
     
-    <div class="section-header section-header--center">
-      <span class="section-subtitle">Venerated Yatras</span>
-      <h2 class="section-title">Featured Pilgrimage Itineraries</h2>
-      <p class="lead-text">Pre-planned devotional journeys curated with senior-friendly logistics and clean vegetarian dining.</p>
-    </div>
+    <div class="pilgrim-banner">
+      <div style="text-align:center;max-width:760px;margin:0 auto 36px;">
+        <span style="font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Signature 5-Day Circuit</span>
+        <h2 style="font-size:clamp(1.8rem, 3.2vw, 2.8rem);margin-top:6px;">Pilgrim Tours &bull; Divine Destinations</h2>
+        <p style="font-size:0.95rem;color:var(--color-text-secondary);margin-top:8px;">A comprehensive, beautifully organized spiritual voyage across Tamil Nadu’s most celebrated shrines.</p>
+      </div>
 
-    <div class="package-grid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:30px;margin-bottom:50px;">
-      <?php foreach ($pilgrimPackages as $package): ?>
-        <?php include __DIR__ . '/includes/package-card.php'; ?>
-      <?php endforeach; ?>
+      <!-- Places Covered Grid -->
+      <div style="margin-bottom:36px;">
+        <h3 style="font-size:1.1rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-text-main);margin-bottom:16px;text-align:center;">
+          Holy Places Covered on the Trail
+        </h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;">
+          
+          <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+            <div style="font-size:1.2rem;color:var(--color-gold-deep);margin-bottom:6px;">🛕</div>
+            <strong style="display:block;font-size:0.92rem;color:var(--color-text-headline);">Sri Murugan Temple</strong>
+            <span style="font-size:0.8rem;color:var(--color-text-muted);">Thiruchendur</span>
+          </div>
+
+          <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+            <div style="font-size:1.2rem;color:var(--color-gold-deep);margin-bottom:6px;">🛕</div>
+            <strong style="display:block;font-size:0.92rem;color:var(--color-text-headline);">Sri Ramanathaswamy Temple</strong>
+            <span style="font-size:0.8rem;color:var(--color-text-muted);">Rameswaram (Overnight stay)</span>
+          </div>
+
+          <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+            <div style="font-size:1.2rem;color:var(--color-gold-deep);margin-bottom:6px;">🌊</div>
+            <strong style="display:block;font-size:0.92rem;color:var(--color-text-headline);">Dhanushkodi Land's End</strong>
+            <span style="font-size:0.8rem;color:var(--color-text-muted);">Sacred Sangam Point</span>
+          </div>
+
+          <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+            <div style="font-size:1.2rem;color:var(--color-gold-deep);margin-bottom:6px;">🏛</div>
+            <strong style="display:block;font-size:0.92rem;color:var(--color-text-headline);">APJ Abdul Kalam Museum</strong>
+            <span style="font-size:0.8rem;color:var(--color-text-muted);">National Memorial</span>
+          </div>
+
+          <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+            <div style="font-size:1.2rem;color:var(--color-gold-deep);margin-bottom:6px;">🛕</div>
+            <strong style="display:block;font-size:0.92rem;color:var(--color-text-headline);">Brihadeeswarar Temple</strong>
+            <span style="font-size:0.8rem;color:var(--color-text-muted);">Thanjavur (Overnight stay)</span>
+          </div>
+
+          <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+            <div style="font-size:1.2rem;color:var(--color-gold-deep);margin-bottom:6px;">🛕</div>
+            <strong style="display:block;font-size:0.92rem;color:var(--color-text-headline);">Nataraja Temple</strong>
+            <span style="font-size:0.8rem;color:var(--color-text-muted);">Chidambaram</span>
+          </div>
+
+          <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+            <div style="font-size:1.2rem;color:var(--color-gold-deep);margin-bottom:6px;">🛕</div>
+            <strong style="display:block;font-size:0.92rem;color:var(--color-text-headline);">Sri Ranganathaswamy Temple</strong>
+            <span style="font-size:0.8rem;color:var(--color-text-muted);">Trichy (Overnight stay)</span>
+          </div>
+
+          <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:16px;text-align:center;">
+            <div style="font-size:1.2rem;color:var(--color-gold-deep);margin-bottom:6px;">🛕</div>
+            <strong style="display:block;font-size:0.92rem;color:var(--color-text-headline);">Meenakshi Amman Temple</strong>
+            <span style="font-size:0.8rem;color:var(--color-text-muted);">Madurai (Overnight stay)</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Tour Tariff, Dates & Inclusions Breakdown -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px;">
+        <div>
+          <span style="font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Fixed Transparent Tariff</span>
+          <div style="font-size:2.8rem;font-weight:800;color:var(--color-text-headline);line-height:1;margin:6px 0;">
+            ₹6,500 <span style="font-size:1rem;color:var(--color-text-muted);font-weight:400;">/ person</span>
+          </div>
+          <p style="font-size:0.88rem;color:var(--color-text-secondary);margin-bottom:16px;">
+            <strong>Tour Dates:</strong> 23.12.26 to 27.12.26 &bull; 5 Days / 4 Nights
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I want to reserve slots for the 5-Day Pilgrim Tour (₹6,500).")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
+              <span>Reserve via WhatsApp</span>
+            </a>
+            <a href="<?= BASE_URL ?>/enquiry.php?package=pilgrim-tour" class="btn-cinematic-primary">
+              <span>Book Online</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-size:0.95rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;color:var(--color-text-main);">Inclusions Verified:</h4>
+          <ul style="display:flex;flex-direction:column;gap:8px;font-size:0.86rem;color:var(--color-text-body);">
+            <li style="display:flex;align-items:center;gap:8px;"><span style="color:#059669;font-weight:700;">✓</span> Sanitized AC Transportation throughout</li>
+            <li style="display:flex;align-items:center;gap:8px;"><span style="color:#059669;font-weight:700;">✓</span> Accommodations in Rameswaram, Thanjavur, Trichy &amp; Madurai</li>
+            <li style="display:flex;align-items:center;gap:8px;"><span style="color:#059669;font-weight:700;">✓</span> Rameswaram to Dhanushkodi bus arrangement</li>
+            <li style="display:flex;align-items:center;gap:8px;"><span style="color:#059669;font-weight:700;">✓</span> Two breakfasts provided</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
 
   </div>
 </section>
 
-<!-- Respectful Travel Philosophy -->
-<section class="section-padding section-dark">
+<!-- Dedicated Pilgrimage Packages Grid (100% Opacity Photography) -->
+<section class="section-padding" id="pilgrimPackages" style="background:#FFFFFF;">
   <div class="container">
-    <div style="max-width:880px;margin:0 auto;text-align:center;">
-      <span class="section-subtitle">Devotional Ethics</span>
-      <h2 class="section-title">Our Sacred Travel Standard</h2>
-      <p class="lead-text" style="margin-bottom:40px;">
-        Pilgrimage is an internal transformation. We arrange every operational element so you and your elders can focus entirely on prayer and quiet contemplation.
-      </p>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:24px;text-align:left;">
-        
-        <div class="glass-card--dark card-3d glass-specular" style="padding:26px;border-radius:var(--radius-md);">
-          <h4 style="font-size:1.1rem;color:var(--color-lavender);margin-bottom:8px;font-weight:700;">Elder-Friendly Pacing</h4>
-          <p style="font-size:0.88rem;color:#CBD5E0;line-height:1.6;">No rushed early schedules or excessive continuous driving. Planned rest pauses and hotels close to temple darshan gates.</p>
+    
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div class="chapter-badge">
+          <span class="chapter-number">Pilgrim Portfolios</span>
+          <span class="chapter-coordinates">Spiritual Yatras</span>
         </div>
-
-        <div class="glass-card--dark card-3d glass-specular" style="padding:26px;border-radius:var(--radius-md);">
-          <h4 style="font-size:1.1rem;color:var(--color-periwinkle);margin-bottom:8px;font-weight:700;">Pure Vegetarian Meals</h4>
-          <p style="font-size:0.88rem;color:#CBD5E0;line-height:1.6;">Arrangements at vetted Sattvic and authentic South &amp; North Indian vegetarian dining establishments.</p>
-        </div>
-
-        <div class="glass-card--dark card-3d glass-specular" style="padding:26px;border-radius:var(--radius-md);">
-          <h4 style="font-size:1.1rem;color:var(--color-icy-blue);margin-bottom:8px;font-weight:700;">Darshan Protocol Support</h4>
-          <p style="font-size:0.88rem;color:#CBD5E0;line-height:1.6;">Guidance regarding temple dress codes, puja timings, special queue access, and holy bath rituals.</p>
-        </div>
-
+        <h2 class="editorial-headline-large" style="font-size:2.2rem;">All Sacred Pilgrimage Circuits</h2>
       </div>
 
-      <div style="margin-top:48px;">
-        <a href="<?= BASE_URL ?>/enquiry.php?category=pilgrimage" class="btn btn-primary btn-lg pulse-luminous">Plan Custom Pilgrimage Yatra</a>
-      </div>
+      <a href="<?= BASE_URL ?>/enquiry.php?category=pilgrimage" class="btn-cinematic-outline">
+        <span>Request Custom Pilgrimage</span>
+      </a>
     </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(350px, 1fr));gap:32px;">
+      <?php if (!empty($pilgrimPackages)): ?>
+        <?php foreach ($pilgrimPackages as $package): ?>
+          <?php include __DIR__ . '/includes/package-card.php'; ?>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <div style="grid-column:1/-1;text-align:center;padding:60px 20px;border:1px dashed var(--color-border);border-radius:var(--radius-md);background:#FAFAFA;">
+          <p style="color:var(--color-text-muted);">Please connect with our pilgrimage specialists on WhatsApp for upcoming yatra dates.</p>
+        </div>
+      <?php endif; ?>
+    </div>
+
   </div>
 </section>
 

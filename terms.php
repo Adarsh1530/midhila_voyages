@@ -1,6 +1,7 @@
 <?php
 /**
  * MIDHILA VOYAGES — Terms and Conditions
+ * Pure White Editorial Hospitality Canvas
  */
 
 require_once __DIR__ . '/includes/config.php';
@@ -10,61 +11,66 @@ $pageTitle = 'Terms & Conditions | MIDHILA VOYAGES';
 $pageDescription = 'Terms of service, booking policies, traveller obligations, and operational provisions governing travel arrangements with Midhila Voyages.';
 
 $agencyName = get_setting('site_name', 'MIDHILA VOYAGES');
-$agencyEmail = get_setting('primary_email', 'journeys@midhilavoyages.com');
+$agencyEmail = get_setting('primary_email', 'contact@midhilavoyages.com');
 
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<section style="position:relative;background:linear-gradient(180deg, rgba(6,11,24,0.92) 0%, rgba(10,17,40,0.85) 100%);padding-top:calc(var(--header-height) + 50px);padding-bottom:60px;color:#FFF;border-bottom:1px solid rgba(196,181,253,0.18);">
-  <div class="container" style="text-align:center;max-width:780px;">
-    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(196,181,253,0.12);backdrop-filter:blur(16px);border:1px solid rgba(196,181,253,0.3);padding:6px 16px;border-radius:var(--radius-pill);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--color-lavender);margin-bottom:14px;font-weight:600;box-shadow:0 0 20px rgba(139,92,246,0.2);">
-      <span>✦ Agreements &amp; Governance</span>
+<!-- Terms Editorial Hero (Pure White with Subtle 35% Photo Layer) -->
+<section style="position:relative;background:#FFFFFF;padding-top:calc(var(--header-height) + 50px);padding-bottom:40px;overflow:hidden;border-bottom:1px solid var(--color-border);">
+  <div class="cinematic-bg-layer cinematic-bg-mask-radial" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80" 
+         alt="" 
+         class="cinematic-bg-layer__img" 
+         style="opacity:0.22;">
+  </div>
+
+  <div class="container" style="text-align:center;max-width:820px;position:relative;z-index:2;">
+    <div class="chapter-badge" style="justify-content:center;">
+      <span class="chapter-number">Governance</span>
+      <span class="chapter-coordinates">Terms of Service</span>
     </div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.2rem, 4.5vw, 3.4rem);margin-bottom:12px;">Terms &amp; Conditions</h1>
-    <p style="color:#CBD5E1;font-size:0.95rem;">Effective Date: October 2026 &bull; Midhila Voyages</p>
+    <h1 class="editorial-headline-large" style="margin-bottom:12px;">Terms &amp; Conditions</h1>
+    <p class="editorial-subtext" style="margin:0 auto;">Effective Date: October 2026 &bull; Midhila Voyages</p>
   </div>
 </section>
 
-<section class="section-padding" style="background:transparent;position:relative;z-index:2;">
-  <div class="container container-narrow glass-card glass-specular" style="background:rgba(255,255,255,0.8);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:clamp(32px, 5vw, 56px);border-radius:28px;box-shadow:0 20px 48px -10px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.85);border:1px solid rgba(196,181,253,0.38);line-height:1.85;color:var(--color-text-body);">
-    
-    <h2 style="font-size:1.45rem;color:var(--color-navy);margin-bottom:12px;font-weight:700;">1. Scope of Agreement</h2>
-    <p style="margin-bottom:20px;">
-      These Terms and Conditions govern the booking, reservation, execution, and coordination of travel packages, pilgrimage tours, hotel stays, vehicle rentals, and related hospitality services offered by <strong><?= e($agencyName) ?></strong>. By submitting a travel booking, accepting an itinerary quotation, or paying a tour deposit, you agree to be bound by these provisions.
-    </p>
+<!-- Content Section (Pure White Surface) -->
+<section class="section-padding" style="background:#FFFFFF;">
+  <div class="container container-narrow">
+    <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:clamp(32px, 5vw, 56px);box-shadow:var(--shadow-card);line-height:1.85;color:var(--color-text-body);">
+      
+      <h2 style="font-size:1.45rem;color:var(--color-text-headline);margin-bottom:12px;">1. Scope of Agreement</h2>
+      <p style="margin-bottom:24px;">
+        These Terms and Conditions govern the booking, reservation, execution, and coordination of travel packages, pilgrimage tours, hotel stays, vehicle rentals, and related hospitality services offered by <strong><?= e($agencyName) ?></strong>. By submitting a travel booking, accepting an itinerary quotation, or paying a tour deposit, you agree to be bound by these provisions.
+      </p>
 
-    <h2 style="font-size:1.45rem;color:var(--color-navy);margin-top:28px;margin-bottom:12px;">2. Quotations &amp; Booking Confirmation</h2>
-    <ul style="margin-left:24px;margin-bottom:20px;list-style-type:disc;">
-      <li>All package tariffs displayed on the website or shared via WhatsApp/email are dynamic and subject to availability until an official deposit is received and confirmed in writing.</li>
-      <li>A booking is officially confirmed only upon issuance of an official <?= e($agencyName) ?> Booking Confirmation Voucher bearing a valid Booking Reference Number.</li>
-      <li>Any verbal or informal enquiry does not hold hotel inventory, flight tickets, or vehicle allocation.</li>
-    </ul>
+      <h2 style="font-size:1.45rem;color:var(--color-text-headline);margin-top:28px;margin-bottom:12px;">2. Quotations &amp; Booking Confirmation</h2>
+      <ul style="margin-left:24px;margin-bottom:24px;list-style-type:disc;">
+        <li>All package tariffs displayed on the website or shared via WhatsApp/email are dynamic and subject to availability until an official deposit is received and confirmed in writing.</li>
+        <li>A booking is officially confirmed only upon issuance of an official <?= e($agencyName) ?> Booking Confirmation Voucher bearing a valid Booking Reference Number.</li>
+        <li>Any verbal or informal enquiry does not hold hotel inventory, flight tickets, or vehicle allocation.</li>
+      </ul>
 
-    <h2 style="font-size:1.45rem;color:var(--color-navy);margin-top:28px;margin-bottom:12px;">3. Payment Schedule</h2>
-    <p style="margin-bottom:12px;">Unless otherwise stipulated in your written proposal:</p>
-    <ul style="margin-left:24px;margin-bottom:20px;list-style-type:disc;">
-      <li><strong>Advance Deposit:</strong> A minimum of 30% to 50% of the total tour cost is payable upon booking confirmation to secure hotel room allocations and transport vehicles.</li>
-      <li><strong>Balance Payment:</strong> The remaining balance must be settled at least 15 days prior to the travel commencement date, or upon arrival check-in as agreed in your specific voucher terms.</li>
-      <li>Failure to remit payments within the stipulated timelines may lead to automated release of hotel reservations without liability to <?= e($agencyName) ?>.</li>
-    </ul>
+      <h2 style="font-size:1.45rem;color:var(--color-text-headline);margin-top:28px;margin-bottom:12px;">3. Payments &amp; Settlement Schedules</h2>
+      <p style="margin-bottom:12px;">Standard settlement schedules are defined as follows:</p>
+      <ul style="margin-left:24px;margin-bottom:24px;list-style-type:disc;">
+        <li><strong>Booking Deposit:</strong> An initial non-refundable reservation deposit (standard ₹5,000 per person or 25% of total package value) is required to secure hotel allocations and vehicle blocks.</li>
+        <li><strong>Balance Payment:</strong> The remaining total balance must be cleared at least 15 calendar days before the scheduled departure date.</li>
+        <li><strong>Late Settlements:</strong> Failure to clear the balance in the stipulated window may result in automatic cancellation of hotel and permit reservations without liability to <?= e($agencyName) ?>.</li>
+      </ul>
 
-    <h2 style="font-size:1.45rem;color:var(--color-navy);margin-top:28px;margin-bottom:12px;">4. Traveller Obligations &amp; Identification</h2>
-    <ul style="margin-left:24px;margin-bottom:20px;list-style-type:disc;">
-      <li>All travellers must carry original, valid photo identification (Aadhaar Card, Passport, Voter ID, or Driver's License) for domestic travel. PAN card is generally not recognized for hotel check-ins.</li>
-      <li>For international journeys, a valid passport with at least 6 months remaining validity from the return date is mandatory, along with approved visas or entry permits.</li>
-      <li>Travellers are responsible for verifying their personal medical fitness, vaccination requirements, and dietary restrictions before commencement of tour activities.</li>
-    </ul>
+      <h2 style="font-size:1.45rem;color:var(--color-text-headline);margin-top:28px;margin-bottom:12px;">4. Traveller Conduct &amp; Temple Protocols</h2>
+      <p style="margin-bottom:24px;">
+        During pilgrimage yatras, travelers agree to observe local temple dress codes, sanctum protocols, and sanctity rules. <?= e($agencyName) ?> acts as an experienced hospitality facilitator and does not control internal temple trust decisions or VIP queue changes dictated by temple administration.
+      </p>
 
-    <h2 style="font-size:1.45rem;color:var(--color-navy);margin-top:28px;margin-bottom:12px;">5. Unforeseen Events &amp; Force Majeure</h2>
-    <p style="margin-bottom:20px;">
-      <?= e($agencyName) ?> shall not be held liable for itinerary changes, delays, cancellations, or incidental expenses caused by events beyond our reasonable control, including but not limited to severe weather conditions, landslides, road closures, strikes, civil unrest, flight cancellations, or governmental restrictions. In such situations, our operations team will make every reasonable effort to provide safe alternative logistics.
-    </p>
+      <h2 style="font-size:1.45rem;color:var(--color-text-headline);margin-top:28px;margin-bottom:12px;">5. Jurisdiction</h2>
+      <p style="margin-bottom:0;">
+        Any legal claims or disputes arising out of services provided shall be subject to the exclusive jurisdiction of the competent courts in <strong>Kerala, India</strong>.
+      </p>
 
-    <h2 style="font-size:1.45rem;color:var(--color-navy);margin-top:28px;margin-bottom:12px;">6. Jurisdiction</h2>
-    <p>
-      Any dispute or claim arising out of or in connection with travel services provided by <?= e($agencyName) ?> shall be subject to the exclusive jurisdiction of the competent courts in Ernakulam, Kerala, India.
-    </p>
-
+    </div>
   </div>
 </section>
 

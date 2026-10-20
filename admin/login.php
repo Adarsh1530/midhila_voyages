@@ -1,6 +1,7 @@
 <?php
 /**
  * MIDHILA VOYAGES — Admin Portal Authentication
+ * Editorial Luxury Pure-White Portal Inspired by Brand Motion
  */
 
 require_once dirname(__DIR__) . '/includes/config.php';
@@ -44,38 +45,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Portal Login | MIDHILA VOYAGES</title>
+  <title>Agency Portal Sign In | MIDHILA VOYAGES</title>
   
   <link rel="icon" type="image/svg+xml" href="<?= ASSETS_URL ?>/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/style.css">
   <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/animations.css">
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-      background-color: #070D1E;
-      color: #F8FAFC;
+      background-color: #FFFFFF;
+      color: #0F172A;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
     }
+    
+    /* Subtle 20% watermark destination underlayer */
+    .login-watermark {
+      position: absolute;
+      inset: 0;
+      background-image: url('<?= ASSETS_URL ?>/images/hero/kerala-backwaters.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.14;
+      filter: saturate(110%);
+      pointer-events: none;
+      z-index: 1;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 80%);
+      -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 80%);
+    }
+
     .login-box {
       width: 100%;
       max-width: 440px;
-      background: rgba(14, 23, 46, 0.78);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
-      border: 1px solid rgba(196, 181, 253, 0.28);
-      border-radius: 20px;
-      padding: 42px 36px;
-      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), 0 30px 60px -10px rgba(0, 0, 0, 0.6);
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 44px 38px;
+      box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
       position: relative;
       z-index: 5;
     }
@@ -83,24 +99,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
     .brand-logo img {
-      filter: drop-shadow(0 0 12px rgba(141, 164, 239, 0.6));
-    }
-    .brand-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1.35rem;
-      letter-spacing: 0.12em;
-      color: #FFF;
-      line-height: 1.1;
-      text-shadow: 0 0 12px rgba(196, 181, 253, 0.3);
-    }
-    .brand-sub {
-      font-size: 0.65rem;
-      letter-spacing: 0.28em;
-      color: #C4B5FD;
+      max-width: 220px;
+      height: 52px;
+      width: auto;
+      object-fit: contain;
     }
     .form-group {
       margin-bottom: 20px;
@@ -109,80 +114,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       display: block;
       font-size: 0.82rem;
       font-weight: 600;
-      color: #CBD5E1;
+      color: #334155;
       margin-bottom: 8px;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
     }
     .form-group input {
       width: 100%;
       padding: 12px 16px;
-      background: rgba(10, 17, 40, 0.75);
-      border: 1.5px solid rgba(196, 181, 253, 0.3);
-      border-radius: 10px;
-      color: #FFF;
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 8px;
+      color: #0F172A;
       font-size: 0.95rem;
       outline: none;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
     }
     .form-group input:focus {
-      background: rgba(10, 17, 40, 0.95);
-      border-color: #8DA4EF;
-      box-shadow: 0 0 0 3px rgba(141, 164, 239, 0.25);
+      background: #FFFFFF;
+      border-color: #0F172A;
+      box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
     }
     .btn-login {
       width: 100%;
       padding: 13px;
-      background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%);
-      color: #FFF;
-      font-weight: 700;
+      background: #0F172A;
+      color: #FFFFFF;
+      font-weight: 600;
       font-size: 0.95rem;
-      letter-spacing: 0.05em;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      border-radius: 10px;
+      letter-spacing: 0.02em;
+      border: 1px solid #0F172A;
+      border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 8px 24px -4px rgba(124, 58, 237, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.4);
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
       margin-top: 8px;
     }
     .btn-login:hover {
-      background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+      background: #1E293B;
+      border-color: #1E293B;
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px -4px rgba(139, 92, 246, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
     }
     .error-alert {
-      background: rgba(239, 68, 68, 0.18);
-      border: 1px solid rgba(239, 68, 68, 0.45);
-      color: #FCA5A5;
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #991B1B;
       padding: 12px 14px;
-      border-radius: 10px;
+      border-radius: 8px;
       font-size: 0.86rem;
       margin-bottom: 20px;
-      box-shadow: 0 0 16px rgba(239, 68, 68, 0.2);
     }
   </style>
 </head>
 <body>
 
-  <!-- Ambient Floating Mesh Orbs -->
-  <div class="ambient-mesh" aria-hidden="true">
-    <div class="ambient-orb ambient-orb--1"></div>
-    <div class="ambient-orb ambient-orb--2"></div>
-    <div class="ambient-orb ambient-orb--3"></div>
-    <div class="ambient-orb ambient-orb--4"></div>
-  </div>
+  <!-- Subtle Watermark Underlayer -->
+  <div class="login-watermark" aria-hidden="true"></div>
 
   <div class="login-box">
     
-    <div class="brand-logo" style="margin-bottom:24px;">
-      <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white.png" 
-           srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white@2x.png 2x" 
-           alt="Midhila Voyages" 
-           style="max-width:210px;height:52px;width:auto;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5));">
+    <div class="brand-logo">
+      <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo.png" 
+           srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo@2x.png 2x" 
+           alt="Midhila Voyages">
     </div>
 
-    <div style="text-align:center;margin-bottom:24px;">
-      <h2 style="font-size:1.25rem;color:#FFF;margin-bottom:4px;">Agency Portal Sign In</h2>
-      <p style="font-size:0.82rem;color:#94A3B8;">Authorized travel managers and staff only</p>
+    <div style="text-align:center;margin-bottom:28px;">
+      <h2 style="font-size:1.3rem;color:#0F172A;font-weight:700;margin-bottom:4px;letter-spacing:-0.01em;">Agency Portal Sign In</h2>
+      <p style="font-size:0.84rem;color:#64748B;">Authorized travel managers &amp; operations staff</p>
     </div>
 
     <?php if (!empty($errorMessage)): ?>
@@ -207,8 +206,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <button type="submit" class="btn-login">Sign In to Dashboard &rarr;</button>
     </form>
 
-    <div style="margin-top:24px;text-align:center;">
-      <a href="<?= BASE_URL ?>/index.php" style="font-size:0.8rem;color:#94A3B8;text-decoration:none;">&larr; Back to Public Website</a>
+    <div style="margin-top:28px;text-align:center;border-top:1px solid #F1F5F9;padding-top:18px;">
+      <a href="<?= BASE_URL ?>/index.php" style="font-size:0.84rem;color:#64748B;text-decoration:none;font-weight:500;">&larr; Back to Public Website</a>
     </div>
 
   </div>

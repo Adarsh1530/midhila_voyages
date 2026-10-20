@@ -1,119 +1,116 @@
 <?php
 /**
- * MIDHILA VOYAGES — About Us
+ * MIDHILA VOYAGES — About The Brand & Philosophy
+ * Pure White Editorial Hospitality Canvas
  */
 
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/database.php';
 require_once __DIR__ . '/includes/functions.php';
 
-$pageTitle = 'About Us | The Philosophy of MIDHILA VOYAGES';
-$pageDescription = 'Learn about Midhila Voyages, our dedication to personalized leisure holidays, authentic cultural discoveries, and sacred pilgrimage journeys across India and beyond.';
+$pageTitle = 'About Midhila Voyages | The Art of Paced Travel & Devotion';
+$pageDescription = 'Learn about Midhila Voyages, our origins, our core philosophy of quiet luxury, sacred reverence, and transparent travel concierge services across India.';
 
-$agencyWhatsApp = get_setting('whatsapp_number', '+911234567890');
-$agencyPhone = get_setting('primary_phone', '+91 12345 67890');
+$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
 
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Banner Header -->
-<section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;">
-  <div style="position:absolute;inset:0;opacity:0.25;">
-    <img src="https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1800&q=80" alt="Misty mountain valley" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
+<!-- About Editorial Hero (Pure White with Subtle 35% Photo Layer) -->
+<section style="position:relative;background:#FFFFFF;padding-top:calc(var(--header-height) + 50px);padding-bottom:50px;overflow:hidden;border-bottom:1px solid var(--color-border);">
+  <div class="cinematic-bg-layer cinematic-bg-mask-radial" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80" 
+         alt="" 
+         class="cinematic-bg-layer__img" 
+         style="opacity:0.25;">
   </div>
-  <div class="container" style="position:relative;z-index:2;text-align:center;max-width:760px;">
-    <div class="float-slow" style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:#4EECD8;margin-bottom:12px;font-weight:700;background:rgba(0,196,180,0.12);padding:6px 18px;border-radius:var(--radius-pill);border:1px solid rgba(0,196,180,0.35);">✨ Our Story &amp; Purpose</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;text-shadow:0 0 20px rgba(0,196,180,0.25);">The Heart Behind Midhila Voyages</h1>
-    <p class="lead-text" style="color:#CBD5E0;">We cultivate deep encounters with landscapes, cultural heritages, and sacred traditions through personalized, thoughtful travel design.</p>
+
+  <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
+    <div class="chapter-badge" style="justify-content:center;">
+      <span class="chapter-number">The Story &bull; Origins</span>
+      <span class="chapter-coordinates">Kerala &bull; Sacred Corridors</span>
+    </div>
+    <h1 class="editorial-headline-large" style="margin-bottom:16px;">
+      The Midhila Voyages Philosophy
+    </h1>
+    <p class="editorial-subtext" style="margin:0 auto;">
+      Born from a profound respect for India’s timeless landscapes and sacred heritage, we curate journeys defined by grace, stillness, and human warmth.
+    </p>
   </div>
 </section>
 
-<!-- Brand Philosophy Section -->
-<section class="section-padding" style="background-color:transparent;">
-  <div class="container">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:clamp(40px, 6vw, 70px);align-items:center;">
-      
-      <div class="reveal-fade-left">
-        <span class="section-subtitle no-after">A Mindful Journey</span>
-        <h2 class="section-title">Beyond Mere Sightseeing — Travel as a Sacred Art</h2>
-        <p class="lead-text" style="margin-bottom:20px;">
-          Founded with a commitment to uncompromised comfort, genuine hospitality, and complete transparency, <strong>MIDHILA VOYAGES</strong> bridges the gap between commercial tourism and genuine exploration.
-        </p>
-        <p style="margin-bottom:20px;line-height:1.75;color:var(--color-text-body);">
-          We understand that no two travellers are identical. A family holiday with young children requires spacious transitions and engaging stops; a senior citizen couple seeking blessings across South Indian temples needs tranquil pacing and proximity; and honeymooners seek intimate, private moments in breathtaking locales.
-        </p>
-        <p style="line-height:1.75;color:var(--color-text-body);">
-          We do not believe in oversized bus herds or rigid formulas. Our travel team directly curates every hotel, inspects vehicle cleanliness, negotiates with local boatmen and drivers, and stays in continuous contact throughout your itinerary.
-        </p>
-      </div>
-
-      <div class="reveal-fade-right">
-        <div style="position:relative;">
-          <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xl);border:6px solid rgba(255,255,255,0.8);">
-            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1000&q=80" alt="Kerala traditional houseboat" style="width:100%;height:440px;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-          </div>
-          <div class="card-3d float-slow glass-specular" style="position:absolute;bottom:-20px;right:-15px;background:rgba(14,23,46,0.85);backdrop-filter:blur(20px);color:#FFF;padding:22px 26px;border-radius:var(--radius-md);box-shadow:0 20px 40px rgba(0,0,0,0.4);border:1px solid rgba(196,181,253,0.35);max-width:280px;">
-            <div style="font-family:var(--font-serif);font-size:1.1rem;color:var(--color-lavender);margin-bottom:4px;font-weight:700;">100% Dedicated Care</div>
-            <div style="font-size:0.82rem;color:#CBD5E0;">Real travel consultants answering your calls and WhatsApp messages.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Core Pillars -->
-<section class="section-padding section-dark">
-  <div class="container">
-    
-    <div class="section-header section-header--center">
-      <span class="section-subtitle">Our Commitments</span>
-      <h2 class="section-title">The Four Pillars of Midhila Voyages</h2>
-      <p class="lead-text">Principles that guide every itinerary we plan and every guest we welcome.</p>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:28px;">
-      
-      <div class="glass-card--dark card-3d glass-specular" style="padding:36px 28px;border-radius:var(--radius-lg);">
-        <div style="font-size:2rem;color:var(--color-lavender);margin-bottom:16px;">✦</div>
-        <h3 style="font-size:1.25rem;color:#FFF;margin-bottom:12px;">Uncompromising Integrity</h3>
-        <p style="font-size:0.9rem;color:#CBD5E0;line-height:1.65;">We quote clear, honest prices. What is included and excluded is written unambiguously in your proposal before you pay a single rupee.</p>
-      </div>
-
-      <div class="glass-card--dark card-3d glass-specular" style="padding:36px 28px;border-radius:var(--radius-lg);">
-        <div style="font-size:2rem;color:var(--color-periwinkle);margin-bottom:16px;">✦</div>
-        <h3 style="font-size:1.25rem;color:#FFF;margin-bottom:12px;">Human-Centric Planning</h3>
-        <p style="font-size:0.9rem;color:#CBD5E0;line-height:1.65;">You will never be handed off to an impersonal automated chatbot for trip design. A knowledgeable travel specialist listens to your wishes.</p>
-      </div>
-
-      <div class="glass-card--dark card-3d glass-specular" style="padding:36px 28px;border-radius:var(--radius-lg);">
-        <div style="font-size:2rem;color:var(--color-lavender);margin-bottom:16px;">✦</div>
-        <h3 style="font-size:1.25rem;color:#FFF;margin-bottom:12px;">Reverent Pilgrimages</h3>
-        <p style="font-size:0.9rem;color:#CBD5E0;line-height:1.65;">We treat religious yatras with the devotion they deserve. Senior-friendly vehicles, pure vegetarian dining choices, and respectful pacing.</p>
-      </div>
-
-      <div class="glass-card--dark card-3d glass-specular" style="padding:36px 28px;border-radius:var(--radius-lg);">
-        <div style="font-size:2rem;color:var(--color-icy-blue);margin-bottom:16px;">✦</div>
-        <h3 style="font-size:1.25rem;color:#FFF;margin-bottom:12px;">Vetted Network</h3>
-        <p style="font-size:0.9rem;color:#CBD5E0;line-height:1.65;">We work exclusively with registered hotel partners, licensed houseboats, and professional chauffeurs who prioritize passenger safety.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Call to Action Banner -->
-<section class="section-padding" style="background-color:var(--color-ivory);text-align:center;">
+<!-- The Narrative Chapter (Pure White Surface) -->
+<section class="section-padding" style="background:#FFFFFF;">
   <div class="container container-narrow">
-    <span class="section-subtitle">Let's Connect</span>
-    <h2 class="section-title">Ready to Design Your Next Expedition?</h2>
-    <p class="lead-text" style="margin-bottom:32px;">Whether you have a specific date in mind or simply want to explore possibilities, our team is here for you.</p>
-    <div style="display:flex;justify-content:center;gap:18px;flex-wrap:wrap;">
-      <a href="<?= BASE_URL ?>/enquiry.php" class="btn btn-primary btn-lg">Plan Your Journey</a>
-      <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to learn more about your services.")) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-teal btn-lg">Chat on WhatsApp</a>
+    
+    <div style="margin-bottom:60px;">
+      <h2 style="font-size:clamp(1.8rem, 3.2vw, 2.6rem);margin-bottom:20px;line-height:1.25;">
+        "We are not merely arranging transit.<br>
+        <span style="font-family:var(--font-editorial);font-style:italic;font-weight:400;color:var(--color-gold-deep);">
+          We are guiding you into moments that linger for a lifetime."
+        </span>
+      </h2>
+      <p style="font-size:1.05rem;line-height:1.85;color:var(--color-text-body);margin-bottom:20px;">
+        MIDHILA VOYAGES began with a fundamental realization: modern travel had become hurried, transactional, and exhausting. Pilgrims were left navigating overwhelming temple crowds with little care for elder comfort, while families found themselves trapped in cookie-cutter packages devoid of authentic connection.
+      </p>
+      <p style="font-size:1.05rem;line-height:1.85;color:var(--color-text-body);">
+        We chose a different path. Rooted in the rich cultural soil of Kerala, our agency designs every journey like an editorial narrative: unhurried, transparent, respectful of local traditions, and supported by a 24/7 dedicated private chauffeur network.
+      </p>
     </div>
+
+    <!-- 4 Foundational Pillars -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:60px;">
+      
+      <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px;">
+        <span style="font-size:1.4rem;color:var(--color-gold-deep);margin-bottom:10px;display:block;">01</span>
+        <h3 style="font-size:1.2rem;margin-bottom:10px;">The Dignity of Sacred Yatras</h3>
+        <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.7;">
+          Pilgrimages demand reverence, patience, and impeccable elder care. We coordinate temple timings, close-proximity accommodations, and calm pacing so darshans remain pure and peaceful.
+        </p>
+      </div>
+
+      <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px;">
+        <span style="font-size:1.4rem;color:var(--color-gold-deep);margin-bottom:10px;display:block;">02</span>
+        <h3 style="font-size:1.2rem;margin-bottom:10px;">Bespoke Personalization</h3>
+        <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.7;">
+          No two voyagers share identical rhythms. Whether seeking a secluded backwater cruise or a high-altitude mountain retreat, we tailor every day around your personal travel desires.
+        </p>
+      </div>
+
+      <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px;">
+        <span style="font-size:1.4rem;color:var(--color-gold-deep);margin-bottom:10px;display:block;">03</span>
+        <h3 style="font-size:1.2rem;margin-bottom:10px;">Zero-Surprise Financials</h3>
+        <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.7;">
+          Transparent itemized vouchers, clear inclusions and exclusions, and zero bait-and-switch fees. You know precisely what is arranged before stepping out your door.
+        </p>
+      </div>
+
+      <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px;">
+        <span style="font-size:1.4rem;color:var(--color-gold-deep);margin-bottom:10px;display:block;">04</span>
+        <h3 style="font-size:1.2rem;margin-bottom:10px;">24/7 Human Concierge</h3>
+        <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.7;">
+          Real, responsive coordinators available throughout your journey. From weather updates to route adjustments, you are supported at every turn.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Agency Hotline Reassurance -->
+    <div style="text-align:center;padding:40px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:#FFFFFF;box-shadow:var(--shadow-card);">
+      <h3 style="font-size:1.4rem;margin-bottom:12px;">Speak Directly with Our Travel Curators</h3>
+      <p style="font-size:0.95rem;color:var(--color-text-muted);margin-bottom:20px;">
+        Reach our headquarters in Kerala for customized route advice and tour reservations.
+      </p>
+      <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
+        <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to consult with a travel curator.")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
+          <span>WhatsApp Specialist</span>
+        </a>
+        <a href="<?= BASE_URL ?>/contact.php" class="btn-cinematic-primary">
+          <span>Contact Our Office</span>
+        </a>
+      </div>
+    </div>
+
   </div>
 </section>
 

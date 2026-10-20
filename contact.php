@@ -1,6 +1,7 @@
 <?php
 /**
  * MIDHILA VOYAGES — Contact Us
+ * Pure White Editorial Hospitality Canvas
  */
 
 require_once __DIR__ . '/includes/config.php';
@@ -9,19 +10,19 @@ require_once __DIR__ . '/includes/functions.php';
 require_once __DIR__ . '/includes/csrf.php';
 
 $pageTitle = 'Contact Us | Speak to Our Travel Specialists | Midhila Voyages';
-$pageDescription = 'Get in touch with Midhila Voyages. Reach our travel desk by phone, email, WhatsApp, or visit our office in Kochi, Kerala.';
+$pageDescription = 'Get in touch with Midhila Voyages. Reach our travel desk by phone, email, WhatsApp, or visit our office in Kerala, India.';
 
-$agencyPhone = get_setting('primary_phone', '+91 12345 67890');
-$agencySecondaryPhone = get_setting('secondary_phone', '+91 12345 67890');
-$agencyWhatsApp = get_setting('whatsapp_number', '+911234567890');
-$agencyEmail = get_setting('primary_email', 'journeys@midhilavoyages.com');
-$agencyAddress = get_setting('office_address', 'Midhila Voyages, Travel & Tourism Hub, MG Road, Kochi, Kerala - 682016, India');
+$agencyPhone = get_setting('primary_phone', '+91 8075021427');
+$agencySecondaryPhone = get_setting('secondary_phone', '+91 9446154048');
+$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+$agencyEmail = get_setting('primary_email', 'contact@midhilavoyages.com');
+$agencyAddress = get_setting('office_address', 'Midhila Voyages, Travel & Pilgrimage Hub, Kerala, India');
 $workingHours = get_setting('working_hours', 'Monday – Saturday: 9:00 AM – 7:30 PM (IST)');
 
 $errors = [];
 $successMessage = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     if (!verify_csrf_token()) {
         $errors[] = 'Invalid security session. Please reload the page and try again.';
     } else {
@@ -49,178 +50,173 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ua = substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 250);
 
                 $stmt = $db->prepare("
-                    INSERT INTO `enquiries` 
-                    (`reference_no`, `full_name`, `email`, `phone`, `whatsapp`, `travel_category`, `travel_requirements`, `preferred_contact_method`, `status`, `ip_address`, `user_agent`)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, 'whatsapp', 'new', ?, ?)
+                    INSERT INTO `enquiries` (
+                        `reference_no`, `name`, `email`, `phone`, `destination_id`, 
+                        `package_id`, `travel_dates`, `adults`, `children`, 
+                        `special_requests`, `status`, `ip_address`, `user_agent`, `created_at`
+                    ) VALUES (
+                        ?, ?, ?, ?, NULL, 
+                        NULL, NULL, 1, 0, 
+                        ?, 'new', ?, ?, NOW()
+                    )
                 ");
-                $stmt->execute([
-                    $ref,
-                    $name,
-                    $email ?: null,
-                    $phone,
-                    $phone,
-                    $subject,
-                    $message,
-                    $ip,
-                    $ua
-                ]);
+                $fullMsg = "Subject: {$subject}\n\n{$message}";
+                $stmt->execute([$ref, $name, $email, $phone, $fullMsg, $ip, $ua]);
 
-                set_flash_message('success', "Thank you, {$name}! Your message has been received with reference #{$ref}. A travel specialist will get back to you shortly.");
-                header('Location: ' . BASE_URL . '/contact.php');
-                exit;
-
+                $successMessage = "Thank you, {$name}. Your message has been received (Ref: {$ref}). Our team will reach out to you within 4 hours.";
             } catch (Exception $e) {
-                error_log("Contact submission error: " . $e->getMessage());
-                $errors[] = 'A system error occurred while recording your message. Please try connecting via WhatsApp directly.';
+                $errors[] = 'A system error occurred. Please reach us directly on WhatsApp or call our hotline.';
             }
         }
     }
 }
 
+$waUrl = build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to consult with a travel specialist regarding my upcoming journey.");
+
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Banner Header -->
-<section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:70px;color:#FFF;overflow:hidden;">
-  <div style="position:absolute;inset:0;opacity:0.25;">
-    <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1800&q=80" alt="Contact us" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,16,30,0.7) 0%, var(--color-navy-deep) 100%);"></div>
+<!-- Contact Hero (Pure White with Subtle 35% Photo Layer) -->
+<section style="position:relative;background:#FFFFFF;padding-top:calc(var(--header-height) + 50px);padding-bottom:50px;overflow:hidden;border-bottom:1px solid var(--color-border);">
+  <div class="cinematic-bg-layer cinematic-bg-mask-radial" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80" 
+         alt="" 
+         class="cinematic-bg-layer__img" 
+         style="opacity:0.22;">
   </div>
-  <div class="container" style="position:relative;z-index:2;text-align:center;max-width:760px;">
-    <div class="float-slow" style="display:inline-block;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-lavender);margin-bottom:12px;font-weight:700;background:rgba(196,181,253,0.12);padding:6px 16px;border-radius:var(--radius-pill);border:1px solid rgba(196,181,253,0.3);">✨ Personal Attention</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.4rem, 4vw, 3.6rem);margin-bottom:16px;text-shadow:0 0 20px rgba(196,181,253,0.25);">Connect with Our Travel Desk</h1>
-    <p class="lead-text" style="color:#CBD5E0;">We welcome your travel questions, itinerary inquiries, group tour arrangements, and custom pilgrimage requests.</p>
+
+  <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
+    <div class="chapter-badge" style="justify-content:center;">
+      <span class="chapter-number">Connect with Us</span>
+      <span class="chapter-coordinates">Kerala Headquarters</span>
+    </div>
+    <h1 class="editorial-headline-large" style="margin-bottom:16px;">
+      Direct Agency Assistance
+    </h1>
+    <p class="editorial-subtext" style="margin:0 auto 28px;">
+      Whether reserving a sacred yatra or planning a bespoke holiday, our coordinators are ready to assist.
+    </p>
   </div>
 </section>
 
-<!-- Contact Info & Form Section -->
-<section class="section-padding" style="background-color:transparent;">
+<!-- Contact Form & Headquarters Details -->
+<section class="section-padding" style="background:#FFFFFF;">
   <div class="container">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:clamp(36px, 6vw, 70px);">
+    
+    <div style="display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:start;">
       
-      <!-- Left Column: Contact Cards -->
-      <div>
-        <span class="section-subtitle no-after">Direct Channels</span>
-        <h2 class="section-title">We Are Here to Guide You</h2>
-        <p class="lead-text" style="margin-bottom:32px;">Reach our travel consultants directly via WhatsApp, telephone, email, or schedule an in-person meeting.</p>
+      <!-- Contact Form -->
+      <div class="editorial-form-panel">
+        <h2 style="font-size:1.6rem;margin-bottom:8px;">Send a Direct Message</h2>
+        <p style="font-size:0.92rem;color:var(--color-text-muted);margin-bottom:28px;">Fill in your details below and a travel coordinator will call or message you.</p>
 
-        <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:36px;">
-          
-          <!-- Office Address -->
-          <div class="glass-card" style="display:flex;gap:16px;padding:24px;border-radius:var(--radius-md);">
-            <div style="width:48px;height:48px;border-radius:12px;background:rgba(196,181,253,0.2);color:var(--color-violet-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div>
-              <h4 style="font-size:1.05rem;color:var(--color-navy);margin-bottom:4px;">Main Office Address</h4>
-              <p style="font-size:0.92rem;color:var(--color-text-body);line-height:1.6;"><?= e($agencyAddress) ?></p>
-            </div>
-          </div>
-
-          <!-- Phone Numbers -->
-          <div class="glass-card" style="display:flex;gap:16px;padding:24px;border-radius:var(--radius-md);">
-            <div style="width:48px;height:48px;border-radius:12px;background:rgba(0,168,150,0.12);color:var(--color-teal);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            </div>
-            <div>
-              <h4 style="font-size:1.05rem;color:var(--color-navy);margin-bottom:4px;">Telephone Lines</h4>
-              <p style="font-size:0.92rem;color:var(--color-text-body);">
-                Primary: <a href="tel:<?= preg_replace('/[^0-9+]/', '', $agencyPhone) ?>" style="color:var(--color-violet-dark);font-weight:600;"><?= e($agencyPhone) ?></a><br>
-                Secondary: <a href="tel:<?= preg_replace('/[^0-9+]/', '', $agencySecondaryPhone) ?>"><?= e($agencySecondaryPhone) ?></a>
-              </p>
-            </div>
-          </div>
-
-          <!-- Email & Hours -->
-          <div class="glass-card" style="display:flex;gap:16px;padding:24px;border-radius:var(--radius-md);">
-            <div style="width:48px;height:48px;border-radius:12px;background:rgba(10,25,47,0.08);color:var(--color-navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div>
-              <h4 style="font-size:1.05rem;color:var(--color-navy);margin-bottom:4px;">Email &amp; Desk Hours</h4>
-              <p style="font-size:0.92rem;color:var(--color-text-body);">
-                Email: <a href="mailto:<?= e($agencyEmail) ?>"><?= e($agencyEmail) ?></a><br>
-                Hours: <?= e($workingHours) ?>
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- WhatsApp Quick Link -->
-        <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to enquire with your travel desk.")) ?>" 
-           target="_blank" rel="noopener noreferrer" class="btn btn-vibrant-teal btn-lg" style="width:100%;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/></svg>
-          <span>Quick WhatsApp Consultation</span>
-        </a>
-
-      </div>
-
-      <!-- Right Column: Interactive Form -->
-      <div class="glass-card" style="background:var(--color-ivory-warm);padding:clamp(28px, 5vw, 44px);border-radius:var(--radius-lg);border:1px solid rgba(0,196,180,0.3);">
-        <h3 style="font-size:1.55rem;color:var(--color-navy);margin-bottom:8px;">Send Us a Message</h3>
-        <p style="font-size:0.92rem;color:var(--color-text-muted);margin-bottom:28px;">Fill in your contact details below and our travel team will respond promptly.</p>
-
-        <?php if (!empty($errors)): ?>
-          <div style="background:#FEF2F2;border-left:4px solid #E53E3E;padding:14px 18px;border-radius:var(--radius-sm);color:#991B1B;font-size:0.9rem;margin-bottom:24px;">
-            <?php foreach ($errors as $err): ?>
-              <div>• <?= e($err) ?></div>
-            <?php endforeach; ?>
+        <?php if (!empty($successMessage)): ?>
+          <div style="background:#E6F4EA;border:1px solid #A7F3D0;color:#065F46;padding:16px 20px;border-radius:var(--radius-sm);margin-bottom:24px;font-size:0.92rem;">
+            <?= e($successMessage) ?>
           </div>
         <?php endif; ?>
 
-        <form method="POST" action="<?= BASE_URL ?>/contact.php">
+        <?php if (!empty($errors)): ?>
+          <div style="background:#FEE2E2;border:1px solid #FCA5A5;color:#991B1B;padding:16px 20px;border-radius:var(--radius-sm);margin-bottom:24px;font-size:0.92rem;">
+            <ul style="list-style:disc;padding-left:18px;">
+              <?php foreach ($errors as $err): ?>
+                <li><?= e($err) ?></li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        <?php endif; ?>
+
+        <form action="<?= BASE_URL ?>/contact.php" method="POST">
           <?= csrf_field() ?>
 
-          <div style="margin-bottom:18px;">
-            <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Your Full Name *</label>
-            <input type="text" name="name" required placeholder="e.g. Ramesh Menon" 
-                   value="<?= e($_POST['name'] ?? '') ?>"
-                   style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFF;outline:none;">
-          </div>
-
-          <div class="form-grid-2">
-            <div>
-              <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Phone / WhatsApp *</label>
-              <input type="tel" name="phone" required placeholder="+91 12345 67890" 
-                     value="<?= e($_POST['phone'] ?? '') ?>"
-                     style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFF;outline:none;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="editorial-form-group">
+              <label class="editorial-label">Your Name *</label>
+              <input type="text" name="name" class="editorial-input" placeholder="e.g. Adarsh" required>
             </div>
-            <div>
-              <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Email Address</label>
-              <input type="email" name="email" placeholder="name@example.com" 
-                     value="<?= e($_POST['email'] ?? '') ?>"
-                     style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFF;outline:none;">
+
+            <div class="editorial-form-group">
+              <label class="editorial-label">Phone / WhatsApp Number *</label>
+              <input type="tel" name="phone" class="editorial-input" placeholder="+91 80750 21427" required>
             </div>
           </div>
 
-          <div style="margin-bottom:18px;">
-            <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Subject / Topic</label>
-            <select name="subject" style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFF;outline:none;">
-              <option value="General Travel Enquiry">General Travel Enquiry</option>
-              <option value="Domestic Holiday Package">Domestic Holiday Package</option>
-              <option value="International Tour Package">International Tour Package</option>
-              <option value="Pilgrimage & Sacred Yatra">Pilgrimage &amp; Sacred Yatra</option>
-              <option value="Houseboat Booking">Houseboat Booking</option>
-              <option value="Custom Group Tour">Custom Group Tour</option>
-            </select>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="editorial-form-group">
+              <label class="editorial-label">Email Address</label>
+              <input type="email" name="email" class="editorial-input" placeholder="you@domain.com">
+            </div>
+
+            <div class="editorial-form-group">
+              <label class="editorial-label">Inquiry Subject</label>
+              <select name="subject" class="editorial-select">
+                <option value="Pilgrim Tour Enquiry">Pilgrim Tour Reservation</option>
+                <option value="Custom Family Package">Custom Family Package</option>
+                <option value="Honeymoon Itinerary">Romantic Escape Planning</option>
+                <option value="Chauffeured Transport Hire">Chauffeured Vehicle Hire</option>
+                <option value="General Query">General Question</option>
+              </select>
+            </div>
           </div>
 
-          <div style="margin-bottom:24px;">
-            <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Your Message / Trip Requirements *</label>
-            <textarea name="message" rows="4" required placeholder="Tell us about your preferred destinations, dates, number of travellers, or questions..." 
-                      style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFF;resize:vertical;outline:none;"><?= e($_POST['message'] ?? '') ?></textarea>
+          <div class="editorial-form-group">
+            <label class="editorial-label">Your Message or Requirements *</label>
+            <textarea name="message" class="editorial-textarea" rows="4" placeholder="Mention preferred travel dates, destinations, number of passengers..." required></textarea>
           </div>
 
-          <button type="submit" class="btn btn-vibrant-coral btn-lg" style="width:100%;">
-            <span>Send Message</span>
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          <button type="submit" class="btn-cinematic-primary" style="margin-top:12px;padding:14px 36px;">
+            <span>Submit Message</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
         </form>
+      </div>
 
+      <!-- Agency Contact Sidebar -->
+      <div>
+        <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:34px 28px;box-shadow:var(--shadow-card);">
+          <div class="chapter-badge">
+            <span class="chapter-number">Agency Office</span>
+            <span class="chapter-coordinates">Kerala Desk</span>
+          </div>
+          <h3 style="font-size:1.35rem;margin-bottom:20px;">Direct Hotlines</h3>
+
+          <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:28px;">
+            <div>
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);font-weight:700;">Primary Contact Numbers</div>
+              <div style="font-size:1.05rem;font-weight:700;color:var(--color-text-headline);margin-top:2px;">
+                +91 8075021427
+              </div>
+              <div style="font-size:0.95rem;color:var(--color-text-body);margin-top:2px;">
+                +91 9446154048 &bull; +91 8943669027
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);font-weight:700;">Electronic Mail</div>
+              <div style="font-size:0.95rem;color:var(--color-text-body);margin-top:2px;"><?= e($agencyEmail) ?></div>
+            </div>
+
+            <div>
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);font-weight:700;">Working Hours</div>
+              <div style="font-size:0.9rem;color:var(--color-text-body);margin-top:2px;"><?= e($workingHours) ?></div>
+            </div>
+
+            <div>
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);font-weight:700;">Location</div>
+              <div style="font-size:0.9rem;color:var(--color-text-body);margin-top:2px;"><?= e($agencyAddress) ?></div>
+            </div>
+          </div>
+
+          <a href="<?= e($waUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" style="width:100%;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/></svg>
+            <span>Instant WhatsApp Chat</span>
+          </a>
+
+        </div>
       </div>
 
     </div>
+
   </div>
 </section>
 

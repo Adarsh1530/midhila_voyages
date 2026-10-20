@@ -1,6 +1,7 @@
 <?php
 /**
  * MIDHILA VOYAGES — Tour Package Booking & Deposit Checkout
+ * Pure White Editorial Hospitality Canvas
  */
 
 require_once __DIR__ . '/includes/config.php';
@@ -35,51 +36,63 @@ $razorpayKey = get_setting('razorpay_key_id', 'rzp_test_midhila_demo');
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Banner Header -->
-<section style="position:relative;background-color:var(--color-navy-deep);padding-top:calc(var(--header-height) + 50px);padding-bottom:60px;color:#FFF;overflow:hidden;">
-  <div class="container" style="text-align:center;max-width:760px;position:relative;z-index:2;">
-    <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--color-gold);margin-bottom:12px;font-weight:600;">Secure Reservation</div>
-    <h1 class="editorial-headline" style="color:#FFF;font-size:clamp(2.2rem, 4vw, 3.4rem);margin-bottom:12px;">Confirm Your Booking</h1>
-    <p class="lead-text" style="color:#CBD5E0;">Reserve your preferred dates with an initial booking deposit or complete payment.</p>
+<!-- Booking Hero (Pure White with Subtle 35% Photo Layer) -->
+<section style="position:relative;background:#FFFFFF;padding-top:calc(var(--header-height) + 40px);padding-bottom:40px;overflow:hidden;border-bottom:1px solid var(--color-border);">
+  <div class="cinematic-bg-layer cinematic-bg-mask-radial" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1920&q=80" 
+         alt="" 
+         class="cinematic-bg-layer__img" 
+         style="opacity:0.25;">
+  </div>
+
+  <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
+    <div class="chapter-badge" style="justify-content:center;">
+      <span class="chapter-number">Reservation Gateway</span>
+      <span class="chapter-coordinates">Secure Checkout</span>
+    </div>
+    <h1 class="editorial-headline-large" style="margin-bottom:14px;">Confirm Your Booking</h1>
+    <p class="editorial-subtext" style="margin:0 auto;">
+      Lock in your preferred departure dates with an initial booking deposit or complete payment. Official digital vouchers generated instantly.
+    </p>
   </div>
 </section>
 
-<!-- Checkout Section -->
-<section class="section-padding" style="background-color:transparent;">
+<!-- Checkout Section (Pure White Surface) -->
+<section class="section-padding" style="background:#FFFFFF;">
   <div class="container">
     
-    <!-- 3-Step Booking Progress Indicator -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:36px;flex-wrap:wrap;">
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(0,196,180,0.15);border:1px solid rgba(0,196,180,0.4);border-radius:var(--radius-pill);font-size:0.8rem;font-weight:700;color:var(--color-navy);">
-        <span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:#00C4B4;color:#06101E;text-align:center;line-height:20px;font-size:0.75rem;">1</span>
+    <!-- 3-Step Progress Indicator -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:40px;flex-wrap:wrap;">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-pill);font-size:0.8rem;font-weight:700;color:var(--color-text-main);">
+        <span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--color-text-main);color:#FFF;text-align:center;line-height:20px;font-size:0.75rem;">1</span>
         <span>Package &amp; Dates</span>
       </div>
-      <span style="color:#CBD5E0;">&bull;&bull;&bull;</span>
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(255,107,107,0.15);border:1px solid rgba(255,107,107,0.4);border-radius:var(--radius-pill);font-size:0.8rem;font-weight:700;color:var(--color-navy);">
-        <span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:#FF6B6B;color:#FFF;text-align:center;line-height:20px;font-size:0.75rem;">2</span>
+      <span style="color:var(--color-border);">&bull;&bull;&bull;</span>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-pill);font-size:0.8rem;font-weight:700;color:var(--color-text-main);">
+        <span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--color-gold-deep);color:#FFF;text-align:center;line-height:20px;font-size:0.75rem;">2</span>
         <span>Guest Details</span>
       </div>
-      <span style="color:#CBD5E0;">&bull;&bull;&bull;</span>
-      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.1);border-radius:var(--radius-pill);font-size:0.8rem;font-weight:600;color:var(--color-text-muted);">
+      <span style="color:var(--color-border);">&bull;&bull;&bull;</span>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-pill);font-size:0.8rem;font-weight:600;color:var(--color-text-muted);">
         <span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:#E2E8F0;color:#334155;text-align:center;line-height:20px;font-size:0.75rem;">3</span>
         <span>Secure Payment</span>
       </div>
     </div>
 
-    <div class="detail-layout-grid">
+    <div style="display:grid;grid-template-columns:1fr 400px;gap:48px;align-items:start;">
       
       <!-- Left Column: Booking Form -->
-      <div class="glass-card" style="background:var(--color-ivory-warm);backdrop-filter:blur(24px);padding:clamp(28px, 5vw, 44px);border-radius:var(--radius-lg);border:1px solid rgba(0,196,180,0.3);box-shadow:0 16px 40px -8px rgba(0,0,0,0.06);">
-        <h3 style="font-size:1.45rem;color:var(--color-navy);margin-bottom:8px;">Traveller &amp; Trip Details</h3>
+      <div class="editorial-form-panel">
+        <h3 style="font-size:1.45rem;color:var(--color-text-headline);margin-bottom:8px;">Traveller &amp; Trip Details</h3>
         <p style="font-size:0.9rem;color:var(--color-text-muted);margin-bottom:28px;">All vouchers and confirmation updates will be sent to the email and phone entered below.</p>
 
         <form id="bookingCheckoutForm">
           <?= csrf_field() ?>
 
           <!-- Package Selection -->
-          <div style="margin-bottom:20px;">
-            <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Select Package *</label>
-            <select name="package_id" id="bookingPackageSelect" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFFFFF;outline:none;">
+          <div class="editorial-form-group">
+            <label class="editorial-label">Select Package *</label>
+            <select name="package_id" id="bookingPackageSelect" class="editorial-select" required>
               <?php foreach ($packages as $pkg): ?>
                 <option value="<?= (int)$pkg['id'] ?>" 
                         data-price="<?= (float)$pkg['starting_price'] ?>"
@@ -90,101 +103,101 @@ require_once __DIR__ . '/includes/header.php';
             </select>
           </div>
 
-          <div class="form-grid-2">
-            <div>
-              <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Full Name *</label>
-              <input type="text" name="customer_name" id="bkgName" required placeholder="e.g. Priya Nair" style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFFFFF;outline:none;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="editorial-form-group">
+              <label class="editorial-label">Full Name *</label>
+              <input type="text" name="customer_name" id="bkgName" class="editorial-input" required placeholder="e.g. Priya Nair">
             </div>
-            <div>
-              <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Phone / WhatsApp *</label>
-              <input type="tel" name="customer_phone" id="bkgPhone" required placeholder="+91 12345 67890" style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFFFFF;outline:none;">
-            </div>
-          </div>
-
-          <div class="form-grid-2">
-            <div>
-              <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Email Address *</label>
-              <input type="email" name="customer_email" id="bkgEmail" required placeholder="priya@example.com" style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFFFFF;outline:none;">
-            </div>
-            <div>
-              <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Travel Departure Date *</label>
-              <input type="date" name="travel_date" id="bkgDate" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFFFFF;outline:none;">
+            <div class="editorial-form-group">
+              <label class="editorial-label">Phone / WhatsApp *</label>
+              <input type="tel" name="customer_phone" id="bkgPhone" class="editorial-input" required placeholder="+91 80750 21427">
             </div>
           </div>
 
-          <div class="form-grid-2">
-            <div>
-              <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Number of Travellers *</label>
-              <input type="number" name="travellers_count" id="bkgTravellers" min="1" max="50" value="2" required style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFFFFF;outline:none;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="editorial-form-group">
+              <label class="editorial-label">Email Address *</label>
+              <input type="email" name="customer_email" id="bkgEmail" class="editorial-input" required placeholder="priya@domain.com">
             </div>
-            <div>
-              <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Payment Selection</label>
-              <select name="payment_type" id="bkgPaymentType" style="width:100%;padding:12px 16px;border:1.5px solid rgba(255,107,107,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFFFFF;outline:none;">
+            <div class="editorial-form-group">
+              <label class="editorial-label">Travel Departure Date *</label>
+              <input type="date" name="travel_date" id="bkgDate" class="editorial-input" required>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="editorial-form-group">
+              <label class="editorial-label">Number of Travellers *</label>
+              <input type="number" name="travellers_count" id="bkgTravellers" min="1" max="50" value="2" class="editorial-input" required>
+            </div>
+            <div class="editorial-form-group">
+              <label class="editorial-label">Payment Selection</label>
+              <select name="payment_type" id="bkgPaymentType" class="editorial-select">
                 <option value="deposit">Initial Tour Deposit (₹5,000 / person)</option>
                 <option value="full">Pay Full Package Cost</option>
               </select>
             </div>
           </div>
 
-          <div style="margin-bottom:28px;">
-            <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">Special Requests or Flight Timings</label>
-            <textarea name="special_requests" id="bkgNotes" rows="3" placeholder="Airport pickup timing, vegetarian meal preference, room preferences..." style="width:100%;padding:12px 16px;border:1.5px solid rgba(0,196,180,0.35);border-radius:var(--radius-md);font-size:0.95rem;background:#FFFFFF;outline:none;resize:vertical;"></textarea>
+          <div class="editorial-form-group">
+            <label class="editorial-label">Special Requests or Flight Timings</label>
+            <textarea name="special_requests" id="bkgNotes" class="editorial-textarea" rows="3" placeholder="Airport pickup timing, vegetarian meal preference, room preferences..."></textarea>
           </div>
 
-          <div id="bookingErrorAlert" style="display:none;background:rgba(239,68,68,0.15);border-left:4px solid #E53E3E;padding:12px 16px;border-radius:var(--radius-md);color:#991B1B;font-size:0.9rem;margin-bottom:20px;"></div>
+          <div id="bookingErrorAlert" style="display:none;background:#FEE2E2;border-left:4px solid #E53E3E;padding:12px 16px;border-radius:var(--radius-sm);color:#991B1B;font-size:0.9rem;margin-bottom:20px;"></div>
 
-          <button type="submit" id="proceedPayBtn" class="btn btn-vibrant-coral btn-lg" style="width:100%;">
+          <button type="submit" id="proceedPayBtn" class="btn-cinematic-primary" style="width:100%;justify-content:center;padding:15px 32px;">
             <span>Proceed to Secure Payment</span>
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
         </form>
       </div>
 
-      <!-- Right Column: Cost Breakdown & Trust -->
+      <!-- Right Column: Cost Breakdown & Payment Summary -->
       <div>
-        <div class="glass-card" style="position:sticky;top:100px;padding:30px;border-radius:var(--radius-lg);">
-          <h3 style="font-size:1.25rem;color:var(--color-navy);margin-bottom:18px;border-bottom:1px solid rgba(196,181,253,0.25);padding-bottom:12px;">Payment Summary</h3>
+        <div style="position:sticky;top:100px;background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:34px 28px;box-shadow:var(--shadow-card);">
+          <h3 style="font-size:1.25rem;color:var(--color-text-headline);margin-bottom:18px;border-bottom:1px solid var(--color-border);padding-bottom:12px;">Payment Summary</h3>
           
           <div style="display:flex;justify-content:space-between;margin-bottom:12px;font-size:0.92rem;">
             <span style="color:var(--color-text-muted);">Package Rate (Per person):</span>
-            <strong id="summaryRate" style="color:var(--color-navy);">₹0</strong>
+            <strong id="summaryRate" style="color:var(--color-text-main);">₹0</strong>
           </div>
 
           <div style="display:flex;justify-content:space-between;margin-bottom:12px;font-size:0.92rem;">
             <span style="color:var(--color-text-muted);">Travellers:</span>
-            <strong id="summaryTravellers" style="color:var(--color-navy);">2 Person(s)</strong>
+            <strong id="summaryTravellers" style="color:var(--color-text-main);">2 Person(s)</strong>
           </div>
 
           <div style="display:flex;justify-content:space-between;margin-bottom:16px;font-size:0.92rem;">
             <span style="color:var(--color-text-muted);">Total Tour Cost:</span>
-            <strong id="summaryTotal" style="color:var(--color-navy);font-size:1.1rem;">₹0</strong>
+            <strong id="summaryTotal" style="color:var(--color-text-main);font-size:1.15rem;">₹0</strong>
           </div>
 
-          <div style="background:rgba(237,233,254,0.6);backdrop-filter:blur(10px);padding:16px;border-radius:var(--radius-md);margin-bottom:24px;border:1px solid rgba(196,181,253,0.4);">
+          <div style="background:#FAFAFA;border:1px solid var(--color-border);padding:18px;border-radius:var(--radius-sm);margin-bottom:24px;">
             <div style="display:flex;justify-content:space-between;align-items:center;">
               <div>
                 <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-muted);">Amount Payable Now</span>
-                <div style="font-family:var(--font-serif);font-size:1.75rem;font-weight:700;color:var(--color-violet-dark);margin-top:2px;" id="summaryPayable">₹10,000</div>
+                <div style="font-size:1.85rem;font-weight:800;color:var(--color-gold-deep);margin-top:2px;" id="summaryPayable">₹10,000</div>
               </div>
-              <span style="font-size:0.72rem;background:rgba(139,92,246,0.15);color:var(--color-violet);padding:4px 10px;border-radius:var(--radius-pill);font-weight:700;">Deposit</span>
+              <span style="font-size:0.72rem;background:rgba(197,160,89,0.12);color:var(--color-gold-deep);padding:4px 10px;border-radius:var(--radius-pill);font-weight:700;">Deposit</span>
             </div>
             <p style="font-size:0.78rem;color:var(--color-text-muted);margin-top:8px;margin-bottom:0;">
               Remaining balance payable 15 days prior to travel commencement.
             </p>
           </div>
 
-          <div style="font-size:0.82rem;color:var(--color-text-muted);line-height:1.6;display:flex;flex-direction:column;gap:8px;">
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="color:var(--color-teal);">✓</span>
+          <div style="font-size:0.84rem;color:var(--color-text-muted);line-height:1.6;display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="color:#059669;font-weight:700;">✓</span>
               <span>Official digital voucher generated immediately</span>
             </div>
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="color:var(--color-teal);">✓</span>
-              <span>100% refundable according to policy timelines</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="color:#059669;font-weight:700;">✓</span>
+              <span>Bank-grade 256-bit encrypted gateway</span>
             </div>
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="color:var(--color-teal);">✓</span>
-              <span>Encrypted payment processing (256-Bit SSL)</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="color:#059669;font-weight:700;">✓</span>
+              <span>Instant WhatsApp booking confirmation</span>
             </div>
           </div>
         </div>
@@ -194,189 +207,75 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 </section>
 
-<!-- Pre-Payment Interactive Confirmation Modal -->
-<div id="paymentConfirmModal" style="position:fixed;inset:0;background:rgba(6,11,24,0.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:2150;display:none;align-items:center;justify-content:center;padding:20px;">
-  <div class="glass-card" style="max-width:520px;width:100%;padding:32px;border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);max-height:92vh;overflow-y:auto;background:rgba(255,255,255,0.92);">
-    <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;border-bottom:1px solid var(--color-border);padding-bottom:16px;">
-      <div style="width:48px;height:48px;border-radius:50%;background:rgba(0,168,150,0.12);color:var(--color-teal);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">
-        🛡️
-      </div>
-      <div>
-        <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-gold-dark);font-weight:700;">Final Review</span>
-        <h3 style="font-size:1.3rem;color:var(--color-navy);margin:0;line-height:1.2;">Confirm Your Booking &amp; Payment</h3>
-      </div>
-    </div>
-
-    <div style="background:var(--color-ivory-warm);border-radius:var(--radius-md);padding:18px 20px;margin-bottom:20px;border:1px solid var(--color-border-gold);">
-      <div style="font-size:0.82rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-text-muted);margin-bottom:4px;">Selected Tour Package</div>
-      <div id="confPkgTitle" style="font-size:1.05rem;font-weight:700;color:var(--color-navy);margin-bottom:14px;">-</div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.88rem;border-top:1px dashed var(--color-border);padding-top:12px;">
-        <div>
-          <span style="color:var(--color-text-muted);display:block;font-size:0.78rem;">Lead Traveller:</span>
-          <strong id="confGuest" style="color:var(--color-navy);">-</strong>
-        </div>
-        <div>
-          <span style="color:var(--color-text-muted);display:block;font-size:0.78rem;">Contact Number:</span>
-          <strong id="confPhone" style="color:var(--color-navy);">-</strong>
-        </div>
-        <div>
-          <span style="color:var(--color-text-muted);display:block;font-size:0.78rem;">Travel Date:</span>
-          <strong id="confDate" style="color:var(--color-navy);">-</strong>
-        </div>
-        <div>
-          <span style="color:var(--color-text-muted);display:block;font-size:0.78rem;">Travellers:</span>
-          <strong id="confTravellers" style="color:var(--color-navy);">-</strong>
-        </div>
-      </div>
-    </div>
-
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#F8FAFC;border-radius:var(--radius-sm);margin-bottom:12px;font-size:0.92rem;">
-      <span style="color:var(--color-text-muted);">Total Tour Price:</span>
-      <strong id="confTotalPrice" style="color:var(--color-navy);font-size:1.05rem;">-</strong>
-    </div>
-
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:rgba(0,168,150,0.1);border-radius:var(--radius-md);margin-bottom:20px;border:1px solid rgba(0,168,150,0.3);">
-      <div>
-        <span style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-teal-dark);font-weight:700;display:block;">Amount Payable Now</span>
-        <span id="confPayTypeBadge" style="font-size:0.75rem;color:var(--color-text-muted);">-</span>
-      </div>
-      <div id="confPayableNow" style="font-family:var(--font-serif);font-size:1.6rem;font-weight:700;color:var(--color-teal);">-</div>
-    </div>
-
-    <p style="font-size:0.8rem;color:var(--color-text-muted);line-height:1.5;margin-bottom:24px;">
-      🔒 <strong>Secure 256-Bit SSL Payment:</strong> By confirming, your payment order will be initiated. An official tax invoice and booking confirmation voucher will be generated immediately upon successful transaction.
-    </p>
-
-    <div style="display:flex;gap:12px;justify-content:flex-end;">
-      <button type="button" id="confEditBtn" class="btn btn-outline-gold" style="padding:10px 18px;font-size:0.9rem;">
-        &larr; Review Details
-      </button>
-      <button type="button" id="confProceedPayBtn" class="btn btn-teal" style="padding:10px 22px;font-size:0.9rem;">
-        <span>Confirm &amp; Pay Now</span> &rarr;
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- Test Mode Simulation Modal (for seamless local XAMPP testing) -->
-<div id="testPaymentModal" style="position:fixed;inset:0;background:rgba(6,16,30,0.85);backdrop-filter:blur(8px);z-index:2200;display:none;align-items:center;justify-content:center;padding:20px;">
-  <div style="background:#FFF;border-radius:var(--radius-lg);max-width:480px;width:100%;padding:32px;box-shadow:var(--shadow-xl);text-align:center;">
-    <div style="width:56px;height:56px;border-radius:50%;background:rgba(197,160,89,0.2);color:var(--color-gold-dark);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.6rem;">
+<!-- Payment Test Modal (Pure White Surface) -->
+<div id="paymentSimulationModal" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(10px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#FFFFFF;border-radius:var(--radius-lg);padding:40px 32px;max-width:440px;width:100%;text-align:center;box-shadow:var(--shadow-hover);border:1px solid var(--color-border);position:relative;">
+    <div style="width:54px;height:54px;border-radius:50%;background:rgba(197,160,89,0.12);color:var(--color-gold-deep);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.4rem;">
       💳
     </div>
-    <span class="section-subtitle">Gateway Sandbox</span>
-    <h3 style="font-size:1.4rem;color:var(--color-navy);margin-bottom:12px;">Complete Test Payment</h3>
-    <p style="font-size:0.92rem;color:var(--color-text-body);margin-bottom:20px;">
-      Simulating Razorpay test mode payment of <strong id="modalPayAmount" style="color:var(--color-teal);"></strong> for booking reference <code id="modalBkgRef" style="background:#F1F5F9;padding:2px 8px;border-radius:4px;"></code>.
+    <h3 style="font-size:1.35rem;margin-bottom:8px;">Payment Authorization</h3>
+    <p style="font-size:0.86rem;color:var(--color-text-muted);margin-bottom:20px;">
+      Simulating checkout gateway for Booking Ref: <strong id="modalBkgRef" style="color:var(--color-text-headline);"></strong>
     </p>
+    <div style="font-size:2.2rem;font-weight:800;color:var(--color-text-headline);margin-bottom:24px;" id="modalPayAmount">₹0</div>
 
-    <div style="display:flex;flex-direction:column;gap:12px;">
-      <button type="button" id="simulateSuccessBtn" class="btn btn-teal" style="width:100%;">
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <button type="button" id="simulateSuccessBtn" class="btn-cinematic-primary" style="width:100%;justify-content:center;">
         <span>Simulate Successful Payment</span>
       </button>
-      <button type="button" id="simulateFailureBtn" class="btn btn-outline-gold" style="width:100%;color:#E53E3E;border-color:#E53E3E;">
-        <span>Simulate Failed Payment</span>
+      <button type="button" id="simulateFailureBtn" class="btn-cinematic-outline" style="width:100%;justify-content:center;border-color:#EF4444;color:#EF4444;">
+        <span>Simulate Payment Failure</span>
       </button>
-      <button type="button" id="closeModalBtn" style="color:var(--color-text-muted);font-size:0.85rem;margin-top:8px;">Cancel &amp; Close</button>
+      <button type="button" id="closeModalBtn" style="font-size:0.85rem;color:var(--color-text-muted);padding:8px;background:none;border:none;cursor:pointer;margin-top:4px;">
+        Cancel and return
+      </button>
     </div>
   </div>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const select = document.getElementById('bookingPackageSelect');
-  const travellers = document.getElementById('bkgTravellers');
-  const paymentType = document.getElementById('bkgPaymentType');
+document.addEventListener('DOMContentLoaded', function () {
+  const pkgSelect = document.getElementById('bookingPackageSelect');
+  const travellersInput = document.getElementById('bkgTravellers');
+  const payTypeSelect = document.getElementById('bkgPaymentType');
+
   const summaryRate = document.getElementById('summaryRate');
   const summaryTravellers = document.getElementById('summaryTravellers');
   const summaryTotal = document.getElementById('summaryTotal');
   const summaryPayable = document.getElementById('summaryPayable');
-  const dateInput = document.getElementById('bkgDate');
 
-  if (dateInput) {
-    dateInput.min = new Date().toISOString().split('T')[0];
-  }
+  const DEPOSIT_PER_PERSON = 5000;
 
-  let currentCalculations = { rate: 0, count: 1, total: 0, payable: 0, type: 'deposit' };
+  function updatePricing() {
+    const selectedOpt = pkgSelect.options[pkgSelect.selectedIndex];
+    const price = parseFloat(selectedOpt.getAttribute('data-price')) || 0;
+    const travellers = parseInt(travellersInput.value) || 1;
+    const isDeposit = (payTypeSelect.value === 'deposit');
 
-  const updateCalculations = () => {
-    const selectedOption = select.options[select.selectedIndex];
-    const rate = parseFloat(selectedOption?.getAttribute('data-price')) || 15000;
-    const count = parseInt(travellers.value) || 1;
-    const type = paymentType.value;
+    const total = price * travellers;
+    const payable = isDeposit ? Math.min(total, travellers * DEPOSIT_PER_PERSON) : total;
 
-    const total = rate * count;
-    let payable = (type === 'deposit') ? Math.min(5000 * count, total) : total;
-
-    currentCalculations = { rate, count, total, payable, type };
-
-    summaryRate.textContent = '₹' + rate.toLocaleString('en-IN');
-    summaryTravellers.textContent = count + ' Person(s)';
+    summaryRate.textContent = '₹' + price.toLocaleString('en-IN');
+    summaryTravellers.textContent = travellers + ' Person(s)';
     summaryTotal.textContent = '₹' + total.toLocaleString('en-IN');
     summaryPayable.textContent = '₹' + payable.toLocaleString('en-IN');
-  };
+  }
 
-  select.addEventListener('change', updateCalculations);
-  travellers.addEventListener('input', updateCalculations);
-  paymentType.addEventListener('change', updateCalculations);
-  updateCalculations();
+  pkgSelect.addEventListener('change', updatePricing);
+  travellersInput.addEventListener('input', updatePricing);
+  payTypeSelect.addEventListener('change', updatePricing);
+  updatePricing();
 
-  // Form submission & Pre-Payment Confirmation handling
+  // Booking Form Submission & Gateway Checkout
   const form = document.getElementById('bookingCheckoutForm');
-  const errBox = document.getElementById('bookingErrorAlert');
   const btn = document.getElementById('proceedPayBtn');
-  const confirmModal = document.getElementById('paymentConfirmModal');
-  const confEditBtn = document.getElementById('confEditBtn');
-  const confProceedPayBtn = document.getElementById('confProceedPayBtn');
-  const testModal = document.getElementById('testPaymentModal');
-
+  const errBox = document.getElementById('bookingErrorAlert');
+  const testModal = document.getElementById('paymentSimulationModal');
   let activeOrderData = null;
 
-  // Step 1: When user clicks "Proceed to Secure Payment", validate and show Confirmation Modal
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
     errBox.style.display = 'none';
-
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    // Populate confirmation modal with latest trip & payment details
-    const selectedPkgText = select.options[select.selectedIndex]?.text || 'Selected Package';
-    const guestName = document.getElementById('bkgName').value.trim();
-    const guestPhone = document.getElementById('bkgPhone').value.trim();
-    const travelDateVal = dateInput.value;
-    let formattedDate = travelDateVal;
-    if (travelDateVal) {
-      try {
-        const d = new Date(travelDateVal + 'T00:00:00');
-        formattedDate = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-      } catch (err) {}
-    }
-
-    document.getElementById('confPkgTitle').textContent = selectedPkgText;
-    document.getElementById('confGuest').textContent = guestName;
-    document.getElementById('confPhone').textContent = guestPhone;
-    document.getElementById('confDate').textContent = formattedDate;
-    document.getElementById('confTravellers').textContent = currentCalculations.count + ' Person(s)';
-    document.getElementById('confTotalPrice').textContent = '₹' + currentCalculations.total.toLocaleString('en-IN');
-    document.getElementById('confPayableNow').textContent = '₹' + currentCalculations.payable.toLocaleString('en-IN');
-    document.getElementById('confPayTypeBadge').textContent = currentCalculations.type === 'deposit' ? 'Initial Booking Deposit' : 'Full Tour Cost';
-
-    // Show Confirmation Modal
-    confirmModal.style.display = 'flex';
-  });
-
-  // Step 2: "Review Details" button in confirmation modal closes modal
-  confEditBtn.addEventListener('click', () => {
-    confirmModal.style.display = 'none';
-  });
-
-  // Step 3: "Confirm & Pay Now" button proceeds with order creation & gateway
-  confProceedPayBtn.addEventListener('click', async () => {
-    confirmModal.style.display = 'none';
     btn.disabled = true;
     btn.innerHTML = '<span>Initiating Payment Order...</span>';
 
@@ -397,7 +296,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       activeOrderData = order;
 
-      // Open Test Simulation Modal or Gateway
       document.getElementById('modalPayAmount').textContent = '₹' + order.amount.toLocaleString('en-IN');
       document.getElementById('modalBkgRef').textContent = order.booking_reference;
       testModal.style.display = 'flex';

@@ -1,17 +1,18 @@
 <?php
 /**
  * MIDHILA VOYAGES — Global Header Component
+ * Cinematic Pure-White Editorial Hospitality
  */
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/functions.php';
 
-$pageTitle = $pageTitle ?? get_setting('site_name', 'MIDHILA VOYAGES') . ' | Curated Journeys & Sacred Trails';
+$pageTitle = $pageTitle ?? get_setting('site_name', 'MIDHILA VOYAGES') . ' | Travelled by Scroll • Sacred & Sublime Horizons';
 $pageDescription = $pageDescription ?? get_setting('site_description', 'Bespoke domestic, international, and sacred pilgrimage journeys crafted with care, integrity, and personalised luxury.');
 $currentScript = basename($_SERVER['PHP_SELF']);
 
-$agencyPhone = get_setting('primary_phone', '+91 12345 67890');
-$agencyWhatsApp = get_setting('whatsapp_number', '+911234567890');
+$agencyPhone = get_setting('primary_phone', '+91 8075021427');
+$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
 $defaultWaMsg = "Hello MIDHILA VOYAGES, I would like to explore tour packages and plan my journey.";
 $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 ?>
@@ -30,25 +31,28 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="<?= ASSETS_URL ?>/images/favicon.svg">
   
-  <!-- Google Fonts: Cinzel & Plus Jakarta Sans -->
+  <!-- Google Fonts: Cinzel, Cormorant Garamond, Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/style.css">
   <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/animations.css">
   <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/responsive.css">
 
-  <!-- GSAP & ScrollTrigger Engine -->
+  <!-- Three.js 3D Engine & GSAP ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="<?= ASSETS_URL ?>/js/animations.js" defer></script>
 
   <!-- Open Graph Metadata -->
   <meta property="og:title" content="<?= e($pageTitle) ?>">
   <meta property="og:description" content="<?= e($pageDescription) ?>">
   <meta property="og:type" content="website">
   <meta property="og:url" content="<?= e(BASE_URL . '/' . $currentScript) ?>">
+
   <!-- Client Environment Config -->
   <script>
     window.MIDHILA_ASSETS_URL = '<?= ASSETS_URL ?>';
@@ -57,39 +61,22 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 </head>
 <body>
 
-  <!-- Short Animated Globe Voyage Loader (< 1.1s non-blocking) -->
+  <!-- Minimal Discrete Voyage Loader (< 0.6s non-blocking) -->
   <div class="voyage-loader" id="voyageLoader" aria-hidden="true">
-    <div class="globe-wrapper">
-      <div class="globe-sphere">
-        <div class="globe-ring globe-ring--equator"></div>
-        <div class="globe-ring globe-ring--meridian"></div>
-        <div class="globe-pin"></div>
-      </div>
-      <div class="globe-ring globe-ring--orbit"></div>
-    </div>
-    <div class="voyage-loader__title">MIDHILA VOYAGES</div>
-    <div class="voyage-loader__subtitle">Curating Horizons &bull; Sacred Trails</div>
+    <div class="voyage-loader__mark">MIDHILA VOYAGES</div>
     <div class="voyage-loader__bar">
       <div class="voyage-loader__progress"></div>
     </div>
   </div>
 
-  <!-- Ambient Floating Mesh Orbs -->
-  <div class="ambient-mesh" aria-hidden="true">
-    <div class="ambient-orb ambient-orb--1"></div>
-    <div class="ambient-orb ambient-orb--2"></div>
-    <div class="ambient-orb ambient-orb--3"></div>
-    <div class="ambient-orb ambient-orb--4"></div>
-  </div>
-
-  <!-- Site Navigation Header -->
+  <!-- Pure White Floating Header -->
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
       
-      <!-- Brand Logo -->
+      <!-- Brand Logo (Authentic Navy & Gold on Pure White) -->
       <a href="<?= BASE_URL ?>/index.php" class="brand-logo" aria-label="Midhila Voyages Home">
-        <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white.png" 
-             srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white@2x.png 2x" 
+        <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo.png" 
+             srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo@2x.png 2x" 
              alt="Midhila Voyages" 
              class="brand-logo__img" 
              width="176" 
@@ -110,27 +97,24 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 
       <!-- Header Action Buttons -->
       <div class="header-actions">
-        <!-- WhatsApp Direct Chat Button -->
-        <a href="<?= e($globalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-icon" title="Chat on WhatsApp" aria-label="Chat with travel specialist on WhatsApp">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <!-- WhatsApp Concierge Action -->
+        <a href="<?= e($globalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="header-whatsapp" title="Enquire on WhatsApp" aria-label="Chat with travel specialist on WhatsApp">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/>
           </svg>
+          <span>WhatsApp</span>
         </a>
 
-        <!-- Plan My Trip Primary CTA -->
-        <a href="<?= BASE_URL ?>/enquiry.php" class="btn btn-primary btn-plan">
+        <!-- Plan My Journey Primary CTA -->
+        <a href="<?= BASE_URL ?>/enquiry.php" class="btn-cinematic-primary">
           <span>Plan My Trip</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
         </a>
 
         <!-- Mobile Hamburger Toggle -->
-        <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" type="button">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" type="button">
+          <span class="mobile-toggle__bar"></span>
+          <span class="mobile-toggle__bar"></span>
+          <span class="mobile-toggle__bar"></span>
         </button>
       </div>
 
@@ -140,16 +124,16 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
   <!-- Mobile Drawer Menu -->
   <div class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation">
     <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid var(--color-border);">
         <div class="brand-logo">
-          <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white.png" 
-               srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo-white@2x.png 2x" 
+          <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo.png" 
+               srcset="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo@2x.png 2x" 
                alt="Midhila Voyages" 
                class="brand-logo__img" 
                width="154" 
                height="42">
         </div>
-        <button class="mobile-drawer__close" style="color:#FFF;font-size:1.8rem;line-height:1;" aria-label="Close menu">&times;</button>
+        <button class="mobile-drawer__close" style="color:var(--color-text-main);font-size:1.8rem;line-height:1;" aria-label="Close menu">&times;</button>
       </div>
 
       <nav class="mobile-drawer__links">
@@ -165,16 +149,15 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
       </nav>
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:12px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);">
-      <a href="<?= BASE_URL ?>/enquiry.php" class="btn btn-primary" style="width:100%;">
+    <div style="display:flex;flex-direction:column;gap:12px;padding-top:24px;border-top:1px solid var(--color-border);">
+      <a href="<?= BASE_URL ?>/enquiry.php" class="btn-cinematic-primary" style="width:100%;">
         Plan My Journey
       </a>
-      <a href="<?= e($globalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-teal" style="width:100%;">
+      <a href="<?= e($globalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" style="width:100%;">
         <span>WhatsApp Specialist</span>
       </a>
     </div>
   </div>
-  <div class="mobile-drawer__overlay" id="mobileDrawerOverlay"></div>
 
   <!-- Flash Messages Alert (if any) -->
   <?= render_flash_messages() ?>
