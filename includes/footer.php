@@ -95,16 +95,16 @@ $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
     </div>
   </footer>
 
-  <!-- Floating WhatsApp Action Pill (Bottom-Right) -->
+  <!-- Floating WhatsApp Action Button (Bottom-Right) -->
   <a href="<?= e($footerWaUrl) ?>" target="_blank" rel="noopener noreferrer" 
-     style="position:fixed;bottom:28px;right:28px;z-index:900;display:inline-flex;align-items:center;gap:10px;background:#128C7E;color:#FFF;padding:12px 20px;border-radius:9999px;box-shadow:0 8px 30px rgba(18,140,126,0.35);font-size:0.86rem;font-weight:700;letter-spacing:0.04em;text-decoration:none;transition:transform 0.2s cubic-bezier(0.16,1,0.3,1);"
-     onmouseover="this.style.transform='scale(1.05) translateY(-3px)';"
-     onmouseout="this.style.transform='scale(1) translateY(0)';"
+     class="fab-whatsapp"
+     style="position:fixed;bottom:28px;right:28px;z-index:900;display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;background:#25D366;color:#FFF;border-radius:50%;box-shadow:0 8px 24px rgba(37,211,102,0.4);text-decoration:none;transition:transform 0.25s cubic-bezier(0.16,1,0.3,1),box-shadow 0.25s ease;"
+     onmouseover="this.style.transform='scale(1.1) translateY(-3px)';this.style.boxShadow='0 12px 30px rgba(37,211,102,0.55)';"
+     onmouseout="this.style.transform='scale(1) translateY(0)';this.style.boxShadow='0 8px 24px rgba(37,211,102,0.4)';"
      aria-label="Enquire directly on WhatsApp">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.38 17.04 14.27C16.97 14.17 16.81 14.11 16.56 13.99C16.32 13.86 15.12 13.27 14.9 13.19C14.67 13.1 14.5 13.06 14.34 13.31C14.18 13.56 13.71 14.11 13.56 14.27C13.42 14.44 13.27 14.46 13.03 14.34C12.78 14.21 11.74 13.87 10.51 12.77C9.56 11.91 8.91 10.86 8.79 10.65C8.66 10.45 8.77 10.33 8.89 10.21C9 10.1 9.15 9.91 9.28 9.76C9.41 9.62 9.45 9.5 9.53 9.35C9.62 9.2 9.58 9.06 9.52 8.94C9.45 8.82 9 7.72 8.81 7.25C8.63 6.79 8.44 6.86 8.3 6.85C8.17 6.85 8.01 6.85 7.85 6.85"/>
     </svg>
-    <span>WhatsApp Us</span>
   </a>
 
 </body>
