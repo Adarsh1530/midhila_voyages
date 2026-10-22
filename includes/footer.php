@@ -31,14 +31,11 @@ $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
           <p style="font-size:0.92rem;line-height:1.75;margin-bottom:20px;color:var(--color-text-secondary);max-width:380px;">
             A premier travel and pilgrimage management house dedicated to curating bespoke domestic journeys, sacred temple yatras, and luxury escapes with uncompromised integrity.
           </p>
-          <div style="display:flex;flex-direction:column;gap:8px;font-size:0.86rem;color:var(--color-text-body);margin-bottom:24px;">
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:0.86rem;color:var(--color-text-body);">
             <div><strong style="color:var(--color-text-main);">Hotline:</strong> +91 8075021427, 9446154048, 8943669027</div>
             <div><strong style="color:var(--color-text-main);">Email:</strong> <?= e($agencyEmail) ?></div>
             <div><strong style="color:var(--color-text-main);">Headquarters:</strong> Kerala, India</div>
           </div>
-          <a href="<?= e($footerWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" style="padding:10px 20px;font-size:0.82rem;">
-            <span>Chat with Concierge</span>
-          </a>
         </div>
 
         <!-- Column 2: Geographic Portfolios -->
@@ -88,14 +85,10 @@ $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
       <!-- Bottom Bar -->
       <div class="footer-bottom">
         <div>
-          &copy; <?= date('Y') ?> MIDHILA VOYAGES. All rights reserved. Curating Horizons &bull; Sacred Trails.
+          &copy; <?= date('Y') ?> MIDHILA VOYAGES. All rights reserved.
         </div>
-        <div style="display:flex;gap:20px;">
-          <span>Explore</span>
-          <span>•</span>
-          <span>Experience</span>
-          <span>•</span>
-          <span>Reconnect</span>
+        <div>
+          Beyond Destinations. Into Experiences.
         </div>
       </div>
 
