@@ -71,7 +71,7 @@ try {
     
     a { color: inherit; text-decoration: none; }
     
-    /* Pure White Luxury Sidebar */
+    /* Pure White Luxury Sidebar - Fixed on Screen While Scrolling */
     .admin-sidebar {
       width: 260px;
       background: #FFFFFF;
@@ -80,8 +80,12 @@ try {
       flex-direction: column;
       flex-shrink: 0;
       border-right: 1px solid var(--admin-border);
-      position: relative;
-      z-index: 10;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 50;
       box-shadow: 2px 0 12px rgba(15, 23, 42, 0.03);
     }
     
@@ -91,6 +95,7 @@ try {
       align-items: center;
       gap: 12px;
       border-bottom: 1px solid var(--admin-border);
+      flex-shrink: 0;
     }
     
     .admin-nav {
@@ -100,6 +105,17 @@ try {
       gap: 3px;
       flex-grow: 1;
       overflow-y: auto;
+    }
+    
+    .admin-nav::-webkit-scrollbar {
+      width: 4px;
+    }
+    .admin-nav::-webkit-scrollbar-thumb {
+      background: #E2E8F0;
+      border-radius: 4px;
+    }
+    .admin-nav::-webkit-scrollbar-track {
+      background: transparent;
     }
     
     .admin-nav-item {
@@ -136,12 +152,15 @@ try {
       font-weight: 700;
     }
 
-    /* Main Content Layout */
+    /* Main Content Layout (Offset for Fixed Left Sidebar) */
     .admin-main {
       flex-grow: 1;
       display: flex;
       flex-direction: column;
       min-width: 0;
+      margin-left: 260px;
+      width: calc(100% - 260px);
+      min-height: 100vh;
       overflow-y: auto;
       position: relative;
       z-index: 5;
@@ -215,6 +234,10 @@ try {
       }
       .admin-sidebar.is-open {
         transform: translateX(0);
+      }
+      .admin-main {
+        margin-left: 0 !important;
+        width: 100% !important;
       }
       .admin-topbar {
         padding: 0 16px;
@@ -796,7 +819,7 @@ try {
       </a>
     </nav>
 
-    <div style="padding:16px 20px;border-top:1px solid #E2E8F0;display:flex;align-items:center;justify-content:space-between;background:#FFFFFF;">
+    <div style="padding:16px 20px;border-top:1px solid #E2E8F0;display:flex;align-items:center;justify-content:space-between;background:#FFFFFF;flex-shrink:0;">
       <a href="<?= BASE_URL ?>/index.php" target="_blank" style="font-size:0.82rem;color:#64748B;display:inline-flex;align-items:center;gap:6px;font-weight:600;">
         <span>Visit Site</span> &nearr;
       </a>
