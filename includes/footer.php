@@ -6,8 +6,15 @@
 require_once __DIR__ . '/functions.php';
 
 $agencyPhone = get_setting('primary_phone', '+91 8075021427');
+$agencySecondaryPhone = get_setting('secondary_phone', '+91 9446154048');
+$agencyHotlinePhone = get_setting('hotline_phone', '+91 8943669027');
 $agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
-$agencyEmail = get_setting('agency_email', 'contact@midhilavoyages.com');
+$agencyEmail = get_setting('primary_email', get_setting('agency_email', 'contact@midhilavoyages.com'));
+$officeAddress = get_setting('office_address', 'Kerala, India');
+$footerDesc = get_setting('footer_description', 'A premier travel and pilgrimage management house dedicated to curating bespoke domestic journeys, sacred temple yatras, and luxury escapes with uncompromised integrity.');
+$footerTagline = get_setting('footer_tagline', 'Beyond Destinations. Into Experiences.');
+$siteName = get_setting('site_name', 'MIDHILA VOYAGES');
+
 $defaultWaMsg = "Hello MIDHILA VOYAGES, I would like to enquire about bespoke journeys.";
 $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 ?>
@@ -29,12 +36,12 @@ $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
                  height="50">
           </div>
           <p style="font-size:0.92rem;line-height:1.75;margin-bottom:20px;color:var(--color-text-secondary);max-width:380px;">
-            A premier travel and pilgrimage management house dedicated to curating bespoke domestic journeys, sacred temple yatras, and luxury escapes with uncompromised integrity.
+            <?= e($footerDesc) ?>
           </p>
           <div style="display:flex;flex-direction:column;gap:8px;font-size:0.86rem;color:var(--color-text-body);">
-            <div><strong style="color:var(--color-text-main);">Hotline:</strong> +91 8075021427, 9446154048, 8943669027</div>
+            <div><strong style="color:var(--color-text-main);">Hotline:</strong> <?= e($agencyPhone) ?>, <?= e($agencySecondaryPhone) ?>, <?= e($agencyHotlinePhone) ?></div>
             <div><strong style="color:var(--color-text-main);">Email:</strong> <?= e($agencyEmail) ?></div>
-            <div><strong style="color:var(--color-text-main);">Headquarters:</strong> Kerala, India</div>
+            <div><strong style="color:var(--color-text-main);">Headquarters:</strong> <?= e($officeAddress) ?></div>
           </div>
         </div>
 
@@ -85,10 +92,10 @@ $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
       <!-- Bottom Bar -->
       <div class="footer-bottom">
         <div>
-          &copy; <?= date('Y') ?> MIDHILA VOYAGES. All rights reserved.
+          &copy; <?= date('Y') ?> <?= e($siteName) ?>. All rights reserved.
         </div>
         <div>
-          Beyond Destinations. Into Experiences.
+          <?= e($footerTagline) ?>
         </div>
       </div>
 

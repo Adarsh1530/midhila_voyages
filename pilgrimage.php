@@ -40,11 +40,11 @@ require_once __DIR__ . '/includes/header.php';
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
     <h1 class="editorial-headline-large" style="margin-bottom:18px;">
-      Journeys of Faith, Serenity &amp; Devotion
+      <?= e(get_setting('pilgrim_hero_title', 'Journeys of Faith, Serenity & Devotion')) ?>
     </h1>
     
     <p class="editorial-subtext" style="margin:0 auto 32px;">
-      Thoughtfully planned pilgrimage trails honoring your spiritual quest. Elderly comfort, dedicated private AC transport, verified sanitized stays, and respectful unhurried pacing.
+      <?= e(get_setting('pilgrim_hero_subtext', 'Thoughtfully planned pilgrimage trails honoring your spiritual quest. Elderly comfort, dedicated private AC transport, verified sanitized stays, and respectful unhurried pacing.')) ?>
     </p>
 
     <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
@@ -132,10 +132,10 @@ require_once __DIR__ . '/includes/header.php';
         <div>
           <span style="font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Fixed Transparent Tariff</span>
           <div style="font-size:2.8rem;font-weight:800;color:var(--color-text-headline);line-height:1;margin:6px 0;">
-            ₹6,500 <span style="font-size:1rem;color:var(--color-text-muted);font-weight:400;">/ person</span>
+            <?= e(get_setting('pilgrim_featured_price', '₹6,500')) ?> <span style="font-size:1rem;color:var(--color-text-muted);font-weight:400;">/ person</span>
           </div>
           <p style="font-size:0.88rem;color:var(--color-text-secondary);margin-bottom:16px;">
-            <strong>Tour Dates:</strong> 23.12.26 to 27.12.26 &bull; 5 Days / 4 Nights
+            <strong>Tour Dates:</strong> <?= e(get_setting('pilgrim_upcoming_dates', '23.12.26 to 27.12.26')) ?> &bull; <?= e(get_setting('pilgrim_featured_duration', '5 Days / 4 Nights')) ?>
           </p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;">
             <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I want to reserve slots for the 5-Day Pilgrim Tour (₹6,500).")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">

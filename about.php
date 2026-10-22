@@ -27,10 +27,10 @@ require_once __DIR__ . '/includes/header.php';
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
     <h1 class="editorial-headline-large" style="margin-bottom:16px;">
-      The Midhila Voyages Philosophy
+      <?= e(get_setting('about_hero_title', 'The Midhila Voyages Philosophy')) ?>
     </h1>
     <p class="editorial-subtext" style="margin:0 auto;">
-      Born from a profound respect for India’s timeless landscapes and sacred heritage, we curate journeys defined by grace, stillness, and human warmth.
+      <?= e(get_setting('about_hero_subtitle', 'Born from a profound respect for India’s timeless landscapes and sacred heritage, we curate journeys defined by grace, stillness, and human warmth.')) ?>
     </p>
   </div>
 </section>
@@ -41,16 +41,15 @@ require_once __DIR__ . '/includes/header.php';
     
     <div style="margin-bottom:60px;">
       <h2 style="font-size:clamp(1.8rem, 3.2vw, 2.6rem);margin-bottom:20px;line-height:1.25;">
-        "We are not merely arranging transit.<br>
         <span style="font-family:var(--font-editorial);font-style:italic;font-weight:400;color:var(--color-gold-deep);">
-          We are guiding you into moments that linger for a lifetime."
+          <?= e(get_setting('about_quote_headline', '“We are not merely arranging transit. We are guiding you into moments that linger for a lifetime.”')) ?>
         </span>
       </h2>
       <p style="font-size:1.05rem;line-height:1.85;color:var(--color-text-body);margin-bottom:20px;">
-        MIDHILA VOYAGES began with a fundamental realization: modern travel had become hurried, transactional, and exhausting. Pilgrims were left navigating overwhelming temple crowds with little care for elder comfort, while families found themselves trapped in cookie-cutter packages devoid of authentic connection.
+        <?= nl2br(e(get_setting('about_story_p1', 'MIDHILA VOYAGES began with a fundamental realization: modern travel had become hurried, transactional, and exhausting. Pilgrims were left navigating overwhelming temple crowds with little care for elder comfort, while families found themselves trapped in cookie-cutter packages devoid of authentic connection.'))) ?>
       </p>
       <p style="font-size:1.05rem;line-height:1.85;color:var(--color-text-body);">
-        We chose a different path. Rooted in the rich cultural soil of Kerala, our agency designs every journey like an editorial narrative: unhurried, transparent, respectful of local traditions, and supported by a 24/7 dedicated private chauffeur network.
+        <?= nl2br(e(get_setting('about_story_p2', 'We chose a different path. Rooted in the rich cultural soil of Kerala, our agency designs every journey like an editorial narrative: unhurried, transparent, respectful of local traditions, and supported by a 24/7 dedicated private chauffeur network.'))) ?>
       </p>
     </div>
 

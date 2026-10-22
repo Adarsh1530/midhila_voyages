@@ -64,13 +64,13 @@ $recentBookings = $db->query("
 
     <!-- Quick Action Shortcut Buttons -->
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <a href="<?= ADMIN_URL ?>/package-edit.php" class="admin-btn admin-btn-gold" style="padding:10px 18px;font-size:0.86rem;font-weight:700;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-        <span>Add Tour Package</span>
+      <a href="<?= ADMIN_URL ?>/content.php" class="admin-btn admin-btn-gold" style="padding:10px 18px;font-size:0.86rem;font-weight:700;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        <span>Edit Page Content</span>
       </a>
-      <a href="<?= ADMIN_URL ?>/destination-edit.php" class="admin-btn" style="background:rgba(255,255,255,0.14);color:#FFFFFF !important;border:1px solid rgba(255,255,255,0.25);padding:10px 18px;font-size:0.86rem;font-weight:600;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-        <span>Add Destination</span>
+      <a href="<?= ADMIN_URL ?>/package-edit.php" class="admin-btn" style="background:rgba(255,255,255,0.14);color:#FFFFFF !important;border:1px solid rgba(255,255,255,0.25);padding:10px 18px;font-size:0.86rem;font-weight:600;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        <span>Add Package</span>
       </a>
       <a href="<?= ADMIN_URL ?>/enquiries.php" class="admin-btn" style="background:#FFFFFF;color:#0F172A !important;padding:10px 18px;font-size:0.86rem;font-weight:700;border:1px solid #E2E8F0;">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>

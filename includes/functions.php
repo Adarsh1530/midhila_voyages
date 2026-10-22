@@ -42,12 +42,16 @@ function get_setting(string $key, string $default = ''): string {
 function update_setting(string $key, ?string $value, string $group = 'general'): bool {
     try {
         $db = getDB();
-        $stmt = $db->prepare("
-            INSERT INTO `site_settings` (`setting_key`, `setting_value`, `setting_group`)
-            VALUES (?, ?, ?)
-            ON DUPLICATE KEY UPDATE `setting_value` = VALUES(`setting_value`), `updated_at` = NOW()
-        ");
-        return $stmt->execute([$key, $value, $group]);
+        $now = date('Y-m-d H:i:s');
+        $chk = $db->prepare("SELECT COUNT(*) FROM `site_settings` WHERE `setting_key` = ?");
+        $chk->execute([$key]);
+        if ((int)$chk->fetchColumn() > 0) {
+            $stmt = $db->prepare("UPDATE `site_settings` SET `setting_value` = ?, `setting_group` = ?, `updated_at` = ? WHERE `setting_key` = ?");
+            return $stmt->execute([$value, $group, $now, $key]);
+        } else {
+            $stmt = $db->prepare("INSERT INTO `site_settings` (`setting_key`, `setting_value`, `setting_group`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?)");
+            return $stmt->execute([$key, $value, $group, $now, $now]);
+        }
     } catch (Exception $e) {
         error_log("Failed to update setting {$key}: " . $e->getMessage());
         return false;

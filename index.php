@@ -95,7 +95,7 @@ require_once __DIR__ . '/includes/header.php';
   
   <!-- Subtle Background Destination Layer (35% Opacity with Soft White Radial Mask) -->
   <div class="cinematic-bg-layer cinematic-bg-mask-radial" aria-hidden="true">
-    <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1920&q=80" 
+    <img src="<?= e(get_setting('hero_bg_image', 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1920&q=80')) ?>" 
          alt="" 
          class="cinematic-bg-layer__img" 
          style="opacity:0.32;">
@@ -145,15 +145,15 @@ require_once __DIR__ . '/includes/header.php';
       
       <!-- Main Display Headline -->
       <h1 class="editorial-headline-hero">
-        Travelled by Scroll.<br>
+        <?= e(get_setting('hero_headline_1', 'Travelled by Scroll.')) ?><br>
         <span style="font-family:var(--font-editorial);font-style:italic;font-weight:400;color:var(--color-gold-deep);">
-          Unfolding Sacred &amp; Sublime Horizons.
+          <?= e(get_setting('hero_headline_2', 'Unfolding Sacred & Sublime Horizons.')) ?>
         </span>
       </h1>
 
       <!-- Editorial Subtext -->
       <p class="editorial-subtext">
-        Where bespoke travel is an art of quiet luxury, reverence, and unhurried discovery. Handcrafted journeys across India’s most storied sanctuaries.
+        <?= e(get_setting('hero_subtext', 'Where bespoke travel is an art of quiet luxury, reverence, and unhurried discovery. Handcrafted journeys across India’s most storied sanctuaries.')) ?>
       </p>
 
     </div>
@@ -182,16 +182,16 @@ require_once __DIR__ . '/includes/header.php';
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:60px;">
       <div>
         <h2 class="editorial-headline-large">
-          Six Sacred Lands.<br>
+          <?= e(get_setting('dest_heading_1', 'Six Sacred Lands.')) ?><br>
           <span style="font-family:var(--font-editorial);font-style:italic;font-weight:400;color:var(--color-text-secondary);">
-            Crafted for the Discerning Explorer.
+            <?= e(get_setting('dest_heading_2', 'Crafted for the Discerning Explorer.')) ?>
           </span>
         </h2>
       </div>
 
       <div>
         <a href="<?= BASE_URL ?>/destinations.php" class="link-editorial-arrow">
-          <span>View All Horizons</span>
+          <span><?= e(get_setting('dest_link_text', 'View All Horizons')) ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
       </div>
@@ -254,16 +254,16 @@ require_once __DIR__ . '/includes/header.php';
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:50px;">
       <div>
         <h2 class="editorial-headline-large">
-          Handcrafted Journeys.<br>
+          <?= e(get_setting('pkg_heading_1', 'Handcrafted Journeys.')) ?><br>
           <span style="font-family:var(--font-editorial);font-style:italic;font-weight:400;color:var(--color-text-secondary);">
-            Every detail verified with private chauffeur &amp; verified stays.
+            <?= e(get_setting('pkg_heading_2', 'Every detail verified with private chauffeur & verified stays.')) ?>
           </span>
         </h2>
       </div>
 
       <div>
         <a href="<?= BASE_URL ?>/packages.php" class="btn-cinematic-primary">
-          <span>Complete Catalog</span>
+          <span><?= e(get_setting('pkg_btn_text', 'Complete Catalog')) ?></span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
       </div>
@@ -320,18 +320,18 @@ require_once __DIR__ . '/includes/header.php';
         <div class="pilgrim-banner__left">
           <div class="pilgrim-temple-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            <span>Sacred Vedic Circuit &bull; Tamil Nadu &amp; Kashi</span>
+            <span><?= e(get_setting('pilgrim_badge', 'Sacred Vedic Circuit • Tamil Nadu & Kashi')) ?></span>
           </div>
 
           <h2 style="font-size:clamp(1.8rem, 3.2vw, 2.8rem);margin-bottom:16px;">
-            Divine Destinations...<br>
+            <?= e(get_setting('pilgrim_title', 'Divine Destinations...')) ?><br>
             <span style="font-family:var(--font-editorial);font-style:italic;font-weight:400;color:var(--color-gold-deep);">
-              A Journey of Deep Reverence &amp; Faith.
+              <?= e(get_setting('pilgrim_subtitle', 'A Journey of Deep Reverence & Faith.')) ?>
             </span>
           </h2>
 
           <p style="font-size:0.96rem;line-height:1.75;color:var(--color-text-secondary);margin-bottom:24px;">
-            Experience seamlessly managed temple yatras across <strong>Sri Murugan Temple Thiruchendur</strong>, <strong>Sri Ramanathaswamy Rameswaram</strong>, <strong>Dhanushkodi</strong>, <strong>Brihadeeswarar Thanjavur</strong>, and <strong>Meenakshi Amman Madurai</strong>. Verified sanitised accommodations, elderly-first ground coordination, and zero hidden costs.
+            <?= nl2br(e(get_setting('pilgrim_desc', 'Experience seamlessly managed temple yatras across Sri Murugan Temple Thiruchendur, Sri Ramanathaswamy Rameswaram, Dhanushkodi, Brihadeeswarar Thanjavur, and Meenakshi Amman Madurai. Verified sanitised accommodations, elderly-first ground coordination, and zero hidden costs.'))) ?>
           </p>
 
           <!-- Inclusion Highlights from the Official Poster -->
@@ -365,17 +365,17 @@ require_once __DIR__ . '/includes/header.php';
           <div style="background:#FFFFFF;border:2px solid rgba(197, 160, 89, 0.4);border-radius:var(--radius-lg);padding:32px 24px;box-shadow:var(--shadow-card);">
             <span style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Special Yatra Package</span>
             <div style="font-size:3rem;font-weight:800;color:var(--color-text-headline);line-height:1;margin:12px 0 6px;">
-              ₹6,500
+              <?= e(get_setting('pilgrim_featured_price', '₹6,500')) ?>
             </div>
-            <span style="font-size:0.82rem;color:var(--color-text-muted);display:block;margin-bottom:20px;">per person &bull; 5 Days / 4 Nights</span>
+            <span style="font-size:0.82rem;color:var(--color-text-muted);display:block;margin-bottom:20px;"><?= e(get_setting('pilgrim_featured_duration', 'per person • 5 Days / 4 Nights')) ?></span>
             
             <div style="background:#FAFAFA;border-radius:var(--radius-sm);padding:14px;font-size:0.82rem;color:var(--color-text-secondary);text-align:left;margin-bottom:20px;border:1px solid var(--color-border);">
-              <strong>Upcoming Tour Dates:</strong> 23.12.26 to 27.12.26<br>
-              <em style="color:var(--color-gold-deep);">Hurry, limited slots on first come, first served basis!</em>
+              <strong>Upcoming Tour Dates:</strong> <?= e(get_setting('pilgrim_upcoming_dates', '23.12.26 to 27.12.26')) ?><br>
+              <em style="color:var(--color-gold-deep);"><?= e(get_setting('pilgrim_special_note', 'Hurry, limited slots on first come, first served basis!')) ?></em>
             </div>
 
             <div style="font-size:0.84rem;color:var(--color-text-body);font-weight:600;">
-              Hotlines: +91 8075021427, 9446154048
+              Hotlines: <?= e(get_setting('pilgrim_hotlines', '+91 8075021427, 9446154048')) ?>
             </div>
           </div>
         </div>
@@ -396,10 +396,10 @@ require_once __DIR__ . '/includes/header.php';
     
     <div style="text-align:center;max-width:760px;margin:0 auto 60px;">
       <h2 class="editorial-headline-large">
-        Hospitality Defined by Stillness, Depth &amp; Care.
+        <?= e(get_setting('pillars_title', 'Hospitality Defined by Stillness, Depth & Care.')) ?>
       </h2>
       <p class="editorial-subtext" style="margin:0 auto;">
-        We believe a journey should be deeply felt, never rushed.
+        <?= e(get_setting('pillars_subtitle', 'We believe a journey should be deeply felt, never rushed.')) ?>
       </p>
     </div>
 
@@ -408,33 +408,33 @@ require_once __DIR__ . '/includes/header.php';
       
       <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px 28px;box-shadow:var(--shadow-ambient);">
         <div style="font-size:1.6rem;color:var(--color-gold-deep);margin-bottom:16px;">✦</div>
-        <h3 style="font-size:1.15rem;margin-bottom:12px;">Handcrafted Routing</h3>
+        <h3 style="font-size:1.15rem;margin-bottom:12px;"><?= e(get_setting('pillar_1_title', 'Handcrafted Routing')) ?></h3>
         <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.7;">
-          Every route is custom paced to balance sacred exploration, cultural depth, and gentle rest.
+          <?= e(get_setting('pillar_1_desc', 'Every route is custom paced to balance sacred exploration, cultural depth, and gentle rest.')) ?>
         </p>
       </div>
 
       <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px 28px;box-shadow:var(--shadow-ambient);">
         <div style="font-size:1.6rem;color:var(--color-gold-deep);margin-bottom:16px;">❖</div>
-        <h3 style="font-size:1.15rem;margin-bottom:12px;">Verified Sanctuaries</h3>
+        <h3 style="font-size:1.15rem;margin-bottom:12px;"><?= e(get_setting('pillar_2_title', 'Verified Sanctuaries')) ?></h3>
         <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.7;">
-          Personally vetted heritage resorts, clean temple guest houses, and scenic boutique retreats.
+          <?= e(get_setting('pillar_2_desc', 'Personally vetted heritage resorts, clean temple guest houses, and scenic boutique retreats.')) ?>
         </p>
       </div>
 
       <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px 28px;box-shadow:var(--shadow-ambient);">
         <div style="font-size:1.6rem;color:var(--color-gold-deep);margin-bottom:16px;">◈</div>
-        <h3 style="font-size:1.15rem;margin-bottom:12px;">Dedicated Chauffeurs</h3>
+        <h3 style="font-size:1.15rem;margin-bottom:12px;"><?= e(get_setting('pillar_3_title', 'Dedicated Chauffeurs')) ?></h3>
         <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.7;">
-          Courteous, verified regional drivers with well-maintained AC fleets ensuring seamless road transit.
+          <?= e(get_setting('pillar_3_desc', 'Courteous, verified regional drivers with well-maintained AC fleets ensuring seamless road transit.')) ?>
         </p>
       </div>
 
       <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px 28px;box-shadow:var(--shadow-ambient);">
         <div style="font-size:1.6rem;color:var(--color-gold-deep);margin-bottom:16px;">❂</div>
-        <h3 style="font-size:1.15rem;margin-bottom:12px;">Transparent Integrity</h3>
+        <h3 style="font-size:1.15rem;margin-bottom:12px;"><?= e(get_setting('pillar_4_title', 'Transparent Integrity')) ?></h3>
         <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.7;">
-          Zero hidden surcharges, honest pricing, and complete written inclusions on every voucher.
+          <?= e(get_setting('pillar_4_desc', 'Zero hidden surcharges, honest pricing, and complete written inclusions on every voucher.')) ?>
         </p>
       </div>
 
@@ -489,9 +489,9 @@ require_once __DIR__ . '/includes/header.php';
     
     <div class="editorial-form-panel">
       <div style="text-align:center;margin-bottom:36px;">
-        <h2 style="font-size:clamp(1.8rem, 3.2vw, 2.6rem);margin-bottom:12px;">Plan Your Bespoke Journey</h2>
+        <h2 style="font-size:clamp(1.8rem, 3.2vw, 2.6rem);margin-bottom:12px;"><?= e(get_setting('cta_title', 'Plan Your Bespoke Journey')) ?></h2>
         <p style="font-size:0.95rem;color:var(--color-text-secondary);max-width:540px;margin:0 auto;">
-          Tell our travel specialists your preferred destinations, dates, and rhythm. We respond within hours with a tailored itinerary.
+          <?= e(get_setting('cta_subtitle', 'Tell our travel specialists your preferred destinations, dates, and rhythm. We respond within hours with a tailored itinerary.')) ?>
         </p>
       </div>
 
@@ -538,7 +538,7 @@ require_once __DIR__ . '/includes/header.php';
 
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:28px;">
           <button type="submit" class="btn-cinematic-primary" style="padding:14px 36px;">
-            <span>Submit Travel Request</span>
+            <span><?= e(get_setting('cta_btn_text', 'Submit Travel Request')) ?></span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
 

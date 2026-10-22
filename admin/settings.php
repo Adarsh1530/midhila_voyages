@@ -51,6 +51,19 @@ require_once __DIR__ . '/includes/admin-header.php';
 
 <div style="max-width:860px;margin:0 auto;">
   
+  <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:1.3rem;">📝</span>
+      <div>
+        <strong style="color:#1E40AF;font-size:0.92rem;">Looking to edit headlines, stories, or page sections?</strong>
+        <p style="font-size:0.82rem;color:#3B82F6;margin:0;">You can customize every section of the public website in the new visual editor.</p>
+      </div>
+    </div>
+    <a href="<?= ADMIN_URL ?>/content.php" class="admin-btn admin-btn-sm" style="background:#2563EB;color:#FFFFFF !important;font-weight:700;">
+      <span>Go to Page Sections Editor &rarr;</span>
+    </a>
+  </div>
+
   <div style="margin-bottom:24px;">
     <h3 style="font-size:1.3rem;color:var(--admin-navy);">Agency Profile &amp; Settings</h3>
     <p style="font-size:0.85rem;color:var(--admin-muted);">Manage verified contact details, WhatsApp integration parameters, and payment keys.</p>

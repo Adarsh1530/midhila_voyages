@@ -87,10 +87,10 @@ require_once __DIR__ . '/includes/header.php';
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
     <h1 class="editorial-headline-large" style="margin-bottom:16px;">
-      Direct Agency Assistance
+      <?= e(get_setting('contact_hero_title', 'Direct Agency Assistance')) ?>
     </h1>
     <p class="editorial-subtext" style="margin:0 auto 28px;">
-      Whether reserving a sacred yatra or planning a bespoke holiday, our coordinators are ready to assist.
+      <?= e(get_setting('contact_hero_subtext', 'Whether reserving a sacred yatra or planning a bespoke holiday, our coordinators are ready to assist.')) ?>
     </p>
   </div>
 </section>

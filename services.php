@@ -28,13 +28,13 @@ require_once __DIR__ . '/includes/header.php';
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
     <h1 class="editorial-headline-large" style="margin-bottom:16px;">
-      Seamless Travel Curation
+      <?= e(get_setting('services_hero_title', 'Seamless Travel Curation')) ?>
     </h1>
     <p class="editorial-subtext" style="margin:0 auto 28px;">
-      From private chauffeured road transit to sacred darshan planning and luxury boutique stays, our concierge manages every detail.
+      <?= e(get_setting('services_hero_subtitle', 'From private chauffeured road transit to sacred darshan planning and luxury boutique stays, our concierge manages every detail.')) ?>
     </p>
     <a href="<?= e($waServiceUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
-      <span>Consult with a Travel Specialist</span>
+      <span><?= e(get_setting('services_cta_text', 'Consult with a Travel Specialist')) ?></span>
     </a>
   </div>
 </section>
