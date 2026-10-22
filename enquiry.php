@@ -89,7 +89,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                     ) VALUES (
                         ?, ?, ?, ?, ?, 
                         ?, ?, ?, ?, 
-                        ?, 'new', ?, ?, NOW()
+                        ?, 'new', ?, ?, CURRENT_TIMESTAMP
                     )
                 ");
                 $stmt->execute([

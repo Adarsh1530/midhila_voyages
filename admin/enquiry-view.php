@@ -28,8 +28,9 @@ if (!$enquiry) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     if (verify_csrf_token()) {
         $newStatus = $_POST['status'] ?? 'new';
-        $upd = $db->prepare("UPDATE `enquiries` SET `status` = ?, `updated_at` = NOW() WHERE `id` = ?");
-        $upd->execute([$newStatus, $id]);
+        $now = date('Y-m-d H:i:s');
+        $upd = $db->prepare("UPDATE `enquiries` SET `status` = ?, `updated_at` = ? WHERE `id` = ?");
+        $upd->execute([$newStatus, $now, $id]);
         log_activity($_SESSION['admin_user_id'] ?? null, 'update_enquiry_status', "Updated enquiry #{$enquiry['reference_no']} status to {$newStatus}");
         set_flash_message('success', 'Enquiry status updated.');
         header('Location: ' . ADMIN_URL . '/enquiry-view.php?id=' . $id);

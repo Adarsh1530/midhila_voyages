@@ -57,7 +57,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                     ) VALUES (
                         ?, ?, ?, ?, NULL, 
                         NULL, NULL, 1, 0, 
-                        ?, 'new', ?, ?, NOW()
+                        ?, 'new', ?, ?, CURRENT_TIMESTAMP
                     )
                 ");
                 $fullMsg = "Subject: {$subject}\n\n{$message}";

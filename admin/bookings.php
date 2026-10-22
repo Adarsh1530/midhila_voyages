@@ -12,8 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_booking_status
         $bkgStatus = $_POST['booking_status'] ?? 'pending';
         $payStatus = $_POST['payment_status'] ?? 'unpaid';
 
-        $upd = $db->prepare("UPDATE `bookings` SET `booking_status` = ?, `payment_status` = ?, `updated_at` = NOW() WHERE `id` = ?");
-        $upd->execute([$bkgStatus, $payStatus, $bkId]);
+        $now = date('Y-m-d H:i:s');
+        $upd = $db->prepare("UPDATE `bookings` SET `booking_status` = ?, `payment_status` = ?, `updated_at` = ? WHERE `id` = ?");
+        $upd->execute([$bkgStatus, $payStatus, $now, $bkId]);
         set_flash_message('success', 'Booking status updated successfully.');
         
         $redirectUrl = ADMIN_URL . '/bookings.php';

@@ -93,8 +93,13 @@ function admin_login(string $username, string $password): array {
     $_SESSION['admin_logged_in'] = true;
 
     // Update last login
-    $upd = $db->prepare("UPDATE `admins` SET `last_login` = NOW() WHERE `id` = ?");
-    $upd->execute([$admin['id']]);
+    try {
+        $now = date('Y-m-d H:i:s');
+        $upd = $db->prepare("UPDATE `admins` SET `last_login` = ? WHERE `id` = ?");
+        $upd->execute([$now, $admin['id']]);
+    } catch (Exception $e) {
+        error_log("Failed to update admin last_login: " . $e->getMessage());
+    }
 
     log_activity($admin['id'], 'admin_login', "Administrator '{$admin['username']}' logged in successfully.");
 
