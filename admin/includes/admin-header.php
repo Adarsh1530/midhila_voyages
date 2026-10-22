@@ -842,26 +842,14 @@ try {
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:14px;">
-        <a href="<?= BASE_URL ?>/index.php" target="_blank" class="admin-btn admin-btn-outline admin-btn-sm" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-          <span>View Site ↗</span>
-        </a>
-
-        <div style="display:flex;align-items:center;gap:10px;padding-left:6px;border-left:1px solid #E2E8F0;">
-          <div style="width:36px;height:36px;border-radius:50%;background:#0F172A;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.88rem;border:1.5px solid #C5A059;">
-            <?= strtoupper(substr($currentAdmin['full_name'] ?? 'A', 0, 1)) ?>
-          </div>
-          <div style="display:none;min-width:100px;" class="admin-user-info-desktop">
-            <div style="font-size:0.86rem;font-weight:600;color:#0F172A;line-height:1.2;"><?= e($currentAdmin['full_name']) ?></div>
-            <div style="font-size:0.72rem;color:#64748B;font-weight:500;"><?= strtoupper(str_replace('_', ' ', $currentAdmin['role'])) ?></div>
-          </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:#0F172A;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.88rem;border:1.5px solid #C5A059;">
+          <?= strtoupper(substr($currentAdmin['full_name'] ?? 'A', 0, 1)) ?>
         </div>
-
-        <a href="<?= ADMIN_URL ?>/logout.php" class="admin-btn admin-btn-danger admin-btn-sm" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;" title="Log out of admin session">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-          <span>Logout</span>
-        </a>
+        <div style="display:none;min-width:100px;" class="admin-user-info-desktop">
+          <div style="font-size:0.86rem;font-weight:600;color:#0F172A;line-height:1.2;"><?= e($currentAdmin['full_name']) ?></div>
+          <div style="font-size:0.72rem;color:#64748B;font-weight:500;"><?= strtoupper(str_replace('_', ' ', $currentAdmin['role'])) ?></div>
+        </div>
       </div>
     </header>
 
