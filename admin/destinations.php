@@ -29,13 +29,7 @@ if (isset($_GET['delete_id'])) {
 }
 
 // Fetch all destinations
-$search = trim($_GET['search'] ?? '');
-if (!empty($search)) {
-    $stmt = $db->prepare("SELECT * FROM `destinations` WHERE `name` LIKE ? OR `region_state` LIKE ? ORDER BY `display_order` ASC");
-    $stmt->execute(["%{$search}%", "%{$search}%"]);
-} else {
-    $stmt = $db->query("SELECT * FROM `destinations` ORDER BY `category` ASC, `display_order` ASC, `name` ASC");
-}
+$stmt = $db->query("SELECT * FROM `destinations` ORDER BY `category` ASC, `display_order` ASC, `name` ASC");
 $destinations = $stmt->fetchAll();
 
 $adminTitle = 'Manage Destinations | MIDHILA VOYAGES';
@@ -51,18 +45,6 @@ require_once __DIR__ . '/includes/admin-header.php';
   <a href="<?= ADMIN_URL ?>/destination-edit.php" class="admin-btn admin-btn-primary">
     <span>+ Add New Destination</span>
   </a>
-</div>
-
-<!-- Search Bar -->
-<div class="admin-card" style="padding:16px 20px;margin-bottom:24px;">
-  <form method="GET" action="<?= ADMIN_URL ?>/destinations.php" style="display:flex;gap:12px;">
-    <input type="text" name="search" value="<?= e($search) ?>" placeholder="Search destination name or region..." 
-           style="flex-grow:1;padding:8px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
-    <button type="submit" class="admin-btn admin-btn-outline">Search</button>
-    <?php if (!empty($search)): ?>
-      <a href="<?= ADMIN_URL ?>/destinations.php" class="admin-btn admin-btn-outline">Reset</a>
-    <?php endif; ?>
-  </form>
 </div>
 
 <!-- Destinations Table -->

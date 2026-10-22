@@ -32,26 +32,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
     exit;
 }
 
-$statusFilter = $_GET['status'] ?? '';
-$search = trim($_GET['search'] ?? '');
-
-$sql = "SELECT * FROM `enquiries` WHERE 1=1";
-$params = [];
-
-if (!empty($statusFilter)) {
-    $sql .= " AND `status` = ?";
-    $params[] = $statusFilter;
-}
-if (!empty($search)) {
-    $sql .= " AND (`reference_no` LIKE ? OR `full_name` LIKE ? OR `phone` LIKE ? OR `destination_name` LIKE ?)";
-    $term = "%{$search}%";
-    $params[] = $term; $params[] = $term; $params[] = $term; $params[] = $term;
-}
-$sql .= " ORDER BY `id` DESC";
-
-$stmt = $db->prepare($sql);
-$stmt->execute($params);
-$enquiries = $stmt->fetchAll();
+$enquiries = $db->query("SELECT * FROM `enquiries` ORDER BY `id` DESC")->fetchAll();
 
 $adminTitle = 'Manage Enquiries | MIDHILA VOYAGES';
 $adminHeading = 'Trip Enquiries & Leads';
@@ -67,34 +48,6 @@ require_once __DIR__ . '/includes/admin-header.php';
   <a href="<?= ADMIN_URL ?>/enquiries.php?export=csv" class="admin-btn admin-btn-outline">
     <span>📥 Export to CSV</span>
   </a>
-</div>
-
-<!-- Search & Status Filter Bar -->
-<div class="admin-card" style="padding:16px 20px;margin-bottom:24px;">
-  <form method="GET" action="<?= ADMIN_URL ?>/enquiries.php" style="display:grid;grid-template-columns:1fr 200px auto;gap:12px;align-items:end;">
-    <div>
-      <label style="font-size:0.75rem;font-weight:700;color:var(--admin-muted);display:block;margin-bottom:4px;">Search Lead</label>
-      <input type="text" name="search" value="<?= e($search) ?>" placeholder="Search by name, phone, reference, or destination..." 
-             style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
-    </div>
-
-    <div>
-      <label style="font-size:0.75rem;font-weight:700;color:var(--admin-muted);display:block;margin-bottom:4px;">Status Filter</label>
-      <select name="status" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;background:#FFF;">
-        <option value="">All Statuses</option>
-        <option value="new" <?= ($statusFilter === 'new') ? 'selected' : '' ?>>New</option>
-        <option value="in_progress" <?= ($statusFilter === 'in_progress') ? 'selected' : '' ?>>In Progress</option>
-        <option value="contacted" <?= ($statusFilter === 'contacted') ? 'selected' : '' ?>>Contacted</option>
-        <option value="converted" <?= ($statusFilter === 'converted') ? 'selected' : '' ?>>Converted</option>
-        <option value="closed" <?= ($statusFilter === 'closed') ? 'selected' : '' ?>>Closed</option>
-      </select>
-    </div>
-
-    <div style="display:flex;gap:6px;">
-      <button type="submit" class="admin-btn admin-btn-outline">Filter</button>
-      <a href="<?= ADMIN_URL ?>/enquiries.php" class="admin-btn admin-btn-outline">Reset</a>
-    </div>
-  </form>
 </div>
 
 <!-- Enquiries Table -->

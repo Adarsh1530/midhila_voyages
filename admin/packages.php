@@ -28,41 +28,14 @@ if (isset($_GET['delete_id'])) {
     exit;
 }
 
-// Fetch destinations and categories for filters
-$dests = $db->query("SELECT `id`, `name` FROM `destinations` ORDER BY `name` ASC")->fetchAll();
-$cats = $db->query("SELECT `id`, `name` FROM `package_categories` ORDER BY `name` ASC")->fetchAll();
-
-$destFilter = isset($_GET['dest_id']) ? (int)$_GET['dest_id'] : 0;
-$catFilter = isset($_GET['cat_id']) ? (int)$_GET['cat_id'] : 0;
-$search = trim($_GET['search'] ?? '');
-
 $sql = "
     SELECT p.*, d.name AS destination_name, c.name AS category_name
     FROM `packages` p
     JOIN `destinations` d ON p.destination_id = d.id
     JOIN `package_categories` c ON p.category_id = c.id
-    WHERE 1=1
+    ORDER BY p.is_featured DESC, p.display_order ASC, p.id DESC
 ";
-$params = [];
-
-if ($destFilter > 0) {
-    $sql .= " AND p.destination_id = ?";
-    $params[] = $destFilter;
-}
-if ($catFilter > 0) {
-    $sql .= " AND p.category_id = ?";
-    $params[] = $catFilter;
-}
-if (!empty($search)) {
-    $sql .= " AND (p.title LIKE ? OR p.short_description LIKE ?)";
-    $params[] = "%{$search}%";
-    $params[] = "%{$search}%";
-}
-$sql .= " ORDER BY p.is_featured DESC, p.display_order ASC, p.id DESC";
-
-$stmt = $db->prepare($sql);
-$stmt->execute($params);
-$packages = $stmt->fetchAll();
+$packages = $db->query($sql)->fetchAll();
 
 $adminTitle = 'Manage Tour Packages | MIDHILA VOYAGES';
 $adminHeading = 'Tour Packages Catalog';
@@ -77,41 +50,6 @@ require_once __DIR__ . '/includes/admin-header.php';
   <a href="<?= ADMIN_URL ?>/package-edit.php" class="admin-btn admin-btn-primary">
     <span>+ Create New Package</span>
   </a>
-</div>
-
-<!-- Filters -->
-<div class="admin-card" style="padding:16px 20px;margin-bottom:24px;">
-  <form method="GET" action="<?= ADMIN_URL ?>/packages.php" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)) auto;gap:12px;align-items:end;">
-    <div>
-      <label style="font-size:0.75rem;font-weight:700;color:var(--admin-muted);display:block;margin-bottom:4px;">Filter Destination</label>
-      <select name="dest_id" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;background:#FFF;">
-        <option value="">All Destinations</option>
-        <?php foreach ($dests as $d): ?>
-          <option value="<?= (int)$d['id'] ?>" <?= ($destFilter == $d['id']) ? 'selected' : '' ?>><?= e($d['name']) ?></option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-
-    <div>
-      <label style="font-size:0.75rem;font-weight:700;color:var(--admin-muted);display:block;margin-bottom:4px;">Filter Category</label>
-      <select name="cat_id" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;background:#FFF;">
-        <option value="">All Categories</option>
-        <?php foreach ($cats as $c): ?>
-          <option value="<?= (int)$c['id'] ?>" <?= ($catFilter == $c['id']) ? 'selected' : '' ?>><?= e($c['name']) ?></option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-
-    <div>
-      <label style="font-size:0.75rem;font-weight:700;color:var(--admin-muted);display:block;margin-bottom:4px;">Keyword Search</label>
-      <input type="text" name="search" value="<?= e($search) ?>" placeholder="Search package title..." style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
-    </div>
-
-    <div style="display:flex;gap:6px;">
-      <button type="submit" class="admin-btn admin-btn-outline">Filter</button>
-      <a href="<?= ADMIN_URL ?>/packages.php" class="admin-btn admin-btn-outline">Reset</a>
-    </div>
-  </form>
 </div>
 
 <!-- Packages Table -->

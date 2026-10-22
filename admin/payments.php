@@ -5,44 +5,13 @@
 
 require_once __DIR__ . '/includes/admin-init.php';
 
-// Search and Filter Parameters
-$search = trim($_GET['search'] ?? '');
-$payStatus = trim($_GET['pay_status'] ?? '');
-$gateway = trim($_GET['gateway'] ?? '');
-
-$where = [];
-$params = [];
-
-if (!empty($search)) {
-    $where[] = "(p.booking_reference LIKE ? OR b.customer_name LIKE ? OR b.customer_email LIKE ? OR p.gateway_order_id LIKE ? OR p.gateway_payment_id LIKE ?)";
-    $term = "%{$search}%";
-    $params[] = $term;
-    $params[] = $term;
-    $params[] = $term;
-    $params[] = $term;
-    $params[] = $term;
-}
-
-if (!empty($payStatus)) {
-    $where[] = "p.status = ?";
-    $params[] = $payStatus;
-}
-
-if (!empty($gateway)) {
-    $where[] = "p.payment_gateway = ?";
-    $params[] = $gateway;
-}
-
-$whereClause = !empty($where) ? ('WHERE ' . implode(' AND ', $where)) : '';
-
-$stmt = $db->prepare("
+// Fetch all payments
+$stmt = $db->query("
     SELECT p.*, b.customer_name, b.customer_email, b.customer_phone
     FROM `payments` p
     LEFT JOIN `bookings` b ON p.booking_id = b.id
-    {$whereClause}
     ORDER BY p.id DESC
 ");
-$stmt->execute($params);
 $payments = $stmt->fetchAll();
 
 // Global Financial KPIs
@@ -120,46 +89,6 @@ require_once __DIR__ . '/includes/admin-header.php';
     <div class="admin-stat-icon" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#FCA5A5;">
       ⚠️
     </div>
-  </div>
-</div>
-
-<!-- Search & Filtering Bar -->
-<div class="admin-filter-bar">
-  <form method="GET" action="<?= ADMIN_URL ?>/payments.php" class="admin-filter-form no-confirm">
-    <div class="admin-search-box">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <input type="text" name="search" value="<?= e($search) ?>" placeholder="Search by booking ref, customer, order ID, payment ID...">
-    </div>
-
-    <select name="pay_status" class="admin-filter-select">
-      <option value="">All Payment Statuses</option>
-      <option value="captured" <?= ($payStatus === 'captured') ? 'selected' : '' ?>>Captured (Success)</option>
-      <option value="pending" <?= ($payStatus === 'pending') ? 'selected' : '' ?>>Pending</option>
-      <option value="failed" <?= ($payStatus === 'failed') ? 'selected' : '' ?>>Failed</option>
-    </select>
-
-    <select name="gateway" class="admin-filter-select">
-      <option value="">All Gateways</option>
-      <option value="razorpay" <?= (strtolower($gateway) === 'razorpay') ? 'selected' : '' ?>>Razorpay</option>
-    </select>
-
-    <button type="submit" class="admin-btn admin-btn-primary" style="padding:9px 18px;">
-      <span>Search</span>
-    </button>
-
-    <?php if ($hasActiveFilters): ?>
-      <a href="<?= ADMIN_URL ?>/payments.php" class="admin-btn admin-btn-outline" style="padding:9px 14px;color:#EF4444;border-color:#FCA5A5;">
-        <span>&times; Clear Filters</span>
-      </a>
-    <?php endif; ?>
-  </form>
-
-  <div style="font-size:0.85rem;color:var(--admin-muted);font-weight:600;white-space:nowrap;">
-    Showing <?= count($payments) ?> transaction<?= count($payments) === 1 ? '' : 's' ?>
-    <?= $hasActiveFilters ? '<span style="color:var(--admin-gold);">(Filtered)</span>' : '' ?>
   </div>
 </div>
 

@@ -26,46 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_booking_status
     }
 }
 
-// Search and Filter Parameters
-$search = trim($_GET['search'] ?? '');
-$bkgStatus = trim($_GET['bkg_status'] ?? '');
-$payStatus = trim($_GET['pay_status'] ?? '');
-
-// Base query & filtering
-$where = [];
-$params = [];
-
-if (!empty($search)) {
-    $where[] = "(b.booking_reference LIKE ? OR b.customer_name LIKE ? OR b.customer_phone LIKE ? OR b.customer_email LIKE ? OR p.title LIKE ?)";
-    $term = "%{$search}%";
-    $params[] = $term;
-    $params[] = $term;
-    $params[] = $term;
-    $params[] = $term;
-    $params[] = $term;
-}
-
-if (!empty($bkgStatus)) {
-    $where[] = "b.booking_status = ?";
-    $params[] = $bkgStatus;
-}
-
-if (!empty($payStatus)) {
-    $where[] = "b.payment_status = ?";
-    $params[] = $payStatus;
-}
-
-$whereClause = !empty($where) ? ('WHERE ' . implode(' AND ', $where)) : '';
-
-$stmt = $db->prepare("
+// Fetch all bookings
+$stmt = $db->query("
     SELECT b.*, p.title AS package_title, p.duration_days, p.duration_nights, d.name AS destination_name
     FROM `bookings` b
     LEFT JOIN `packages` p ON b.package_id = p.id
     LEFT JOIN `destinations` d ON p.destination_id = d.id
-    {$whereClause}
     ORDER BY b.id DESC
 ");
-$stmt->execute($params);
 $bookings = $stmt->fetchAll();
 
 // Global KPIs (computed across all bookings)
@@ -73,8 +41,6 @@ $kpiTotal = (int)$db->query("SELECT COUNT(*) FROM `bookings`")->fetchColumn();
 $kpiConfirmed = (int)$db->query("SELECT COUNT(*) FROM `bookings` WHERE `booking_status` = 'confirmed'")->fetchColumn();
 $kpiPending = (int)$db->query("SELECT COUNT(*) FROM `bookings` WHERE `booking_status` = 'pending'")->fetchColumn();
 $kpiRevenue = (float)$db->query("SELECT COALESCE(SUM(`total_amount`), 0) FROM `bookings` WHERE `payment_status` IN ('paid', 'partial')")->fetchColumn();
-
-$hasActiveFilters = (!empty($search) || !empty($bkgStatus) || !empty($payStatus));
 
 $adminTitle = 'Manage Bookings | MIDHILA VOYAGES';
 $adminHeading = 'Confirmed Bookings & Reservations';
@@ -115,10 +81,10 @@ require_once __DIR__ . '/includes/admin-header.php';
   <div class="admin-stat-card">
     <div>
       <div class="admin-stat-label">Confirmed</div>
-      <div class="admin-stat-value" style="color:#86EFAC;"><?= number_format($kpiConfirmed) ?></div>
+      <div class="admin-stat-value" style="color:#16A34A;"><?= number_format($kpiConfirmed) ?></div>
       <div class="admin-stat-sub">Ready to travel</div>
     </div>
-    <div class="admin-stat-icon" style="background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#86EFAC;">
+    <div class="admin-stat-icon" style="background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#16A34A;">
       ✅
     </div>
   </div>
@@ -126,10 +92,10 @@ require_once __DIR__ . '/includes/admin-header.php';
   <div class="admin-stat-card">
     <div>
       <div class="admin-stat-label">Pending Review</div>
-      <div class="admin-stat-value" style="color:#FDE68A;"><?= number_format($kpiPending) ?></div>
+      <div class="admin-stat-value" style="color:#D97706;"><?= number_format($kpiPending) ?></div>
       <div class="admin-stat-sub">Awaiting confirmation</div>
     </div>
-    <div class="admin-stat-icon" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:#FDE68A;">
+    <div class="admin-stat-icon" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:#D97706;">
       ⏳
     </div>
   </div>
@@ -140,53 +106,9 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div class="admin-stat-value" style="color:var(--admin-navy);"><?= format_price($kpiRevenue) ?></div>
       <div class="admin-stat-sub">Paid &amp; deposit revenue</div>
     </div>
-    <div class="admin-stat-icon" style="background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3);color:#7DD3FC;">
+    <div class="admin-stat-icon" style="background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3);color:#0284C7;">
       💰
     </div>
-  </div>
-</div>
-
-<!-- Search & Filtering Bar -->
-<div class="admin-filter-bar">
-  <form method="GET" action="<?= ADMIN_URL ?>/bookings.php" class="admin-filter-form no-confirm">
-    <div class="admin-search-box">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <input type="text" name="search" value="<?= e($search) ?>" placeholder="Search by booking ref, guest name, phone, tour...">
-    </div>
-
-    <select name="bkg_status" class="admin-filter-select">
-      <option value="">All Booking Statuses</option>
-      <option value="confirmed" <?= ($bkgStatus === 'confirmed') ? 'selected' : '' ?>>Confirmed</option>
-      <option value="pending" <?= ($bkgStatus === 'pending') ? 'selected' : '' ?>>Pending</option>
-      <option value="completed" <?= ($bkgStatus === 'completed') ? 'selected' : '' ?>>Completed</option>
-      <option value="cancelled" <?= ($bkgStatus === 'cancelled') ? 'selected' : '' ?>>Cancelled</option>
-    </select>
-
-    <select name="pay_status" class="admin-filter-select">
-      <option value="">All Payment Statuses</option>
-      <option value="paid" <?= ($payStatus === 'paid') ? 'selected' : '' ?>>Paid (Full)</option>
-      <option value="partial" <?= ($payStatus === 'partial') ? 'selected' : '' ?>>Partial (Deposit)</option>
-      <option value="unpaid" <?= ($payStatus === 'unpaid') ? 'selected' : '' ?>>Unpaid</option>
-      <option value="refunded" <?= ($payStatus === 'refunded') ? 'selected' : '' ?>>Refunded</option>
-    </select>
-
-    <button type="submit" class="admin-btn admin-btn-primary" style="padding:9px 18px;">
-      <span>Search</span>
-    </button>
-
-    <?php if ($hasActiveFilters): ?>
-      <a href="<?= ADMIN_URL ?>/bookings.php" class="admin-btn admin-btn-outline" style="padding:9px 14px;color:#EF4444;border-color:#FCA5A5;">
-        <span>&times; Clear Filters</span>
-      </a>
-    <?php endif; ?>
-  </form>
-
-  <div style="font-size:0.85rem;color:var(--admin-muted);font-weight:600;white-space:nowrap;">
-    Showing <?= count($bookings) ?> booking<?= count($bookings) === 1 ? '' : 's' ?>
-    <?= $hasActiveFilters ? '<span style="color:var(--admin-gold);">(Filtered)</span>' : '' ?>
   </div>
 </div>
 
