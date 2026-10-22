@@ -397,6 +397,41 @@
       checkFlashMessages();
     }
 
+    // 5. Mobile Sidebar Toggle & Drawer Handler
+    const sidebarToggleBtn = document.getElementById('adminSidebarToggle');
+    const sidebarEl = document.getElementById('adminSidebar');
+    const sidebarOverlayEl = document.getElementById('adminSidebarOverlay');
+
+    if (sidebarToggleBtn && sidebarEl && sidebarOverlayEl) {
+      function openSidebar() {
+        sidebarEl.classList.add('is-open');
+        sidebarOverlayEl.classList.add('is-active');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeSidebar() {
+        sidebarEl.classList.remove('is-open');
+        sidebarOverlayEl.classList.remove('is-active');
+        document.body.style.overflow = '';
+      }
+
+      sidebarToggleBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (sidebarEl.classList.contains('is-open')) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      });
+
+      sidebarOverlayEl.addEventListener('click', closeSidebar);
+
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 992 && sidebarEl.classList.contains('is-open')) {
+          closeSidebar();
+        }
+      });
+    }
+
   })();
   </script>
 </body>

@@ -8,6 +8,11 @@ require_once __DIR__ . '/admin-init.php';
 
 $adminScript = basename($_SERVER['PHP_SELF']);
 $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
+
+$newEnquiryCount = 0;
+try {
+    $newEnquiryCount = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `status` = 'new'")->fetchColumn();
+} catch (Exception $e) {}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -155,6 +160,68 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
       top: 0;
       z-index: 100;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+    
+    .admin-mobile-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--admin-border);
+      background: #FFFFFF;
+      color: #0F172A;
+      cursor: pointer;
+      margin-right: 14px;
+      transition: all 0.2s;
+    }
+    .admin-mobile-toggle:hover {
+      background: #F1F5F9;
+    }
+    @media (min-width: 640px) {
+      .admin-user-info-desktop { display: block !important; }
+    }
+    
+    .admin-sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 998;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .admin-sidebar-overlay.is-active {
+      display: block;
+      opacity: 1;
+    }
+    
+    @media (max-width: 992px) {
+      .admin-mobile-toggle {
+        display: inline-flex;
+      }
+      .admin-sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 999;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 10px 0 25px rgba(15, 23, 42, 0.15);
+      }
+      .admin-sidebar.is-open {
+        transform: translateX(0);
+      }
+      .admin-topbar {
+        padding: 0 16px;
+      }
+      .admin-content {
+        padding: 20px 16px;
+      }
     }
     
     .admin-content {
@@ -649,8 +716,11 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
 </head>
 <body>
 
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div id="adminSidebarOverlay" class="admin-sidebar-overlay"></div>
+
   <!-- Sidebar -->
-  <aside class="admin-sidebar">
+  <aside id="adminSidebar" class="admin-sidebar">
     <div class="admin-brand">
       <a href="<?= ADMIN_URL ?>/dashboard.php" style="display:flex;align-items:center;text-decoration:none;">
         <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo.png" 
@@ -662,56 +732,71 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
 
     <nav class="admin-nav">
       <a href="<?= ADMIN_URL ?>/dashboard.php" class="admin-nav-item <?= ($adminScript === 'dashboard.php') ? 'is-active' : '' ?>">
-        <span>📊</span> Dashboard
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+        <span>Dashboard</span>
       </a>
 
-      <div class="admin-nav-section-title">Customer Journeys</div>
+      <div class="admin-nav-section-title">Client Bookings &amp; Inquiries</div>
       <a href="<?= ADMIN_URL ?>/enquiries.php" class="admin-nav-item <?= in_array($adminScript, ['enquiries.php', 'enquiry-view.php']) ? 'is-active' : '' ?>">
-        <span>📩</span> Enquiries
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <span>Inquiries</span>
+        <?php if ($newEnquiryCount > 0): ?>
+          <span style="background:#EF4444;color:#FFFFFF;padding:2px 8px;border-radius:999px;font-size:0.75rem;font-weight:700;margin-left:auto;"><?= $newEnquiryCount ?> New</span>
+        <?php endif; ?>
       </a>
       <a href="<?= ADMIN_URL ?>/bookings.php" class="admin-nav-item <?= ($adminScript === 'bookings.php') ? 'is-active' : '' ?>">
-        <span>🎫</span> Bookings
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <span>Bookings</span>
       </a>
       <a href="<?= ADMIN_URL ?>/payments.php" class="admin-nav-item <?= ($adminScript === 'payments.php') ? 'is-active' : '' ?>">
-        <span>💳</span> Payments Audit
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+        <span>Payments Audit</span>
       </a>
 
-      <div class="admin-nav-section-title">Travel Catalog</div>
-      <a href="<?= ADMIN_URL ?>/destinations.php" class="admin-nav-item <?= in_array($adminScript, ['destinations.php', 'destination-edit.php']) ? 'is-active' : '' ?>">
-        <span>📍</span> Destinations
-      </a>
+      <div class="admin-nav-section-title">Tour Catalog</div>
       <a href="<?= ADMIN_URL ?>/packages.php" class="admin-nav-item <?= in_array($adminScript, ['packages.php', 'package-edit.php']) ? 'is-active' : '' ?>">
-        <span>🧭</span> Tour Packages
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+        <span>Tour Packages</span>
+      </a>
+      <a href="<?= ADMIN_URL ?>/destinations.php" class="admin-nav-item <?= in_array($adminScript, ['destinations.php', 'destination-edit.php']) ? 'is-active' : '' ?>">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <span>Destinations</span>
       </a>
       <a href="<?= ADMIN_URL ?>/categories.php" class="admin-nav-item <?= ($adminScript === 'categories.php') ? 'is-active' : '' ?>">
-        <span>🏷️</span> Categories
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+        <span>Categories</span>
       </a>
 
-      <div class="admin-nav-section-title">Media & Content</div>
+      <div class="admin-nav-section-title">Website Content</div>
       <a href="<?= ADMIN_URL ?>/gallery.php" class="admin-nav-item <?= ($adminScript === 'gallery.php') ? 'is-active' : '' ?>">
-        <span>🖼️</span> Photo Gallery
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+        <span>Photo Gallery</span>
       </a>
       <a href="<?= ADMIN_URL ?>/testimonials.php" class="admin-nav-item <?= ($adminScript === 'testimonials.php') ? 'is-active' : '' ?>">
-        <span>⭐</span> Testimonials
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        <span>Testimonials</span>
       </a>
       <a href="<?= ADMIN_URL ?>/faqs.php" class="admin-nav-item <?= ($adminScript === 'faqs.php') ? 'is-active' : '' ?>">
-        <span>❓</span> FAQs
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <span>FAQs</span>
       </a>
 
-      <div class="admin-nav-section-title">Administration</div>
+      <div class="admin-nav-section-title">System Settings</div>
       <a href="<?= ADMIN_URL ?>/settings.php" class="admin-nav-item <?= ($adminScript === 'settings.php') ? 'is-active' : '' ?>">
-        <span>⚙️</span> Site Settings
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span>Site Settings</span>
       </a>
       <a href="<?= ADMIN_URL ?>/users.php" class="admin-nav-item <?= ($adminScript === 'users.php') ? 'is-active' : '' ?>">
-        <span>👥</span> Staff Accounts
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span>Staff Accounts</span>
       </a>
     </nav>
 
-    <div style="padding:16px 20px;border-top:1px solid #E2E8F0;display:flex;align-items:center;justify-content:space-between;">
-      <a href="<?= BASE_URL ?>/index.php" target="_blank" style="font-size:0.82rem;color:#64748B;display:flex;align-items:center;gap:6px;font-weight:500;">
+    <div style="padding:16px 20px;border-top:1px solid #E2E8F0;display:flex;align-items:center;justify-content:space-between;background:#FFFFFF;">
+      <a href="<?= BASE_URL ?>/index.php" target="_blank" style="font-size:0.82rem;color:#64748B;display:inline-flex;align-items:center;gap:6px;font-weight:600;">
         <span>Visit Site</span> &nearr;
       </a>
-      <a href="<?= ADMIN_URL ?>/logout.php" style="font-size:0.82rem;color:#DC2626;font-weight:600;">Logout</a>
+      <a href="<?= ADMIN_URL ?>/logout.php" style="font-size:0.82rem;color:#DC2626;font-weight:700;">Logout</a>
     </div>
   </aside>
 
@@ -720,20 +805,36 @@ $pageTitle = $adminTitle ?? 'Admin Dashboard | MIDHILA VOYAGES';
     
     <!-- Topbar -->
     <header class="admin-topbar">
-      <div>
-        <h2 style="font-size:1.25rem;color:#0F172A;font-weight:700;letter-spacing:-0.01em;"><?= e($adminHeading ?? 'Dashboard') ?></h2>
+      <div style="display:flex;align-items:center;">
+        <button id="adminSidebarToggle" class="admin-mobile-toggle" aria-label="Toggle navigation">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div>
+          <h2 style="font-size:1.25rem;color:#0F172A;font-weight:700;letter-spacing:-0.01em;line-height:1.2;"><?= e($adminHeading ?? 'Dashboard') ?></h2>
+          <div style="font-size:0.75rem;color:#64748B;margin-top:2px;">Midhila Voyages Management Console</div>
+        </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:18px;">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:38px;height:38px;border-radius:50%;background:#0F172A;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;border:1.5px solid #C5A059;box-shadow:0 2px 6px rgba(15,23,42,0.15);">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a href="<?= BASE_URL ?>/index.php" target="_blank" class="admin-btn admin-btn-outline admin-btn-sm" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span>View Site ↗</span>
+        </a>
+
+        <div style="display:flex;align-items:center;gap:10px;padding-left:6px;border-left:1px solid #E2E8F0;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#0F172A;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.88rem;border:1.5px solid #C5A059;">
             <?= strtoupper(substr($currentAdmin['full_name'] ?? 'A', 0, 1)) ?>
           </div>
-          <div>
-            <div style="font-size:0.88rem;font-weight:600;color:#0F172A;"><?= e($currentAdmin['full_name']) ?></div>
-            <div style="font-size:0.75rem;color:#64748B;font-weight:500;"><?= strtoupper(str_replace('_', ' ', $currentAdmin['role'])) ?></div>
+          <div style="display:none;min-width:100px;" class="admin-user-info-desktop">
+            <div style="font-size:0.86rem;font-weight:600;color:#0F172A;line-height:1.2;"><?= e($currentAdmin['full_name']) ?></div>
+            <div style="font-size:0.72rem;color:#64748B;font-weight:500;"><?= strtoupper(str_replace('_', ' ', $currentAdmin['role'])) ?></div>
           </div>
         </div>
+
+        <a href="<?= ADMIN_URL ?>/logout.php" class="admin-btn admin-btn-danger admin-btn-sm" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;" title="Log out of admin session">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Logout</span>
+        </a>
       </div>
     </header>
 
