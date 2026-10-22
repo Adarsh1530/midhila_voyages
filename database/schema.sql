@@ -41,7 +41,7 @@ CREATE TABLE `activity_logs` (
 
 LOCK TABLES `activity_logs` WRITE;
 /*!40000 ALTER TABLE `activity_logs` DISABLE KEYS */;
-INSERT INTO `activity_logs` VALUES (1,1,'admin_login','Administrator \'admin\' logged in successfully.','127.0.0.1','2026-10-18 20:21:22'),(2,NULL,'payment_verified','Payment captured for booking ref MV-BKG-2026-BAAC10. Amount: INR 10000.00','::1','2026-10-18 20:22:11'),(3,1,'admin_login','Administrator \'admin\' logged in successfully.','::1','2026-10-18 21:43:51'),(4,NULL,'payment_verified','Payment captured for booking ref MV-BKG-2026-CF2D1A. Amount: INR 10000.00','::1','2026-10-18 21:44:58'),(5,1,'admin_login','Administrator \'admin\' logged in successfully.','::1','2026-10-18 21:53:11'),(6,1,'update_settings','Updated agency profile and site configuration.','::1','2026-10-18 21:54:53'),(7,1,'update_settings','Updated agency profile and site configuration.','::1','2026-10-18 22:03:37'),(8,NULL,'payment_verified','Payment captured for booking ref MV-BKG-2026-97667B. Amount: INR 10000.00','::1','2026-10-18 22:03:42'),(9,1,'update_settings','Updated agency profile and site configuration.','::1','2026-10-18 22:28:10'),(10,1,'update_settings','Updated agency profile and site configuration.','::1','2026-10-18 22:28:30'),(11,1,'edit_destination','Updated destination \'Kerala Backwaters & Hills\'','::1','2026-10-18 22:28:50');
+INSERT INTO `activity_logs` VALUES (1,1,'admin_login','Administrator \'admin\' logged in successfully.','127.0.0.1','2026-10-18 20:21:22');
 /*!40000 ALTER TABLE `activity_logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,6 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
-INSERT INTO `bookings` VALUES (1,'MV-BKG-2026-BAAC10',NULL,1,'Vikram Aditya','vikram.aditya@example.com','+91 98470 55443','2026-12-05',2,49000.00,'INR','confirmed','partial','Vegetarian meals on the houseboat cruise.','2026-10-18 20:22:11','2026-10-18 20:22:11'),(2,'MV-BKG-2026-CF2D1A',NULL,1,'KEERTHI ADARSH M P','keerthiadarshmp@gmail.com','+918778979416','2026-10-31',2,49000.00,'INR','confirmed','partial','','2026-10-18 21:44:54','2026-10-18 21:44:58'),(3,'MV-BKG-2026-75084E',NULL,5,'KEERTHI ADARSH M P','keerthiadarshmp@gmail.com','+918778979416','2026-10-31',2,39600.00,'INR','pending','unpaid','','2026-10-18 22:03:08','2026-10-18 23:03:35'),(4,'MV-BKG-2026-97667B',NULL,5,'KEERTHI ADARSH M P','keerthiadarshmp@gmail.com','+918778979416','2026-10-31',2,39600.00,'INR','confirmed','partial','','2026-10-18 22:03:42','2026-10-18 22:30:49');
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +219,6 @@ CREATE TABLE `enquiries` (
 
 LOCK TABLES `enquiries` WRITE;
 /*!40000 ALTER TABLE `enquiries` DISABLE KEYS */;
-INSERT INTO `enquiries` VALUES (1,'MV-ENQ-2026-FA326E','Kavitha Krishnan','kavitha.krishnan@example.com','+91 98470 99887','+91 98470 99887',1,'Kerala Backwaters & Hills',NULL,NULL,'Family Holidays','2026-11-10','2026-11-15',3,1,'Premium 4-Star (₹25,000 – ₹45,000 / person)','Premium 4-Star Resorts & Hotels','Senior citizen ground floor room and 1 night Alleppey private luxury houseboat requested.','whatsapp','new','::1','Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.26100.9711','2026-10-18 20:21:53','2026-10-18 20:21:53');
 /*!40000 ALTER TABLE `enquiries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -500,7 +498,6 @@ CREATE TABLE `payments` (
 
 LOCK TABLES `payments` WRITE;
 /*!40000 ALTER TABLE `payments` DISABLE KEYS */;
-INSERT INTO `payments` VALUES (1,1,'MV-BKG-2026-BAAC10','razorpay','order_afd558a1ef22556ab7e0','pay_test_9988aacc','',10000.00,'INR','captured','{\"payment_id\":\"pay_test_9988aacc\",\"is_test_mock\":1,\"booking_reference\":\"MV-BKG-2026-BAAC10\",\"order_id\":\"order_afd558a1ef22556ab7e0\"}','2026-10-18 20:22:11','2026-10-18 20:22:11','2026-10-18 20:22:11'),(2,2,'MV-BKG-2026-CF2D1A','razorpay','order_c28244321bf6c02157f0','pay_test_5d4po29u','',10000.00,'INR','captured','{\"booking_reference\":\"MV-BKG-2026-CF2D1A\",\"razorpay_order_id\":\"order_c28244321bf6c02157f0\",\"razorpay_payment_id\":\"pay_test_5d4po29u\",\"is_test_mock\":1}','2026-10-18 21:44:58','2026-10-18 21:44:54','2026-10-18 21:44:58'),(3,3,'MV-BKG-2026-75084E','razorpay','order_472142bd31f81ff76cdd',NULL,NULL,10000.00,'INR','failed','{\"booking_reference\":\"MV-BKG-2026-75084E\",\"razorpay_order_id\":\"order_472142bd31f81ff76cdd\",\"razorpay_payment_id\":\"pay_test_gpo2aggj\",\"is_test_mock\":1}',NULL,'2026-10-18 22:03:08','2026-10-18 22:03:15'),(4,4,'MV-BKG-2026-97667B','razorpay','order_2d3fb8aef00f2fd1e797','pay_test_yrx25oif','',10000.00,'INR','captured','{\"booking_reference\":\"MV-BKG-2026-97667B\",\"razorpay_order_id\":\"order_2d3fb8aef00f2fd1e797\",\"razorpay_payment_id\":\"pay_test_yrx25oif\",\"is_test_mock\":1}','2026-10-18 22:03:42','2026-10-18 22:03:42','2026-10-18 22:03:42');
 /*!40000 ALTER TABLE `payments` ENABLE KEYS */;
 UNLOCK TABLES;
 
