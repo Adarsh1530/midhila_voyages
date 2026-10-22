@@ -114,5 +114,8 @@ $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
     </svg>
   </a>
 
+  <!-- Promotional Offer Popup Modal Component -->
+  <?php include __DIR__ . '/offer-popup.php'; ?>
+
 </body>
 </html>
