@@ -54,7 +54,7 @@ An original, production-oriented, luxury travel agency website for **MIDHILA VOY
 
 - **Portal URL:** `http://localhost/MIDHILA%20TRAVELS/admin/login.php`
 - **Username:** `admin`
-- **Password:** `AdminPassword@2026`
+- **Password:** `admin123`
 - **Role:** `super_admin`
 
 > [!NOTE]

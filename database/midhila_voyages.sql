@@ -333,10 +333,10 @@ INSERT INTO `site_settings` (`setting_key`, `setting_value`, `setting_group`) VA
 -- =====================================================================
 -- SEED DATA: Default Admin Account
 -- Username: admin
--- Password: AdminPassword@2026 (BCRYPT hashed)
+-- Password: admin123 (BCRYPT hashed)
 -- =====================================================================
 INSERT INTO `admins` (`username`, `password_hash`, `full_name`, `email`, `role`, `is_active`) VALUES
-('admin', '$2y$10$SmlNBv/m8PNN17bPVpap5ODXTZY8NA/3ai2fjsJOvvlepKs3uqfnO', 'Midhila Voyages Director', 'admin@midhilavoyages.com', 'super_admin', 1)
+('admin', '$2y$10$MqWc6VOvHC7FGPeefV7ygei9LLuc2PGiIDNqQ9ANRJy74Y1tS.HLK', 'Midhila Voyages Director', 'admin@midhilavoyages.com', 'super_admin', 1)
 ON DUPLICATE KEY UPDATE `username`=`username`;
 
 -- =====================================================================

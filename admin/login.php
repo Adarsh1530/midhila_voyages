@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <?= csrf_field() ?>
 
       <div class="form-group">
-        <label for="username">Username or Email</label>
+        <label for="username">Username</label>
         <input type="text" name="username" id="username" required autocomplete="username" placeholder="e.g. admin" value="<?= e($_POST['username'] ?? '') ?>">
       </div>
 

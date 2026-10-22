@@ -75,7 +75,7 @@ CREATE TABLE `admins` (
 
 LOCK TABLES `admins` WRITE;
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'admin','$2y$10$5UWE0Lcg.tn/qjyoTu6gauaBP/5tUGnOe74/VaA0Pq4So4jIIgJXi','Midhila Voyages Director','admin@midhilavoyages.com','super_admin','2026-10-18 21:53:11',1,'2026-10-18 19:50:10','2026-10-18 23:11:41');
+INSERT INTO `admins` VALUES (1,'admin','$2y$10$MqWc6VOvHC7FGPeefV7ygei9LLuc2PGiIDNqQ9ANRJy74Y1tS.HLK','Midhila Voyages Director','admin@midhilavoyages.com','super_admin','2026-10-18 21:53:11',1,'2026-10-18 19:50:10','2026-10-18 23:11:41');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 
