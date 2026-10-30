@@ -9,6 +9,7 @@ require_once dirname(__DIR__) . '/includes/functions.php';
 require_once dirname(__DIR__) . '/includes/auth.php';
 
 require_admin_login();
+require_role(['super_admin', 'travel_manage']);
 
 $db = getDB();
 

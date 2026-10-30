@@ -121,3 +121,133 @@ function admin_logout(): void {
         $_SESSION['admin_logged_in']
     );
 }
+
+/**
+ * Retrieve current admin role string
+ */
+function get_admin_role(): string {
+    if (!empty($_SESSION['admin_role'])) {
+        return (string)$_SESSION['admin_role'];
+    }
+    $admin = get_logged_in_admin();
+    return $admin['role'] ?? 'super_admin';
+}
+
+/**
+ * Check if logged in admin has one of the allowed roles
+ * Super Admin always has full access.
+ */
+function has_role($allowedRoles): bool {
+    if (!is_admin_logged_in()) {
+        return false;
+    }
+    $currentRole = get_admin_role();
+
+    // Super admin always has unrestricted clearance
+    if ($currentRole === 'super_admin') {
+        return true;
+    }
+
+    if (is_string($allowedRoles)) {
+        $allowedRoles = [$allowedRoles];
+    }
+
+    // Support legacy role aliases
+    $normalized = $currentRole;
+    if ($currentRole === 'manager' || $currentRole === 'editor') {
+        $normalized = 'travel_manage';
+    }
+
+    return in_array($normalized, $allowedRoles, true) || in_array($currentRole, $allowedRoles, true);
+}
+
+/**
+ * Check specific role helpers
+ */
+function is_super_admin(): bool {
+    return get_admin_role() === 'super_admin';
+}
+
+function is_travel_manager(): bool {
+    return has_role(['travel_manage', 'super_admin']);
+}
+
+function is_payment_handler(): bool {
+    return has_role(['payment_handle', 'super_admin']);
+}
+
+/**
+ * Enforce role permissions on protected pages
+ */
+function require_role($allowedRoles, ?string $redirectUrl = null): void {
+    require_admin_login();
+
+    if (!has_role($allowedRoles)) {
+        $currentRole = get_admin_role();
+        $roleLabel = get_role_label($currentRole);
+        set_flash_message('error', "Access Restricted: Your account role ({$roleLabel}) does not have permission to access that section.");
+
+        if ($redirectUrl === null) {
+            if ($currentRole === 'payment_handle') {
+                $redirectUrl = ADMIN_URL . '/payments.php';
+            } else {
+                $redirectUrl = ADMIN_URL . '/dashboard.php';
+            }
+        }
+        header('Location: ' . $redirectUrl);
+        exit;
+    }
+}
+
+/**
+ * Get human-readable role label
+ */
+function get_role_label(string $role): string {
+    switch ($role) {
+        case 'super_admin':
+            return 'Super Admin';
+        case 'travel_manage':
+        case 'manager':
+        case 'editor':
+            return 'Travel Manage';
+        case 'payment_handle':
+            return 'Payment Handle';
+        default:
+            return ucwords(str_replace('_', ' ', $role));
+    }
+}
+
+/**
+ * Return all defined system roles and metadata
+ */
+function get_all_roles(): array {
+    return [
+        'super_admin' => [
+            'label' => 'Super Admin',
+            'badge' => 'SUPER ADMIN',
+            'desc' => 'Full unrestricted access to all modules, financial audits, tour catalog, and user credentials.',
+            'color' => '#0F172A',
+            'badge_bg' => '#0F172A',
+            'badge_fg' => '#FFFFFF',
+            'tag' => 'Full System Control'
+        ],
+        'travel_manage' => [
+            'label' => 'Travel Manage',
+            'badge' => 'TRAVEL MANAGE',
+            'desc' => 'Manages tour packages, itineraries, destinations, categories, photo gallery, offer popup, inquiries, and customer bookings.',
+            'color' => '#2563EB',
+            'badge_bg' => '#EFF6FF',
+            'badge_fg' => '#1D4ED8',
+            'tag' => 'Tours, Bookings & Inquiries'
+        ],
+        'payment_handle' => [
+            'label' => 'Payment Handle',
+            'badge' => 'PAYMENT HANDLE',
+            'desc' => 'Audits Razorpay payment transactions, captured revenue, payment reconciliations, and booking payment statuses.',
+            'color' => '#059669',
+            'badge_bg' => '#ECFDF5',
+            'badge_fg' => '#047857',
+            'tag' => 'Finance & Payment Auditing'
+        ]
+    ];
+}

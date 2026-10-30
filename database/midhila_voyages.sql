@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
   `password_hash` VARCHAR(255) NOT NULL,
   `full_name` VARCHAR(100) NOT NULL,
   `email` VARCHAR(120) NOT NULL UNIQUE,
-  `role` ENUM('super_admin', 'manager', 'editor') NOT NULL DEFAULT 'super_admin',
+  `role` VARCHAR(50) NOT NULL DEFAULT 'super_admin',
   `last_login` DATETIME DEFAULT NULL,
   `is_active` TINYINT(1) NOT NULL DEFAULT 1,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -333,10 +333,12 @@ INSERT INTO `site_settings` (`setting_key`, `setting_value`, `setting_group`) VA
 -- =====================================================================
 -- SEED DATA: Default Admin Account
 -- Username: admin
--- Password: admin123 (BCRYPT hashed)
+-- Password: admin123 / travel123 / payment123 (BCRYPT hashed)
 -- =====================================================================
 INSERT INTO `admins` (`username`, `password_hash`, `full_name`, `email`, `role`, `is_active`) VALUES
-('admin', '$2y$10$MqWc6VOvHC7FGPeefV7ygei9LLuc2PGiIDNqQ9ANRJy74Y1tS.HLK', 'Midhila Voyages Director', 'admin@midhilavoyages.com', 'super_admin', 1)
+('admin', '$2y$10$MqWc6VOvHC7FGPeefV7ygei9LLuc2PGiIDNqQ9ANRJy74Y1tS.HLK', 'Midhila Voyages Director', 'admin@midhilavoyages.com', 'super_admin', 1),
+('travel', '$2y$10$MqWc6VOvHC7FGPeefV7ygei9LLuc2PGiIDNqQ9ANRJy74Y1tS.HLK', 'Travel Operations Manager', 'travel@midhilavoyages.com', 'travel_manage', 1),
+('payment', '$2y$10$MqWc6VOvHC7FGPeefV7ygei9LLuc2PGiIDNqQ9ANRJy74Y1tS.HLK', 'Finance & Payment Handler', 'payment@midhilavoyages.com', 'payment_handle', 1)
 ON DUPLICATE KEY UPDATE `username`=`username`;
 
 -- =====================================================================

@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agency Portal Sign In | MIDHILA VOYAGES</title>
+  <title>User Sign In | MIDHILA VOYAGES</title>
   
   <link rel="icon" type="image/svg+xml" href="<?= ASSETS_URL ?>/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -179,9 +179,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
            alt="Midhila Voyages">
     </div>
 
-    <div style="text-align:center;margin-bottom:28px;">
-      <h2 style="font-size:1.3rem;color:#0F172A;font-weight:700;margin-bottom:4px;letter-spacing:-0.01em;">Agency Portal Sign In</h2>
-      <p style="font-size:0.84rem;color:#64748B;">Authorized travel managers &amp; operations staff</p>
+    <div style="text-align:center;margin-bottom:24px;">
+      <h2 style="font-size:1.3rem;color:#0F172A;font-weight:700;margin-bottom:4px;letter-spacing:-0.01em;">User Portal Sign In</h2>
+      <p style="font-size:0.84rem;color:#64748B;">Enter your authorized Username &amp; Password</p>
+      
+      <div style="display:flex;justify-content:center;gap:6px;margin-top:10px;flex-wrap:wrap;">
+        <span style="font-size:0.68rem;font-weight:700;background:#0F172A;color:#FFFFFF;padding:2px 8px;border-radius:4px;">SUPER ADMIN</span>
+        <span style="font-size:0.68rem;font-weight:700;background:#EFF6FF;color:#1D4ED8;padding:2px 8px;border-radius:4px;border:1px solid #BFDBFE;">TRAVEL MANAGE</span>
+        <span style="font-size:0.68rem;font-weight:700;background:#ECFDF5;color:#047857;padding:2px 8px;border-radius:4px;border:1px solid #A7F3D0;">PAYMENT HANDLE</span>
+      </div>
     </div>
 
     <?php if (!empty($errorMessage)): ?>
@@ -194,8 +200,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <?= csrf_field() ?>
 
       <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" required autocomplete="username" placeholder="e.g. admin" value="<?= e($_POST['username'] ?? '') ?>">
+        <label for="username">Username (Login ID)</label>
+        <input type="text" name="username" id="username" required autocomplete="username" placeholder="e.g. admin, travel, payment" value="<?= e($_POST['username'] ?? '') ?>">
       </div>
 
       <div class="form-group">
@@ -203,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="password" name="password" id="password" required autocomplete="current-password" placeholder="••••••••">
       </div>
 
-      <button type="submit" class="btn-login">Sign In to Dashboard &rarr;</button>
+      <button type="submit" class="btn-login">Sign In &rarr;</button>
     </form>
 
     <div style="margin-top:28px;text-align:center;border-top:1px solid #F1F5F9;padding-top:18px;">

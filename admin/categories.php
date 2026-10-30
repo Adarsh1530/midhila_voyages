@@ -5,6 +5,9 @@
 
 require_once __DIR__ . '/includes/admin-init.php';
 
+// Restricted to Super Admin and Travel Manage roles
+require_role(['super_admin', 'travel_manage']);
+
 // Handle Create / Update
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (verify_csrf_token()) {

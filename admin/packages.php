@@ -5,6 +5,9 @@
 
 require_once __DIR__ . '/includes/admin-init.php';
 
+// Restricted to Super Admin and Travel Manage roles
+require_role(['super_admin', 'travel_manage']);
+
 // Handle Status Toggle or Deletion
 if (isset($_GET['toggle_id'])) {
     $toggleId = (int)$_GET['toggle_id'];

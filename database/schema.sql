@@ -58,7 +58,7 @@ CREATE TABLE `admins` (
   `password_hash` varchar(255) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `email` varchar(120) NOT NULL,
-  `role` enum('super_admin','manager','editor') NOT NULL DEFAULT 'super_admin',
+  `role` varchar(50) NOT NULL DEFAULT 'super_admin',
   `last_login` datetime DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
@@ -75,7 +75,10 @@ CREATE TABLE `admins` (
 
 LOCK TABLES `admins` WRITE;
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'admin','$2y$10$MqWc6VOvHC7FGPeefV7ygei9LLuc2PGiIDNqQ9ANRJy74Y1tS.HLK','Midhila Voyages Director','admin@midhilavoyages.com','super_admin','2026-10-18 21:53:11',1,'2026-10-18 19:50:10','2026-10-18 23:11:41');
+INSERT INTO `admins` VALUES 
+(1,'admin','$2y$10$MqWc6VOvHC7FGPeefV7ygei9LLuc2PGiIDNqQ9ANRJy74Y1tS.HLK','Midhila Voyages Director','admin@midhilavoyages.com','super_admin','2026-10-18 21:53:11',1,'2026-10-18 19:50:10','2026-10-18 23:11:41'),
+(2,'travel','$2y$10$tZ9kIu9x3jC7V3E17MhPceC0vN65Z62s2L0E0R1A2b3C4D5E6F7G8','Travel Operations Manager','travel@midhilavoyages.com','travel_manage',NULL,1,current_timestamp(),current_timestamp()),
+(3,'payment','$2y$10$wK1mJv0y4kD8W4F28NiQdfD1wO76a73t3M1F1S2B3c4D5E6F7G8H9','Finance & Payment Handler','payment@midhilavoyages.com','payment_handle',NULL,1,current_timestamp(),current_timestamp());
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 

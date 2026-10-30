@@ -5,6 +5,9 @@
 
 require_once __DIR__ . '/includes/admin-init.php';
 
+// Restricted to Super Admin and Payment Handle roles
+require_role(['super_admin', 'payment_handle']);
+
 // Fetch all payments
 $stmt = $db->query("
     SELECT p.*, b.customer_name, b.customer_email, b.customer_phone

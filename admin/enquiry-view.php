@@ -10,6 +10,7 @@ require_once dirname(__DIR__) . '/includes/auth.php';
 require_once dirname(__DIR__) . '/includes/csrf.php';
 
 require_admin_login();
+require_role(['super_admin', 'travel_manage']);
 
 $db = getDB();
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
