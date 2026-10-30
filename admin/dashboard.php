@@ -41,47 +41,7 @@ $recentBookings = $db->query("
 ?>
 
 <!-- =====================================================================
-     1. WELCOME & QUICK ACTIONS BANNER
-     ===================================================================== -->
-<div class="admin-card" style="padding:24px 28px;margin-bottom:28px;background:linear-gradient(135deg, #0F172A 0%, #1E293B 100%);color:#FFFFFF;border:none;box-shadow:0 8px 24px -4px rgba(15,23,42,0.12);">
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;">
-    <div>
-      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);padding:4px 12px;border-radius:999px;font-size:0.75rem;font-weight:700;margin-bottom:10px;letter-spacing:0.04em;">
-        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10B981;box-shadow:0 0 8px #10B981;"></span>
-        MIDHILA VOYAGES CONSOLE
-      </div>
-      <h1 style="font-size:1.55rem;font-weight:700;margin-bottom:6px;color:#FFFFFF;letter-spacing:-0.01em;">
-        Welcome back, <?= e($currentAdmin['full_name']) ?> 👋
-      </h1>
-      <p style="font-size:0.88rem;color:#94A3B8;margin:0;">
-        <?php if ($newEnquiries > 0): ?>
-          You have <strong style="color:#FBBF24;"><?= $newEnquiries ?> new customer <?= $newEnquiries === 1 ? 'inquiry' : 'inquiries' ?></strong> waiting for follow-up today.
-        <?php else: ?>
-          All inquiries are up to date. You can manage tour packages and confirmed reservations below.
-        <?php endif; ?>
-      </p>
-    </div>
-
-    <!-- Quick Action Shortcut Buttons -->
-    <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <a href="<?= ADMIN_URL ?>/content.php" class="admin-btn admin-btn-gold" style="padding:10px 18px;font-size:0.86rem;font-weight:700;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-        <span>Edit Page Content</span>
-      </a>
-      <a href="<?= ADMIN_URL ?>/package-edit.php" class="admin-btn" style="background:rgba(255,255,255,0.14);color:#FFFFFF !important;border:1px solid rgba(255,255,255,0.25);padding:10px 18px;font-size:0.86rem;font-weight:600;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-        <span>Add Package</span>
-      </a>
-      <a href="<?= ADMIN_URL ?>/enquiries.php" class="admin-btn" style="background:#FFFFFF;color:#0F172A !important;padding:10px 18px;font-size:0.86rem;font-weight:700;border:1px solid #E2E8F0;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        <span>View Inquiries</span>
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- =====================================================================
-     2. FOUR CORE OPERATIONAL STAT CARDS
+     1. FOUR CORE OPERATIONAL STAT CARDS
      ===================================================================== -->
 <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));gap:20px;margin-bottom:28px;">
 
