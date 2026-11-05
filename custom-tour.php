@@ -594,13 +594,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Scroll to preview smoothly
         document.getElementById('aiItineraryResultBox').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
-        alert(data.error || 'Failed to generate itinerary. Please try again.');
+        document.getElementById('aiItineraryResultBox').style.display = 'block';
+        document.getElementById('aiItineraryText').innerHTML = '<div style="color:#991B1B;background:#FEF2F2;padding:14px;border-radius:8px;border:1px solid #FECACA;">⚠️ ' + (data.error || 'Unable to generate proposal at this moment. You can submit your requirements below and our team will prepare a custom plan.') + '</div>';
+        document.getElementById('aiItineraryResultBox').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     })
     .catch(function(err) {
       btnAi.disabled = false;
       btnAi.innerHTML = originalText;
-      alert('Service temporarily busy. Please try again or submit your preferences directly.');
+      document.getElementById('aiItineraryResultBox').style.display = 'block';
+      document.getElementById('aiItineraryText').innerHTML = '<div style="color:#991B1B;background:#FEF2F2;padding:14px;border-radius:8px;border:1px solid #FECACA;">⚠️ Network connection interrupted. Please submit your travel requirements below directly.</div>';
+      document.getElementById('aiItineraryResultBox').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
   });
 

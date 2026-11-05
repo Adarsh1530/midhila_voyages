@@ -25,6 +25,18 @@ class Database {
                 // Auto-fallback to embedded SQLite for cloud preview (e.g. Vercel) if MySQL is unreachable
                 $sqliteFile = dirname(__DIR__) . '/database/midhila_fallback.sqlite';
                 if (file_exists($sqliteFile)) {
+                    // In read-only serverless environments (like Vercel Lambda), copy SQLite db to writable /tmp
+                    if (!is_writable($sqliteFile) || !is_writable(dirname($sqliteFile)) || getenv('VERCEL') || !empty($_SERVER['VERCEL'])) {
+                        $tmpDir = sys_get_temp_dir();
+                        $writableSqlite = rtrim($tmpDir, '/\\') . '/midhila_fallback.sqlite';
+                        if (!file_exists($writableSqlite) || (filemtime($sqliteFile) > filemtime($writableSqlite))) {
+                            @copy($sqliteFile, $writableSqlite);
+                        }
+                        if (file_exists($writableSqlite)) {
+                            $sqliteFile = $writableSqlite;
+                        }
+                    }
+
                     try {
                         self::$instance = new PDO("sqlite:" . $sqliteFile, null, null, [
                             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

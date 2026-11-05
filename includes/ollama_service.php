@@ -167,28 +167,34 @@ class OllamaService {
             );
         }
 
-        // 8. Generate unique reference and persist in ai_itineraries
+        // 8. Generate unique reference and persist in ai_itineraries (non-blocking)
         $refNo = 'MV-AI-' . date('Y') . '-' . strtoupper(substr(bin2hex(random_bytes(4)), 0, 6));
-        $saveStmt = $db->prepare("
-            INSERT INTO ai_itineraries (
-                reference_no, destination_id, customer_name, customer_phone,
-                customer_email, duration_days, budget_range, travel_type,
-                selected_places_json, itinerary_content, model_used, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
-        ");
-        $saveStmt->execute([
-            $refNo,
-            $destId,
-            $params['customer_name'] ?? 'Guest Traveller',
-            $params['customer_phone'] ?? '',
-            $params['customer_email'] ?? '',
-            $days,
-            $budget,
-            $travelType,
-            json_encode($customerSelectedPlaces),
-            $ollamaResult,
-            $modelUsed,
-        ]);
+        $now = date('Y-m-d H:i:s');
+        try {
+            $saveStmt = $db->prepare("
+                INSERT INTO ai_itineraries (
+                    reference_no, destination_id, customer_name, customer_phone,
+                    customer_email, duration_days, budget_range, travel_type,
+                    selected_places_json, itinerary_content, model_used, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ");
+            $saveStmt->execute([
+                $refNo,
+                $destId,
+                $params['customer_name'] ?? 'Guest Traveller',
+                $params['customer_phone'] ?? '',
+                $params['customer_email'] ?? '',
+                $days,
+                $budget,
+                $travelType,
+                json_encode($customerSelectedPlaces),
+                $ollamaResult,
+                $modelUsed,
+                $now,
+            ]);
+        } catch (Throwable $e) {
+            error_log("Notice: Failed to persist ai_itinerary record (non-fatal): " . $e->getMessage());
+        }
 
         return [
             'success'          => true,

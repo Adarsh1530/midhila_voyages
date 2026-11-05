@@ -81,8 +81,9 @@ class OverpassService {
         // 2. Check cache unless force refresh
         $cacheKey = "dest_{$destinationId}_{$category}_{$radiusKm}km";
         if (!$forceRefresh) {
-            $cStmt = $db->prepare("SELECT response_json, expires_at FROM osm_cache WHERE cache_key = ? AND expires_at > datetime('now')");
-            $cStmt->execute([$cacheKey]);
+            $nowStr = date('Y-m-d H:i:s');
+            $cStmt = $db->prepare("SELECT response_json, expires_at FROM osm_cache WHERE cache_key = ? AND expires_at > ?");
+            $cStmt->execute([$cacheKey, $nowStr]);
             $cached = $cStmt->fetch();
 
             if ($cached && !empty($cached['response_json'])) {
@@ -106,13 +107,19 @@ class OverpassService {
             // 5. Parse, sanitize and upsert places
             $parsedCount = self::upsertOsmElements($destinationId, $rawOsmData['elements']);
 
-            // 6. Save in cache
-            $expiresAt = date('Y-m-d H:i:s', strtotime("+ " . self::$cacheTtlDays . " days"));
-            $saveCache = $db->prepare("
-                INSERT OR REPLACE INTO osm_cache (cache_key, destination_id, category, response_json, expires_at, created_at)
-                VALUES (?, ?, ?, ?, ?, datetime('now'))
-            ");
-            $saveCache->execute([$cacheKey, $destinationId, $category, json_encode(['count' => $parsedCount]), $expiresAt]);
+            // 6. Save in cache (non-blocking)
+            try {
+                $expiresAt = date('Y-m-d H:i:s', strtotime("+ " . self::$cacheTtlDays . " days"));
+                $nowStr = date('Y-m-d H:i:s');
+                $db->prepare("DELETE FROM osm_cache WHERE cache_key = ?")->execute([$cacheKey]);
+                $saveCache = $db->prepare("
+                    INSERT INTO osm_cache (cache_key, destination_id, category, response_json, expires_at, created_at)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                ");
+                $saveCache->execute([$cacheKey, $destinationId, $category, json_encode(['count' => $parsedCount]), $expiresAt, $nowStr]);
+            } catch (Throwable $ce) {
+                error_log("Notice: Cache save skipped: " . $ce->getMessage());
+            }
 
             return [
                 'success' => true,
@@ -217,6 +224,7 @@ OVERPASS;
             if ($aaVal !== false && $aaVal !== null) $autoApprove = (int)$aaVal;
         } catch (Exception $e) {}
 
+        $nowStr = date('Y-m-d H:i:s');
         $checkStmt = $db->prepare("SELECT id, is_approved, is_verified FROM external_places WHERE osm_type = ? AND osm_id = ?");
         $insertStmt = $db->prepare("
             INSERT INTO external_places (
@@ -230,7 +238,7 @@ OVERPASS;
                 ?, ?, ?, ?, ?,
                 ?, ?, ?, ?,
                 ?, ?, ?, ?,
-                ?, ?, ?, datetime('now'), datetime('now')
+                ?, ?, ?, ?, ?
             )
         ");
         $updateStmt = $db->prepare("
@@ -243,11 +251,12 @@ OVERPASS;
                 contact_phone = COALESCE(NULLIF(?, ''), contact_phone),
                 website = COALESCE(NULLIF(?, ''), website),
                 raw_tags_json = ?,
-                updated_at = datetime('now')
+                updated_at = ?
             WHERE id = ?
         ");
 
-        foreach ($elements as $el) {
+        try {
+            foreach ($elements as $el) {
             $tags = $el['tags'] ?? [];
             $name = trim($tags['name'] ?? $tags['name:en'] ?? '');
             if (empty($name)) continue; // Skip unnamed nodes
@@ -370,6 +379,7 @@ OVERPASS;
                     $phone,
                     $website,
                     $rawJson,
+                    $nowStr,
                     $existing['id'],
                 ]);
             } else {
@@ -396,12 +406,17 @@ OVERPASS;
                     $rawJson,
                     $autoApprove,
                     0, // is_verified
+                    $nowStr,
+                    $nowStr,
                 ]);
                 $count++;
             }
         }
+    } catch (Throwable $t) {
+        error_log("Notice: Error during OSM upsert (non-fatal): " . $t->getMessage());
+    }
 
-        return $count;
+    return $count;
     }
 
     /**

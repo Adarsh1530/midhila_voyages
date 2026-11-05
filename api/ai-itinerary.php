@@ -77,10 +77,40 @@ $params = [
 try {
     $res = OllamaService::generateGroundedItinerary($params);
     echo json_encode($res);
-} catch (Exception $e) {
-    error_log("AI Itinerary Endpoint Error: " . $e->getMessage());
+} catch (Throwable $e) {
+    error_log("AI Itinerary Endpoint Error: " . $e->getMessage() . " in " . $e->getFile() . ":" . $e->getLine());
+
+    // Failsafe: Generate grounded fallback plan so visitor never sees a blocker error
+    $destName = 'Kerala & All-India Circuit';
+    try {
+        $db = getDB();
+        $dStmt = $db->prepare("SELECT name FROM destinations WHERE id = ?");
+        $dStmt->execute([$destId]);
+        $nameFromDb = $dStmt->fetchColumn();
+        if ($nameFromDb) $destName = $nameFromDb;
+    } catch (Throwable $dbErr) {}
+
+    $fallbackItinerary = OllamaService::generateFallbackItinerary(
+        $params,
+        ['name' => $destName],
+        [],
+        [],
+        [],
+        $params['duration_days'] ?? 3,
+        $params['language'] ?? 'en'
+    );
+
     echo json_encode([
-        'success' => false,
-        'error'   => 'An error occurred while generating your itinerary. Our team has been notified.',
+        'success'          => true,
+        'reference_no'     => 'MV-AI-' . date('Y') . '-' . strtoupper(substr(bin2hex(random_bytes(4)), 0, 6)),
+        'destination_id'   => $destId,
+        'destination_name' => $destName,
+        'duration_days'    => $params['duration_days'] ?? 3,
+        'model_used'       => 'curated-fallback',
+        'itinerary'        => $fallbackItinerary,
+        'verified_hotels'  => [],
+        'grounded_places'  => [],
+        'selected_places'  => [],
+        'disclaimer'       => 'All hotel room allotments, schedules, and pricing are subject to direct availability check and confirmation by Midhila Voyages management.',
     ]);
 }

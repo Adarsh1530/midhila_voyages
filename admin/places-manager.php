@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $placeId = (int)($_POST['place_id'] ?? 0);
             $newStatus = (int)($_POST['new_status'] ?? 1); // 1 = approved, -1 = hidden, 0 = pending
             if ($placeId > 0) {
-                $upd = $db->prepare("UPDATE external_places SET is_approved = ?, updated_at = datetime('now') WHERE id = ?");
+                $upd = $db->prepare("UPDATE external_places SET is_approved = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
                 $upd->execute([$newStatus, $placeId]);
                 set_flash_message('success', 'Place status updated.');
             }
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $placeId = (int)($_POST['place_id'] ?? 0);
             $val = (int)($_POST['is_verified'] ?? 0);
             if ($placeId > 0) {
-                $upd = $db->prepare("UPDATE external_places SET is_verified = ?, updated_at = datetime('now') WHERE id = ?");
+                $upd = $db->prepare("UPDATE external_places SET is_verified = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
                 $upd->execute([$val ? 1 : 0, $placeId]);
                 set_flash_message('success', 'Verification badge updated.');
             }
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         food_options = ?,
                         room_categories = ?,
                         is_verified = 1,
-                        updated_at = datetime('now')
+                        updated_at = CURRENT_TIMESTAMP
                     WHERE id = ?
                 ");
                 $upd->execute([
