@@ -39,51 +39,51 @@ $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
             <?= e($footerDesc) ?>
           </p>
           <div style="display:flex;flex-direction:column;gap:8px;font-size:0.86rem;color:var(--color-text-body);">
-            <div><strong style="color:var(--color-text-main);">Hotline:</strong> <?= e($agencyPhone) ?>, <?= e($agencySecondaryPhone) ?>, <?= e($agencyHotlinePhone) ?></div>
-            <div><strong style="color:var(--color-text-main);">Email:</strong> <?= e($agencyEmail) ?></div>
-            <div><strong style="color:var(--color-text-main);">Headquarters:</strong> <?= e($officeAddress) ?></div>
+            <div><strong style="color:var(--color-text-main);"><?= e(__t('footer_hotline_label', 'Hotline:')) ?></strong> <?= e($agencyPhone) ?>, <?= e($agencySecondaryPhone) ?>, <?= e($agencyHotlinePhone) ?></div>
+            <div><strong style="color:var(--color-text-main);"><?= e(__t('footer_email_label', 'Email:')) ?></strong> <?= e($agencyEmail) ?></div>
+            <div><strong style="color:var(--color-text-main);"><?= e(__t('footer_hq_label', 'Headquarters:')) ?></strong> <?= e($officeAddress) ?></div>
           </div>
         </div>
 
         <!-- Column 2: Geographic Portfolios -->
         <div class="footer-col">
-          <h4 class="footer-col__title">Destinations</h4>
+          <h4 class="footer-col__title"><?= e(__t('footer_col_destinations', 'Destinations')) ?></h4>
           <div class="footer-links">
-            <a href="<?= BASE_URL ?>/destination.php?slug=kerala" class="footer-link">Kerala Backwaters</a>
-            <a href="<?= BASE_URL ?>/destination.php?slug=tamil-nadu" class="footer-link">Tamil Nadu Temples</a>
-            <a href="<?= BASE_URL ?>/destination.php?slug=varanasi" class="footer-link">Varanasi Spiritual</a>
-            <a href="<?= BASE_URL ?>/destination.php?slug=himalayas" class="footer-link">Himalayan Valleys</a>
-            <a href="<?= BASE_URL ?>/destination.php?slug=lakshadweep" class="footer-link">Lakshadweep Atolls</a>
-            <a href="<?= BASE_URL ?>/destination.php?slug=andaman" class="footer-link">Andaman Islands</a>
-            <a href="<?= BASE_URL ?>/destinations.php" class="footer-link" style="color:var(--color-gold-deep);font-weight:700;">Explore All Portfolios &rarr;</a>
+            <a href="<?= BASE_URL ?>/destination.php?slug=kerala" class="footer-link"><?= e(__t('footer_link_kerala', 'Kerala Backwaters')) ?></a>
+            <a href="<?= BASE_URL ?>/destination.php?slug=tamil-nadu" class="footer-link"><?= e(__t('footer_link_tamil_nadu', 'Tamil Nadu Temples')) ?></a>
+            <a href="<?= BASE_URL ?>/destination.php?slug=varanasi" class="footer-link"><?= e(__t('footer_link_varanasi', 'Varanasi Spiritual')) ?></a>
+            <a href="<?= BASE_URL ?>/destination.php?slug=himalayas" class="footer-link"><?= e(__t('footer_link_himalayas', 'Himalayan Valleys')) ?></a>
+            <a href="<?= BASE_URL ?>/destination.php?slug=lakshadweep" class="footer-link"><?= e(__t('footer_link_lakshadweep', 'Lakshadweep Atolls')) ?></a>
+            <a href="<?= BASE_URL ?>/destination.php?slug=andaman" class="footer-link"><?= e(__t('footer_link_andaman', 'Andaman Islands')) ?></a>
+            <a href="<?= BASE_URL ?>/destinations.php" class="footer-link" style="color:var(--color-gold-deep);font-weight:700;"><?= __t('footer_link_all_dest', 'Explore All Portfolios &rarr;') ?></a>
           </div>
         </div>
 
         <!-- Column 3: The Sanctuary & Experiences -->
         <div class="footer-col">
-          <h4 class="footer-col__title">Experiences</h4>
+          <h4 class="footer-col__title"><?= e(__t('footer_col_experiences', 'Experiences')) ?></h4>
           <div class="footer-links">
-            <a href="<?= BASE_URL ?>/pilgrimage.php" class="footer-link">Sacred Vedic Yatras</a>
-            <a href="<?= BASE_URL ?>/packages.php?category=family" class="footer-link">Curated Family Holidays</a>
-            <a href="<?= BASE_URL ?>/packages.php?category=honeymoon" class="footer-link">Romantic Escapes</a>
-            <a href="<?= BASE_URL ?>/packages.php?category=adventure" class="footer-link">High Altitude Trekking</a>
-            <a href="<?= BASE_URL ?>/services.php" class="footer-link">Concierge Services</a>
-            <a href="<?= BASE_URL ?>/gallery.php" class="footer-link">Travel Memoir Gallery</a>
+            <a href="<?= BASE_URL ?>/pilgrimage.php" class="footer-link"><?= e(__t('footer_link_pilgrim', 'Sacred Vedic Yatras')) ?></a>
+            <a href="<?= BASE_URL ?>/packages.php?category=family" class="footer-link"><?= e(__t('footer_link_family', 'Curated Family Holidays')) ?></a>
+            <a href="<?= BASE_URL ?>/packages.php?category=honeymoon" class="footer-link"><?= e(__t('footer_link_romantic', 'Romantic Escapes')) ?></a>
+            <a href="<?= BASE_URL ?>/packages.php?category=adventure" class="footer-link"><?= e(__t('footer_link_adventure', 'High Altitude Trekking')) ?></a>
+            <a href="<?= BASE_URL ?>/services.php" class="footer-link"><?= e(__t('footer_link_concierge', 'Concierge Services')) ?></a>
+            <a href="<?= BASE_URL ?>/gallery.php" class="footer-link"><?= e(__t('footer_link_gallery', 'Travel Memoir Gallery')) ?></a>
           </div>
         </div>
 
         <!-- Column 4: Trust, Safety & Legal -->
         <div class="footer-col">
-          <h4 class="footer-col__title">Client Assurance</h4>
+          <h4 class="footer-col__title"><?= e(__t('footer_col_assurance', 'Client Assurance')) ?></h4>
           <p style="font-size:0.86rem;line-height:1.7;color:var(--color-text-muted);margin-bottom:16px;">
-            Recognized hospitality curation, 24/7 dedicated on-ground transport coordination, verified accommodations, and transparent booking protection.
+            <?= e(__t('footer_assurance_text', 'Recognized hospitality curation, 24/7 dedicated on-ground transport coordination, verified accommodations, and transparent booking protection.')) ?>
           </p>
           <div class="footer-links">
-            <a href="<?= BASE_URL ?>/about.php" class="footer-link">The Midhila Philosophy</a>
-            <a href="<?= BASE_URL ?>/faq.php" class="footer-link">Frequently Asked Questions</a>
-            <a href="<?= BASE_URL ?>/terms.php" class="footer-link">Terms of Service</a>
-            <a href="<?= BASE_URL ?>/privacy.php" class="footer-link">Privacy Policy</a>
-            <a href="<?= BASE_URL ?>/refund-policy.php" class="footer-link">Booking & Refund Policy</a>
+            <a href="<?= BASE_URL ?>/about.php" class="footer-link"><?= e(__t('footer_link_philosophy', 'The Midhila Philosophy')) ?></a>
+            <a href="<?= BASE_URL ?>/faq.php" class="footer-link"><?= e(__t('footer_link_faqs', 'Frequently Asked Questions')) ?></a>
+            <a href="<?= BASE_URL ?>/terms.php" class="footer-link"><?= e(__t('footer_link_terms', 'Terms of Service')) ?></a>
+            <a href="<?= BASE_URL ?>/privacy.php" class="footer-link"><?= e(__t('footer_link_privacy', 'Privacy Policy')) ?></a>
+            <a href="<?= BASE_URL ?>/refund-policy.php" class="footer-link"><?= e(__t('footer_link_refund', 'Booking & Refund Policy')) ?></a>
           </div>
         </div>
 
@@ -92,7 +92,7 @@ $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
       <!-- Bottom Bar -->
       <div class="footer-bottom">
         <div>
-          &copy; <?= date('Y') ?> <?= e($siteName) ?>. All rights reserved.
+          &copy; <?= date('Y') ?> <?= e($siteName) ?>. <?= e(__t('footer_all_rights_reserved', 'All rights reserved.')) ?>
         </div>
         <div>
           <?= e($footerTagline) ?>

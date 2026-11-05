@@ -15,7 +15,8 @@ $db = getDB();
 
 // Fetch dedicated pilgrimage packages
 $stmt = $db->query("
-    SELECT p.*, d.name AS destination_name, d.region_state, c.name AS category_name, c.slug AS category_slug
+    SELECT p.*, d.name AS destination_name, d.name_ml AS destination_name_ml, d.name_ta AS destination_name_ta, d.region_state, 
+           c.name AS category_name, c.name_ml AS category_name_ml, c.name_ta AS category_name_ta, c.slug AS category_slug
     FROM `packages` p
     JOIN `destinations` d ON p.destination_id = d.id
     JOIN `package_categories` c ON p.category_id = c.id
@@ -64,15 +65,15 @@ require_once __DIR__ . '/includes/header.php';
     
     <div class="pilgrim-banner">
       <div style="text-align:center;max-width:760px;margin:0 auto 36px;">
-        <span style="font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Signature 5-Day Circuit</span>
-        <h2 style="font-size:clamp(1.8rem, 3.2vw, 2.8rem);margin-top:6px;">Pilgrim Tours &bull; Divine Destinations</h2>
-        <p style="font-size:0.95rem;color:var(--color-text-secondary);margin-top:8px;">A comprehensive, beautifully organized spiritual voyage across Tamil Nadu’s most celebrated shrines.</p>
+        <span style="font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;"><?= e(__t('signature_5day_circuit', 'Signature 5-Day Circuit')) ?></span>
+        <h2 style="font-size:clamp(1.8rem, 3.2vw, 2.8rem);margin-top:6px;"><?= e(__t('pilgrim_tours_divine', 'Pilgrim Tours • Divine Destinations')) ?></h2>
+        <p style="font-size:0.95rem;color:var(--color-text-secondary);margin-top:8px;"><?= e(__t('pilgrim_tours_divine_desc', 'A comprehensive, beautifully organized spiritual voyage across Tamil Nadu’s most celebrated shrines.')) ?></p>
       </div>
 
       <!-- Places Covered Grid -->
       <div style="margin-bottom:36px;">
         <h3 style="font-size:1.1rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-text-main);margin-bottom:16px;text-align:center;">
-          Holy Places Covered on the Trail
+          <?= e(__t('holy_places_covered', 'Holy Places Covered on the Trail')) ?>
         </h3>
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;">
           
@@ -130,19 +131,19 @@ require_once __DIR__ . '/includes/header.php';
       <!-- Tour Tariff, Dates & Inclusions Breakdown -->
       <div class="responsive-2col" style="align-items:center;background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:clamp(20px, 3vw, 32px);">
         <div>
-          <span style="font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Fixed Transparent Tariff</span>
+          <span style="font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;"><?= e(__t('fixed_transparent_tariff', 'Fixed Transparent Tariff')) ?></span>
           <div style="font-size:2.8rem;font-weight:800;color:var(--color-text-headline);line-height:1;margin:6px 0;">
-            <?= e(get_setting('pilgrim_featured_price', '₹6,500')) ?> <span style="font-size:1rem;color:var(--color-text-muted);font-weight:400;">/ person</span>
+            <?= e(get_setting('pilgrim_featured_price', '₹6,500')) ?> <span style="font-size:1rem;color:var(--color-text-muted);font-weight:400;"><?= e(__t('per_person', '/ person')) ?></span>
           </div>
           <p style="font-size:0.88rem;color:var(--color-text-secondary);margin-bottom:16px;">
-            <strong>Tour Dates:</strong> <?= e(get_setting('pilgrim_upcoming_dates', '23.12.26 to 27.12.26')) ?> &bull; <?= e(get_setting('pilgrim_featured_duration', '5 Days / 4 Nights')) ?>
+            <strong><?= e(__t('tour_dates_label', 'Tour Dates:')) ?></strong> <?= e(get_setting('pilgrim_upcoming_dates', '23.12.26 to 27.12.26')) ?> &bull; <?= e(get_setting('pilgrim_featured_duration', '5 Days / 4 Nights')) ?>
           </p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;">
             <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I want to reserve slots for the 5-Day Pilgrim Tour (₹6,500).")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
-              <span>Reserve via WhatsApp</span>
+              <span><?= e(__t('btn_whatsapp_us', 'Reserve via WhatsApp')) ?></span>
             </a>
             <a href="<?= BASE_URL ?>/enquiry.php?package=pilgrim-tour" class="btn-cinematic-primary">
-              <span>Book Online</span>
+              <span><?= e(__t('btn_book_now', 'Book Online')) ?></span>
             </a>
           </div>
         </div>

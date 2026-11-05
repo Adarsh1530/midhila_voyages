@@ -40,7 +40,8 @@ $categories = $catStmt->fetchAll();
 
 // 3. Fetch Featured Tour Packages
 $pkgStmt = $db->query("
-    SELECT p.*, d.name AS destination_name, d.region_state, c.name AS category_name, c.slug AS category_slug
+    SELECT p.*, d.name AS destination_name, d.name_ml AS destination_name_ml, d.name_ta AS destination_name_ta, d.region_state, 
+           c.name AS category_name, c.name_ml AS category_name_ml, c.name_ta AS category_name_ta, c.slug AS category_slug
     FROM `packages` p
     JOIN `destinations` d ON p.destination_id = d.id
     JOIN `package_categories` c ON p.category_id = c.id
@@ -52,7 +53,8 @@ $packages = $pkgStmt->fetchAll();
 
 // 4. Fetch Dedicated Pilgrimage Packages
 $pilgrimStmt = $db->query("
-    SELECT p.*, d.name AS destination_name, d.region_state, c.name AS category_name, c.slug AS category_slug
+    SELECT p.*, d.name AS destination_name, d.name_ml AS destination_name_ml, d.name_ta AS destination_name_ta, d.region_state, 
+           c.name AS category_name, c.name_ml AS category_name_ml, c.name_ta AS category_name_ta, c.slug AS category_slug
     FROM `packages` p
     JOIN `destinations` d ON p.destination_id = d.id
     JOIN `package_categories` c ON p.category_id = c.id
@@ -225,18 +227,18 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div class="dest-showcase-card__content">
               <div class="dest-coordinates">
-                <?= e($dest['region_state'] ?? 'India') ?> &bull; Curated Circuit
+                <?= e($dest['region_state'] ?? 'India') ?> &bull; <?= e(__t('curated_circuit', 'Curated Circuit')) ?>
               </div>
               <h3 class="dest-title">
                 <a href="<?= BASE_URL ?>/destination.php?slug=<?= urlencode($destSlug) ?>">
-                  <?= e($dest['name']) ?>
+                  <?= e(loc($dest, 'name')) ?>
                 </a>
               </h3>
               <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.65;margin-bottom:16px;">
-                <?= e(truncate_words($dest['description'] ?? '', 18)) ?>
+                <?= e(truncate_words(loc($dest, 'description'), 18)) ?>
               </p>
               <a href="<?= BASE_URL ?>/destination.php?slug=<?= urlencode($destSlug) ?>" class="link-editorial-arrow">
-                <span>Discover Itinerary</span>
+                <span><?= e(__t('discover_itinerary', 'Discover Itinerary')) ?></span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </a>
             </div>
@@ -422,11 +424,11 @@ require_once __DIR__ . '/includes/header.php';
 
     <!-- Category Filter Pills -->
     <div class="filter-pills" style="margin-bottom:40px;">
-      <a href="<?= BASE_URL ?>/packages.php" class="filter-pill is-active">All Itineraries</a>
+      <a href="<?= BASE_URL ?>/packages.php" class="filter-pill is-active"><?= e(__t('all_itineraries', 'All Itineraries')) ?></a>
       <?php if (!empty($categories)): ?>
         <?php foreach ($categories as $cat): ?>
           <a href="<?= BASE_URL ?>/packages.php?category=<?= urlencode($cat['slug']) ?>" class="filter-pill">
-            <?= e($cat['name']) ?>
+            <?= e(loc($cat, 'name')) ?>
           </a>
         <?php endforeach; ?>
       <?php endif; ?>
@@ -503,10 +505,10 @@ require_once __DIR__ . '/includes/header.php';
 
           <div style="display:flex;align-items:center;flex-wrap:wrap;gap:16px;">
             <a href="<?= BASE_URL ?>/pilgrimage.php" class="btn-cinematic-gold">
-              <span>View Pilgrimage Circuit</span>
+              <span><?= e(__t('btn_explore_sacred', 'View Pilgrimage Circuit')) ?></span>
             </a>
             <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to reserve seats for the upcoming Pilgrim Tour.")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
-              <span>Reserve via WhatsApp</span>
+              <span><?= e(__t('btn_whatsapp_us', 'Reserve via WhatsApp')) ?></span>
             </a>
           </div>
         </div>
@@ -514,7 +516,7 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Featured Price Badge & Image Frame -->
         <div class="pilgrim-banner__right">
           <div style="background:#FFFFFF;border:2px solid rgba(197, 160, 89, 0.4);border-radius:var(--radius-lg);padding:32px 24px;box-shadow:var(--shadow-card);">
-            <span style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Special Yatra Package</span>
+            <span style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;"><?= e(__t('signature_5day_circuit', 'Special Yatra Package')) ?></span>
             <div style="font-size:3rem;font-weight:800;color:var(--color-text-headline);line-height:1;margin:12px 0 6px;">
               <?= e(get_setting('pilgrim_featured_price', '₹6,500')) ?>
             </div>
@@ -604,7 +606,7 @@ require_once __DIR__ . '/includes/header.php';
   <div class="container">
     
     <div style="text-align:center;max-width:700px;margin:0 auto 50px;">
-      <h2 class="editorial-headline-large">Journeys Remembered.</h2>
+      <h2 class="editorial-headline-large"><?= e(__t('testimonials_title', 'Journeys Remembered.')) ?></h2>
     </div>
 
     <div class="packages-grid">
@@ -621,7 +623,7 @@ require_once __DIR__ . '/includes/header.php';
               <strong style="color:var(--color-text-headline);font-size:0.9rem;"><?= e($t['client_name'] ?? $t['customer_name'] ?? 'Traveller') ?></strong>
               <span style="display:block;font-size:0.75rem;color:var(--color-text-muted);"><?= e($t['location'] ?? $t['customer_location'] ?? 'India') ?></span>
             </div>
-            <span style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Verified Journey</span>
+            <span style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;"><?= e(__t('verified_journey', 'Verified Journey')) ?></span>
           </div>
         </div>
       <?php endforeach; ?>
@@ -651,26 +653,26 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="form-row-2col">
           <div class="editorial-form-group">
-            <label class="editorial-label">Your Name *</label>
+            <label class="editorial-label"><?= e(__t('form_full_name', 'Your Name *')) ?></label>
             <input type="text" name="name" class="editorial-input" placeholder="e.g. Adarsh" required>
           </div>
 
           <div class="editorial-form-group">
-            <label class="editorial-label">Phone / WhatsApp Number *</label>
+            <label class="editorial-label"><?= e(__t('form_phone', 'Phone / WhatsApp Number *')) ?></label>
             <input type="tel" name="phone" class="editorial-input" placeholder="+91 98765 43210" required>
           </div>
         </div>
 
         <div class="form-row-2col">
           <div class="editorial-form-group">
-            <label class="editorial-label">Email Address *</label>
+            <label class="editorial-label"><?= e(__t('form_email', 'Email Address *')) ?></label>
             <input type="email" name="email" class="editorial-input" placeholder="you@domain.com" required>
           </div>
 
           <div class="editorial-form-group">
-            <label class="editorial-label">Preferred Destination</label>
+            <label class="editorial-label"><?= e(__t('form_select_destination', 'Preferred Destination')) ?></label>
             <select name="destination" class="editorial-select">
-              <option value="">Select Destination</option>
+              <option value=""><?= e(__t('form_select_destination', 'Select Destination')) ?></option>
               <option value="kerala">Kerala Backwaters &amp; Munnar</option>
               <option value="tamil-nadu">Tamil Nadu Temple Circuit</option>
               <option value="varanasi">Varanasi &amp; Prayagraj</option>
@@ -683,7 +685,7 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <div class="editorial-form-group">
-          <label class="editorial-label">Travel Notes / Preferences</label>
+          <label class="editorial-label"><?= e(__t('form_additional_req', 'Travel Notes / Preferences')) ?></label>
           <textarea name="message" class="editorial-textarea" rows="3" placeholder="Tell us about travelers, expected dates, and any special accommodations..."></textarea>
         </div>
 
@@ -694,7 +696,7 @@ require_once __DIR__ . '/includes/header.php';
           </button>
 
           <span style="font-size:0.8rem;color:var(--color-text-muted);">
-            Prefer instant messaging? <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to enquire about travel packages.")) ?>" target="_blank" rel="noopener noreferrer" style="color:var(--color-whatsapp);font-weight:700;">Chat on WhatsApp &rarr;</a>
+            <?= e(__t('prefer_instant_messaging', 'Prefer instant messaging?')) ?> <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to enquire about travel packages.")) ?>" target="_blank" rel="noopener noreferrer" style="color:var(--color-whatsapp);font-weight:700;"><?= e(__t('chat_on_whatsapp', 'Chat on WhatsApp')) ?> &rarr;</a>
           </span>
         </div>
       </form>

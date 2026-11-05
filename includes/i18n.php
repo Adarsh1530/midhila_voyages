@@ -642,6 +642,412 @@ function get_translation_dictionary(): array {
             'en' => 'Your Unique Booking Reference Number:',
             'ml' => 'നിങ്ങളുടെ ബുക്കിംഗ് റഫറൻസ് നമ്പർ:',
             'ta' => 'உங்கள் தனித்துவமான முன்பதிவு எண்:'
+        ],
+
+        // General UI, Cards & Badges
+        'starting_from' => [
+            'en' => 'Starting From',
+            'ml' => 'തുടങ്ങുന്നത്',
+            'ta' => 'தொடங்கும் விலை'
+        ],
+        'on_request' => [
+            'en' => 'On Request',
+            'ml' => 'ലഭ്യത അനുസരിച്ച്',
+            'ta' => 'விசாரணைக்கு ஏற்ப'
+        ],
+        'per_person' => [
+            'en' => '/ person',
+            'ml' => '/ ഒരാൾക്ക്',
+            'ta' => '/ நபர் ஒன்றுக்கு'
+        ],
+        'days_abbr' => [
+            'en' => 'D',
+            'ml' => 'ദിനം',
+            'ta' => 'நாட்கள்'
+        ],
+        'nights_abbr' => [
+            'en' => 'N',
+            'ml' => 'രാത്രി',
+            'ta' => 'இரவு'
+        ],
+        'all_itineraries' => [
+            'en' => 'All Itineraries',
+            'ml' => 'എല്ലാ പാക്കേജുകളും',
+            'ta' => 'அனைத்து பயணங்கள்'
+        ],
+        'curated_circuit' => [
+            'en' => 'Curated Circuit',
+            'ml' => 'പ്രത്യേകം തയ്യാറാക്കിയത്',
+            'ta' => 'வடிவமைக்கப்பட்ட பயணம்'
+        ],
+        'discover_itinerary' => [
+            'en' => 'Discover Itinerary',
+            'ml' => 'വിശദാംശങ്ങൾ കാണുക',
+            'ta' => 'பயண விபரம் காண்க'
+        ],
+        'view_itineraries_guide' => [
+            'en' => 'View Itineraries & Guide',
+            'ml' => 'വിവരങ്ങളും വഴികാട്ടിയും',
+            'ta' => 'பயண வழிகாட்டி காண்க'
+        ],
+        'kerala_hero_title' => [
+            'en' => 'God\'s Own Country • Tailored Experiences',
+            'ml' => 'ദൈവത്തിന്റെ സ്വന്തം നാട് • ഹൃദ്യമായ കേരളം',
+            'ta' => 'கடவுளின் சொந்த நாடு • தனிப்பயன் கேரளா'
+        ],
+        'kerala_hero_sub' => [
+            'en' => 'Discover Kerala through our specialized tourism categories with curated destinations, verified boutique stays, private chauffeurs, and customized itineraries.',
+            'ml' => 'കേരളത്തിലെ മികച്ച സഞ്ചാര കേന്ദ്രങ്ങൾ, പരിശോധിച്ചുറപ്പിച്ച റിസോർട്ടുകൾ, പ്രൈവറ്റ് എസി വാഹനം, വ്യക്തിഗത യാത്രാക്രമങ്ങൾ എന്നിവ മിഥില വോയേജസിനൊപ്പം അനുഭവിക്കൂ.',
+            'ta' => 'கேரளாவின் சிறந்த இடங்கள், சரிபார்க்கப்பட்ட தங்குமிடங்கள், தனி நபர் வாகனம் மற்றும் தனிப்பயனாக்கப்பட்ட பயணங்களை மிதிலா வாயேஜஸ் உடன் கண்டறியுங்கள்.'
+        ],
+        'explore_all_packages' => [
+            'en' => 'Explore All Kerala Tours',
+            'ml' => 'എല്ലാ കേരള യാത്രകളും',
+            'ta' => 'அனைத்து கேரளா சுற்றுலா'
+        ],
+        'btn_view_packages' => [
+            'en' => 'View Packages',
+            'ml' => 'പാക്കേജുകൾ കാണുക',
+            'ta' => 'தொகுப்புகளை காண்க'
+        ],
+        'btn_continue_browsing' => [
+            'en' => 'Continue Browsing',
+            'ml' => 'തുടർന്നും കാണുക',
+            'ta' => 'தொடர்ந்து பார்க்க'
+        ],
+        'btn_back_to_home' => [
+            'en' => 'Back to Home',
+            'ml' => 'ഹോമിലേക്ക് മടങ്ങുക',
+            'ta' => 'முகப்புக்கு செல்க'
+        ],
+        'btn_book_venue' => [
+            'en' => 'Book This Venue',
+            'ml' => 'ഈ വേദി ബുക്ക് ചെയ്യുക',
+            'ta' => 'இந்த அரங்கை தேர்வு செய்க'
+        ],
+        'btn_select_property' => [
+            'en' => 'Select This Property for Booking',
+            'ml' => 'ഈ താമസം തിരഞ്ഞെടുക്കുക',
+            'ta' => 'இந்த விடுதியை தேர்வு செய்க'
+        ],
+        'btn_explore_sacred' => [
+            'en' => 'Explore Sacred Circuits',
+            'ml' => 'പുണ്യ തീർത്ഥാടനങ്ങൾ കാണുക',
+            'ta' => 'ஆன்மீக யாத்திரைகளை காண்க'
+        ],
+        'btn_group_yatra' => [
+            'en' => 'Group Yatra Enquiry',
+            'ml' => 'ഗ്രൂപ്പ് യാത്രാ അന്വേഷണം',
+            'ta' => 'குழு யாத்திரை விசாரணை'
+        ],
+        'signature_5day_circuit' => [
+            'en' => 'Signature 5-Day Circuit',
+            'ml' => 'പ്രത്യേക 5 ദിന തീർത്ഥാടനം',
+            'ta' => 'சிறப்பு 5 நாள் ஆன்மீக யாத்திரை'
+        ],
+        'pilgrim_tours_divine' => [
+            'en' => 'Pilgrim Tours • Divine Destinations',
+            'ml' => 'തീർത്ഥാടന യാത്രകൾ • ദിവ്യ സന്നിധാനങ്ങൾ',
+            'ta' => 'புனித யாத்திரை • ஆலய தரிசனம்'
+        ],
+        'pilgrim_tours_divine_desc' => [
+            'en' => 'A comprehensive, beautifully organized spiritual voyage across Tamil Nadu’s most celebrated shrines.',
+            'ml' => 'തമിഴ്നാട്ടിലെ പ്രശസ്തമായ പുണ്യക്ഷേത്രങ്ങളിലേക്ക് ചിട്ടയോടെ നടത്തുന്ന ആത്മീയ തീർത്ഥാടനം.',
+            'ta' => 'தமிழ்நாட்டின் புகழ்பெற்ற புனித தலங்களுக்கு நேர்த்தியாக ஏற்பாடு செய்யப்பட்ட ஆன்மீகப் பயணம்.'
+        ],
+        'holy_places_covered' => [
+            'en' => 'Holy Places Covered on the Trail',
+            'ml' => 'യാത്രയിൽ സന്ദർശിക്കുന്ന പുണ്യസ്ഥലങ്ങൾ',
+            'ta' => 'யாத்திரையில் காணும் புனித தலங்கள்'
+        ],
+        'capacity_label' => [
+            'en' => 'Capacity',
+            'ml' => 'ഇരിപ്പിട ശേഷി',
+            'ta' => 'கொள்ளளவு'
+        ],
+        'corp_acc_onsite' => [
+            'en' => 'Delegate accommodation available on-site',
+            'ml' => 'പ്രതിനിധികൾക്കായി ഒരേ ക്യാമ്പസിൽ താമസ സൗകര്യം ലഭ്യമാണ്',
+            'ta' => 'பங்கேற்பாளர்களுக்கு வளாகத்திலேயே தங்கும் வசதி உள்ளது'
+        ],
+        'corp_form_title' => [
+            'en' => 'Corporate Event Enquiry Form',
+            'ml' => 'കോർപ്പറേറ്റ് ഇവന്റ് അന്വേഷണ ഫോം',
+            'ta' => 'கார்ப்பரேட் நிகழ்வு முன்பதிவு படிவம்'
+        ],
+        'corp_form_desc' => [
+            'en' => 'Submit your conference, seminar, or convention requirements. Our corporate desk coordinates proposals promptly.',
+            'ml' => 'കോൺഫറൻസ്, സെമിനാർ, കൺവെൻഷൻ ആവശ്യങ്ങൾ സമർപ്പിക്കുക. ഞങ്ങളുടെ കോർപ്പറേറ്റ് ഡെസ്ക് വേഗത്തിൽ വിശദാംശങ്ങൾ ലഭ്യമാക്കും.',
+            'ta' => 'மாநாடு, கருத்தரங்கு தேவைகளை சமர்ப்பிக்கவும். எங்கள் கார்ப்பரேட் குழு உடனே மதிப்பீடு வழங்கும்.'
+        ],
+        'customised_booking_enquiry' => [
+            'en' => 'Customised Booking Enquiry',
+            'ml' => 'വ്യക്തിഗത ബുക്കിംഗ് അന്വേഷണം',
+            'ta' => 'தனிப்பயன் முன்பதிவு விசாரணை'
+        ],
+        'customised_booking_desc' => [
+            'en' => 'Specify your preferences. Our travel directors will contact the property, verify availability, and revert promptly.',
+            'ml' => 'നിങ്ങളുടെ താൽപ്പര്യങ്ങൾ രേഖപ്പെടുത്തുക. റൂമുകളുടെ ലഭ്യത പരിശോധിച്ച് ഞങ്ങളുടെ ടീം വേഗത്തിൽ ബന്ധപ്പെടും.',
+            'ta' => 'உங்கள் விருப்பங்களை குறிப்பிடவும். தங்குமிட இருப்பை சரிபார்த்துவிட்டு எங்கள் குழு உடனே தொடர்பு கொள்ளும்.'
+        ],
+        'step_1_contact' => [
+            'en' => '1. Your Contact Details',
+            'ml' => '1. നിങ്ങളുടെ വിവരങ്ങൾ',
+            'ta' => '1. தொடர்பு விபரங்கள்'
+        ],
+        'step_2_dates' => [
+            'en' => '2. Destination & Journey Dates',
+            'ml' => '2. കേന്ദ്രവും യാത്രാ തീയതികളും',
+            'ta' => '2. சேருமிடம் & பயண தேதி'
+        ],
+        'custom_multi_route' => [
+            'en' => 'Custom Multi-Destination Route',
+            'ml' => 'ഒന്നിലധികം സ്ഥലങ്ങൾ ഉൾപ്പെടുന്ന പ്രത്യേക വഴി',
+            'ta' => 'பல இடங்களை உள்ளடக்கிய சொந்த திட்டம்'
+        ],
+        'testimonials_title' => [
+            'en' => 'Journeys Remembered.',
+            'ml' => 'യാത്രക്കാരുടെ അനുഭവങ്ങൾ.',
+            'ta' => 'பயணிகளின் அனுபவங்கள்.'
+        ],
+        'verified_journey' => [
+            'en' => 'Verified Journey',
+            'ml' => 'സ്ഥിരീകരിച്ച യാത്ര',
+            'ta' => 'உறுதிப்படுத்தப்பட்ட பயணம்'
+        ],
+        'submit_travel_request' => [
+            'en' => 'Submit Travel Request',
+            'ml' => 'യാത്രാ അഭ്യർത്ഥന സമർപ്പിക്കുക',
+            'ta' => 'பயண கோரிக்கையை அனுப்புக'
+        ],
+        'chat_on_whatsapp' => [
+            'en' => 'Chat on WhatsApp',
+            'ml' => 'വാട്സ്ആപ്പിൽ സംസാരിക്കാം',
+            'ta' => 'வாட்ஸ்அப்பில் உரையாட'
+        ],
+        'prefer_instant_messaging' => [
+            'en' => 'Prefer instant messaging?',
+            'ml' => 'തത്സമയം ചാറ്റ് ചെയ്യണോ?',
+            'ta' => 'உடனடி செய்தி அனுப்ப வேண்டுமா?'
+        ],
+
+        // Footer Section Translations
+        'footer_col_destinations' => [
+            'en' => 'Destinations',
+            'ml' => 'സഞ്ചാര കേന്ദ്രങ്ങൾ',
+            'ta' => 'சுற்றுலா தலங்கள்'
+        ],
+        'footer_col_experiences' => [
+            'en' => 'Experiences',
+            'ml' => 'യാത്രാ വിഭാഗങ്ങൾ',
+            'ta' => 'பயண அனுபவங்கள்'
+        ],
+        'footer_col_assurance' => [
+            'en' => 'Client Assurance',
+            'ml' => 'വിശ്വാസ്യതയും സുരക്ഷയും',
+            'ta' => 'பாதுகாப்பு & நம்பகத்தன்மை'
+        ],
+        'footer_assurance_text' => [
+            'en' => 'Recognized hospitality curation, 24/7 dedicated on-ground transport coordination, verified accommodations, and transparent booking protection.',
+            'ml' => 'വിശ്വാസ്യതയാർന്ന സേവനം, 24/7 ഓൺ-ഗ്രൗണ്ട് യാത്രാ ഏകോപനം, പരിശോധിച്ചുറപ്പിച്ച ഹോട്ടലുകൾ, സുതാര്യമായ ബുക്കിംഗ് സംരക്ഷണം.',
+            'ta' => 'நம்பகமான சேவை, 24/7 வாகன ஒருங்கிணைப்பு, சரிபார்க்கப்பட்ட தங்குமிடங்கள் மற்றும் வெளிப்படையான முன்பதிவு பாதுகாப்பு.'
+        ],
+        'footer_link_kerala' => [
+            'en' => 'Kerala Backwaters',
+            'ml' => 'കേരള കായലുകൾ',
+            'ta' => 'கேரளா காயல்கள்'
+        ],
+        'footer_link_tamil_nadu' => [
+            'en' => 'Tamil Nadu Temples',
+            'ml' => 'തമിഴ്നാട് ക്ഷേത്രങ്ങൾ',
+            'ta' => 'தமிழ்நாடு கோவில்கள்'
+        ],
+        'footer_link_varanasi' => [
+            'en' => 'Varanasi Spiritual',
+            'ml' => 'കാശി വാരണാസി',
+            'ta' => 'வாரணாசி ஆன்மீகம்'
+        ],
+        'footer_link_himalayas' => [
+            'en' => 'Himalayan Valleys',
+            'ml' => 'ഹിമാലയൻ താഴ്‌വരകൾ',
+            'ta' => 'இமயமலை பள்ளத்தாக்கு'
+        ],
+        'footer_link_lakshadweep' => [
+            'en' => 'Lakshadweep Atolls',
+            'ml' => 'ലക്ഷദ്വീപ് പവിഴദ്വീപുകൾ',
+            'ta' => 'லட்சத்தீவு பவளப்பாறைகள்'
+        ],
+        'footer_link_andaman' => [
+            'en' => 'Andaman Islands',
+            'ml' => 'ആൻഡമാൻ ദ്വീപുകൾ',
+            'ta' => 'அந்தமான் தீவுகள்'
+        ],
+        'footer_link_all_dest' => [
+            'en' => 'Explore All Portfolios &rarr;',
+            'ml' => 'എല്ലാ കേന്ദ്രങ്ങളും കാണുക &rarr;',
+            'ta' => 'அனைத்து இடங்களையும் காண்க &rarr;'
+        ],
+        'footer_link_pilgrim' => [
+            'en' => 'Sacred Vedic Yatras',
+            'ml' => 'പുണ്യ തീർത്ഥാടനങ്ങൾ',
+            'ta' => 'புனித வேத யாத்திரைகள்'
+        ],
+        'footer_link_family' => [
+            'en' => 'Curated Family Holidays',
+            'ml' => 'കുടുംബ വിനോദയാത്രകൾ',
+            'ta' => 'குடும்ப சுற்றுலாக்கள்'
+        ],
+        'footer_link_romantic' => [
+            'en' => 'Romantic Escapes',
+            'ml' => 'ഹണിമൂൺ യാത്രകൾ',
+            'ta' => 'தேனிலவு பயணங்கள்'
+        ],
+        'footer_link_adventure' => [
+            'en' => 'High Altitude Trekking',
+            'ml' => 'സാഹസിക ട്രെക്കിംഗ്',
+            'ta' => 'மலை மலையேற்ற சாகசம்'
+        ],
+        'footer_link_concierge' => [
+            'en' => 'Concierge Services',
+            'ml' => 'പ്രത്യേക സേവനങ്ങൾ',
+            'ta' => 'பிரத்யேக சேவைகள்'
+        ],
+        'footer_link_gallery' => [
+            'en' => 'Travel Memoir Gallery',
+            'ml' => 'യാത്രാ ചിത്രശാല',
+            'ta' => 'புகைப்பட தொகுப்பு'
+        ],
+        'footer_link_philosophy' => [
+            'en' => 'The Midhila Philosophy',
+            'ml' => 'മിഥിലയുടെ യാത്രാ ദർശനം',
+            'ta' => 'மிதிலாவின் பயண தத்துவம்'
+        ],
+        'footer_link_faqs' => [
+            'en' => 'Frequently Asked Questions',
+            'ml' => 'പൊതുവായ സംശയങ്ങൾ (FAQs)',
+            'ta' => 'அடிக்கடி கேட்கப்படும் கேள்விகள்'
+        ],
+        'footer_link_terms' => [
+            'en' => 'Terms of Service',
+            'ml' => 'നിബന്ധനകളും വ്യവസ്ഥകളും',
+            'ta' => 'விதிமுறைகள் மற்றும் நிபந்தனைகள்'
+        ],
+        'footer_link_privacy' => [
+            'en' => 'Privacy Policy',
+            'ml' => 'സ്വകാര്യതാ നയം',
+            'ta' => 'தனியுரிமைக் கொள்கை'
+        ],
+        'footer_link_refund' => [
+            'en' => 'Booking & Refund Policy',
+            'ml' => 'റീഫണ്ട് നയം',
+            'ta' => 'ரீஃபண்ட் கொள்கை'
+        ],
+        'footer_hotline_label' => [
+            'en' => 'Hotline:',
+            'ml' => 'ഹോട്ട്‌ലൈൻ:',
+            'ta' => 'உடனடி உதவி எண்:'
+        ],
+        'footer_email_label' => [
+            'en' => 'Email:',
+            'ml' => 'ഇമെയിൽ:',
+            'ta' => 'மின்னஞ்சல்:'
+        ],
+        'footer_hq_label' => [
+            'en' => 'Headquarters:',
+            'ml' => 'പ്രധാന ഓഫീസ്:',
+            'ta' => 'தலைமை அலுவலகம்:'
+        ],
+        'footer_all_rights_reserved' => [
+            'en' => 'All rights reserved.',
+            'ml' => 'എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.',
+            'ta' => 'அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.'
+        ],
+
+        // Destinations Page Filters
+        'dest_all_horizons' => [
+            'en' => 'All Horizons',
+            'ml' => 'എല്ലാ കേന്ദ്രങ്ങളും',
+            'ta' => 'அனைத்து இடங்களும்'
+        ],
+        'dest_india_domestic' => [
+            'en' => 'Incredible India (Domestic)',
+            'ml' => 'ഇന്ത്യൻ കേന്ദ്രങ്ങൾ (ആഭ്യന്തരം)',
+            'ta' => 'இந்திய சுற்றுலா (உள்நாடு)'
+        ],
+        'dest_global_escapes' => [
+            'en' => 'Global Escapes',
+            'ml' => 'വിദേശ യാത്രകൾ',
+            'ta' => 'சர்வதேச சுற்றுலா'
+        ],
+        'btn_reset' => [
+            'en' => 'Reset',
+            'ml' => 'റീസെറ്റ്',
+            'ta' => 'மீட்டமைக்க'
+        ],
+        'faq_hero_sub' => [
+            'en' => 'Clear, straightforward answers regarding booking, private chauffeured transfers, elderly pilgrimage care, and payment protection.',
+            'ml' => 'ബുക്കിംഗ്, വാഹനം, മുതിർന്നവർക്കുള്ള സൗകര്യങ്ങൾ, പെയ്‌മെന്റ് സുരക്ഷ എന്നിവയെക്കുറിച്ചുള്ള വ്യക്തമായ ഉത്തരങ്ങൾ.',
+            'ta' => 'முன்பதிவு, பிரத்யேக வாகனம், முதியோர் பாதுகாப்பு மற்றும் கட்டண பாதுகாப்பு பற்றிய தெளிவான பதில்கள்.'
+        ],
+        'have_question_not_listed' => [
+            'en' => 'Have a Question Not Listed Here?',
+            'ml' => 'മറ്റ് എന്തെങ്കിലും സംശയങ്ങൾ ഉണ്ടോ?',
+            'ta' => 'வேறு ஏதேனும் கேள்விகள் உள்ளதா?'
+        ],
+        'have_question_desk_desc' => [
+            'en' => 'Our Kerala travel desk is available daily from 9:00 AM to 7:30 PM.',
+            'ml' => 'ഞങ്ങളുടെ കേരള ട്രാവൽ ഡെസ്ക് ദിവസവും രാവിലെ 9:00 മുതൽ വൈകുന്നേരം 7:30 വരെ ലഭ്യമാണ്.',
+            'ta' => 'எங்கள் கேரளா பயண உதவி மையம் தினமும் காலை 9:00 மணி முதல் இரவு 7:30 மணி வரை செயல்படுகிறது.'
+        ],
+        'btn_speak_desk' => [
+            'en' => 'Speak to Our Travel Desk',
+            'ml' => 'ട്രാവൽ ഡെസ്കിൽ ബന്ധപ്പെടാം',
+            'ta' => 'எங்கள் பயண மையத்தை தொடர்பு கொள்ள'
+        ],
+        'fixed_transparent_tariff' => [
+            'en' => 'Fixed Transparent Tariff',
+            'ml' => 'നിശ്ചിത സുതാര്യ നിരക്ക്',
+            'ta' => 'நிலையான வெளிப்படையான கட்டணம்'
+        ],
+        'tour_dates_label' => [
+            'en' => 'Tour Dates:',
+            'ml' => 'യാത്രാ തീയതികൾ:',
+            'ta' => 'சுற்றுலா தேதிகள்:'
+        ],
+        'contact_direct_title' => [
+            'en' => 'Send a Direct Message',
+            'ml' => 'നേരിട്ട് സന്ദേശമയക്കാം',
+            'ta' => 'நேரடி செய்தி அனுப்புக'
+        ],
+        'contact_direct_desc' => [
+            'en' => 'Fill in your details below and a travel coordinator will call or message you.',
+            'ml' => 'താഴെ നൽകിയിരിക്കുന്ന വിവരങ്ങൾ പൂരിപ്പിക്കുക. യാത്രാ കോർഡിനേറ്റർ നിങ്ങളെ ബന്ധപ്പെടും.',
+            'ta' => 'கீழே உங்கள் விவரங்களை நிரப்பவும். எங்கள் பயண ஒருங்கிணைப்பாளர் உங்களை அழைப்பார்.'
+        ],
+        'inquiry_subject' => [
+            'en' => 'Inquiry Subject',
+            'ml' => 'അന്വേഷണ വിഷയം',
+            'ta' => 'விசாரணை தலைப்பு'
+        ],
+        'general_query' => [
+            'en' => 'General Question',
+            'ml' => 'പൊതുവായ ചോദ്യം',
+            'ta' => 'பொதுவான கேள்வி'
+        ],
+        'journey_synopsis' => [
+            'en' => 'The Journey Synopsis',
+            'ml' => 'യാത്രാ വിവരണം',
+            'ta' => 'பயண விபரம்'
+        ],
+        'day_by_day_itinerary' => [
+            'en' => 'Day-by-Day Itinerary',
+            'ml' => 'ദിവസേനയുള്ള യാത്രാക്രമം',
+            'ta' => 'நாள் வாரியான பயண அட்டவணை'
+        ],
+        'speak_direct_curators' => [
+            'en' => 'Speak Directly with Our Travel Curators',
+            'ml' => 'ഞങ്ങളുടെ യാത്രാ വിദഗ്ദ്ധരുമായി നേരിട്ട് സംസാരിക്കാം',
+            'ta' => 'எங்கள் பயண வல்லுநர்களுடன் நேரடியாக பேசலாம்'
         ]
     ];
 

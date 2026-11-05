@@ -103,8 +103,8 @@ require_once __DIR__ . '/includes/header.php';
       
       <!-- Contact Form -->
       <div class="editorial-form-panel">
-        <h2 style="font-size:1.6rem;margin-bottom:8px;">Send a Direct Message</h2>
-        <p style="font-size:0.92rem;color:var(--color-text-muted);margin-bottom:28px;">Fill in your details below and a travel coordinator will call or message you.</p>
+        <h2 style="font-size:1.6rem;margin-bottom:8px;"><?= e(__t('contact_direct_title', 'Send a Direct Message')) ?></h2>
+        <p style="font-size:0.92rem;color:var(--color-text-muted);margin-bottom:28px;"><?= e(__t('contact_direct_desc', 'Fill in your details below and a travel coordinator will call or message you.')) ?></p>
 
         <?php if (!empty($successMessage)): ?>
           <div style="background:#E6F4EA;border:1px solid #A7F3D0;color:#065F46;padding:16px 20px;border-radius:var(--radius-sm);margin-bottom:24px;font-size:0.92rem;">
@@ -127,41 +127,41 @@ require_once __DIR__ . '/includes/header.php';
 
           <div class="form-row-2col">
             <div class="editorial-form-group">
-              <label class="editorial-label">Your Name *</label>
+              <label class="editorial-label"><?= e(__t('form_full_name', 'Your Name *')) ?></label>
               <input type="text" name="name" class="editorial-input" placeholder="e.g. Adarsh" required>
             </div>
 
             <div class="editorial-form-group">
-              <label class="editorial-label">Phone / WhatsApp Number *</label>
+              <label class="editorial-label"><?= e(__t('form_phone', 'Phone / WhatsApp Number *')) ?></label>
               <input type="tel" name="phone" class="editorial-input" placeholder="+91 80750 21427" required>
             </div>
           </div>
 
           <div class="form-row-2col">
             <div class="editorial-form-group">
-              <label class="editorial-label">Email Address</label>
+              <label class="editorial-label"><?= e(__t('form_email', 'Email Address')) ?></label>
               <input type="email" name="email" class="editorial-input" placeholder="you@domain.com">
             </div>
 
             <div class="editorial-form-group">
-              <label class="editorial-label">Inquiry Subject</label>
+              <label class="editorial-label"><?= e(__t('inquiry_subject', 'Inquiry Subject')) ?></label>
               <select name="subject" class="editorial-select">
-                <option value="Pilgrim Tour Enquiry">Pilgrim Tour Reservation</option>
-                <option value="Custom Family Package">Custom Family Package</option>
-                <option value="Honeymoon Itinerary">Romantic Escape Planning</option>
-                <option value="Chauffeured Transport Hire">Chauffeured Vehicle Hire</option>
-                <option value="General Query">General Question</option>
+                <option value="Pilgrim Tour Enquiry"><?= e(__t('nav_pilgrimage', 'Pilgrim Tour Reservation')) ?></option>
+                <option value="Custom Family Package"><?= e(__t('footer_link_family', 'Custom Family Package')) ?></option>
+                <option value="Honeymoon Itinerary"><?= e(__t('footer_link_romantic', 'Romantic Escape Planning')) ?></option>
+                <option value="Chauffeured Transport Hire"><?= e(__t('sightseeing_private', 'Chauffeured Vehicle Hire')) ?></option>
+                <option value="General Query"><?= e(__t('general_query', 'General Question')) ?></option>
               </select>
             </div>
           </div>
 
           <div class="editorial-form-group">
-            <label class="editorial-label">Your Message or Requirements *</label>
+            <label class="editorial-label"><?= e(__t('form_additional_req', 'Your Message or Requirements *')) ?></label>
             <textarea name="message" class="editorial-textarea" rows="4" placeholder="Mention preferred travel dates, destinations, number of passengers..." required></textarea>
           </div>
 
           <button type="submit" class="btn-cinematic-primary" style="margin-top:12px;padding:14px 36px;">
-            <span>Submit Message</span>
+            <span><?= e(__t('btn_submit_enquiry', 'Submit Message')) ?></span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
         </form>

@@ -34,6 +34,24 @@ function get_setting(string $key, string $default = ''): string {
         }
     }
 
+    if (function_exists('current_lang')) {
+        $lang = current_lang();
+        if ($lang !== 'en') {
+            // 1. Check for explicit localized setting key in site_settings (e.g. hero_headline_1_ml)
+            $langKey = $key . '_' . $lang;
+            if (!empty($settingsCache[$langKey])) {
+                return $settingsCache[$langKey];
+            }
+            // 2. Check translation dictionary __t('setting_' . $key)
+            if (function_exists('__t')) {
+                $dictVal = __t('setting_' . $key, '');
+                if (!empty($dictVal) && $dictVal !== ('setting_' . $key)) {
+                    return $dictVal;
+                }
+            }
+        }
+    }
+
     return $settingsCache[$key] ?? $default;
 }
 

@@ -58,33 +58,33 @@ require_once __DIR__ . '/includes/header.php';
       
       <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px;">
         <span style="font-size:1.4rem;color:var(--color-gold-deep);margin-bottom:10px;display:block;">01</span>
-        <h3 style="font-size:1.2rem;margin-bottom:10px;">The Dignity of Sacred Yatras</h3>
+        <h3 style="font-size:1.2rem;margin-bottom:10px;"><?= e(get_setting('pillar_1_title', 'The Dignity of Sacred Yatras')) ?></h3>
         <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.7;">
-          Pilgrimages demand reverence, patience, and impeccable elder care. We coordinate temple timings, close-proximity accommodations, and calm pacing so darshans remain pure and peaceful.
+          <?= e(get_setting('pillar_1_desc', 'Pilgrimages demand reverence, patience, and impeccable elder care. We coordinate temple timings, close-proximity accommodations, and calm pacing so darshans remain pure and peaceful.')) ?>
         </p>
       </div>
 
       <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px;">
         <span style="font-size:1.4rem;color:var(--color-gold-deep);margin-bottom:10px;display:block;">02</span>
-        <h3 style="font-size:1.2rem;margin-bottom:10px;">Bespoke Personalization</h3>
+        <h3 style="font-size:1.2rem;margin-bottom:10px;"><?= e(get_setting('pillar_2_title', 'Bespoke Personalization')) ?></h3>
         <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.7;">
-          No two voyagers share identical rhythms. Whether seeking a secluded backwater cruise or a high-altitude mountain retreat, we tailor every day around your personal travel desires.
+          <?= e(get_setting('pillar_2_desc', 'No two voyagers share identical rhythms. Whether seeking a secluded backwater cruise or a high-altitude mountain retreat, we tailor every day around your personal travel desires.')) ?>
         </p>
       </div>
 
       <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px;">
         <span style="font-size:1.4rem;color:var(--color-gold-deep);margin-bottom:10px;display:block;">03</span>
-        <h3 style="font-size:1.2rem;margin-bottom:10px;">Zero-Surprise Financials</h3>
+        <h3 style="font-size:1.2rem;margin-bottom:10px;"><?= e(get_setting('pillar_3_title', 'Zero-Surprise Financials')) ?></h3>
         <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.7;">
-          Transparent itemized vouchers, clear inclusions and exclusions, and zero bait-and-switch fees. You know precisely what is arranged before stepping out your door.
+          <?= e(get_setting('pillar_3_desc', 'Transparent itemized vouchers, clear inclusions and exclusions, and zero bait-and-switch fees. You know precisely what is arranged before stepping out your door.')) ?>
         </p>
       </div>
 
       <div style="background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px;">
         <span style="font-size:1.4rem;color:var(--color-gold-deep);margin-bottom:10px;display:block;">04</span>
-        <h3 style="font-size:1.2rem;margin-bottom:10px;">24/7 Human Concierge</h3>
+        <h3 style="font-size:1.2rem;margin-bottom:10px;"><?= e(get_setting('pillar_4_title', '24/7 Human Concierge')) ?></h3>
         <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.7;">
-          Real, responsive coordinators available throughout your journey. From weather updates to route adjustments, you are supported at every turn.
+          <?= e(get_setting('pillar_4_desc', 'Real, responsive coordinators available throughout your journey. From weather updates to route adjustments, you are supported at every turn.')) ?>
         </p>
       </div>
 
@@ -92,16 +92,16 @@ require_once __DIR__ . '/includes/header.php';
 
     <!-- Agency Hotline Reassurance -->
     <div style="text-align:center;padding:40px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:#FFFFFF;box-shadow:var(--shadow-card);">
-      <h3 style="font-size:1.4rem;margin-bottom:12px;">Speak Directly with Our Travel Curators</h3>
+      <h3 style="font-size:1.4rem;margin-bottom:12px;"><?= e(__t('speak_direct_curators', 'Speak Directly with Our Travel Curators')) ?></h3>
       <p style="font-size:0.95rem;color:var(--color-text-muted);margin-bottom:20px;">
-        Reach our headquarters in Kerala for customized route advice and tour reservations.
+        <?= e(__t('have_question_desk_desc', 'Reach our headquarters in Kerala for customized route advice and tour reservations.')) ?>
       </p>
       <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
         <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to consult with a travel curator.")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
-          <span>WhatsApp Specialist</span>
+          <span><?= e(__t('btn_whatsapp_us', 'WhatsApp Specialist')) ?></span>
         </a>
         <a href="<?= BASE_URL ?>/contact.php" class="btn-cinematic-primary">
-          <span>Contact Our Office</span>
+          <span><?= e(__t('nav_contact', 'Contact Our Office')) ?></span>
         </a>
       </div>
     </div>

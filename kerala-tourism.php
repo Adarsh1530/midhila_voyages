@@ -140,8 +140,8 @@ require_once __DIR__ . '/includes/header.php';
 <section style="padding:60px 0 40px;background:#FAFAFA;">
   <div class="container">
     <div style="text-align:center;max-width:700px;margin:0 auto 40px;">
-      <h2 style="font-family:'Cinzel',serif;font-size:2rem;color:#0F172A;margin-bottom:10px;">The Five Pillars of Kerala Experience</h2>
-      <p style="font-size:0.92rem;color:#64748B;line-height:1.6;">Each handcrafted trail offers deep serenity, verified sanitised stays, and private transportation.</p>
+      <h2 style="font-family:'Cinzel',serif;font-size:2rem;color:#0F172A;margin-bottom:10px;"><?= e(__t('kerala_5_categories', 'The Five Pillars of Kerala Experience')) ?></h2>
+      <p style="font-size:0.92rem;color:#64748B;line-height:1.6;"><?= e(__t('kerala_hero_sub', 'Each handcrafted trail offers deep serenity, verified sanitised stays, and private transportation.')) ?></p>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:24px;">
@@ -160,10 +160,10 @@ require_once __DIR__ . '/includes/header.php';
             </p>
             <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid #F1F5F9;padding-top:14px;">
               <a href="<?= BASE_URL ?>/kerala-tourism.php?cat=<?= urlencode($c['slug']) ?>" style="font-size:0.85rem;font-weight:700;color:#0F172A;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
-                <span>Explore Packages</span> &rarr;
+                <span><?= e(__t('btn_view_packages', 'Explore Packages')) ?></span> &rarr;
               </a>
               <a href="<?= BASE_URL ?>/accommodation.php?cat=<?= urlencode($c['slug']) ?>" style="font-size:0.82rem;font-weight:600;color:#2563EB;text-decoration:none;">
-                <span>View Stays</span>
+                <span><?= e(__t('nav_accommodation', 'View Stays')) ?></span>
               </a>
             </div>
           </div>
@@ -180,14 +180,14 @@ require_once __DIR__ . '/includes/header.php';
     <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;flex-wrap:wrap;gap:16px;">
       <div>
         <span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;color:#C5A059;letter-spacing:0.08em;display:block;margin-bottom:6px;">
-          <?= loc($currentCategoryMeta, 'name', 'Kerala') ?> Sanctuaries
+          <?= loc($currentCategoryMeta, 'name', 'Kerala') ?>
         </span>
         <h2 style="font-family:'Cinzel',serif;font-size:2rem;color:#0F172A;margin:0;">
-          Storied Destinations &amp; Regions
+          <?= e(__t('nav_destinations', 'Storied Destinations & Regions')) ?>
         </h2>
       </div>
       <a href="<?= BASE_URL ?>/accommodation.php" class="btn-cinematic-secondary" style="padding:9px 18px;font-size:0.86rem;">
-        <span>Filter Accommodations by Region &rarr;</span>
+        <span><?= e(__t('nav_accommodation', 'Filter Accommodations')) ?> &rarr;</span>
       </a>
     </div>
 
@@ -242,10 +242,10 @@ require_once __DIR__ . '/includes/header.php';
         Curated Itineraries
       </span>
       <h2 style="font-family:'Cinzel',serif;font-size:2.2rem;color:#0F172A;margin-bottom:10px;">
-        Kerala Handcrafted Tour Packages
+        <?= e(get_setting('pkg_heading_1', 'Kerala Handcrafted Tour Packages')) ?>
       </h2>
       <p style="font-size:0.92rem;color:#64748B;line-height:1.6;">
-        Every package includes verified accommodations, dedicated chauffeur-driven private vehicles, and elderly-friendly pacing.
+        <?= e(get_setting('pkg_heading_2', 'Every package includes verified accommodations, dedicated chauffeur-driven private vehicles, and elderly-friendly pacing.')) ?>
       </p>
     </div>
 
@@ -254,7 +254,7 @@ require_once __DIR__ . '/includes/header.php';
         <p style="font-size:1.1rem;font-weight:600;color:#0F172A;margin-bottom:8px;">Custom itineraries available on request</p>
         <p style="font-size:0.86rem;color:#64748B;margin-bottom:20px;">We tailor exact routes and dates to your family or group requirements.</p>
         <a href="<?= BASE_URL ?>/custom-tour.php" class="btn-cinematic-primary">
-          <span>Request Customised Itinerary &rarr;</span>
+          <span><?= e(__t('btn_customise_this', 'Request Customised Itinerary &rarr;')) ?></span>
         </a>
       </div>
     <?php else: ?>
@@ -265,10 +265,10 @@ require_once __DIR__ . '/includes/header.php';
               <img src="<?= e($pkg['featured_image'] ?: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80') ?>" 
                    alt="<?= e(loc($pkg, 'title')) ?>" style="width:100%;height:100%;object-fit:cover;">
               <div style="position:absolute;top:12px;right:12px;background:rgba(15,23,42,0.9);color:#C5A059;padding:4px 10px;border-radius:6px;font-size:0.75rem;font-weight:700;backdrop-filter:blur(4px);border:1px solid #C5A059;">
-                <?= (int)$pkg['duration_days'] ?> Days / <?= (int)$pkg['duration_nights'] ?> Nights
+                <?= (int)$pkg['duration_days'] ?> <?= e(__t('days_abbr', 'Days')) ?> / <?= (int)$pkg['duration_nights'] ?> <?= e(__t('nights_abbr', 'Nights')) ?>
               </div>
               <div style="position:absolute;bottom:12px;left:12px;background:rgba(15,23,42,0.85);color:#FFFFFF;padding:3px 10px;border-radius:6px;font-size:0.72rem;font-weight:600;">
-                📍 <?= e($pkg['destination_name'] ?: 'Kerala') ?>
+                📍 <?= e(loc($pkg, 'destination_name', $pkg['destination_name'] ?: 'Kerala')) ?>
               </div>
             </div>
 
@@ -282,10 +282,13 @@ require_once __DIR__ . '/includes/header.php';
                 </p>
 
                 <!-- Key Inclusions -->
-                <?php if (!empty($pkg['inclusions'])): ?>
+                <?php 
+                  $incVal = loc($pkg, 'inclusions', $pkg['inclusions'] ?? '');
+                  if (!empty($incVal)): 
+                ?>
                   <div style="font-size:0.78rem;color:#334155;background:#F8FAFC;padding:10px 12px;border-radius:8px;margin-bottom:16px;">
-                    <strong style="color:#0F172A;">Inclusions:</strong>
-                    <div style="margin-top:4px;color:#64748B;"><?= e(mb_strimwidth($pkg['inclusions'], 0, 110, '...')) ?></div>
+                    <strong style="color:#0F172A;"><?= e(__t('nav_services', 'Inclusions')) ?>:</strong>
+                    <div style="margin-top:4px;color:#64748B;"><?= e(mb_strimwidth($incVal, 0, 110, '...')) ?></div>
                   </div>
                 <?php endif; ?>
               </div>
@@ -293,9 +296,9 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;border-top:1px solid #F1F5F9;padding-top:14px;">
                   <div>
-                    <span style="font-size:0.72rem;text-transform:uppercase;color:#64748B;font-weight:600;display:block;">Starting From</span>
+                    <span style="font-size:0.72rem;text-transform:uppercase;color:#64748B;font-weight:600;display:block;"><?= e(__t('starting_from', 'Starting From')) ?></span>
                     <strong style="font-size:1.35rem;color:#059669;font-weight:800;"><?= format_price((float)$pkg['starting_price']) ?></strong>
-                    <span style="font-size:0.75rem;color:#64748B;">/ person</span>
+                    <span style="font-size:0.75rem;color:#64748B;"><?= e(__t('per_person', '/ person')) ?></span>
                   </div>
                   <a href="<?= BASE_URL ?>/package.php?id=<?= (int)$pkg['id'] ?>" class="btn-cinematic-secondary" style="padding:8px 14px;font-size:0.82rem;">
                     <span><?= __t('btn_view_details') ?> &rarr;</span>
@@ -304,10 +307,10 @@ require_once __DIR__ . '/includes/header.php';
 
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
                   <a href="<?= BASE_URL ?>/accommodation.php?destination_id=<?= (int)$pkg['destination_id'] ?>" class="btn-cinematic-secondary" style="text-align:center;padding:9px;font-size:0.8rem;">
-                    <span>Stays</span>
+                    <span><?= e(__t('nav_accommodation', 'Stays')) ?></span>
                   </a>
                   <a href="<?= BASE_URL ?>/enquiry.php?package_id=<?= (int)$pkg['id'] ?>" class="btn-cinematic-primary" style="text-align:center;padding:9px;font-size:0.8rem;">
-                    <span>Enquire</span>
+                    <span><?= e(__t('btn_submit_enquiry', 'Enquire')) ?></span>
                   </a>
                 </div>
               </div>
@@ -325,10 +328,10 @@ require_once __DIR__ . '/includes/header.php';
 <section style="background:#0F172A;color:#FFFFFF;padding:60px 0;text-align:center;">
   <div class="container" style="max-width:760px;margin:0 auto;">
     <h2 style="font-family:'Cinzel',serif;font-size:2rem;color:#FFFFFF;margin-bottom:14px;">
-      Looking for a Specialised Itinerary?
+      <?= e(get_setting('cta_title', 'Looking for a Specialised Itinerary?')) ?>
     </h2>
     <p style="font-size:0.95rem;color:#CBD5E1;line-height:1.7;margin-bottom:28px;">
-      Whether you wish to coordinate elderly pilgrimage darshans at Guruvayur, a romantic private houseboat night in Alleppey, or a complete corporate team offsite in Munnar, our directors coordinate every detail directly.
+      <?= e(get_setting('cta_subtitle', 'Whether you wish to coordinate elderly pilgrimage darshans at Guruvayur, a romantic private houseboat night in Alleppey, or a complete corporate team offsite in Munnar, our directors coordinate every detail directly.')) ?>
     </p>
     <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
       <a href="<?= BASE_URL ?>/accommodation.php" class="btn-cinematic-primary" style="padding:13px 26px;">

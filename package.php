@@ -15,8 +15,8 @@ $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $package = null;
 if (!empty($slug)) {
     $stmt = $db->prepare("
-        SELECT p.*, d.name AS destination_name, d.region_state, d.slug AS destination_slug,
-               c.name AS category_name, c.slug AS category_slug
+        SELECT p.*, d.name AS destination_name, d.name_ml AS destination_name_ml, d.name_ta AS destination_name_ta, d.region_state, d.slug AS destination_slug,
+               c.name AS category_name, c.name_ml AS category_name_ml, c.name_ta AS category_name_ta, c.slug AS category_slug
         FROM `packages` p
         JOIN `destinations` d ON p.destination_id = d.id
         JOIN `package_categories` c ON p.category_id = c.id
@@ -26,8 +26,8 @@ if (!empty($slug)) {
     $package = $stmt->fetch();
 } elseif ($id > 0) {
     $stmt = $db->prepare("
-        SELECT p.*, d.name AS destination_name, d.region_state, d.slug AS destination_slug,
-               c.name AS category_name, c.slug AS category_slug
+        SELECT p.*, d.name AS destination_name, d.name_ml AS destination_name_ml, d.name_ta AS destination_name_ta, d.region_state, d.slug AS destination_slug,
+               c.name AS category_name, c.name_ml AS category_name_ml, c.name_ta AS category_name_ta, c.slug AS category_slug
         FROM `packages` p
         JOIN `destinations` d ON p.destination_id = d.id
         JOIN `package_categories` c ON p.category_id = c.id
@@ -65,7 +65,8 @@ $packageGallery = $pkgImgStmt->fetchAll();
 
 // Fetch Related Packages
 $relStmt = $db->prepare("
-    SELECT p.*, d.name AS destination_name, d.region_state, c.name AS category_name, c.slug AS category_slug
+    SELECT p.*, d.name AS destination_name, d.name_ml AS destination_name_ml, d.name_ta AS destination_name_ta, d.region_state, 
+           c.name AS category_name, c.name_ml AS category_name_ml, c.name_ta AS category_name_ta, c.slug AS category_slug
     FROM `packages` p
     JOIN `destinations` d ON p.destination_id = d.id
     JOIN `package_categories` c ON p.category_id = c.id
@@ -76,12 +77,14 @@ $relStmt->execute([$package['id'], $package['destination_id'], $package['categor
 $relatedPackages = $relStmt->fetchAll();
 
 $agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
-$durationText = ($package['duration_days'] ?? 1) . ' Days / ' . ($package['duration_nights'] ?? 0) . ' Nights';
+$pkgDisplayTitle = loc($package, 'title');
+$durationText = ($package['duration_days'] ?? 1) . ' ' . __t('days_abbr', 'Days') . ' / ' . ($package['duration_nights'] ?? 0) . ' ' . __t('nights_abbr', 'Nights');
 
-$waMsg = "Hello MIDHILA VOYAGES, I would like to book or enquire about the \"{$package['title']}\" package ({$durationText}). Please share availability and customized quotation.";
+$waMsg = "Hello MIDHILA VOYAGES, I would like to book or enquire about the \"{$pkgDisplayTitle}\" package ({$durationText}). Please share availability and customized quotation.";
 $waPkgUrl = build_whatsapp_url($agencyWhatsApp, $waMsg);
 
-$inclusions = !empty($package['inclusions']) ? array_map('trim', explode(',', $package['inclusions'])) : [];
+$incRaw = loc($package, 'inclusions', $package['inclusions'] ?? '');
+$inclusions = !empty($incRaw) ? array_map('trim', explode(',', $incRaw)) : [];
 $exclusions = !empty($package['exclusions']) ? array_map('trim', explode(',', $package['exclusions'])) : [];
 
 require_once __DIR__ . '/includes/header.php';
@@ -100,32 +103,32 @@ require_once __DIR__ . '/includes/header.php';
   <div class="container" style="position:relative;z-index:2;">
     <!-- Breadcrumb -->
     <nav aria-label="Breadcrumb" style="margin-bottom:16px;font-size:0.82rem;display:flex;align-items:center;gap:8px;color:var(--color-text-muted);">
-      <a href="<?= BASE_URL ?>/index.php" style="color:var(--color-text-secondary);">Home</a> <span>/</span>
-      <a href="<?= BASE_URL ?>/packages.php" style="color:var(--color-text-secondary);">Packages</a> <span>/</span>
-      <a href="<?= BASE_URL ?>/destination.php?slug=<?= e($package['destination_slug']) ?>" style="color:var(--color-text-secondary);"><?= e($package['destination_name']) ?></a> <span>/</span>
-      <span style="color:var(--color-text-main);font-weight:700;"><?= e($package['title']) ?></span>
+      <a href="<?= BASE_URL ?>/index.php" style="color:var(--color-text-secondary);"><?= e(__t('nav_home', 'Home')) ?></a> <span>/</span>
+      <a href="<?= BASE_URL ?>/packages.php" style="color:var(--color-text-secondary);"><?= e(__t('nav_packages', 'Packages')) ?></a> <span>/</span>
+      <a href="<?= BASE_URL ?>/destination.php?slug=<?= e($package['destination_slug']) ?>" style="color:var(--color-text-secondary);"><?= e(loc($package, 'destination_name')) ?></a> <span>/</span>
+      <span style="color:var(--color-text-main);font-weight:700;"><?= e($pkgDisplayTitle) ?></span>
     </nav>
 
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
       <span class="chapter-number">
-        <?= e($package['category_name']) ?>
+        <?= e(loc($package, 'category_name')) ?>
       </span>
       <span style="font-size:0.8rem;background:#FAFAFA;border:1px solid var(--color-border);padding:4px 14px;border-radius:var(--radius-pill);color:var(--color-text-secondary);font-weight:600;">
         ⏱ <?= e($durationText) ?>
       </span>
       <?php if (!empty($package['is_pilgrimage'])): ?>
         <span style="font-size:0.8rem;background:rgba(197,160,89,0.1);border:1px solid rgba(197,160,89,0.3);padding:4px 14px;border-radius:var(--radius-pill);color:var(--color-gold-deep);font-weight:700;">
-          🕉 Sacred Pilgrimage
+          🕉 <?= e(__t('nav_pilgrimage', 'Sacred Pilgrimage')) ?>
         </span>
       <?php endif; ?>
     </div>
 
     <h1 class="editorial-headline-large" style="margin-bottom:12px;">
-      <?= e($package['title']) ?>
+      <?= e($pkgDisplayTitle) ?>
     </h1>
     
     <?php if (!empty($package['subtitle'])): ?>
-      <p class="editorial-subtext" style="max-width:820px;"><?= e($package['subtitle']) ?></p>
+      <p class="editorial-subtext" style="max-width:820px;"><?= e(loc($package, 'subtitle', $package['subtitle'])) ?></p>
     <?php endif; ?>
   </div>
 </section>
@@ -149,9 +152,9 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Tour Overview Card -->
         <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:36px;box-shadow:var(--shadow-ambient);margin-bottom:44px;">
-          <h2 style="font-size:1.5rem;margin-bottom:16px;">The Journey Synopsis</h2>
+          <h2 style="font-size:1.5rem;margin-bottom:16px;"><?= e(__t('journey_synopsis', 'The Journey Synopsis')) ?></h2>
           <p style="font-size:1rem;line-height:1.85;color:var(--color-text-body);margin-bottom:20px;">
-            <?= nl2br(e($package['overview'] ?: $package['short_description'])) ?>
+            <?= nl2br(e(loc($package, 'overview', loc($package, 'short_description')))) ?>
           </p>
           <?php if (!empty($package['seasonal_info'])): ?>
             <div style="display:inline-flex;align-items:center;gap:10px;padding:10px 18px;background:#FAFAFA;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-size:0.86rem;color:var(--color-text-secondary);">
@@ -163,7 +166,7 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Day-by-Day Itinerary -->
         <div style="margin-bottom:44px;">
-          <h2 class="editorial-headline-large" style="font-size:2rem;margin-bottom:24px;">Day-by-Day Itinerary</h2>
+          <h2 class="editorial-headline-large" style="font-size:2rem;margin-bottom:24px;"><?= e(__t('day_by_day_itinerary', 'Day-by-Day Itinerary')) ?></h2>
 
           <?php if (empty($itineraries)): ?>
             <div style="padding:28px;border:1px dashed var(--color-border);border-radius:var(--radius-md);text-align:center;background:#FAFAFA;">
