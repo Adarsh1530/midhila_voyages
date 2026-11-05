@@ -6,6 +6,7 @@
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/csrf.php';
+require_once __DIR__ . '/i18n.php';
 
 /**
  * Safe HTML string escaping
@@ -248,4 +249,20 @@ function truncate_words(?string $text, int $limit = 20, string $ellipsis = '...'
         return implode(' ', $words) . $ellipsis;
     }
     return implode(' ', $words);
+}
+
+/**
+ * Generate standard sequential booking reference number (MV-YYYY-XXXX)
+ */
+function generate_booking_reference(?PDO $db = null): string {
+    if ($db === null) {
+        $db = getDB();
+    }
+    $year = date('Y');
+    try {
+        $count = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `reference_no` LIKE 'MV-{$year}-%'")->fetchColumn() + 1;
+    } catch (Exception $e) {
+        $count = rand(1000, 9999);
+    }
+    return sprintf("MV-%s-%04d", $year, $count);
 }

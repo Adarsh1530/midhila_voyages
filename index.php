@@ -23,6 +23,13 @@ $destStmt = $db->query("
 ");
 $featuredDestinations = $destStmt->fetchAll();
 
+// 1b. Fetch Kerala Tourism Categories
+$tourismCategories = [];
+try {
+    $tcStmt = $db->query("SELECT * FROM `tourism_categories` WHERE `is_active` = 1 ORDER BY `display_order` ASC");
+    $tourismCategories = $tcStmt->fetchAll();
+} catch (Exception $e) {}
+
 // 2. Fetch Package Categories
 $catStmt = $db->query("
     SELECT * FROM `package_categories` 
@@ -236,6 +243,150 @@ require_once __DIR__ . '/includes/header.php';
           </div>
         <?php endforeach; ?>
       <?php endif; ?>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider-hairline"></div>
+
+<!-- =====================================================================
+     CHAPTER II-B: GOD'S OWN COUNTRY — DEDICATED KERALA TOURISM MODULE
+     ===================================================================== -->
+<section class="section-padding" id="kerala-tourism-showcase" style="position:relative;background:#FFFFFF;">
+  <div class="container">
+    
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:48px;">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;background:#F0FDF4;border:1px solid #BBF7D0;color:#15803D;font-size:0.8rem;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.05em;">
+          <span>🌴 <?= e(__t('nav_kerala_tourism', 'Dedicated Kerala Tourism')) ?></span>
+        </div>
+        <h2 class="editorial-headline-large" style="margin-bottom:8px;">
+          <?= e(__t('kerala_hero_title', 'God\'s Own Country • Tailored Experiences')) ?><br>
+          <span style="font-family:var(--font-editorial);font-style:italic;font-weight:400;color:var(--color-gold-deep);">
+            5 Signature Kerala Tourism Disciplines
+          </span>
+        </h2>
+        <p style="font-size:0.95rem;color:var(--color-text-muted);max-width:640px;line-height:1.6;">
+          <?= e(__t('kerala_hero_sub', 'Discover Kerala through our specialized tourism categories with curated destinations, verified boutique stays, private chauffeurs, and customized itineraries.')) ?>
+        </p>
+      </div>
+
+      <div>
+        <a href="<?= BASE_URL ?>/kerala-tourism.php" class="btn-cinematic-primary">
+          <span><?= e(__t('explore_all_packages', 'Explore All Kerala Tours')) ?></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 5 Kerala Categories Grid -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:24px;margin-bottom:56px;">
+      <?php if (!empty($tourismCategories)): ?>
+        <?php foreach ($tourismCategories as $cat): 
+          $catName = loc($cat, 'name', $cat['name_en'] ?? '');
+          $catTag = loc($cat, 'tagline', $cat['tagline_en'] ?? '');
+          $catDesc = loc($cat, 'description', $cat['description_en'] ?? '');
+          $catImg = !empty($cat['featured_image']) ? $cat['featured_image'] : (ASSETS_URL . '/images/placeholder.svg');
+        ?>
+          <div class="dest-showcase-card" style="display:flex;flex-direction:column;border:1px solid #E2E8F0;border-radius:14px;overflow:hidden;background:#FFFFFF;box-shadow:0 2px 10px rgba(15,23,42,0.04);transition:transform 0.25s, box-shadow 0.25s;">
+            <div style="position:relative;height:210px;overflow:hidden;background:#0F172A;">
+              <a href="<?= BASE_URL ?>/kerala-tourism.php?category=<?= urlencode($cat['slug']) ?>">
+                <img src="<?= e($catImg) ?>" alt="<?= e($catName) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" loading="lazy" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              </a>
+              <span style="position:absolute;top:14px;left:14px;background:rgba(15,23,42,0.85);backdrop-filter:blur(6px);color:#FFFFFF;padding:4px 10px;border-radius:6px;font-size:0.75rem;font-weight:700;letter-spacing:0.04em;">
+                <?= e($cat['slug'] === 'pilgrimage' ? 'TEMPLE & SACRED' : ($cat['slug'] === 'hill-stations' ? 'MIST & MOUNTAINS' : ($cat['slug'] === 'backwaters' ? 'HOUSEBOATS & LAGOONS' : ($cat['slug'] === 'beaches' ? 'COASTAL RETREATS' : 'REJUVENATION')))) ?>
+              </span>
+            </div>
+            <div style="padding:22px;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between;">
+              <div>
+                <h3 style="font-size:1.15rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">
+                  <a href="<?= BASE_URL ?>/kerala-tourism.php?category=<?= urlencode($cat['slug']) ?>" style="color:inherit;text-decoration:none;">
+                    <?= e($catName) ?>
+                  </a>
+                </h3>
+                <div style="font-size:0.8rem;color:var(--color-gold-deep);font-weight:600;margin-bottom:10px;">
+                  <?= e($catTag) ?>
+                </div>
+                <p style="font-size:0.86rem;color:var(--color-text-muted);line-height:1.55;margin-bottom:16px;">
+                  <?= e(truncate_words($catDesc, 16)) ?>
+                </p>
+              </div>
+              <div style="padding-top:14px;border-top:1px solid #F1F5F9;display:flex;justify-content:space-between;align-items:center;">
+                <a href="<?= BASE_URL ?>/kerala-tourism.php?category=<?= urlencode($cat['slug']) ?>" class="link-editorial-arrow" style="font-size:0.84rem;font-weight:700;">
+                  <span><?= e(__t('btn_view_packages', 'View Packages')) ?></span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      <?php endif; ?>
+    </div>
+
+    <!-- 3 Quick Access Interactive Service Cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:20px;">
+      
+      <!-- Card 1: Destination Accommodation -->
+      <div style="background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color 0.2s;">
+        <div>
+          <div style="width:48px;height:48px;border-radius:12px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </div>
+          <h3 style="font-size:1.2rem;font-weight:700;color:var(--color-navy);margin-bottom:8px;">
+            <?= e(__t('nav_accommodation', 'Accommodation Booking')) ?>
+          </h3>
+          <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.6;margin-bottom:20px;">
+            Filter hotels, tea plantation resorts, beach villas, and houseboats by destination with custom room views, dietary options, and facilities.
+          </p>
+        </div>
+        <div>
+          <a href="<?= BASE_URL ?>/accommodation.php" class="btn-cinematic-primary" style="display:inline-flex;width:auto;">
+            <span>Browse Accommodations &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Custom Tour Planner -->
+      <div style="background:#FFFDF5;border:1.5px solid #FEF08A;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="width:48px;height:48px;border-radius:12px;background:#FEF3C7;color:#D97706;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <h3 style="font-size:1.2rem;font-weight:700;color:var(--color-navy);margin-bottom:8px;">
+            <?= e(__t('nav_custom_tour', 'Customised Tour Planner')) ?>
+          </h3>
+          <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.6;margin-bottom:20px;">
+            Specify your route, transport preference (Sedan, Innova, Urbania), private chauffeur, days, dietary choices, and receive a bespoke itinerary proposal.
+          </p>
+        </div>
+        <div>
+          <a href="<?= BASE_URL ?>/custom-tour.php" class="btn-cinematic-primary" style="display:inline-flex;width:auto;background:#C5A059;border-color:#C5A059;">
+            <span>Plan Custom Trip &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3: Corporate & Business Events -->
+      <div style="background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="width:48px;height:48px;border-radius:12px;background:#F3E8FF;color:#7E22CE;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <h3 style="font-size:1.2rem;font-weight:700;color:var(--color-navy);margin-bottom:8px;">
+            <?= e(__t('nav_corporate', 'Corporate & Business Events')) ?>
+          </h3>
+          <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.6;margin-bottom:20px;">
+            Reserve conference halls, seminar auditoriums, and convention centres with theater/roundtable seating, AV equipment, catering, and guest accommodation.
+          </p>
+        </div>
+        <div>
+          <a href="<?= BASE_URL ?>/corporate-events.php" class="btn-cinematic-primary" style="display:inline-flex;width:auto;">
+            <span>Corporate Venues &rarr;</span>
+          </a>
+        </div>
+      </div>
+
     </div>
 
   </div>

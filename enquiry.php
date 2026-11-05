@@ -1,7 +1,7 @@
 <?php
 /**
  * MIDHILA VOYAGES — Interactive "Plan My Trip" Enquiry System
- * Pure White Editorial Hospitality Canvas
+ * Universal Travel, Tour Package & Customised Circuit Booking Portal
  */
 
 require_once __DIR__ . '/includes/config.php';
@@ -9,103 +9,168 @@ require_once __DIR__ . '/includes/database.php';
 require_once __DIR__ . '/includes/functions.php';
 require_once __DIR__ . '/includes/csrf.php';
 
-$pageTitle = 'Plan My Trip | Bespoke Custom Journey Planner | Midhila Voyages';
-$pageDescription = 'Customize your dream vacation or sacred pilgrimage. Share your preferences with Midhila Voyages and receive a personalized itinerary and quotation.';
-
 $db = getDB();
+$activeLang = current_lang();
 
-// Pre-fill parameters if arriving from a package or destination page
-$preDest = trim($_GET['destination'] ?? '');
-$prePkgId = isset($_GET['package_id']) ? (int)$_GET['package_id'] : 0;
-$preCat = trim($_GET['category'] ?? '');
+$pageTitle = __t('btn_plan_trip') . ' | Midhila Voyages';
+$pageDescription = 'Customize your vacation, Kerala tour, or sacred pilgrimage. Share your requirements and receive a personalized travel proposal.';
+
+// Pre-fill parameters if arriving from package or destination page
+$preDestId = isset($_GET['destination_id']) ? (int)$_GET['destination_id'] : 0;
+$prePkgId  = isset($_GET['package_id']) ? (int)$_GET['package_id'] : 0;
+$preType   = trim($_GET['type'] ?? 'general_tour');
 
 $pkgDetails = null;
 if ($prePkgId > 0) {
-    $stmt = $db->prepare("SELECT `id`, `title`, `destination_id` FROM `packages` WHERE `id` = ? LIMIT 1");
+    $stmt = $db->prepare("SELECT id, title, destination_id FROM packages WHERE id = ? LIMIT 1");
     $stmt->execute([$prePkgId]);
     $pkgDetails = $stmt->fetch();
+    if ($pkgDetails && empty($preDestId)) {
+        $preDestId = (int)$pkgDetails['destination_id'];
+    }
 }
 
 // Fetch active destinations & categories
-$destinations = $db->query("SELECT `id`, `name` FROM `destinations` WHERE `is_published` = 1 ORDER BY `name` ASC")->fetchAll();
-$categories = $db->query("SELECT `id`, `name`, `slug` FROM `package_categories` WHERE `is_active` = 1 ORDER BY `display_order` ASC")->fetchAll();
+$destinations = $db->query("SELECT id, name, name_ml, name_ta, region_state FROM destinations WHERE is_published = 1 ORDER BY (region_state = 'Kerala') DESC, name ASC")->fetchAll();
+$categories = $db->query("SELECT id, name, slug FROM package_categories WHERE is_active = 1 ORDER BY display_order ASC")->fetchAll();
 
 $errors = [];
 $submittedRecord = null;
 $agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
 
-if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf_token()) {
         $errors[] = 'Your security session has expired. Please refresh the page and submit again.';
     } else {
-        $fullName = trim($_POST['full_name'] ?? '');
-        $email = trim($_POST['email'] ?? '');
-        $phone = trim($_POST['phone'] ?? '');
-        $whatsapp = trim($_POST['whatsapp'] ?? $phone);
-        $destId = !empty($_POST['destination_id']) ? (int)$_POST['destination_id'] : null;
-        $destName = trim($_POST['destination_name'] ?? '');
-        $pkgId = !empty($_POST['package_id']) ? (int)$_POST['package_id'] : null;
+        $fullName       = trim($_POST['full_name'] ?? '');
+        $email          = trim($_POST['email'] ?? '');
+        $phone          = trim($_POST['phone'] ?? '');
+        $whatsapp       = trim($_POST['whatsapp'] ?? $phone);
+        $destId         = !empty($_POST['destination_id']) ? (int)$_POST['destination_id'] : null;
+        $destName       = trim($_POST['destination_name'] ?? '');
+        $pkgId          = !empty($_POST['package_id']) ? (int)$_POST['package_id'] : null;
+        $pkgTitle       = trim($_POST['package_title'] ?? '');
+        $enquiryType    = trim($_POST['enquiry_type'] ?? 'general_tour');
         $travelCategory = trim($_POST['travel_category'] ?? 'Custom Tour');
-        $depDate = !empty($_POST['departure_date']) ? $_POST['departure_date'] : null;
-        $retDate = !empty($_POST['return_date']) ? $_POST['return_date'] : null;
-        $adults = max(1, (int)($_POST['adults_count'] ?? 1));
-        $children = max(0, (int)($_POST['children_count'] ?? 0));
-        $hotelPref = trim($_POST['hotel_preference'] ?? 'Deluxe 3-Star');
-        $budget = trim($_POST['budget_tier'] ?? 'Flexible');
-        $vehiclePref = trim($_POST['vehicle_preference'] ?? 'Dedicated AC Sedan');
-        $requests = trim($_POST['special_requests'] ?? '');
+        $depDate        = !empty($_POST['departure_date']) ? $_POST['departure_date'] : null;
+        $retDate        = !empty($_POST['return_date']) ? $_POST['return_date'] : null;
+        $adults         = max(1, (int)($_POST['adults_count'] ?? 1));
+        $children       = max(0, (int)($_POST['children_count'] ?? 0));
+        $roomsCount     = max(1, (int)($_POST['rooms_count'] ?? 1));
+        $hotelPref      = trim($_POST['hotel_preference'] ?? 'Deluxe Resort');
+        $foodPref       = trim($_POST['food_preference'] ?? 'with_food');
+        $foodType       = trim($_POST['food_type'] ?? 'both');
+        $vehiclePref    = trim($_POST['vehicle_preference'] ?? 'Dedicated AC Sedan');
+        $budget         = trim($_POST['budget_tier'] ?? 'Flexible');
+        $requests       = trim($_POST['special_requests'] ?? '');
 
         if (empty($fullName) || strlen($fullName) < 2) {
             $errors[] = 'Please enter your full name.';
         }
         if (empty($phone) || strlen($phone) < 8) {
-            $errors[] = 'Please enter a valid primary contact number.';
+            $errors[] = 'Please enter a valid contact phone number.';
         }
 
         if (empty($errors)) {
             try {
-                $refNo = generate_reference('MV-REQ');
-                $datesFormatted = $depDate ? ($depDate . ($retDate ? ' to ' . $retDate : '')) : 'Flexible Dates';
-                
-                $compiledNotes = "Category: {$travelCategory}\n";
-                $compiledNotes .= "Destination Requested: " . ($destName ?: 'Not specified') . "\n";
-                $compiledNotes .= "Dates: {$datesFormatted}\n";
-                $compiledNotes .= "Hotel Preference: {$hotelPref}\n";
-                $compiledNotes .= "Budget: {$budget}\n";
-                $compiledNotes .= "Vehicle: {$vehiclePref}\n";
-                $compiledNotes .= "WhatsApp Number: {$whatsapp}\n";
-                if (!empty($requests)) {
-                    $compiledNotes .= "Special Requests:\n{$requests}";
+                if ($destId > 0 && empty($destName)) {
+                    $dStmt = $db->prepare("SELECT name FROM destinations WHERE id = ?");
+                    $dStmt->execute([$destId]);
+                    $destName = $dStmt->fetchColumn() ?: '';
                 }
+                if ($pkgId > 0 && empty($pkgTitle)) {
+                    $pStmt = $db->prepare("SELECT title FROM packages WHERE id = ?");
+                    $pStmt->execute([$pkgId]);
+                    $pkgTitle = $pStmt->fetchColumn() ?: '';
+                }
+
+                $year = date('Y');
+                $refCount = (int)$db->query("SELECT COUNT(*) FROM enquiries WHERE reference_no LIKE 'MV-{$year}-%'")->fetchColumn() + 1;
+                $refNo = sprintf("MV-%s-%04d", $year, $refCount);
+
+                $compiledNotes = "Accommodation: {$hotelPref}\n"
+                               . "Food Plan: {$foodPref} ({$foodType})\n"
+                               . "Vehicle: {$vehiclePref}\n"
+                               . "Rooms: {$roomsCount}\n"
+                               . "Special Requests: {$requests}";
 
                 $ip = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
                 $ua = substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 250);
 
                 $stmt = $db->prepare("
-                    INSERT INTO `enquiries` (
-                        `reference_no`, `name`, `email`, `phone`, `destination_id`, 
-                        `package_id`, `travel_dates`, `adults`, `children`, 
-                        `special_requests`, `status`, `ip_address`, `user_agent`, `created_at`
+                    INSERT INTO enquiries (
+                        reference_no, full_name, email, phone, whatsapp,
+                        destination_id, destination_name, package_id, package_title,
+                        enquiry_type, language, travel_category, departure_date, return_date,
+                        adults_count, children_count, rooms_count, budget_range,
+                        accommodation_preference, food_preference, food_type,
+                        travel_requirements, status, workflow_status, ip_address, user_agent,
+                        created_at, updated_at
                     ) VALUES (
-                        ?, ?, ?, ?, ?, 
-                        ?, ?, ?, ?, 
-                        ?, 'new', ?, ?, CURRENT_TIMESTAMP
+                        ?, ?, ?, ?, ?,
+                        ?, ?, ?, ?,
+                        ?, ?, ?, ?, ?,
+                        ?, ?, ?, ?,
+                        ?, ?, ?,
+                        ?, 'new', 'new', ?, ?,
+                        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
                     )
                 ");
+
                 $stmt->execute([
-                    $refNo, $fullName, $email, $phone, $destId, 
-                    $pkgId, $datesFormatted, $adults, $children, 
+                    $refNo, $fullName, $email, $phone, $whatsapp,
+                    $destId, $destName, $pkgId, $pkgTitle,
+                    $enquiryType, $activeLang, $travelCategory, $depDate, $retDate,
+                    $adults, $children, $roomsCount, $budget,
+                    $hotelPref, $foodPref, $foodType,
                     $compiledNotes, $ip, $ua
                 ]);
+                $enquiryId = (int)$db->lastInsertId();
+
+                // Customer registry
+                try {
+                    $custCheck = $db->prepare("SELECT id FROM customers WHERE phone = ? LIMIT 1");
+                    $custCheck->execute([$phone]);
+                    $cust = $custCheck->fetch(PDO::FETCH_ASSOC);
+
+                    if ($cust) {
+                        $db->prepare("UPDATE customers SET total_enquiries = total_enquiries + 1, updated_at = CURRENT_TIMESTAMP WHERE id = ?")
+                           ->execute([$cust['id']]);
+                    } else {
+                        $db->prepare("INSERT INTO customers (full_name, email, phone, whatsapp, preferred_language, total_enquiries, created_at) VALUES (?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP)")
+                           ->execute([$fullName, $email, $phone, $whatsapp, $activeLang]);
+                    }
+                } catch (Exception $ce) {}
+
+                // Initial status history
+                try {
+                    $db->prepare("INSERT INTO booking_status_history (enquiry_id, new_status, notes, created_at) VALUES (?, 'new', 'Customer submitted trip planner form', CURRENT_TIMESTAMP)")
+                       ->execute([$enquiryId]);
+                } catch (Exception $he) {}
+
+                // Email log
+                $emailBody = "Dear " . htmlspecialchars($fullName) . ",\n\n"
+                           . "Your booking enquiry (#{$refNo}) has been received successfully.\n\n"
+                           . "Destination: " . ($destName ?: 'Customized Route') . "\n"
+                           . ($pkgTitle ? "Package: {$pkgTitle}\n" : "")
+                           . "Dates: {$depDate} to {$retDate}\n"
+                           . "Travellers: {$adults} Adults, {$children} Children\n\n"
+                           . "IMPORTANT NOTICE:\n"
+                           . "Our team will verify the availability of your requested services and contact you shortly. This acknowledgement does not represent a confirmed booking.\n\n"
+                           . "Warm Regards,\nMidhila Voyages Management Team";
+
+                try {
+                    $db->prepare("INSERT INTO email_logs (recipient_email, recipient_name, subject, message_body, enquiry_id, status, sent_at) VALUES (?, ?, ?, ?, ?, 'sent', CURRENT_TIMESTAMP)")
+                       ->execute([$email ?: 'guest@midhilavoyages.com', $fullName, "Booking Enquiry Acknowledgement - #{$refNo}", $emailBody, $enquiryId]);
+                } catch (Exception $ee) {}
 
                 // Prefilled WhatsApp message
-                $waText = "Hello MIDHILA VOYAGES, I have submitted a bespoke travel request (Ref: {$refNo}).\n\n";
-                $waText .= "• Name: {$fullName}\n";
-                $waText .= "• Destination: " . ($destName ?: 'Custom Route') . "\n";
-                $waText .= "• Dates: {$datesFormatted}\n";
-                $waText .= "• Travelers: {$adults} Adults" . ($children > 0 ? ", {$children} Children" : "") . "\n";
-                $waText .= "• Accommodation: {$hotelPref}\n";
-                $waText .= "\nPlease review and share the customized proposal.";
+                $waText = "Hello MIDHILA VOYAGES, I have submitted a booking enquiry (Ref: {$refNo}).\n\n"
+                        . "• Name: {$fullName}\n"
+                        . "• Destination: " . ($destName ?: 'Custom Route') . "\n"
+                        . "• Dates: {$depDate} to {$retDate}\n"
+                        . "• Travellers: {$adults} Adults" . ($children > 0 ? ", {$children} Children" : "") . "\n\n"
+                        . "Please check availability and revert.";
 
                 $submittedRecord = [
                     'reference' => $refNo,
@@ -114,7 +179,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                     'wa_url' => build_whatsapp_url($agencyWhatsApp, $waText)
                 ];
             } catch (Exception $e) {
-                $errors[] = 'A database error occurred while saving your request. Please reach our direct WhatsApp hotline.';
+                error_log("Enquiry submission error: " . $e->getMessage());
+                $errors[] = 'A database error occurred while saving your request. Please message our direct WhatsApp hotline.';
             }
         }
     }
@@ -123,212 +189,204 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
 require_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Planner Editorial Hero (Pure White with Subtle 35% Photo Layer) -->
-<section style="position:relative;background:#FFFFFF;padding-top:calc(var(--header-height) + 40px);padding-bottom:40px;overflow:hidden;border-bottom:1px solid var(--color-border);">
-  <div class="cinematic-bg-layer cinematic-bg-mask-radial" aria-hidden="true">
-    <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1920&q=80" 
-         alt="" 
-         class="cinematic-bg-layer__img" 
-         style="opacity:0.25;">
-  </div>
-
-  <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
-    <h1 class="editorial-headline-large" style="margin-bottom:14px;">
-      Plan Your Custom Journey
-    </h1>
-    <p class="editorial-subtext" style="margin:0 auto;">
-      Share your travel vision with our Kerala headquarters. We craft a bespoke sequence with verified stays, chauffeur routing, and transparent pricing.
+<!-- ACKNOWLEDGEMENT MODAL -->
+<?php if ($submittedRecord): ?>
+<div style="position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#FFFFFF;border-radius:16px;max-width:540px;width:100%;padding:36px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);border:1px solid #E2E8F0;text-align:center;">
+    <div style="width:64px;height:64px;border-radius:50%;background:#ECFDF5;color:#059669;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:2rem;">
+      ✓
+    </div>
+    <h3 style="font-family:'Cinzel',serif;font-size:1.45rem;color:#0F172A;margin-bottom:8px;">
+      <?= __t('ack_modal_title') ?>
+    </h3>
+    <div style="background:#F1F5F9;border:1px dashed #CBD5E1;border-radius:8px;padding:12px;margin-bottom:18px;">
+      <span style="font-size:0.75rem;text-transform:uppercase;color:#64748B;font-weight:700;letter-spacing:0.06em;display:block;">
+        <?= __t('ack_ref_label') ?>
+      </span>
+      <strong style="font-family:monospace;font-size:1.3rem;color:#0F172A;letter-spacing:0.05em;"><?= e($submittedRecord['reference']) ?></strong>
+    </div>
+    <p style="font-size:0.9rem;color:#475569;line-height:1.65;margin-bottom:24px;text-align:left;background:#FFFBEB;border-left:4px solid #D97706;padding:12px 14px;border-radius:4px;">
+      <strong>Notice:</strong> <?= __t('ack_modal_text') ?>
     </p>
+    <div style="display:flex;gap:10px;">
+      <a href="<?= e($submittedRecord['wa_url']) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" style="flex:1;justify-content:center;padding:12px;">
+        <span>Chat on WhatsApp</span>
+      </a>
+      <a href="<?= BASE_URL ?>/index.php" class="btn-cinematic-secondary" style="flex:1;justify-content:center;padding:12px;">
+        <span>Back to Home</span>
+      </a>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
+
+<!-- HERO -->
+<section style="background:#0F172A;color:#FFFFFF;padding:80px 0 60px;text-align:center;">
+  <div class="container" style="max-width:820px;">
+    <span style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em;color:#C5A059;font-weight:700;display:block;margin-bottom:12px;">
+      Bespoke Itinerary &amp; Tour Inquiry
+    </span>
+    <h1 style="font-family:'Cinzel',serif;font-size:clamp(2rem, 4vw, 3rem);color:#FFFFFF;margin-bottom:14px;">
+      <?= __t('btn_plan_trip') ?>
+    </h1>
+    <p style="font-size:0.95rem;color:#CBD5E1;line-height:1.7;margin:0 auto 20px;">
+      Share your dates, family preferences, and desired route. Our team coordinates directly with verified properties and drivers to craft a flawless experience.
+    </p>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(217,119,6,0.15);border:1px solid #D97706;padding:6px 16px;border-radius:20px;font-size:0.78rem;color:#FDE68A;">
+      <span>ℹ️</span>
+      <span><?= __t('disclaimer_notice') ?></span>
+    </div>
   </div>
 </section>
 
-<!-- Main Form Section -->
-<section class="section-padding" style="background:#FFFFFF;">
-  <div class="container container-narrow">
+<!-- MAIN FORM -->
+<section style="padding:60px 0 90px;background:#FAFAFA;">
+  <div class="container" style="max-width:860px;">
 
-    <?php if ($submittedRecord): ?>
-      <!-- Submission Confirmation Card (Pure White Surface) -->
-      <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:50px 40px;text-align:center;box-shadow:var(--shadow-card);">
-        <div style="width:68px;height:68px;border-radius:50%;background:#E6F4EA;border:2px solid #059669;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:#059669;font-size:1.8rem;">
-          ✓
-        </div>
-        <span style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Inquiry Successfully Registered</span>
-        <h2 style="font-size:2.2rem;margin:8px 0 16px;">We Have Received Your Journey Vision</h2>
-        <p style="font-size:1.02rem;line-height:1.75;color:var(--color-text-secondary);max-width:620px;margin:0 auto 28px;">
-          Thank you, <strong><?= e($submittedRecord['name']) ?></strong>. Your request reference number is <strong style="color:var(--color-text-headline);"><?= e($submittedRecord['reference']) ?></strong>. A senior travel curator is reviewing your route pacing.
-        </p>
-
-        <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
-          <a href="<?= e($submittedRecord['wa_url']) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" style="padding:14px 28px;font-size:0.95rem;">
-            <span>Synchronize with WhatsApp Specialist &rarr;</span>
-          </a>
-          <a href="<?= BASE_URL ?>/index.php" class="btn-cinematic-outline" style="padding:13px 24px;">
-            <span>Return to Home</span>
-          </a>
-        </div>
+    <?php if (!empty($errors)): ?>
+      <div style="background:#FEF2F2;border:1px solid #FECACA;color:#991B1B;padding:16px 20px;border-radius:10px;margin-bottom:24px;">
+        <ul style="margin:0;padding-left:18px;">
+          <?php foreach ($errors as $err): ?>
+            <li><?= e($err) ?></li>
+          <?php endforeach; ?>
+        </ul>
       </div>
-    <?php else: ?>
+    <?php endif; ?>
 
-      <!-- 3-Step Progress Indicator -->
-      <div style="display:flex;align-items:center;justify-content:space-between;max-width:540px;margin:0 auto 40px;position:relative;">
-        <div style="text-align:center;position:relative;z-index:2;">
-          <div style="width:36px;height:36px;border-radius:50%;background:var(--color-text-main);color:#FFF;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-weight:700;font-size:0.85rem;">1</div>
-          <span style="font-size:0.75rem;font-weight:700;color:var(--color-text-main);text-transform:uppercase;">Circuits</span>
-        </div>
-        <div style="flex:1;height:2px;background:var(--color-border);margin:0 12px;transform:translateY(-12px);"></div>
-        <div style="text-align:center;position:relative;z-index:2;">
-          <div style="width:36px;height:36px;border-radius:50%;background:#FAFAFA;border:1px solid var(--color-border);color:var(--color-text-secondary);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-weight:700;font-size:0.85rem;">2</div>
-          <span style="font-size:0.75rem;font-weight:600;color:var(--color-text-muted);text-transform:uppercase;">Rhythm</span>
-        </div>
-        <div style="flex:1;height:2px;background:var(--color-border);margin:0 12px;transform:translateY(-12px);"></div>
-        <div style="text-align:center;position:relative;z-index:2;">
-          <div style="width:36px;height:36px;border-radius:50%;background:#FAFAFA;border:1px solid var(--color-border);color:var(--color-text-secondary);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-weight:700;font-size:0.85rem;">3</div>
-          <span style="font-size:0.75rem;font-weight:600;color:var(--color-text-muted);text-transform:uppercase;">Guest Info</span>
-        </div>
-      </div>
-
-      <?php if (!empty($errors)): ?>
-        <div style="background:#FEE2E2;border:1px solid #FCA5A5;color:#991B1B;padding:16px 20px;border-radius:var(--radius-sm);margin-bottom:28px;font-size:0.92rem;">
-          <ul style="list-style:disc;padding-left:18px;">
-            <?php foreach ($errors as $err): ?>
-              <li><?= e($err) ?></li>
-            <?php endforeach; ?>
-          </ul>
-        </div>
-      <?php endif; ?>
-
-      <!-- The Custom Planner Form Panel -->
-      <div class="editorial-form-panel">
-        <form action="<?= BASE_URL ?>/enquiry.php" method="POST">
-          <?= csrf_field() ?>
-
-          <?php if ($pkgDetails): ?>
-            <div style="background:#FAFAFA;border:1px solid var(--color-border);border-left:4px solid var(--color-gold-deep);padding:14px 18px;border-radius:var(--radius-sm);margin-bottom:24px;font-size:0.88rem;color:var(--color-text-main);">
-              <strong>Inquiring specifically for:</strong> <?= e($pkgDetails['title']) ?>
-              <input type="hidden" name="package_id" value="<?= (int)$pkgDetails['id'] ?>">
+    <div style="background:#FFFFFF;border-radius:18px;padding:38px 42px;border:1px solid #E2E8F0;box-shadow:0 10px 35px rgba(15,23,42,0.06);">
+      
+      <form method="POST" action="<?= BASE_URL ?>/enquiry.php">
+        <?= csrf_field() ?>
+        <?php if ($pkgDetails): ?>
+          <input type="hidden" name="package_id" value="<?= (int)$pkgDetails['id'] ?>">
+          <input type="hidden" name="package_title" value="<?= e($pkgDetails['title']) ?>">
+          <div style="background:#EFF6FF;border:1px solid #BFDBFE;padding:12px 16px;border-radius:8px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <span style="font-size:0.72rem;text-transform:uppercase;color:#1E40AF;font-weight:700;">Selected Tour Package:</span>
+              <div style="font-size:1.05rem;font-weight:700;color:#1E3A8A;"><?= e($pkgDetails['title']) ?></div>
             </div>
-          <?php endif; ?>
+            <a href="<?= BASE_URL ?>/package.php?id=<?= (int)$pkgDetails['id'] ?>" target="_blank" style="font-size:0.8rem;color:#2563EB;font-weight:600;">View Package &rarr;</a>
+          </div>
+        <?php endif; ?>
 
-          <!-- Part 1: Destination & Dates -->
-          <h3 style="font-size:1.15rem;margin-bottom:16px;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-text-main);">
-            1. Destination &amp; Journey Dates
+        <!-- 1. Customer Details -->
+        <div style="margin-bottom:26px;">
+          <h3 style="font-size:1.05rem;color:#0F172A;font-weight:700;margin-bottom:14px;border-bottom:1px solid #F1F5F9;padding-bottom:6px;">
+            1. Your Contact Details
           </h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;">
+            <div>
+              <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_full_name') ?></label>
+              <input type="text" name="full_name" required placeholder="e.g. Ramesh Kumar" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+            </div>
+            <div>
+              <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_phone') ?></label>
+              <input type="tel" name="phone" required placeholder="+91 8075021427" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div>
+              <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_email') ?></label>
+              <input type="email" name="email" placeholder="ramesh@example.com" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+            </div>
+            <div>
+              <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;">WhatsApp Number (if different)</label>
+              <input type="tel" name="whatsapp" placeholder="+91 8075021427" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+            </div>
+          </div>
+        </div>
 
-          <div class="form-row-2col">
-            <div class="editorial-form-group">
-              <label class="editorial-label">Selected Destination *</label>
-              <select name="destination_name" class="editorial-select" required>
-                <option value="">Select Destination</option>
+        <!-- 2. Trip Specifics -->
+        <div style="margin-bottom:26px;">
+          <h3 style="font-size:1.05rem;color:#0F172A;font-weight:700;margin-bottom:14px;border-bottom:1px solid #F1F5F9;padding-bottom:6px;">
+            2. Destination &amp; Dates
+          </h3>
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px;margin-bottom:14px;">
+            <div>
+              <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_select_destination') ?></label>
+              <select name="destination_id" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
+                <option value="0">Choose Preferred Destination</option>
                 <?php foreach ($destinations as $d): ?>
-                  <option value="<?= e($d['name']) ?>" <?= ($preDest === $d['name'] || ($pkgDetails && $pkgDetails['destination_id'] == $d['id'])) ? 'selected' : '' ?>>
-                    <?= e($d['name']) ?>
+                  <option value="<?= (int)$d['id'] ?>" <?= ((int)$d['id'] === $preDestId) ? 'selected' : '' ?>>
+                    <?= loc($d, 'name') ?> (<?= e($d['region_state']) ?>)
                   </option>
                 <?php endforeach; ?>
-                <option value="Pilgrim Tour (Rameswaram - Madurai - Thanjavur)">Pilgrim Tour (Tamil Nadu Circuit ₹6,500)</option>
-                <option value="Multi-Region Custom Circuit">Multi-Region Custom Circuit</option>
               </select>
             </div>
-
-            <div class="editorial-form-group">
-              <label class="editorial-label">Travel Style</label>
-              <select name="travel_category" class="editorial-select">
-                <option value="Sacred Pilgrimage Yatra">Sacred Pilgrimage Yatra</option>
-                <option value="Bespoke Family Vacation" selected>Bespoke Family Vacation</option>
-                <option value="Honeymoon &amp; Couple">Romantic Escape / Honeymoon</option>
-                <option value="Senior Citizen Escorted Tour">Senior Citizen Escorted Tour</option>
-                <option value="Group / Corporate Expedition">Group / Extended Family</option>
-              </select>
+            <div>
+              <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_start_date') ?></label>
+              <input type="date" name="departure_date" required min="<?= date('Y-m-d') ?>" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
+            </div>
+            <div>
+              <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_end_date') ?></label>
+              <input type="date" name="return_date" min="<?= date('Y-m-d') ?>" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
             </div>
           </div>
 
-          <div class="form-row-2col">
-            <div class="editorial-form-group">
-              <label class="editorial-label">Estimated Departure Date</label>
-              <input type="date" name="departure_date" class="editorial-input">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+            <div>
+              <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_adults') ?></label>
+              <input type="number" name="adults_count" value="2" min="1" max="100" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
             </div>
-
-            <div class="editorial-form-group">
-              <label class="editorial-label">Return Date (Optional)</label>
-              <input type="date" name="return_date" class="editorial-input">
+            <div>
+              <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_children') ?></label>
+              <input type="number" name="children_count" value="0" min="0" max="50" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
+            </div>
+            <div>
+              <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_rooms') ?></label>
+              <input type="number" name="rooms_count" value="1" min="1" max="50" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
             </div>
           </div>
+        </div>
 
-          <!-- Part 2: Party Size & Accommodation -->
-          <h3 style="font-size:1.15rem;margin:28px 0 16px;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-text-main);">
-            2. Party Size &amp; Accommodation Rhythm
+        <!-- 3. Preferences -->
+        <div style="margin-bottom:26px;">
+          <h3 style="font-size:1.05rem;color:#0F172A;font-weight:700;margin-bottom:14px;border-bottom:1px solid #F1F5F9;padding-bottom:6px;">
+            3. Travel &amp; Food Preferences
           </h3>
-
-          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:20px;">
-            <div class="editorial-form-group">
-              <label class="editorial-label">Adults (12+ Yrs)</label>
-              <input type="number" name="adults_count" value="2" min="1" max="100" class="editorial-input">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div>
+              <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;">Hotel Category</label>
+              <select name="hotel_preference" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                <option value="4-Star Resort" selected>4-Star / Luxury Resort</option>
+                <option value="5-Star Palace">5-Star Palace &amp; Heritage</option>
+                <option value="3-Star Hotel">3-Star Clean Sanitised Hotel</option>
+                <option value="Houseboat">Private Houseboat (Alleppey)</option>
+              </select>
             </div>
-
-            <div class="editorial-form-group">
-              <label class="editorial-label">Children (&lt; 12 Yrs)</label>
-              <input type="number" name="children_count" value="0" min="0" max="50" class="editorial-input">
+            <div>
+              <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('pref_food_plan') ?></label>
+              <select name="food_preference" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                <option value="all_meals" selected><?= __t('food_all_meals') ?></option>
+                <option value="breakfast_dinner"><?= __t('food_breakfast_dinner') ?></option>
+                <option value="breakfast_only"><?= __t('food_breakfast_only') ?></option>
+                <option value="without_food"><?= __t('food_without') ?></option>
+              </select>
             </div>
-
-            <div class="editorial-form-group">
-              <label class="editorial-label">Hotel Category</label>
-              <select name="hotel_preference" class="editorial-select">
-                <option value="Heritage Palace / 5-Star">Heritage Luxury Palace / 5-Star</option>
-                <option value="Boutique 4-Star Resort" selected>Boutique 4-Star Resort</option>
-                <option value="Comfort Deluxe 3-Star">Comfort Deluxe 3-Star</option>
-                <option value="Clean Ashram / Temple Suite">Clean Ashram / Temple Guest House</option>
+            <div>
+              <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;">Vehicle</label>
+              <select name="vehicle_preference" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                <option value="Toyota Innova Crysta AC" selected>Innova Crysta AC</option>
+                <option value="Sedan (Dzire AC)">AC Sedan (1-3 Pax)</option>
+                <option value="Tempo Traveller AC">Tempo Traveller (12-17 Pax)</option>
+                <option value="No Vehicle">No Transport Needed</option>
               </select>
             </div>
           </div>
 
-          <!-- Part 3: Guest Information -->
-          <h3 style="font-size:1.15rem;margin:28px 0 16px;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-text-main);">
-            3. Lead Traveler Details
-          </h3>
-
-          <div class="form-row-2col">
-            <div class="editorial-form-group">
-              <label class="editorial-label">Full Name *</label>
-              <input type="text" name="full_name" class="editorial-input" placeholder="e.g. Adarsh" required>
-            </div>
-
-            <div class="editorial-form-group">
-              <label class="editorial-label">Contact Number (Calling / SMS) *</label>
-              <input type="tel" name="phone" class="editorial-input" placeholder="+91 80750 21427" required>
-            </div>
+          <div>
+            <label style="display:block;font-size:0.78rem;font-weight:600;color:#64748B;margin-bottom:4px;">Special Requests / Temple Darshans / Sightseeing</label>
+            <textarea name="special_requests" rows="3" placeholder="Specify any specific places, elderly care needs, flight arrival timings..." style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;line-height:1.6;"></textarea>
           </div>
+        </div>
 
-          <div class="form-row-2col">
-            <div class="editorial-form-group">
-              <label class="editorial-label">WhatsApp Number</label>
-              <input type="tel" name="whatsapp" class="editorial-input" placeholder="If different from calling number">
-            </div>
+        <button type="submit" class="btn-cinematic-primary" style="width:100%;justify-content:center;padding:15px;font-size:1.05rem;">
+          <span><?= __t('btn_submit_enquiry') ?> &rarr;</span>
+        </button>
 
-            <div class="editorial-form-group">
-              <label class="editorial-label">Email Address</label>
-              <input type="email" name="email" class="editorial-input" placeholder="you@domain.com">
-            </div>
-          </div>
+      </form>
 
-          <div class="editorial-form-group">
-            <label class="editorial-label">Special Requests / Preferences</label>
-            <textarea name="special_requests" class="editorial-textarea" rows="3" placeholder="Tell us if you need senior wheelchair assistance, special dietary meals, specific darshan timings, or private vehicle type..."></textarea>
-          </div>
-
-          <div style="margin-top:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-            <button type="submit" class="btn-cinematic-primary" style="padding:15px 38px;">
-              <span>Submit Journey Proposal</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </button>
-
-            <span style="font-size:0.82rem;color:var(--color-text-muted);">
-              Need immediate booking? <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I need immediate itinerary assistance.")) ?>" target="_blank" rel="noopener noreferrer" style="color:var(--color-whatsapp);font-weight:700;">WhatsApp Concierge &rarr;</a>
-            </span>
-          </div>
-
-        </form>
-      </div>
-
-    <?php endif; ?>
+    </div>
 
   </div>
 </section>

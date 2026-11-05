@@ -477,3 +477,161 @@ INSERT INTO `testimonials` (`client_name`, `location`, `tour_taken`, `rating`, `
 ('Narayanan K. & Family', 'Kottayam, Kerala', 'Tamil Nadu Divine Yatra (Madurai - Rameswaram)', 5, 'Midhila Voyages arranged our parents\' pilgrimage with utmost care and devotion. The vehicle was immaculately clean, the driver was courteous and knowledgeable, and all hotel accommodations were conveniently close to the temples. Truly a peaceful experience.', 'February 2026', 1, 1, 1),
 ('Dr. Anand & Meera', 'Bengaluru, Karnataka', 'Kerala Serenade (Munnar & Alleppey)', 5, 'The private houseboat experience in Alleppey arranged by Midhila Voyages exceeded our expectations. The chef served delicious authentic Kerala meals, and the tea estate resort in Munnar had breathtaking misty valley views. Highly recommended for couples!', 'January 2026', 1, 1, 2),
 ('Rajesh Varma & Group', 'Chennai, Tamil Nadu', 'Kashi & Ayodhya Sacred Circuit', 5, 'Coordinating a 12-member group tour to Varanasi and Ayodhya could have been challenging, but Midhila Voyages handled every detail seamlessly — from airport pickups to sunrise boats on the Ganges and smooth darshan at Ram Janmabhoomi.', 'March 2026', 1, 1, 3);
+
+-- =====================================================================
+-- MIDHILA VOYAGES V2 UPDATE: TOURISM, ACCOMMODATION, CORPORATE & WORKFLOW
+-- =====================================================================
+
+CREATE TABLE IF NOT EXISTS `tourism_categories` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `slug` VARCHAR(80) NOT NULL UNIQUE,
+  `name_en` VARCHAR(150) NOT NULL,
+  `name_ml` VARCHAR(255) DEFAULT NULL,
+  `name_ta` VARCHAR(255) DEFAULT NULL,
+  `tagline_en` VARCHAR(255) DEFAULT NULL,
+  `tagline_ml` VARCHAR(255) DEFAULT NULL,
+  `tagline_ta` VARCHAR(255) DEFAULT NULL,
+  `description_en` TEXT DEFAULT NULL,
+  `description_ml` TEXT DEFAULT NULL,
+  `description_ta` TEXT DEFAULT NULL,
+  `icon_svg` VARCHAR(50) DEFAULT 'compass',
+  `featured_image` VARCHAR(255) DEFAULT NULL,
+  `is_kerala_focus` TINYINT(1) DEFAULT 1,
+  `display_order` INT DEFAULT 0,
+  `is_active` TINYINT(1) DEFAULT 1,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `accommodations` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `destination_id` INT UNSIGNED DEFAULT NULL,
+  `tourism_category_id` INT UNSIGNED DEFAULT NULL,
+  `name_en` VARCHAR(200) NOT NULL,
+  `name_ml` VARCHAR(255) DEFAULT NULL,
+  `name_ta` VARCHAR(255) DEFAULT NULL,
+  `category` VARCHAR(80) DEFAULT 'Resort',
+  `location_address` TEXT DEFAULT NULL,
+  `contact_person` VARCHAR(150) DEFAULT NULL,
+  `contact_phone` VARCHAR(60) DEFAULT NULL,
+  `contact_email` VARCHAR(120) DEFAULT NULL,
+  `room_categories` TEXT DEFAULT NULL,
+  `room_views` TEXT DEFAULT NULL,
+  `room_facilities` TEXT DEFAULT NULL,
+  `food_availability` VARCHAR(100) DEFAULT 'with_food',
+  `food_types` TEXT DEFAULT NULL,
+  `sightseeing_services` VARCHAR(100) DEFAULT 'with_sightseeing',
+  `additional_facilities` TEXT DEFAULT NULL,
+  `indicative_price` DECIMAL(10,2) DEFAULT 0.00,
+  `price_unit` VARCHAR(50) DEFAULT 'per night',
+  `featured_image` VARCHAR(255) DEFAULT NULL,
+  `photos_json` TEXT DEFAULT NULL,
+  `special_instructions` TEXT DEFAULT NULL,
+  `is_active` TINYINT(1) DEFAULT 1,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_acc_destination` (`destination_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `corporate_venues` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `venue_type` VARCHAR(50) NOT NULL DEFAULT 'conference_hall',
+  `destination_id` INT UNSIGNED DEFAULT NULL,
+  `name_en` VARCHAR(200) NOT NULL,
+  `name_ml` VARCHAR(255) DEFAULT NULL,
+  `name_ta` VARCHAR(255) DEFAULT NULL,
+  `city` VARCHAR(100) DEFAULT 'Kochi',
+  `location_address` TEXT DEFAULT NULL,
+  `contact_person` VARCHAR(150) DEFAULT NULL,
+  `contact_phone` VARCHAR(60) DEFAULT NULL,
+  `contact_email` VARCHAR(120) DEFAULT NULL,
+  `capacity_theater` INT DEFAULT 100,
+  `capacity_classroom` INT DEFAULT 60,
+  `capacity_round_table` INT DEFAULT 50,
+  `av_equipment_specs` TEXT DEFAULT NULL,
+  `catering_options` TEXT DEFAULT NULL,
+  `indicative_price` DECIMAL(10,2) DEFAULT 0.00,
+  `price_unit` VARCHAR(50) DEFAULT 'per day',
+  `featured_image` VARCHAR(255) DEFAULT NULL,
+  `is_active` TINYINT(1) DEFAULT 1,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `customers` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `full_name` VARCHAR(150) NOT NULL,
+  `email` VARCHAR(150) DEFAULT NULL,
+  `phone` VARCHAR(50) NOT NULL,
+  `whatsapp` VARCHAR(50) DEFAULT NULL,
+  `city` VARCHAR(100) DEFAULT NULL,
+  `state` VARCHAR(100) DEFAULT NULL,
+  `country` VARCHAR(100) DEFAULT 'India',
+  `preferred_language` VARCHAR(10) DEFAULT 'en',
+  `total_enquiries` INT DEFAULT 1,
+  `total_bookings` INT DEFAULT 0,
+  `internal_notes` TEXT DEFAULT NULL,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `availability_checks` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `enquiry_id` INT UNSIGNED NOT NULL,
+  `admin_id` INT UNSIGNED DEFAULT NULL,
+  `accommodation_id` INT UNSIGNED DEFAULT NULL,
+  `provider_name` VARCHAR(200) NOT NULL,
+  `contact_person` VARCHAR(120) DEFAULT NULL,
+  `contacted_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `response_status` VARCHAR(50) NOT NULL DEFAULT 'pending',
+  `available_room_category` VARCHAR(120) DEFAULT NULL,
+  `confirmed_room_quantity` INT DEFAULT 0,
+  `quoted_price` DECIMAL(10,2) DEFAULT NULL,
+  `provider_remarks` TEXT DEFAULT NULL,
+  `admin_remarks` TEXT DEFAULT NULL,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `customer_communications` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `customer_id` INT UNSIGNED DEFAULT NULL,
+  `enquiry_id` INT UNSIGNED DEFAULT NULL,
+  `admin_id` INT UNSIGNED DEFAULT NULL,
+  `channel` VARCHAR(30) NOT NULL DEFAULT 'whatsapp',
+  `subject` VARCHAR(255) DEFAULT NULL,
+  `message` TEXT NOT NULL,
+  `status` VARCHAR(40) DEFAULT 'sent',
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `booking_status_history` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `enquiry_id` INT UNSIGNED NOT NULL,
+  `admin_id` INT UNSIGNED DEFAULT NULL,
+  `old_status` VARCHAR(50) DEFAULT NULL,
+  `new_status` VARCHAR(50) NOT NULL,
+  `notes` TEXT DEFAULT NULL,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `email_logs` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `recipient_email` VARCHAR(150) NOT NULL,
+  `recipient_name` VARCHAR(150) DEFAULT NULL,
+  `subject` VARCHAR(255) NOT NULL,
+  `message_body` TEXT NOT NULL,
+  `enquiry_id` INT UNSIGNED DEFAULT NULL,
+  `status` VARCHAR(30) DEFAULT 'sent',
+  `sent_at` DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `translations` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `translation_key` VARCHAR(120) NOT NULL UNIQUE,
+  `group_name` VARCHAR(60) DEFAULT 'general',
+  `en_text` TEXT NOT NULL,
+  `ml_text` TEXT DEFAULT NULL,
+  `ta_text` TEXT DEFAULT NULL,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+

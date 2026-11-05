@@ -85,21 +85,26 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 
       <!-- Desktop Navigation Menu -->
       <nav class="nav-menu" aria-label="Main Navigation">
-        <a href="<?= BASE_URL ?>/index.php" class="nav-link <?= ($currentScript === 'index.php') ? 'is-active' : '' ?>">Home</a>
-        <a href="<?= BASE_URL ?>/about.php" class="nav-link <?= ($currentScript === 'about.php') ? 'is-active' : '' ?>">About Us</a>
-        <a href="<?= BASE_URL ?>/destinations.php" class="nav-link <?= in_array($currentScript, ['destinations.php', 'destination.php']) ? 'is-active' : '' ?>">Destinations</a>
-        <a href="<?= BASE_URL ?>/packages.php" class="nav-link <?= in_array($currentScript, ['packages.php', 'package.php']) ? 'is-active' : '' ?>">Tour Packages</a>
-        <a href="<?= BASE_URL ?>/pilgrimage.php" class="nav-link <?= ($currentScript === 'pilgrimage.php') ? 'is-active' : '' ?>">Pilgrimage Tours</a>
-        <a href="<?= BASE_URL ?>/services.php" class="nav-link <?= ($currentScript === 'services.php') ? 'is-active' : '' ?>">Services</a>
-        <a href="<?= BASE_URL ?>/gallery.php" class="nav-link <?= ($currentScript === 'gallery.php') ? 'is-active' : '' ?>">Gallery</a>
-        <a href="<?= BASE_URL ?>/contact.php" class="nav-link <?= ($currentScript === 'contact.php') ? 'is-active' : '' ?>">Contact Us</a>
+        <a href="<?= BASE_URL ?>/index.php" class="nav-link <?= ($currentScript === 'index.php') ? 'is-active' : '' ?>"><?= __t('nav_home') ?></a>
+        <a href="<?= BASE_URL ?>/kerala-tourism.php" class="nav-link <?= in_array($currentScript, ['kerala-tourism.php']) ? 'is-active' : '' ?>" style="color:#0F172A;font-weight:700;"><?= __t('nav_kerala_tourism') ?></a>
+        <a href="<?= BASE_URL ?>/packages.php" class="nav-link <?= in_array($currentScript, ['packages.php', 'package.php']) ? 'is-active' : '' ?>"><?= __t('nav_packages') ?></a>
+        <a href="<?= BASE_URL ?>/destinations.php" class="nav-link <?= in_array($currentScript, ['destinations.php', 'destination.php']) ? 'is-active' : '' ?>"><?= __t('nav_destinations') ?></a>
+        <a href="<?= BASE_URL ?>/accommodation.php" class="nav-link <?= ($currentScript === 'accommodation.php') ? 'is-active' : '' ?>"><?= __t('nav_accommodation') ?></a>
+        <a href="<?= BASE_URL ?>/custom-tour.php" class="nav-link <?= ($currentScript === 'custom-tour.php') ? 'is-active' : '' ?>"><?= __t('nav_custom_tour') ?></a>
+        <a href="<?= BASE_URL ?>/corporate-events.php" class="nav-link <?= ($currentScript === 'corporate-events.php') ? 'is-active' : '' ?>"><?= __t('nav_corporate_events') ?></a>
+        <a href="<?= BASE_URL ?>/pilgrimage.php" class="nav-link <?= ($currentScript === 'pilgrimage.php') ? 'is-active' : '' ?>"><?= __t('nav_pilgrimage') ?></a>
+        <a href="<?= BASE_URL ?>/about.php" class="nav-link <?= ($currentScript === 'about.php') ? 'is-active' : '' ?>"><?= __t('nav_about') ?></a>
+        <a href="<?= BASE_URL ?>/contact.php" class="nav-link <?= ($currentScript === 'contact.php') ? 'is-active' : '' ?>"><?= __t('nav_contact') ?></a>
       </nav>
 
       <!-- Header Action Buttons -->
-      <div class="header-actions">
+      <div class="header-actions" style="display:flex;align-items:center;gap:12px;">
+        <!-- Language Switcher (English, Malayalam, Tamil) -->
+        <?= render_language_switcher() ?>
+
         <!-- Plan My Journey Primary CTA -->
         <a href="<?= BASE_URL ?>/enquiry.php" class="btn-cinematic-primary btn-header-cta">
-          <span>Plan My Trip</span>
+          <span><?= __t('btn_plan_trip') ?></span>
         </a>
 
         <!-- Mobile Hamburger Toggle -->
@@ -129,27 +134,56 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
       </div>
 
       <nav class="mobile-drawer__links">
-        <a href="<?= BASE_URL ?>/index.php" class="mobile-drawer__link <?= ($currentScript === 'index.php') ? 'is-active' : '' ?>">Home</a>
-        <a href="<?= BASE_URL ?>/about.php" class="mobile-drawer__link <?= ($currentScript === 'about.php') ? 'is-active' : '' ?>">About Us</a>
-        <a href="<?= BASE_URL ?>/destinations.php" class="mobile-drawer__link <?= in_array($currentScript, ['destinations.php', 'destination.php']) ? 'is-active' : '' ?>">Destinations</a>
-        <a href="<?= BASE_URL ?>/packages.php" class="mobile-drawer__link <?= in_array($currentScript, ['packages.php', 'package.php']) ? 'is-active' : '' ?>">Tour Packages</a>
-        <a href="<?= BASE_URL ?>/pilgrimage.php" class="mobile-drawer__link <?= ($currentScript === 'pilgrimage.php') ? 'is-active' : '' ?>">Pilgrimage Tours</a>
-        <a href="<?= BASE_URL ?>/services.php" class="mobile-drawer__link <?= ($currentScript === 'services.php') ? 'is-active' : '' ?>">Travel Services</a>
-        <a href="<?= BASE_URL ?>/gallery.php" class="mobile-drawer__link <?= ($currentScript === 'gallery.php') ? 'is-active' : '' ?>">Travel Gallery</a>
-        <a href="<?= BASE_URL ?>/contact.php" class="mobile-drawer__link <?= ($currentScript === 'contact.php') ? 'is-active' : '' ?>">Contact Us</a>
-        <a href="<?= BASE_URL ?>/faq.php" class="mobile-drawer__link <?= ($currentScript === 'faq.php') ? 'is-active' : '' ?>">FAQs</a>
+        <a href="<?= BASE_URL ?>/index.php" class="mobile-drawer__link <?= ($currentScript === 'index.php') ? 'is-active' : '' ?>"><?= __t('nav_home') ?></a>
+        <a href="<?= BASE_URL ?>/kerala-tourism.php" class="mobile-drawer__link <?= ($currentScript === 'kerala-tourism.php') ? 'is-active' : '' ?>" style="color:#0F172A;font-weight:700;">🌴 <?= __t('nav_kerala_tourism') ?></a>
+        <a href="<?= BASE_URL ?>/packages.php" class="mobile-drawer__link <?= in_array($currentScript, ['packages.php', 'package.php']) ? 'is-active' : '' ?>"><?= __t('nav_packages') ?></a>
+        <a href="<?= BASE_URL ?>/destinations.php" class="mobile-drawer__link <?= in_array($currentScript, ['destinations.php', 'destination.php']) ? 'is-active' : '' ?>"><?= __t('nav_destinations') ?></a>
+        <a href="<?= BASE_URL ?>/accommodation.php" class="mobile-drawer__link <?= ($currentScript === 'accommodation.php') ? 'is-active' : '' ?>"><?= __t('nav_accommodation') ?></a>
+        <a href="<?= BASE_URL ?>/custom-tour.php" class="mobile-drawer__link <?= ($currentScript === 'custom-tour.php') ? 'is-active' : '' ?>"><?= __t('nav_custom_tour') ?></a>
+        <a href="<?= BASE_URL ?>/corporate-events.php" class="mobile-drawer__link <?= ($currentScript === 'corporate-events.php') ? 'is-active' : '' ?>"><?= __t('nav_corporate_events') ?></a>
+        <a href="<?= BASE_URL ?>/pilgrimage.php" class="mobile-drawer__link <?= ($currentScript === 'pilgrimage.php') ? 'is-active' : '' ?>">🛕 <?= __t('nav_pilgrimage') ?></a>
+        <a href="<?= BASE_URL ?>/about.php" class="mobile-drawer__link <?= ($currentScript === 'about.php') ? 'is-active' : '' ?>"><?= __t('nav_about') ?></a>
+        <a href="<?= BASE_URL ?>/contact.php" class="mobile-drawer__link <?= ($currentScript === 'contact.php') ? 'is-active' : '' ?>"><?= __t('nav_contact') ?></a>
+        <a href="<?= BASE_URL ?>/faq.php" class="mobile-drawer__link <?= ($currentScript === 'faq.php') ? 'is-active' : '' ?>"><?= __t('nav_faqs') ?></a>
       </nav>
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:12px;padding-top:24px;border-top:1px solid var(--color-border);">
+    <div style="display:flex;flex-direction:column;gap:12px;padding-top:20px;border-top:1px solid var(--color-border);">
+      <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px;">
+        <a href="<?= htmlspecialchars(lang_url('en')) ?>" style="padding:6px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:0.8rem;text-decoration:none;font-weight:700;color:<?= current_lang() === 'en' ? '#FFFFFF;background:#0F172A' : '#334155;background:#FFFFFF' ?>;">English</a>
+        <a href="<?= htmlspecialchars(lang_url('ml')) ?>" style="padding:6px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:0.8rem;text-decoration:none;font-weight:700;color:<?= current_lang() === 'ml' ? '#FFFFFF;background:#0F172A' : '#334155;background:#FFFFFF' ?>;">മലയാളം</a>
+        <a href="<?= htmlspecialchars(lang_url('ta')) ?>" style="padding:6px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:0.8rem;text-decoration:none;font-weight:700;color:<?= current_lang() === 'ta' ? '#FFFFFF;background:#0F172A' : '#334155;background:#FFFFFF' ?>;">தமிழ்</a>
+      </div>
       <a href="<?= BASE_URL ?>/enquiry.php" class="btn-cinematic-primary" style="width:100%;">
-        Plan My Journey
+        <?= __t('btn_plan_trip') ?>
       </a>
       <a href="<?= e($globalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" style="width:100%;">
-        <span>WhatsApp Specialist</span>
+        <span><?= __t('btn_whatsapp_us') ?></span>
       </a>
     </div>
   </div>
+
+  <script>
+    // Language Switcher Dropdown Click Handler
+    document.addEventListener('DOMContentLoaded', function() {
+      var switcherBtn = document.getElementById('langSwitcherBtn');
+      var switcherMenu = document.getElementById('langSwitcherMenu');
+      if (switcherBtn && switcherMenu) {
+        switcherBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var isExpanded = switcherMenu.style.display === 'block';
+          switcherMenu.style.display = isExpanded ? 'none' : 'block';
+          switcherBtn.setAttribute('aria-expanded', !isExpanded);
+        });
+        document.addEventListener('click', function(e) {
+          if (!switcherBtn.contains(e.target) && !switcherMenu.contains(e.target)) {
+            switcherMenu.style.display = 'none';
+            switcherBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+    });
+  </script>
 
   <!-- Flash Messages Alert (if any) -->
   <?= render_flash_messages() ?>

@@ -11,7 +11,31 @@ $db = getDB();
 
 // 1. Live Aggregate Statistics
 $totalEnquiries = (int)$db->query("SELECT COUNT(*) FROM `enquiries`")->fetchColumn();
-$newEnquiries   = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `status` = 'new'")->fetchColumn();
+$newEnquiries   = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` = 'new' OR `status` = 'new'")->fetchColumn();
+
+// 1b. Centralised 10 Operational Workflow KPI Metrics
+$wfStats = [
+    'total' => $totalEnquiries,
+    'new' => $newEnquiries,
+    'checking_availability' => 0,
+    'availability_confirmed' => 0,
+    'availability_unavailable' => 0,
+    'customer_contacted' => 0,
+    'followup_required' => 0,
+    'booking_confirmed' => 0,
+    'cancelled' => 0,
+    'corporate_event' => 0
+];
+try {
+    $wfStats['checking_availability'] = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` = 'checking_availability'")->fetchColumn();
+    $wfStats['availability_confirmed'] = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` = 'availability_confirmed'")->fetchColumn();
+    $wfStats['availability_unavailable'] = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` = 'availability_unavailable'")->fetchColumn();
+    $wfStats['customer_contacted'] = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` = 'customer_contacted' OR `status` = 'contacted'")->fetchColumn();
+    $wfStats['followup_required'] = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` = 'followup_required'")->fetchColumn();
+    $wfStats['booking_confirmed'] = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` = 'booking_confirmed' OR `status` = 'converted'")->fetchColumn();
+    $wfStats['cancelled'] = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` IN ('cancelled', 'rejected') OR `status` = 'closed'")->fetchColumn();
+    $wfStats['corporate_event'] = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `enquiry_type` = 'corporate_event'")->fetchColumn();
+} catch (Exception $e) {}
 
 $totalBookings     = (int)$db->query("SELECT COUNT(*) FROM `bookings`")->fetchColumn();
 $confirmedBookings = (int)$db->query("SELECT COUNT(*) FROM `bookings` WHERE `booking_status` = 'confirmed'")->fetchColumn();
@@ -67,6 +91,97 @@ $adminHeading = (function() use ($currentRole) {
 
 require_once __DIR__ . '/includes/admin-header.php';
 ?>
+
+<?php if (has_role(['super_admin', 'travel_manage'])): ?>
+<!-- =====================================================================
+     0. CENTRALISED BOOKING WORKFLOW OPERATIONS DASHBOARD (10 KPIS)
+     ===================================================================== -->
+<div class="admin-card" style="padding:22px 24px;margin-bottom:28px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+    <div>
+      <h3 style="font-size:1.15rem;font-weight:700;color:#0F172A;margin-bottom:2px;">Booking &amp; Availability Operations Hub</h3>
+      <p style="font-size:0.82rem;color:#64748B;margin:0;">Real-time status tracking across customer journeys, property availability checks, and corporate leads.</p>
+    </div>
+    <a href="<?= ADMIN_URL ?>/enquiries.php" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:700;">
+      Centralised Enquiries Hub &rarr;
+    </a>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:12px;">
+    
+    <!-- 1. Total Enquiries -->
+    <a href="<?= ADMIN_URL ?>/enquiries.php" style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:14px;text-decoration:none;transition:all 0.15s;display:block;">
+      <div style="font-size:0.72rem;text-transform:uppercase;color:#64748B;font-weight:700;">Total Enquiries</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#0F172A;line-height:1.2;margin-top:4px;"><?= $wfStats['total'] ?></div>
+      <div style="font-size:0.74rem;color:#64748B;margin-top:4px;">All Channels</div>
+    </a>
+
+    <!-- 2. New Requests -->
+    <a href="<?= ADMIN_URL ?>/enquiries.php?status=new" style="background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:14px;text-decoration:none;transition:all 0.15s;display:block;">
+      <div style="font-size:0.72rem;text-transform:uppercase;color:#991B1B;font-weight:700;">New Requests</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#DC2626;line-height:1.2;margin-top:4px;"><?= $wfStats['new'] ?></div>
+      <div style="font-size:0.74rem;color:#B91C1C;margin-top:4px;">Needs Review</div>
+    </a>
+
+    <!-- 3. Pending Availability Checks -->
+    <a href="<?= ADMIN_URL ?>/enquiries.php?status=checking_availability" style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;padding:14px;text-decoration:none;transition:all 0.15s;display:block;">
+      <div style="font-size:0.72rem;text-transform:uppercase;color:#92400E;font-weight:700;">Checking Availability</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#D97706;line-height:1.2;margin-top:4px;"><?= $wfStats['checking_availability'] ?></div>
+      <div style="font-size:0.74rem;color:#B45309;margin-top:4px;">Hotel / Venue Query</div>
+    </a>
+
+    <!-- 4. Availability Confirmed -->
+    <a href="<?= ADMIN_URL ?>/enquiries.php?status=availability_confirmed" style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:14px;text-decoration:none;transition:all 0.15s;display:block;">
+      <div style="font-size:0.72rem;text-transform:uppercase;color:#1E40AF;font-weight:700;">Availability Confirmed</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#2563EB;line-height:1.2;margin-top:4px;"><?= $wfStats['availability_confirmed'] ?></div>
+      <div style="font-size:0.74rem;color:#1D4ED8;margin-top:4px;">Ready to Quote</div>
+    </a>
+
+    <!-- 5. Unavailable -->
+    <a href="<?= ADMIN_URL ?>/enquiries.php?status=availability_unavailable" style="background:#FEE2E2;border:1px solid #FCA5A5;border-radius:10px;padding:14px;text-decoration:none;transition:all 0.15s;display:block;">
+      <div style="font-size:0.72rem;text-transform:uppercase;color:#991B1B;font-weight:700;">Unavailable</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#B91C1C;line-height:1.2;margin-top:4px;"><?= $wfStats['availability_unavailable'] ?></div>
+      <div style="font-size:0.74rem;color:#7F1D1D;margin-top:4px;">Alternate Needed</div>
+    </a>
+
+    <!-- 6. Customers Contacted -->
+    <a href="<?= ADMIN_URL ?>/enquiries.php?status=customer_contacted" style="background:#F1F5F9;border:1px solid #CBD5E1;border-radius:10px;padding:14px;text-decoration:none;transition:all 0.15s;display:block;">
+      <div style="font-size:0.72rem;text-transform:uppercase;color:#475569;font-weight:700;">Customers Contacted</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#334155;line-height:1.2;margin-top:4px;"><?= $wfStats['customer_contacted'] ?></div>
+      <div style="font-size:0.74rem;color:#64748B;margin-top:4px;">Proposal Sent</div>
+    </a>
+
+    <!-- 7. Follow-up Required -->
+    <a href="<?= ADMIN_URL ?>/enquiries.php?status=followup_required" style="background:#FEF3C7;border:1px solid #FCD34D;border-radius:10px;padding:14px;text-decoration:none;transition:all 0.15s;display:block;">
+      <div style="font-size:0.72rem;text-transform:uppercase;color:#B45309;font-weight:700;">Follow-up Needed</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#B45309;line-height:1.2;margin-top:4px;"><?= $wfStats['followup_required'] ?></div>
+      <div style="font-size:0.74rem;color:#78350F;margin-top:4px;">Pending Response</div>
+    </a>
+
+    <!-- 8. Confirmed Bookings -->
+    <a href="<?= ADMIN_URL ?>/enquiries.php?status=booking_confirmed" style="background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;padding:14px;text-decoration:none;transition:all 0.15s;display:block;">
+      <div style="font-size:0.72rem;text-transform:uppercase;color:#065F46;font-weight:700;">Confirmed Bookings</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#059669;line-height:1.2;margin-top:4px;"><?= $wfStats['booking_confirmed'] ?></div>
+      <div style="font-size:0.74rem;color:#047857;margin-top:4px;">Vouchers Active</div>
+    </a>
+
+    <!-- 9. Cancelled Bookings -->
+    <a href="<?= ADMIN_URL ?>/enquiries.php?status=cancelled" style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:14px;text-decoration:none;transition:all 0.15s;display:block;">
+      <div style="font-size:0.72rem;text-transform:uppercase;color:#64748B;font-weight:700;">Cancelled / Rejected</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#64748B;line-height:1.2;margin-top:4px;"><?= $wfStats['cancelled'] ?></div>
+      <div style="font-size:0.74rem;color:#94A3B8;margin-top:4px;">Closed Leads</div>
+    </a>
+
+    <!-- 10. Corporate Event Enquiries -->
+    <a href="<?= ADMIN_URL ?>/enquiries.php?tab=corporate_event" style="background:#FAF5FF;border:1px solid #E9D5FF;border-radius:10px;padding:14px;text-decoration:none;transition:all 0.15s;display:block;">
+      <div style="font-size:0.72rem;text-transform:uppercase;color:#6B21A8;font-weight:700;">Corporate Events</div>
+      <div style="font-size:1.6rem;font-weight:800;color:#7E22CE;line-height:1.2;margin-top:4px;"><?= $wfStats['corporate_event'] ?></div>
+      <div style="font-size:0.74rem;color:#581C87;margin-top:4px;">Conventions &amp; Halls</div>
+    </a>
+
+  </div>
+</div>
+<?php endif; ?>
 
 <!-- =====================================================================
      1. ROLE-TAILORED OPERATIONAL STAT CARDS

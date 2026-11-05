@@ -796,10 +796,14 @@ try {
       <?php endif; ?>
 
       <?php if (has_role(['super_admin', 'travel_manage'])): ?>
-        <div class="admin-nav-section-title">Tour Catalog</div>
+        <div class="admin-nav-section-title">Tour Catalog &amp; Kerala</div>
         <a href="<?= ADMIN_URL ?>/packages.php" class="admin-nav-item <?= in_array($adminScript, ['packages.php', 'package-edit.php']) ? 'is-active' : '' ?>">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
           <span>Tour Packages</span>
+        </a>
+        <a href="<?= ADMIN_URL ?>/tourism-categories.php" class="admin-nav-item <?= ($adminScript === 'tourism-categories.php') ? 'is-active' : '' ?>">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          <span>Kerala Tourism</span>
         </a>
         <a href="<?= ADMIN_URL ?>/destinations.php" class="admin-nav-item <?= in_array($adminScript, ['destinations.php', 'destination-edit.php']) ? 'is-active' : '' ?>">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -810,14 +814,38 @@ try {
           <span>Categories</span>
         </a>
 
+        <div class="admin-nav-section-title">Accommodations &amp; Venues</div>
+        <a href="<?= ADMIN_URL ?>/accommodations.php" class="admin-nav-item <?= in_array($adminScript, ['accommodations.php', 'accommodation-edit.php']) ? 'is-active' : '' ?>">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Accommodations</span>
+        </a>
+        <a href="<?= ADMIN_URL ?>/corporate-venues.php" class="admin-nav-item <?= in_array($adminScript, ['corporate-venues.php', 'corporate-venue-edit.php']) ? 'is-active' : '' ?>">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          <span>Corporate Venues</span>
+        </a>
+
+        <div class="admin-nav-section-title">Customers &amp; Intelligence</div>
+        <a href="<?= ADMIN_URL ?>/customers.php" class="admin-nav-item <?= ($adminScript === 'customers.php') ? 'is-active' : '' ?>">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span>Customer Registry</span>
+        </a>
+        <a href="<?= ADMIN_URL ?>/reports.php" class="admin-nav-item <?= ($adminScript === 'reports.php') ? 'is-active' : '' ?>">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span>Reports &amp; Analytics</span>
+        </a>
+
         <div class="admin-nav-section-title">Website Content</div>
-        <a href="<?= ADMIN_URL ?>/offer-popup.php" class="admin-nav-item <?= in_array($adminScript, ['offer-popup.php', 'content.php']) ? 'is-active' : '' ?>">
+        <a href="<?= ADMIN_URL ?>/offer-popup.php" class="admin-nav-item <?= in_array($adminScript, ['offer-popup.php']) ? 'is-active' : '' ?>">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           <span>Offer Popup</span>
         </a>
         <a href="<?= ADMIN_URL ?>/gallery.php" class="admin-nav-item <?= ($adminScript === 'gallery.php') ? 'is-active' : '' ?>">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
           <span>Photo Gallery</span>
+        </a>
+        <a href="<?= ADMIN_URL ?>/translations.php" class="admin-nav-item <?= ($adminScript === 'translations.php') ? 'is-active' : '' ?>">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span>Translations (i18n)</span>
         </a>
       <?php endif; ?>
 
