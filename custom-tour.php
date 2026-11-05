@@ -158,7 +158,7 @@ require_once __DIR__ . '/includes/header.php';
 <?php endif; ?>
 
 <!-- HERO -->
-<section style="background:#0F172A;color:#FFFFFF;padding:80px 0 60px;text-align:center;position:relative;">
+<section style="background:#0F172A;color:#FFFFFF;padding:calc(var(--header-height, 86px) + 48px) 0 60px;text-align:center;position:relative;">
   <div class="container" style="max-width:820px;position:relative;z-index:2;">
     <span style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em;color:#C5A059;font-weight:700;display:block;margin-bottom:12px;">
       Tailored Itineraries &amp; Dedicated Concierge
@@ -192,7 +192,7 @@ require_once __DIR__ . '/includes/header.php';
             1. Your Contact Details
           </h3>
           
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;">
+          <div class="form-grid-2col" style="margin-bottom:14px;">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_full_name') ?></label>
               <input type="text" name="full_name" required placeholder="e.g. Sreejith Menon" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
@@ -203,7 +203,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="form-grid-2col">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_email') ?></label>
               <input type="email" name="email" placeholder="menon@example.com" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
@@ -221,7 +221,7 @@ require_once __DIR__ . '/includes/header.php';
             2. Destination &amp; Journey Dates
           </h3>
 
-          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px;margin-bottom:14px;">
+          <div class="form-grid-3col" style="margin-bottom:14px;">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_select_destination') ?></label>
               <select name="destination_id" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
@@ -243,7 +243,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;">
+          <div class="form-grid-3col">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_adults') ?></label>
               <input type="number" name="adults_count" value="2" min="1" max="100" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;text-align:center;">
@@ -272,7 +272,7 @@ require_once __DIR__ . '/includes/header.php';
             3. Travel &amp; Accommodation Preferences
           </h3>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;">
+          <div class="form-grid-2col" style="margin-bottom:14px;">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;">Preferred Private Vehicle</label>
               <select name="preferred_transport" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
@@ -297,7 +297,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+          <div class="form-grid-3col">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('pref_food_plan') ?></label>
               <select name="food_preference" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">

@@ -221,7 +221,7 @@ require_once __DIR__ . '/includes/header.php';
 <?php endif; ?>
 
 <!-- HERO -->
-<section style="background:#0F172A;color:#FFFFFF;padding:80px 0 60px;text-align:center;">
+<section style="background:#0F172A;color:#FFFFFF;padding:calc(var(--header-height, 86px) + 48px) 0 60px;text-align:center;">
   <div class="container" style="max-width:820px;">
     <span style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em;color:#C5A059;font-weight:700;display:block;margin-bottom:12px;">
       Bespoke Itinerary &amp; Tour Inquiry
@@ -274,7 +274,7 @@ require_once __DIR__ . '/includes/header.php';
           <h3 style="font-size:1.05rem;color:#0F172A;font-weight:700;margin-bottom:14px;border-bottom:1px solid #F1F5F9;padding-bottom:6px;">
             1. Your Contact Details
           </h3>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;">
+          <div class="form-grid-2col" style="margin-bottom:14px;">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_full_name') ?></label>
               <input type="text" name="full_name" required placeholder="e.g. Ramesh Kumar" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
@@ -284,7 +284,7 @@ require_once __DIR__ . '/includes/header.php';
               <input type="tel" name="phone" required placeholder="+91 8075021427" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="form-grid-2col">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_email') ?></label>
               <input type="email" name="email" placeholder="ramesh@example.com" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
@@ -301,7 +301,7 @@ require_once __DIR__ . '/includes/header.php';
           <h3 style="font-size:1.05rem;color:#0F172A;font-weight:700;margin-bottom:14px;border-bottom:1px solid #F1F5F9;padding-bottom:6px;">
             2. Destination &amp; Dates
           </h3>
-          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px;margin-bottom:14px;">
+          <div class="form-grid-3col" style="margin-bottom:14px;">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_select_destination') ?></label>
               <select name="destination_id" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
@@ -323,7 +323,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+          <div class="form-grid-3col">
             <div>
               <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_adults') ?></label>
               <input type="number" name="adults_count" value="2" min="1" max="100" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
@@ -344,7 +344,7 @@ require_once __DIR__ . '/includes/header.php';
           <h3 style="font-size:1.05rem;color:#0F172A;font-weight:700;margin-bottom:14px;border-bottom:1px solid #F1F5F9;padding-bottom:6px;">
             3. Travel &amp; Food Preferences
           </h3>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div class="form-grid-3col" style="margin-bottom:14px;">
             <div>
               <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;">Hotel Category</label>
               <select name="hotel_preference" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">

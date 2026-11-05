@@ -28,11 +28,11 @@
 }
 
 /* =====================================================================
-   Laptop / Small Desktop / Tablet (max-width: 1140px)
+   Laptop / Small Desktop / Tablet (max-width: 1240px)
    ===================================================================== */
-@media (max-width: 1140px) {
+@media (max-width: 1240px) {
   .nav-menu {
-    display: none !important; /* Hidden on tablet & mobile; accessible via mobile drawer */
+    display: none !important; /* Cleanly hidden on laptop & tablet; accessible via mobile drawer */
   }
   .mobile-toggle,
   .mobile-nav-toggle {

@@ -281,7 +281,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- 5 Kerala Categories Grid -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:24px;margin-bottom:56px;">
+    <div class="kerala-disciplines-grid">
       <?php if (!empty($tourismCategories)): ?>
         <?php foreach ($tourismCategories as $cat): 
           $catName = loc($cat, 'name', $cat['name_en'] ?? '');

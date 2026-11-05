@@ -165,7 +165,7 @@ require_once __DIR__ . '/includes/header.php';
 <?php endif; ?>
 
 <!-- HERO -->
-<section style="background:#0F172A;color:#FFFFFF;padding:90px 0 70px;position:relative;overflow:hidden;">
+<section style="background:#0F172A;color:#FFFFFF;padding:calc(var(--header-height, 86px) + 48px) 0 70px;position:relative;overflow:hidden;">
   <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1920&q=80');background-size:cover;background-position:center;opacity:0.25;pointer-events:none;"></div>
 
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:880px;margin:0 auto;">
@@ -209,7 +209,7 @@ require_once __DIR__ . '/includes/header.php';
 <section style="padding:60px 0 90px;background:#FAFAFA;">
   <div class="container">
     
-    <div style="display:grid;grid-template-columns:1.2fr 1.3fr;gap:38px;align-items:start;">
+    <div class="booking-workspace-grid" style="align-items:start;">
 
       <!-- LEFT: REGISTERED CORPORATE VENUES -->
       <div>
@@ -284,7 +284,7 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <!-- RIGHT: CORPORATE ENQUIRY FORM -->
-      <div style="background:#FFFFFF;border-radius:16px;padding:34px;border:1px solid #E2E8F0;box-shadow:0 8px 30px rgba(15,23,42,0.06);position:sticky;top:100px;">
+      <div style="background:#FFFFFF;border-radius:16px;padding:34px;border:1px solid #E2E8F0;box-shadow:0 8px 30px rgba(15,23,42,0.06);position:sticky;top:calc(var(--header-height, 86px) + 20px);">
         
         <div style="border-bottom:1px solid #E2E8F0;padding-bottom:16px;margin-bottom:20px;">
           <h3 style="font-size:1.3rem;color:#0F172A;font-weight:700;margin:0 0 4px;">
@@ -314,7 +314,7 @@ require_once __DIR__ . '/includes/header.php';
               <input type="text" name="corporate_organisation_name" required placeholder="e.g. Infopark Technologies Ltd" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+            <div class="form-grid-2col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('corp_contact_person') ?></label>
                 <input type="text" name="full_name" required placeholder="e.g. Rajesh Kumar" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
@@ -333,7 +333,7 @@ require_once __DIR__ . '/includes/header.php';
 
           <!-- 2. Event Specifics -->
           <div style="margin-bottom:20px;">
-            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-bottom:14px;">
+            <div class="form-grid-2col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('corp_event_type') ?></label>
                 <select name="corporate_event_type" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
@@ -355,7 +355,7 @@ require_once __DIR__ . '/includes/header.php';
               </div>
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;">
+            <div class="form-grid-3col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;">Event Date *</label>
                 <input type="date" name="departure_date" required min="<?= date('Y-m-d') ?>" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.85rem;background:#FFF;">
@@ -370,7 +370,7 @@ require_once __DIR__ . '/includes/header.php';
               </div>
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+            <div class="form-grid-2col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('corp_seating') ?></label>
                 <select name="corporate_seating_arrangement" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">

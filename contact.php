@@ -99,7 +99,7 @@ require_once __DIR__ . '/includes/header.php';
 <section class="section-padding" style="background:#FFFFFF;">
   <div class="container">
     
-    <div style="display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:start;">
+    <div class="booking-workspace-grid" style="align-items:start;">
       
       <!-- Contact Form -->
       <div class="editorial-form-panel">

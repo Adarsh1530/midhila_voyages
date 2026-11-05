@@ -71,7 +71,7 @@ require_once __DIR__ . '/includes/header.php';
 ?>
 
 <!-- 1. KERALA TOURISM HERO CHAPTER -->
-<section style="position:relative;background:#0F172A;color:#FFFFFF;padding:100px 0 80px;overflow:hidden;">
+<section style="position:relative;background:#0F172A;color:#FFFFFF;padding:calc(var(--header-height, 86px) + 48px) 0 70px;overflow:hidden;">
   <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1920&q=80');background-size:cover;background-position:center;opacity:0.25;filter:saturate(120%);pointer-events:none;"></div>
   
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:920px;margin:0 auto;">
@@ -101,7 +101,7 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <!-- 2. THE 5 CORE CATEGORY TABS -->
-<section style="background:#FFFFFF;border-bottom:1px solid #E2E8F0;position:sticky;top:70px;z-index:40;box-shadow:0 4px 12px rgba(15,23,42,0.03);">
+<section style="background:#FFFFFF;border-bottom:1px solid #E2E8F0;position:sticky;top:var(--header-height, 86px);z-index:40;box-shadow:0 4px 12px rgba(15,23,42,0.03);">
   <div class="container" style="padding:14px 20px;">
     <div style="display:flex;align-items:center;gap:10px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;">
       <span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;color:#64748B;letter-spacing:0.05em;white-space:nowrap;margin-right:6px;">

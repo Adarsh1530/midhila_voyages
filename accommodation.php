@@ -217,7 +217,7 @@ require_once __DIR__ . '/includes/header.php';
 <?php endif; ?>
 
 <!-- PAGE HERO -->
-<section style="background:#0F172A;color:#FFFFFF;padding:80px 0 60px;position:relative;overflow:hidden;">
+<section style="background:#0F172A;color:#FFFFFF;padding:calc(var(--header-height, 86px) + 48px) 0 60px;position:relative;overflow:hidden;">
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:860px;">
     <span style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em;color:#C5A059;font-weight:700;display:block;margin-bottom:12px;">
       Destination-Linked Properties &amp; Customised Routing
@@ -274,7 +274,7 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- 2-COLUMN LAYOUT: ACCOMMODATIONS LIST + CUSTOMISED BOOKING FORM -->
-    <div style="display:grid;grid-template-columns:1.2fr 1.3fr;gap:36px;align-items:start;">
+    <div class="booking-workspace-grid" style="align-items:start;">
 
       <!-- LEFT COLUMN: DISPLAY OF ACCOMMODATIONS FOR SELECTED DESTINATION -->
       <div>
@@ -397,7 +397,7 @@ require_once __DIR__ . '/includes/header.php';
               <input type="text" name="full_name" required placeholder="e.g. Maya Varma" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+            <div class="form-grid-2col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_phone') ?></label>
                 <input type="tel" name="phone" required placeholder="+91 9876543210" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
@@ -408,7 +408,7 @@ require_once __DIR__ . '/includes/header.php';
               </div>
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+            <div class="form-grid-2col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_start_date') ?></label>
                 <input type="date" name="departure_date" required min="<?= date('Y-m-d') ?>" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;background:#FFF;">
@@ -419,7 +419,7 @@ require_once __DIR__ . '/includes/header.php';
               </div>
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+            <div class="form-grid-3col">
               <div>
                 <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_adults') ?></label>
                 <input type="number" name="adults_count" value="2" min="1" max="50" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
