@@ -28,6 +28,25 @@
 }
 
 /* =====================================================================
+   Indic Language Breakpoint (Malayalam & Tamil nav width compensation)
+   ===================================================================== */
+@media (max-width: 1280px) {
+  html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .nav-menu {
+    display: none !important;
+  }
+  html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .mobile-toggle,
+  html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .mobile-nav-toggle {
+    display: flex !important;
+  }
+  html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .brand-logo {
+    margin-right: 0 !important;
+  }
+  html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .header-actions {
+    margin-left: auto !important;
+  }
+}
+
+/* =====================================================================
    Laptop / Small Desktop / Tablet (max-width: 1240px)
    ===================================================================== */
 @media (max-width: 1240px) {

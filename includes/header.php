@@ -17,7 +17,7 @@ $defaultWaMsg = "Hello MIDHILA VOYAGES, I would like to explore tour packages an
 $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= e(current_lang()) ?>" class="<?= current_lang() !== 'en' ? 'lang-' . e(current_lang()) : '' ?>">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,10 +31,10 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="<?= ASSETS_URL ?>/images/favicon.svg">
   
-  <!-- Google Fonts: Cinzel, Cormorant Garamond, Plus Jakarta Sans -->
+  <!-- Google Fonts: Cinzel, Cormorant Garamond, Plus Jakarta Sans, Noto Sans Malayalam, Noto Sans Tamil -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/style.css">
@@ -94,15 +94,15 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
         <a href="<?= BASE_URL ?>/destinations.php" class="nav-link <?= in_array($currentScript, ['destinations.php', 'destination.php']) ? 'is-active' : '' ?>"><?= __t('nav_destinations') ?></a>
         <a href="<?= BASE_URL ?>/accommodation.php" class="nav-link <?= ($currentScript === 'accommodation.php') ? 'is-active' : '' ?>"><?= __t('nav_accommodation') ?></a>
         <a href="<?= BASE_URL ?>/custom-tour.php" class="nav-link <?= ($currentScript === 'custom-tour.php') ? 'is-active' : '' ?>"><?= __t('nav_custom_tour') ?></a>
-        <a href="<?= BASE_URL ?>/corporate-events.php" class="nav-link <?= ($currentScript === 'corporate-events.php') ? 'is-active' : '' ?>"><?= __t('nav_corporate_events') ?></a>
         
-        <!-- More Dropdown for Pilgrimage, About, Contact & FAQs -->
+        <!-- More Dropdown for Corporate Events, Pilgrimage, About, Contact & FAQs -->
         <div class="nav-dropdown" id="navMoreDropdown">
           <button type="button" class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
             <span><?= __t('nav_more', 'More') ?></span>
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="nav-dropdown-menu" id="navMoreMenu">
+            <a href="<?= BASE_URL ?>/corporate-events.php" class="nav-dropdown-item <?= ($currentScript === 'corporate-events.php') ? 'is-active' : '' ?>">🏢 <?= __t('nav_corporate_events') ?></a>
             <a href="<?= BASE_URL ?>/pilgrimage.php" class="nav-dropdown-item <?= ($currentScript === 'pilgrimage.php') ? 'is-active' : '' ?>">🛕 <?= __t('nav_pilgrimage') ?></a>
             <a href="<?= BASE_URL ?>/about.php" class="nav-dropdown-item <?= ($currentScript === 'about.php') ? 'is-active' : '' ?>"><?= __t('nav_about') ?></a>
             <a href="<?= BASE_URL ?>/contact.php" class="nav-dropdown-item <?= ($currentScript === 'contact.php') ? 'is-active' : '' ?>"><?= __t('nav_contact') ?></a>

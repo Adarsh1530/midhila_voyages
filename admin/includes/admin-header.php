@@ -27,7 +27,7 @@ try {
   <link rel="icon" type="image/svg+xml" href="<?= ASSETS_URL ?>/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/animations.css">
   
   <script>
@@ -62,7 +62,9 @@ try {
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
-      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Malayalam', 'Noto Sans Tamil', system-ui, sans-serif;
+      overflow-wrap: break-word;
+      word-break: normal;
       background-color: var(--admin-bg);
       color: var(--admin-text);
       display: flex;

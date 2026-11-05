@@ -112,7 +112,7 @@ function get_translation_dictionary(): array {
         // Navigation & General
         'nav_home' => [
             'en' => 'Home',
-            'ml' => 'പ്രധാന പേജ്',
+            'ml' => 'ഹോം',
             'ta' => 'முகப்பு'
         ],
         'nav_about' => [
@@ -152,28 +152,33 @@ function get_translation_dictionary(): array {
         ],
         'nav_destinations' => [
             'en' => 'Destinations',
-            'ml' => 'സഞ്ചാര കേന്ദ്രങ്ങൾ',
-            'ta' => 'சுற்றுலா தலங்கள்'
+            'ml' => 'കേന്ദ്രങ്ങൾ',
+            'ta' => 'இடங்கள்'
         ],
         'nav_packages' => [
             'en' => 'Tour Packages',
-            'ml' => 'ടൂർ പാക്കേജുകൾ',
-            'ta' => 'சுற்றுலா தொகுப்புகள்'
+            'ml' => 'പാക്കേജുകൾ',
+            'ta' => 'சுற்றுலா'
         ],
         'nav_accommodation' => [
             'en' => 'Accommodation',
-            'ml' => 'താമസ സൗകര്യങ്ങൾ',
-            'ta' => 'தங்கும் விடுதிகள்'
+            'ml' => 'താമസ സൗകര്യം',
+            'ta' => 'தங்குமிடம்'
         ],
         'nav_custom_tour' => [
-            'en' => 'Customised Tour',
-            'ml' => 'കസ്റ്റമൈസ്ഡ് ടൂർ',
-            'ta' => 'விருப்பத்திற்கேற்ப சுற்றுலா'
+            'en' => 'Custom Tour',
+            'ml' => 'കസ്റ്റം ടൂർ',
+            'ta' => 'விருப்ப சுற்றுலா'
         ],
         'nav_corporate_events' => [
             'en' => 'Corporate Events',
-            'ml' => 'കോർപ്പറേറ്റ് ഇവന്റുകൾ',
-            'ta' => 'கார்ப்பரேட் நிகழ்வுகள்'
+            'ml' => 'കോർപ്പറേറ്റ്',
+            'ta' => 'கார்ப்பரேட்'
+        ],
+        'nav_more' => [
+            'en' => 'More',
+            'ml' => 'കൂടുതൽ',
+            'ta' => 'மேலும்'
         ],
         'nav_conference_halls' => [
             'en' => 'Conference Halls',
@@ -211,9 +216,9 @@ function get_translation_dictionary(): array {
             'ta' => 'கேள்வி பதில்'
         ],
         'btn_plan_trip' => [
-            'en' => 'Plan My Trip',
+            'en' => 'Plan My Journey',
             'ml' => 'യാത്ര പ്ലാൻ ചെയ്യാം',
-            'ta' => 'பயணம் திட்டமிடலாம்'
+            'ta' => 'பயண திட்டம்'
         ],
         'btn_book_now' => [
             'en' => 'Book Now',

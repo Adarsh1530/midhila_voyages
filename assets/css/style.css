@@ -1304,3 +1304,159 @@ h1, h2, h3, h4, h5, h6 {
     scroll-behavior: auto !important;
   }
 }
+
+/* =====================================================================
+   13. MULTILINGUAL & INDIC TYPOGRAPHY ENGINE (MALAYALAM & TAMIL)
+   Flawless Alignment, Baseline Geometry & Ligature Preservation
+   ===================================================================== */
+html:is([lang="ml"], .lang-ml) {
+  --font-serif: "Noto Sans Malayalam", system-ui, sans-serif;
+  --font-editorial: "Noto Sans Malayalam", system-ui, sans-serif;
+  --font-sans: "Noto Sans Malayalam", "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+html:is([lang="ta"], .lang-ta) {
+  --font-serif: "Noto Sans Tamil", system-ui, sans-serif;
+  --font-editorial: "Noto Sans Tamil", system-ui, sans-serif;
+  --font-sans: "Noto Sans Tamil", "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+/* Indic Global Reset for Typography, Line Height & Overflow Wrapping */
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) {
+  word-break: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  line-height: 1.7;
+}
+
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) body {
+  font-family: var(--font-sans);
+  line-height: 1.75;
+}
+
+/* Strip faux-italics and destructive letter-spacing that breaks Indic conjunct ligatures */
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) h1,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) h2,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) h3,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) h4,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) h5,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) h6,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) span,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) p,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) a,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) button,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) label,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) select,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) input,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .editorial-headline-hero,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .editorial-headline-large,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .editorial-subtext,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .chapter-number,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .editorial-label,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .btn-cinematic-primary,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .btn-cinematic-secondary,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .btn-header-cta,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .filter-pill,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .nav-link,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .nav-dropdown-btn,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .dest-coordinates {
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* Indic Headlines & Subtitles Proportional Balance */
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .editorial-headline-hero {
+  font-size: clamp(1.9rem, 4.2vw, 3.2rem) !important;
+  line-height: 1.38 !important;
+}
+
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .editorial-headline-large {
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem) !important;
+  line-height: 1.38 !important;
+}
+
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .editorial-subtext {
+  font-size: clamp(1rem, 1.6vw, 1.25rem) !important;
+  line-height: 1.7 !important;
+  font-style: normal !important;
+}
+
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) em,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) i {
+  font-style: normal !important;
+}
+
+/* Header & Navigation Alignment in Malayalam & Tamil */
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .site-header {
+  height: var(--header-height, 86px);
+}
+
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .header-container {
+  gap: 8px !important;
+  padding: 0 16px !important;
+}
+
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .nav-menu {
+  gap: clamp(4px, 0.75vw, 10px) !important;
+}
+
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .nav-link,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .nav-dropdown-btn {
+  font-size: 0.8rem !important;
+  padding: 5px 3px !important;
+}
+
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .btn-header-cta {
+  padding: 8px 14px !important;
+  font-size: 0.78rem !important;
+}
+
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .nav-dropdown-menu {
+  min-width: 210px !important;
+}
+
+/* Card Heights & Grid Equalization */
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .dest-showcase-card,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .package-card,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .kerala-disciplines-grid > div {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .dest-showcase-card__content,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .package-card__content {
+  flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+/* Checkbox and Radio items vertical alignment with multi-line Indic labels */
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) label:has(input[type="checkbox"]),
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) label:has(input[type="radio"]) {
+  display: flex !important;
+  align-items: flex-start !important;
+  line-height: 1.45 !important;
+}
+
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) input[type="checkbox"],
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) input[type="radio"] {
+  margin-top: 3px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Form inputs & select height alignment */
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) input,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) select,
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) textarea {
+  line-height: 1.5 !important;
+}
+
+/* Indic mobile drawer typography */
+html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .mobile-drawer__link {
+  font-size: 0.96rem !important;
+  line-height: 1.5 !important;
+  padding: 10px 0 !important;
+}
+
