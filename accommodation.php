@@ -22,126 +22,156 @@ $generatedRef = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_accommodation_enquiry'])) {
     if (verify_csrf_token()) {
-        $fullName     = trim($_POST['full_name'] ?? '');
-        $phone        = trim($_POST['phone'] ?? '');
-        $email        = trim($_POST['email'] ?? '');
-        $destId       = (int)($_POST['destination_id'] ?? 0);
-        $accId        = (int)($_POST['accommodation_id'] ?? 0);
-        $startDate    = trim($_POST['departure_date'] ?? '');
-        $endDate      = trim($_POST['return_date'] ?? '');
-        $adults       = max(1, (int)($_POST['adults_count'] ?? 1));
-        $children     = max(0, (int)($_POST['children_count'] ?? 0));
-        $roomsCount   = max(1, (int)($_POST['rooms_count'] ?? 1));
-        $durationDays = max(1, (int)($_POST['duration_days'] ?? 1));
-        $totalTravel  = $adults + $children;
-        $travelType   = trim($_POST['travel_type'] ?? 'family');
-        $budgetRange  = trim($_POST['budget_range'] ?? '');
-        $addReqs      = trim($_POST['travel_requirements'] ?? '');
+        try {
+            $fullName     = trim($_POST['full_name'] ?? '');
+            $phone        = trim($_POST['phone'] ?? '');
+            $email        = trim($_POST['email'] ?? '');
+            $destId       = (int)($_POST['destination_id'] ?? 0);
+            $accId        = (int)($_POST['accommodation_id'] ?? 0);
+            $startDate    = trim($_POST['departure_date'] ?? '');
+            $endDate      = trim($_POST['return_date'] ?? '');
+            $adults       = max(1, (int)($_POST['adults_count'] ?? 1));
+            $children     = max(0, (int)($_POST['children_count'] ?? 0));
+            $roomsCount   = max(1, (int)($_POST['rooms_count'] ?? 1));
+            $durationDays = max(1, (int)($_POST['duration_days'] ?? 1));
 
-        // Preferences
-        $roomTypes    = isset($_POST['room_types']) && is_array($_POST['room_types']) ? implode(', ', $_POST['room_types']) : '';
-        $foodPref     = trim($_POST['food_preference'] ?? 'with_food');
-        $foodType     = trim($_POST['food_type'] ?? 'both');
-        $foodNotes    = trim($_POST['food_special_instructions'] ?? '');
-        $sightPref    = trim($_POST['sightseeing_preference'] ?? 'with_sightseeing');
-        $sightPlaces  = trim($_POST['sightseeing_places'] ?? '');
-        $facilities   = isset($_POST['facilities']) && is_array($_POST['facilities']) ? implode(', ', $_POST['facilities']) : '';
-
-        if (!empty($fullName) && !empty($phone) && $destId > 0) {
-            // Fetch destination name
-            $destStmt = $db->prepare("SELECT name FROM destinations WHERE id = ?");
-            $destStmt->execute([$destId]);
-            $destName = $destStmt->fetchColumn() ?: 'Custom Destination';
-
-            // Fetch accommodation name if selected
-            $accName = null;
-            if ($accId > 0) {
-                $accStmt = $db->prepare("SELECT name_en FROM accommodations WHERE id = ?");
-                $accStmt->execute([$accId]);
-                $accName = $accStmt->fetchColumn() ?: null;
+            // Auto calculate duration from dates if not manually overridden
+            if (!empty($startDate) && !empty($endDate)) {
+                try {
+                    $d1 = new DateTime($startDate);
+                    $d2 = new DateTime($endDate);
+                    $diff = $d1->diff($d2)->days;
+                    if ($diff > 0) {
+                        $durationDays = (int)$diff;
+                    }
+                } catch (Exception $dte) {}
             }
 
-            // Generate unique sequential reference
-            $year = date('Y');
-            $refCount = (int)$db->query("SELECT COUNT(*) FROM enquiries WHERE reference_no LIKE 'MV-{$year}-%'")->fetchColumn() + 1;
-            $generatedRef = sprintf("MV-%s-%04d", $year, $refCount);
+            $travelType   = trim($_POST['travel_type'] ?? 'family');
+            $budgetRange  = trim($_POST['budget_range'] ?? '');
+            $addReqs      = trim($_POST['travel_requirements'] ?? '');
 
-            // Insert into enquiries table
-            $insStmt = $db->prepare("
-                INSERT INTO enquiries
-                (reference_no, full_name, email, phone, whatsapp, destination_id, destination_name,
-                 enquiry_type, language, departure_date, return_date, adults_count, children_count,
-                 rooms_count, duration_days, travel_type, budget_range, accommodation_id, accommodation_name,
-                 preferred_room_types, food_preference, food_type, food_special_instructions,
-                 sightseeing_preference, sightseeing_places, required_facilities, travel_requirements,
-                 status, workflow_status, created_at, updated_at)
-                VALUES
-                (?, ?, ?, ?, ?, ?, ?, 'accommodation', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'new', 'new', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-            ");
+            // Preferences
+            $roomTypes    = isset($_POST['room_types']) && is_array($_POST['room_types']) ? implode(', ', $_POST['room_types']) : '';
+            $foodPref     = trim($_POST['food_preference'] ?? 'with_food');
+            $foodType     = trim($_POST['food_type'] ?? 'both');
+            $foodNotes    = trim($_POST['food_special_instructions'] ?? '');
+            $sightPref    = trim($_POST['sightseeing_preference'] ?? 'with_sightseeing');
+            $sightPlaces  = trim($_POST['sightseeing_places'] ?? '');
+            $facilities   = isset($_POST['facilities']) && is_array($_POST['facilities']) ? implode(', ', $_POST['facilities']) : '';
 
-            $insStmt->execute([
-                $generatedRef, $fullName, $email, $phone, $phone, $destId, $destName,
-                $activeLang, $startDate, $endDate, $adults, $children,
-                $roomsCount, $durationDays, $travelType, $budgetRange, $accId ?: null, $accName,
-                $roomTypes, $foodPref, $foodType, $foodNotes,
-                $sightPref, $sightPlaces, $facilities, $addReqs
-            ]);
-            $enquiryId = (int)$db->lastInsertId();
+            if (!empty($fullName) && !empty($phone) && $destId > 0) {
+                // Fetch destination name
+                $destStmt = $db->prepare("SELECT name FROM destinations WHERE id = ?");
+                $destStmt->execute([$destId]);
+                $destName = $destStmt->fetchColumn() ?: 'Custom Destination';
 
-            // Register / Update in customers table
-            try {
-                $custCheck = $db->prepare("SELECT id, total_enquiries FROM customers WHERE phone = ? LIMIT 1");
-                $custCheck->execute([$phone]);
-                $cust = $custCheck->fetch(PDO::FETCH_ASSOC);
-
-                if ($cust) {
-                    $updCust = $db->prepare("UPDATE customers SET total_enquiries = total_enquiries + 1, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
-                    $updCust->execute([$cust['id']]);
-                } else {
-                    $insCust = $db->prepare("INSERT INTO customers (full_name, email, phone, whatsapp, preferred_language, total_enquiries, created_at) VALUES (?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP)");
-                    $insCust->execute([$fullName, $email, $phone, $phone, $activeLang]);
+                // Fetch accommodation name if selected
+                $accName = null;
+                if ($accId > 0) {
+                    $accStmt = $db->prepare("SELECT name_en FROM accommodations WHERE id = ?");
+                    $accStmt->execute([$accId]);
+                    $accName = $accStmt->fetchColumn() ?: null;
                 }
-            } catch (Exception $ce) {
-                error_log("Customer log notice: " . $ce->getMessage());
+
+                // Generate unique sequential reference
+                $year = date('Y');
+                $refCount = (int)$db->query("SELECT COUNT(*) FROM enquiries")->fetchColumn() + 1;
+                do {
+                    $generatedRef = sprintf("MV-%s-%04d", $year, $refCount);
+                    $chkRef = $db->prepare("SELECT COUNT(*) FROM enquiries WHERE reference_no = ?");
+                    $chkRef->execute([$generatedRef]);
+                    if ((int)$chkRef->fetchColumn() === 0) {
+                        break;
+                    }
+                    $refCount++;
+                } while (true);
+
+                // Insert into enquiries table
+                $insStmt = $db->prepare("
+                    INSERT INTO enquiries
+                    (reference_no, full_name, email, phone, whatsapp, destination_id, destination_name,
+                     enquiry_type, language, departure_date, return_date, adults_count, children_count,
+                     rooms_count, duration_days, travel_type, budget_range, accommodation_id, accommodation_name,
+                     preferred_room_types, food_preference, food_type, food_special_instructions,
+                     sightseeing_preference, sightseeing_places, required_facilities, travel_requirements,
+                     status, workflow_status, created_at, updated_at)
+                    VALUES
+                    (?, ?, ?, ?, ?, ?, ?, 'accommodation', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'new', 'new', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+                ");
+
+                $insStmt->execute([
+                    $generatedRef, $fullName, $email, $phone, $phone, $destId, $destName,
+                    $activeLang, $startDate, $endDate, $adults, $children,
+                    $roomsCount, $durationDays, $travelType, $budgetRange, $accId ?: null, $accName,
+                    $roomTypes, $foodPref, $foodType, $foodNotes,
+                    $sightPref, $sightPlaces, $facilities, $addReqs
+                ]);
+                $enquiryId = (int)$db->lastInsertId();
+
+                // Register / Update in customers table
+                try {
+                    $custCheck = $db->prepare("SELECT id, total_enquiries FROM customers WHERE phone = ? LIMIT 1");
+                    $custCheck->execute([$phone]);
+                    $cust = $custCheck->fetch(PDO::FETCH_ASSOC);
+
+                    if ($cust) {
+                        $updCust = $db->prepare("UPDATE customers SET total_enquiries = total_enquiries + 1, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
+                        $updCust->execute([$cust['id']]);
+                    } else {
+                        $insCust = $db->prepare("INSERT INTO customers (full_name, email, phone, whatsapp, preferred_language, total_enquiries, created_at) VALUES (?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP)");
+                        $insCust->execute([$fullName, $email, $phone, $phone, $activeLang]);
+                    }
+                } catch (Exception $ce) {
+                    error_log("Customer log notice: " . $ce->getMessage());
+                }
+
+                // Log initial status history
+                try {
+                    $db->prepare("INSERT INTO booking_status_history (enquiry_id, old_status, new_status, notes, created_at) VALUES (?, NULL, 'new', 'Accommodation booking enquiry submitted online by guest', CURRENT_TIMESTAMP)")
+                       ->execute([$enquiryId]);
+                } catch (Exception $he) {}
+
+                // Record customer acknowledgement email log with required disclaimer
+                $emailBody = "Dear " . htmlspecialchars($fullName) . ",\n\n"
+                           . "Your booking enquiry (#{$generatedRef}) has been received successfully.\n\n"
+                           . "Selected Destination: {$destName}\n"
+                           . ($accName ? "Preferred Accommodation: {$accName}\n" : "")
+                           . "Dates: {$startDate} to {$endDate} ({$durationDays} Days)\n"
+                           . "Travellers: {$adults} Adults, {$children} Children ({$roomsCount} Rooms)\n"
+                           . "Room Types: " . ($roomTypes ?: 'Standard preferences') . "\n"
+                           . "Meal Plan: " . ucwords(str_replace('_', ' ', $foodPref)) . " (" . ucwords(str_replace('_', ' ', $foodType)) . ")\n\n"
+                           . "IMPORTANT NOTICE:\n"
+                           . "Our team will verify the availability of your requested services and contact you shortly. This acknowledgement does not represent a confirmed booking.\n\n"
+                           . "Warm Regards,\nMidhila Voyages Management Team";
+
+                try {
+                    $db->prepare("INSERT INTO email_logs (recipient_email, recipient_name, subject, message_body, enquiry_id, status, sent_at) VALUES (?, ?, ?, ?, ?, 'sent', CURRENT_TIMESTAMP)")
+                       ->execute([$email ?: 'guest@midhilavoyages.com', $fullName, "Booking Enquiry Acknowledgement - #{$generatedRef}", $emailBody, $enquiryId]);
+                } catch (Exception $ee) {}
+
+                $bookingSuccess = true;
+                set_flash_message('success', "Enquiry received! Booking reference: {$generatedRef}");
+            } else {
+                set_flash_message('error', 'Please fill in your name, phone number, and select a destination.');
             }
-
-            // Log initial status history
-            try {
-                $db->prepare("INSERT INTO booking_status_history (enquiry_id, old_status, new_status, notes, created_at) VALUES (?, NULL, 'new', 'Enquiry submitted online by customer', CURRENT_TIMESTAMP)")
-                   ->execute([$enquiryId]);
-            } catch (Exception $he) {}
-
-            // Record customer acknowledgement email log with required disclaimer
-            $emailBody = "Dear " . htmlspecialchars($fullName) . ",\n\n"
-                       . "Your booking enquiry (#{$generatedRef}) has been received successfully.\n\n"
-                       . "Selected Destination: {$destName}\n"
-                       . ($accName ? "Preferred Accommodation: {$accName}\n" : "")
-                       . "Dates: {$startDate} to {$endDate}\n"
-                       . "Travellers: {$adults} Adults, {$children} Children ({$roomsCount} Rooms)\n\n"
-                       . "IMPORTANT NOTICE:\n"
-                       . "Our team will verify the availability of your requested services and contact you shortly. This acknowledgement does not represent a confirmed booking.\n\n"
-                       . "Warm Regards,\nMidhila Voyages Management Team";
-
-            try {
-                $db->prepare("INSERT INTO email_logs (recipient_email, recipient_name, subject, message_body, enquiry_id, status, sent_at) VALUES (?, ?, ?, ?, ?, 'sent', CURRENT_TIMESTAMP)")
-                   ->execute([$email ?: 'guest@midhilavoyages.com', $fullName, "Booking Enquiry Acknowledgement - #{$generatedRef}", $emailBody, $enquiryId]);
-            } catch (Exception $ee) {}
-
-            $bookingSuccess = true;
-        } else {
-            set_flash_message('error', 'Please fill in your name, phone number, and select a destination.');
+        } catch (Throwable $e) {
+            error_log("Accommodation submission error: " . $e->getMessage());
+            set_flash_message('error', 'An error occurred while saving your enquiry: ' . $e->getMessage());
         }
+    } else {
+        set_flash_message('error', 'Security token invalid or expired. Please reload and submit again.');
     }
 }
 
-// Fetch all destinations with their registered accommodation counts
+// Fetch all destinations with their registered accommodation counts and geo coordinates
 $destinationsStmt = $db->query("
-    SELECT d.id, d.name, d.slug, d.name_ml, d.name_ta, d.region_state,
+    SELECT d.id, d.name, d.slug, d.name_ml, d.name_ta, d.region_state, d.latitude, d.longitude,
            COUNT(a.id) as accommodation_count
     FROM destinations d
     LEFT JOIN accommodations a ON a.destination_id = d.id AND a.is_active = 1
     WHERE d.is_published = 1
-    GROUP BY d.id
+    GROUP BY d.id, d.name, d.slug, d.name_ml, d.name_ta, d.region_state, d.latitude, d.longitude
     ORDER BY (d.region_state = 'Kerala') DESC, d.name ASC
 ");
 $allDestinations = $destinationsStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -207,13 +237,13 @@ require_once __DIR__ . '/includes/header.php';
       <span style="font-size:0.75rem;text-transform:uppercase;color:#64748B;font-weight:700;letter-spacing:0.06em;display:block;">
         <?= __t('ack_ref_label') ?>
       </span>
-      <strong style="font-family:monospace;font-size:1.25rem;color:#0F172A;letter-spacing:0.05em;"><?= e($generatedRef) ?></strong>
+      <strong style="font-family:monospace;font-size:1.35rem;color:#0F172A;letter-spacing:0.05em;"><?= e($generatedRef) ?></strong>
     </div>
     <p style="font-size:0.9rem;color:#475569;line-height:1.65;margin-bottom:24px;text-align:left;background:#FFFBEB;border-left:4px solid #D97706;padding:12px 14px;border-radius:4px;">
       <strong>Notice:</strong> <?= __t('ack_modal_text') ?>
     </p>
     <a href="<?= BASE_URL ?>/accommodation.php" class="btn-cinematic-primary" style="width:100%;justify-content:center;">
-      <span>Continue Browsing</span>
+      <span>Continue Browsing Accommodations</span>
     </a>
   </div>
 </div>
@@ -388,52 +418,75 @@ require_once __DIR__ . '/includes/header.php';
         <form method="POST" action="<?= BASE_URL ?>/accommodation.php" id="accommodationBookingForm">
           <?= csrf_field() ?>
           <input type="hidden" name="submit_accommodation_enquiry" value="1">
-          <input type="hidden" name="destination_id" id="formDestinationId" value="<?= (int)$selectedDestId ?>">
           <input type="hidden" name="accommodation_id" id="formAccommodationId" value="0">
 
           <!-- Selected Property Banner (if chosen) -->
-          <div id="selectedPropertyBadge" style="display:none;background:#EFF6FF;border:1px solid #BFDBFE;padding:10px 14px;border-radius:8px;margin-bottom:18px;">
-            <div style="font-size:0.7rem;text-transform:uppercase;color:#1E40AF;font-weight:700;">Selected Property:</div>
-            <div style="font-size:0.95rem;font-weight:700;color:#1E3A8A;" id="selectedPropertyName"></div>
-            <button type="button" onclick="clearSelectedAcc()" style="background:none;border:none;color:#DC2626;font-size:0.75rem;cursor:pointer;padding:0;margin-top:2px;">(Change / Clear Selection)</button>
+          <div id="selectedPropertyBadge" style="display:none;background:#EFF6FF;border:1px solid #BFDBFE;padding:12px 14px;border-radius:8px;margin-bottom:18px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <span style="font-size:0.7rem;text-transform:uppercase;color:#1E40AF;font-weight:700;display:block;">Selected Accommodation:</span>
+                <strong style="font-size:0.95rem;color:#1E3A8A;" id="selectedPropertyName"></strong>
+              </div>
+              <button type="button" onclick="clearSelectedAcc()" style="background:#FEE2E2;border:1px solid #FECACA;color:#DC2626;font-size:0.75rem;cursor:pointer;padding:4px 8px;border-radius:6px;font-weight:600;">Clear</button>
+            </div>
           </div>
 
-          <!-- Section A: Guest Information -->
+          <!-- Section A: Travel Information -->
           <div style="margin-bottom:20px;">
             <h4 style="font-size:0.88rem;text-transform:uppercase;color:#0F172A;font-weight:700;letter-spacing:0.04em;margin-bottom:12px;border-bottom:1px solid #F1F5F9;padding-bottom:6px;">
-              A. Guest Information
+              A. Travel Information
             </h4>
+
+            <!-- Selected Destination Dropdown -->
+            <div class="form-group" style="margin-bottom:14px;">
+              <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;">
+                Selected Destination *
+              </label>
+              <select name="destination_id" id="formDestinationSelect" onchange="switchDestination(this.value)" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;font-weight:600;color:#0F172A;" required>
+                <?php foreach ($allDestinations as $d): ?>
+                  <option value="<?= (int)$d['id'] ?>" <?= ((int)$d['id'] === $selectedDestId) ? 'selected' : '' ?>>
+                    📍 <?= e(loc($d, 'name')) ?><?= ($d['accommodation_count'] > 0) ? " ({$d['accommodation_count']} Stays Registered)" : '' ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
             
             <div class="form-group" style="margin-bottom:14px;">
-              <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_full_name') ?></label>
+              <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_full_name') ?> *</label>
               <input type="text" name="full_name" required placeholder="e.g. Maya Varma" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
             </div>
 
             <div class="form-grid-2col" style="margin-bottom:14px;">
               <div>
-                <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_phone') ?></label>
+                <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_phone') ?> *</label>
                 <input type="tel" name="phone" required placeholder="+91 9876543210" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
               </div>
               <div>
-                <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_email') ?></label>
+                <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_email') ?> *</label>
                 <input type="email" name="email" required placeholder="maya@example.com" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
               </div>
             </div>
 
-            <div class="form-grid-2col" style="margin-bottom:14px;">
+            <!-- Dates & Duration -->
+            <div class="form-grid-3col" style="margin-bottom:14px;">
               <div>
-                <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_start_date') ?></label>
-                <input type="date" name="departure_date" required min="<?= date('Y-m-d') ?>" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;background:#FFF;">
+                <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_start_date') ?> *</label>
+                <input type="date" name="departure_date" id="accStartDate" required min="<?= date('Y-m-d') ?>" onchange="calcDuration()" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;background:#FFF;">
               </div>
               <div>
-                <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_end_date') ?></label>
-                <input type="date" name="return_date" min="<?= date('Y-m-d') ?>" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;background:#FFF;">
+                <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_end_date') ?> *</label>
+                <input type="date" name="return_date" id="accEndDate" required min="<?= date('Y-m-d') ?>" onchange="calcDuration()" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;background:#FFF;">
+              </div>
+              <div>
+                <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;">Number of Days</label>
+                <input type="number" name="duration_days" id="accDurationDays" value="3" min="1" max="90" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
               </div>
             </div>
 
-            <div class="form-grid-3col">
+            <!-- Travellers & Rooms Count -->
+            <div class="form-grid-3col" style="margin-bottom:14px;">
               <div>
-                <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_adults') ?></label>
+                <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_adults') ?> *</label>
                 <input type="number" name="adults_count" value="2" min="1" max="50" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
               </div>
               <div>
@@ -441,8 +494,32 @@ require_once __DIR__ . '/includes/header.php';
                 <input type="number" name="children_count" value="0" min="0" max="30" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
               </div>
               <div>
-                <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_rooms') ?></label>
+                <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_rooms') ?> *</label>
                 <input type="number" name="rooms_count" value="1" min="1" max="30" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
+              </div>
+            </div>
+
+            <!-- Travel Type & Budget Range -->
+            <div class="form-grid-2col" style="margin-bottom:14px;">
+              <div>
+                <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;">Preferred Travel Type</label>
+                <select name="travel_type" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                  <option value="family" selected>Family Vacation</option>
+                  <option value="couple">Honeymoon / Couple</option>
+                  <option value="friends">Friends &amp; Small Group</option>
+                  <option value="solo">Solo Traveler</option>
+                  <option value="seniors">Senior Citizens / Leisure</option>
+                  <option value="corporate">Corporate / Executive</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;">Estimated Budget Range</label>
+                <select name="budget_range" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                  <option value="Standard (₹15,000 - ₹30,000)">Standard (₹15,000 – ₹30,000)</option>
+                  <option value="Deluxe (₹30,000 - ₹60,000)" selected>Deluxe (₹30,000 – ₹60,000)</option>
+                  <option value="Luxury (₹60,000 - ₹1,20,000)">Luxury (₹60,000 – ₹1,20,000)</option>
+                  <option value="Ultra Luxury (₹1,20,000+)">Ultra Luxury (₹1,20,000+)</option>
+                </select>
               </div>
             </div>
           </div>
@@ -453,6 +530,22 @@ require_once __DIR__ . '/includes/header.php';
               B. Room Category &amp; View Preferences
             </h4>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:#334155;">
+                <input type="checkbox" name="room_types[]" value="Standard room">
+                <span>Standard Room</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:#334155;">
+                <input type="checkbox" name="room_types[]" value="Deluxe room" checked>
+                <span><?= __t('room_deluxe') ?></span>
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:#334155;">
+                <input type="checkbox" name="room_types[]" value="Premium room">
+                <span>Premium Room</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:#334155;">
+                <input type="checkbox" name="room_types[]" value="Luxury Suite">
+                <span><?= __t('room_luxury') ?></span>
+              </label>
               <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:#334155;">
                 <input type="checkbox" name="room_types[]" value="Mountain-view">
                 <span><?= __t('room_mountain_view') ?></span>
@@ -476,14 +569,6 @@ require_once __DIR__ . '/includes/header.php';
               <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:#334155;">
                 <input type="checkbox" name="room_types[]" value="Beach-view">
                 <span><?= __t('room_beach_view') ?></span>
-              </label>
-              <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:#334155;">
-                <input type="checkbox" name="room_types[]" value="Deluxe room" checked>
-                <span><?= __t('room_deluxe') ?></span>
-              </label>
-              <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:#334155;">
-                <input type="checkbox" name="room_types[]" value="Luxury Suite">
-                <span><?= __t('room_luxury') ?></span>
               </label>
             </div>
           </div>
@@ -571,10 +656,30 @@ require_once __DIR__ . '/includes/header.php';
                 <span><?= __t('fac_balcony') ?></span>
               </label>
               <label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:#334155;">
+                <input type="checkbox" name="facilities[]" value="Family Rooms">
+                <span>Family Rooms</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:#334155;">
+                <input type="checkbox" name="facilities[]" value="Room Service">
+                <span>24/7 Room Service</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:#334155;">
+                <input type="checkbox" name="facilities[]" value="Restaurant">
+                <span>In-House Restaurant</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:#334155;">
                 <input type="checkbox" name="facilities[]" value="Accessibility / Senior Friendly">
                 <span><?= __t('fac_accessibility') ?></span>
               </label>
             </div>
+          </div>
+
+          <!-- Section G: Additional Travel Requirements -->
+          <div style="margin-bottom:20px;">
+            <h4 style="font-size:0.88rem;text-transform:uppercase;color:#0F172A;font-weight:700;letter-spacing:0.04em;margin-bottom:8px;border-bottom:1px solid #F1F5F9;padding-bottom:6px;">
+              G. Additional Travel Requirements
+            </h4>
+            <textarea name="travel_requirements" rows="2" placeholder="e.g. Ground floor room preferred, late evening check-in, infant baby cot required" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;resize:vertical;"></textarea>
           </div>
 
           <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:20px;font-size:0.75rem;color:#64748B;line-height:1.5;">
@@ -624,6 +729,26 @@ require_once __DIR__ . '/includes/header.php';
       card.style.boxShadow = '0 3px 12px rgba(0,0,0,0.03)';
     });
   }
+
+  function switchDestination(destId) {
+    if (destId) {
+      window.location.href = '<?= BASE_URL ?>/accommodation.php?destination_id=' + destId;
+    }
+  }
+
+  function calcDuration() {
+    var s = document.getElementById('accStartDate').value;
+    var e = document.getElementById('accEndDate').value;
+    if (s && e) {
+      var d1 = new Date(s);
+      var d2 = new Date(e);
+      var diffTime = d2.getTime() - d1.getTime();
+      var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      if (diffDays > 0) {
+        document.getElementById('accDurationDays').value = diffDays;
+      }
+    }
+  }
 </script>
 
 <!-- Leaflet & OSM Interactive Scripts -->
@@ -632,8 +757,8 @@ require_once __DIR__ . '/includes/header.php';
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   var destId = <?= (int)$selectedDestId ?>;
-  var destLat = <?= (float)($currentDest['latitude'] ?: 10.0889) ?>;
-  var destLng = <?= (float)($currentDest['longitude'] ?: 77.0595) ?>;
+  var destLat = <?= (float)($currentDest['latitude'] ?? 10.0889) ?>;
+  var destLng = <?= (float)($currentDest['longitude'] ?? 77.0595) ?>;
 
   if (document.getElementById('accLeafletMap') && destId > 0) {
     new MidhilaMap({

@@ -51,8 +51,8 @@ $totalDestinations = (int)$db->query("SELECT COUNT(*) FROM `destinations` WHERE 
 $recentEnquiries = [];
 if (has_role(['super_admin', 'travel_manage'])) {
     $recentEnquiries = $db->query("
-        SELECT `id`, `reference_no`, `full_name`, `phone`, `whatsapp`, `destination_name`, `travel_category`,
-               `travel_requirements`, `status`, `created_at`
+        SELECT `id`, `reference_no`, `full_name`, `phone`, `whatsapp`, `destination_name`, `accommodation_name`,
+               `enquiry_type`, `workflow_status`, `travel_category`, `travel_requirements`, `status`, `created_at`
         FROM `enquiries`
         ORDER BY `id` DESC LIMIT 6
     ")->fetchAll();
@@ -393,7 +393,10 @@ require_once __DIR__ . '/includes/admin-header.php';
                   <strong style="color:#0F172A;font-size:0.92rem;"><?= e($enq['full_name']) ?></strong>
                 </td>
                 <td>
-                  <span style="font-weight:500;color:#334155;"><?= e($enq['destination_name'] ?: 'Custom Route') ?></span>
+                  <span style="font-weight:600;color:#0F172A;"><?= e($enq['destination_name'] ?: 'Custom Route') ?></span>
+                  <?php if (!empty($enq['accommodation_name'])): ?>
+                    <div style="font-size:0.75rem;color:#2563EB;font-weight:500;">🏨 <?= e($enq['accommodation_name']) ?></div>
+                  <?php endif; ?>
                 </td>
                 <td>
                   <a href="tel:<?= e($enq['phone']) ?>" style="font-size:0.86rem;font-weight:600;color:#0F172A;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
@@ -402,7 +405,19 @@ require_once __DIR__ . '/includes/admin-header.php';
                   </a>
                 </td>
                 <td>
-                  <span class="badge <?= $stClass ?>"><?= str_replace('_', ' ', e($enq['status'])) ?></span>
+                  <?php
+                    $displayStatus = $enq['workflow_status'] ?: ($enq['status'] ?? 'new');
+                    $badgeClass = match($displayStatus) {
+                      'new' => 'badge-danger',
+                      'checking_availability' => 'badge-warning',
+                      'availability_confirmed' => 'badge-info',
+                      'availability_unavailable' => 'badge-danger',
+                      'booking_confirmed', 'converted' => 'badge-success',
+                      'customer_contacted' => 'badge-neutral',
+                      default => 'badge-neutral'
+                    };
+                  ?>
+                  <span class="badge <?= $badgeClass ?>"><?= ucwords(str_replace('_', ' ', e($displayStatus))) ?></span>
                 </td>
                 <td style="font-size:0.82rem;color:#64748B;">
                   <?= date('d M, h:i A', strtotime($enq['created_at'])) ?>
