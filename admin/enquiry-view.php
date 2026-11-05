@@ -541,6 +541,70 @@ require_once __DIR__ . '/includes/admin-header.php';
         </div>
       <?php endif; ?>
 
+      <!-- Customer-Selected Mapped Places (OpenStreetMap) -->
+      <?php if (!empty($enquiry['selected_places_json'])): ?>
+        <?php 
+          $selPlaces = @json_decode($enquiry['selected_places_json'], true);
+          if (is_array($selPlaces) && !empty($selPlaces)):
+        ?>
+          <div style="background:#F0FDF4;border:1px solid #BBF7D0;padding:18px 20px;border-radius:10px;margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <h5 style="font-size:0.92rem;font-weight:700;color:#166534;margin:0;display:flex;align-items:center;gap:6px;">
+                <span>🗺️</span>
+                <span>Customer Selected Spots (OpenStreetMap Directory):</span>
+              </h5>
+              <span class="badge badge-success"><?= count($selPlaces) ?> Selected</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:10px;">
+              <?php foreach ($selPlaces as $sp): ?>
+                <?php 
+                  $spName = is_array($sp) ? ($sp['name'] ?? 'Unnamed Spot') : (string)$sp;
+                  $spCat  = is_array($sp) ? ($sp['category'] ?? 'attraction') : 'place';
+                  $spLat  = is_array($sp) ? ($sp['latitude'] ?? null) : null;
+                  $spLng  = is_array($sp) ? ($sp['longitude'] ?? null) : null;
+                  $spPrice = is_array($sp) ? ($sp['indicative_price'] ?? 0) : 0;
+                  $osmLink = ($spLat && $spLng) ? "https://www.openstreetmap.org/?mlat={$spLat}&mlon={$spLng}#map=16/{$spLat}/{$spLng}" : null;
+                ?>
+                <div style="background:#FFFFFF;border:1px solid #DCFCE7;border-radius:8px;padding:10px 14px;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+                  <div style="font-weight:700;font-size:0.86rem;color:#0F172A;display:flex;justify-content:space-between;align-items:flex-start;">
+                    <span><?= e($spName) ?></span>
+                    <span class="badge <?= ($spCat === 'hotel' || $spCat === 'resort') ? 'badge-info' : (($spCat === 'restaurant' || $spCat === 'cafe') ? 'badge-warning' : 'badge-success') ?>" style="font-size:0.65rem;">
+                      <?= ucfirst(e($spCat)) ?>
+                    </span>
+                  </div>
+                  <?php if ($spPrice > 0): ?>
+                    <div style="font-size:0.75rem;color:#059669;font-weight:600;margin-top:2px;">₹<?= number_format($spPrice) ?></div>
+                  <?php endif; ?>
+                  <?php if ($osmLink): ?>
+                    <div style="margin-top:4px;">
+                      <a href="<?= e($osmLink) ?>" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;color:#2563EB;font-weight:600;">View Coordinates &nearr;</a>
+                    </div>
+                  <?php endif; ?>
+                </div>
+              <?php endforeach; ?>
+            </div>
+          </div>
+        <?php endif; ?>
+      <?php endif; ?>
+
+      <!-- Grounded AI Custom Itinerary Proposal -->
+      <?php if (!empty($enquiry['itinerary_content'])): ?>
+        <div style="background:#F8FAFC;border:1.5px solid #CBD5E1;padding:20px;border-radius:10px;margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+            <h5 style="font-size:0.95rem;font-weight:700;color:#0F172A;margin:0;display:flex;align-items:center;gap:6px;">
+              <span>🤖</span>
+              <span>Grounded AI Travel Proposal &amp; Schedule</span>
+            </h5>
+            <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('itineraryRawContent').innerText).then(()=>alert('Itinerary copied to clipboard!'))" class="admin-btn admin-btn-outline" style="padding:4px 10px;font-size:0.75rem;">
+              📋 Copy Proposal
+            </button>
+          </div>
+          <div id="itineraryRawContent" style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:8px;padding:16px;font-size:0.86rem;line-height:1.7;color:#334155;white-space:pre-wrap;max-height:420px;overflow-y:auto;font-family:inherit;">
+<?= htmlspecialchars($enquiry['itinerary_content']) ?>
+          </div>
+        </div>
+      <?php endif; ?>
+
       <!-- Dispatch Customer Acknowledgement Email Form -->
       <div style="border-top:1px solid #E2E8F0;padding-top:18px;">
         <h4 style="font-size:0.95rem;color:#0F172A;font-weight:700;margin-bottom:8px;">Send Acknowledgement Email</h4>

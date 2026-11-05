@@ -635,3 +635,72 @@ CREATE TABLE IF NOT EXISTS `translations` (
   `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+
+
+--
+-- Additional Tables for OpenStreetMap & Ollama AI Itineraries
+--
+
+CREATE TABLE IF NOT EXISTS `external_places` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `destination_id` int(10) unsigned NOT NULL,
+  `osm_type` varchar(20) NOT NULL DEFAULT 'node',
+  `osm_id` varchar(50) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `name_ml` varchar(255) DEFAULT NULL,
+  `name_ta` varchar(255) DEFAULT NULL,
+  `category` varchar(50) NOT NULL,
+  `sub_type` varchar(100) DEFAULT NULL,
+  `latitude` decimal(10,7) NOT NULL,
+  `longitude` decimal(10,7) NOT NULL,
+  `address` text DEFAULT NULL,
+  `contact_phone` varchar(100) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `indicative_price` decimal(10,2) DEFAULT 0.00,
+  `price_unit` varchar(50) DEFAULT 'per person / night',
+  `room_categories` text DEFAULT NULL,
+  `facilities` text DEFAULT NULL,
+  `food_options` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `raw_tags_json` text DEFAULT NULL,
+  `is_approved` tinyint(1) DEFAULT 1,
+  `is_verified` tinyint(1) DEFAULT 0,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_osm_unique` (`osm_type`, `osm_id`),
+  KEY `idx_dest_cat` (`destination_id`, `category`),
+  KEY `idx_approved` (`is_approved`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `osm_cache` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cache_key` varchar(150) NOT NULL,
+  `destination_id` int(10) unsigned NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `response_json` mediumtext DEFAULT NULL,
+  `expires_at` datetime NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_cache_key` (`cache_key`),
+  KEY `idx_expires` (`expires_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `ai_itineraries` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `reference_no` varchar(60) NOT NULL,
+  `destination_id` int(10) unsigned NOT NULL,
+  `customer_name` varchar(150) DEFAULT NULL,
+  `customer_phone` varchar(50) DEFAULT NULL,
+  `customer_email` varchar(150) DEFAULT NULL,
+  `duration_days` int(11) DEFAULT 3,
+  `budget_range` varchar(80) DEFAULT NULL,
+  `travel_type` varchar(80) DEFAULT NULL,
+  `selected_places_json` text DEFAULT NULL,
+  `itinerary_content` text NOT NULL,
+  `model_used` varchar(80) DEFAULT 'ollama:llama3.2',
+  `created_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_ai_ref` (`reference_no`),
+  KEY `idx_ai_dest` (`destination_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

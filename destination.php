@@ -62,6 +62,41 @@ $waDestUrl = build_whatsapp_url($agencyWhatsApp, $waDestMsg);
 require_once __DIR__ . '/includes/header.php';
 ?>
 
+<!-- Leaflet Interactive Maps (OpenStreetMap Permitted Tiles) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<style>
+.osm-cat-btn {
+  padding: 8px 18px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: #FFFFFF;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.osm-cat-btn:hover, .osm-cat-btn.is-active {
+  background: var(--color-navy);
+  color: #FFFFFF;
+  border-color: var(--color-navy);
+}
+.dest-place-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.dest-place-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+</style>
+
 <!-- Destination Editorial Hero (Pure White with Subtle 35% Photo Layer) -->
 <section style="position:relative;background:#FFFFFF;padding-top:calc(var(--header-height) + 40px);padding-bottom:50px;overflow:hidden;border-bottom:1px solid var(--color-border);">
   
@@ -193,6 +228,80 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 </section>
 
+<!-- Interactive OpenStreetMap Directory & Grounded Travel Map -->
+<div class="section-divider-hairline"></div>
+<section class="section-padding" style="background:#FAFAFA;border-bottom:1px solid var(--color-border);">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;flex-wrap:wrap;gap:16px;">
+      <div>
+        <span class="chapter-number">OPENSTREETMAP VERIFIED DIRECTORY</span>
+        <h2 class="editorial-headline-large" style="font-size:2rem;margin-top:6px;">
+          Explore <?= e($destDisplayName) ?> on the Map
+        </h2>
+        <p class="editorial-subtext" style="font-size:0.95rem;max-width:700px;margin-top:6px;">
+          Live mapped hotels, certified resorts, regional dining spots, and cultural landmarks in <?= e($destDisplayName) ?>.
+        </p>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button type="button" class="osm-cat-btn is-active" onclick="filterDestCategory('all', this)">All Highlights</button>
+        <button type="button" class="osm-cat-btn" onclick="filterDestCategory('hotel_resort', this)">Stays &amp; Resorts</button>
+        <button type="button" class="osm-cat-btn" onclick="filterDestCategory('dining', this)">Dining &amp; Cafes</button>
+        <button type="button" class="osm-cat-btn" onclick="filterDestCategory('attraction', this)">Attractions</button>
+      </div>
+    </div>
+
+    <!-- Map & Places Split View -->
+    <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:28px;align-items:start;">
+      <!-- Leaflet Canvas -->
+      <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-card);position:relative;">
+        <div id="destLeafletMap" style="height:520px;width:100%;position:relative;z-index:1;"></div>
+      </div>
+
+      <!-- Places List Sidebar -->
+      <div>
+        <div style="background:#FFFFFF;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:24px;box-shadow:var(--shadow-ambient);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;border-bottom:1px solid var(--color-border);padding-bottom:12px;">
+            <h3 style="font-size:1.1rem;font-weight:700;margin:0;color:var(--color-text-main);">
+              Verified Spots (<span id="destPlacesCount">...</span>)
+            </h3>
+            <a href="<?= BASE_URL ?>/custom-tour.php?destination_id=<?= (int)$dest['id'] ?>" class="btn-cinematic-primary" style="padding:6px 14px;font-size:0.78rem;">
+              <span>Plan Custom Trip &rarr;</span>
+            </a>
+          </div>
+
+          <!-- Places Scroll List -->
+          <div id="destPlacesList" style="max-height:430px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:4px;">
+            <div style="text-align:center;padding:30px 10px;color:var(--color-text-muted);font-size:0.88rem;">
+              Loading verified places...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Grounded Planner Banner -->
+    <div style="margin-top:28px;background:#FFFFFF;border:1.5px solid var(--color-gold);border-radius:var(--radius-md);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;box-shadow:var(--shadow-card);">
+      <div style="max-width:700px;">
+        <div style="font-size:0.75rem;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;letter-spacing:0.08em;margin-bottom:4px;">
+          AI TRAVEL ASSISTANT &bull; GROUNDED ON VERIFIED PLACES
+        </div>
+        <h4 style="font-size:1.25rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">
+          Want a Custom Day-by-Day Itinerary for <?= e($destDisplayName) ?>?
+        </h4>
+        <p style="font-size:0.88rem;color:var(--color-text-body);line-height:1.6;margin:0;">
+          Our AI system uses only verified accommodations, real GPS-mapped dining, and approved attractions to build a tailored proposal. Room availability is verified directly with providers by Midhila Voyages directors.
+        </p>
+      </div>
+      <a href="<?= BASE_URL ?>/custom-tour.php?destination_id=<?= (int)$dest['id'] ?>" class="btn-cinematic-primary" style="padding:12px 22px;">
+        <span>Create Tailored Itinerary &rarr;</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
 <!-- Available Tour Packages for this Destination -->
 <div class="section-divider-hairline"></div>
 <section class="section-padding" style="background:#FFFFFF;">
@@ -224,5 +333,69 @@ require_once __DIR__ . '/includes/header.php';
 
   </div>
 </section>
+
+<!-- Leaflet & OSM Interactive Scripts -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="<?= ASSETS_URL ?>/js/osm-leaflet-map.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var destId = <?= (int)$dest['id'] ?>;
+  var destLat = <?= (float)($dest['latitude'] ?: 10.0889) ?>;
+  var destLng = <?= (float)($dest['longitude'] ?: 77.0595) ?>;
+
+  var mapInstance = new MidhilaMap({
+    containerId: 'destLeafletMap',
+    destinationId: destId,
+    latitude: destLat,
+    longitude: destLng,
+    zoom: 13,
+    onSelectPlace: function(place) {
+      window.location.href = '<?= BASE_URL ?>/custom-tour.php?destination_id=' + destId;
+    }
+  });
+
+  mapInstance.onPlacesLoaded = function(places) {
+    var countEl = document.getElementById('destPlacesCount');
+    var listEl = document.getElementById('destPlacesList');
+
+    countEl.innerText = places.length;
+    if (places.length === 0) {
+      listEl.innerHTML = '<div style="text-align:center;padding:24px 10px;color:var(--color-text-muted);font-size:0.85rem;">No mapped places currently recorded for this filter.</div>';
+      return;
+    }
+
+    listEl.innerHTML = '';
+    places.forEach(function(p) {
+      var card = document.createElement('div');
+      card.className = 'dest-place-card';
+
+      var badgeBg = (p.category === 'hotel' || p.category === 'resort') ? '#EFF6FF;color:#1E40AF;' : ((p.category === 'restaurant' || p.category === 'cafe') ? '#FFFBEB;color:#92400E;' : '#ECFDF5;color:#065F46;');
+      var priceHtml = (p.indicative_price > 0)
+        ? '<div style="font-weight:700;color:var(--color-text-main);font-size:0.82rem;">₹' + Number(p.indicative_price).toLocaleString('en-IN') + ' <span style="font-size:0.72rem;font-weight:400;color:var(--color-text-muted);">' + (p.price_unit || '') + '</span></div>'
+        : '<div style="font-size:0.75rem;color:var(--color-text-muted);">Verified on Enquiry</div>';
+
+      card.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">'
+        + '<div style="font-weight:700;font-size:0.88rem;color:var(--color-text-main);line-height:1.3;">' + p.name + '</div>'
+        + '<span style="font-size:0.68rem;padding:2px 8px;border-radius:12px;font-weight:700;background:' + badgeBg + ';text-transform:capitalize;">' + (p.category || 'Spot') + '</span>'
+        + '</div>'
+        + (p.address ? '<div style="font-size:0.75rem;color:var(--color-text-muted);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">📍 ' + p.address + '</div>' : '')
+        + '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;border-top:1px solid var(--color-border);padding-top:6px;">'
+        + priceHtml
+        + '<a href="<?= BASE_URL ?>/custom-tour.php?destination_id=' + destId + '" style="font-size:0.75rem;color:var(--color-gold-deep);font-weight:700;">+ Choose &rarr;</a>'
+        + '</div>';
+
+      listEl.appendChild(card);
+    });
+  };
+
+  window.filterDestCategory = function(cat, btn) {
+    document.querySelectorAll('.osm-cat-btn').forEach(function(b) { b.classList.remove('is-active'); });
+    if (btn) btn.classList.add('is-active');
+    if (mapInstance) {
+      mapInstance.filterCategory(cat);
+    }
+  };
+});
+</script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

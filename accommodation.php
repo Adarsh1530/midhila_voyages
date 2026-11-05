@@ -190,6 +190,9 @@ $pageDescription = 'Filter registered luxury chalets, tea plantation resorts, ba
 require_once __DIR__ . '/includes/header.php';
 ?>
 
+<!-- Leaflet Interactive Maps (OpenStreetMap Permitted Tiles) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
 <!-- ACKNOWLEDGEMENT MODAL POPUP ON SUCCESSFUL SUBMISSION -->
 <?php if ($bookingSuccess): ?>
 <div style="position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
@@ -285,6 +288,15 @@ require_once __DIR__ . '/includes/header.php';
           <span style="font-size:0.8rem;color:#64748B;">
             (<?= count($availableAccommodations) ?> Available Properties)
           </span>
+        </div>
+
+        <!-- Interactive Leaflet Map for Accommodations & Nearby Places -->
+        <div style="background:#FFFFFF;border-radius:12px;border:1px solid #E2E8F0;overflow:hidden;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+          <div style="padding:10px 14px;background:#F8FAFC;border-bottom:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.75rem;font-weight:700;color:#64748B;text-transform:uppercase;">Mapped Stays &amp; Highlights</span>
+            <span style="font-size:0.72rem;color:#059669;font-weight:600;">✓ OpenStreetMap Verified</span>
+          </div>
+          <div id="accLeafletMap" style="height:250px;width:100%;"></div>
         </div>
 
         <?php if (empty($availableAccommodations)): ?>
@@ -612,6 +624,27 @@ require_once __DIR__ . '/includes/header.php';
       card.style.boxShadow = '0 3px 12px rgba(0,0,0,0.03)';
     });
   }
+</script>
+
+<!-- Leaflet & OSM Interactive Scripts -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="<?= ASSETS_URL ?>/js/osm-leaflet-map.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var destId = <?= (int)$selectedDestId ?>;
+  var destLat = <?= (float)($currentDest['latitude'] ?: 10.0889) ?>;
+  var destLng = <?= (float)($currentDest['longitude'] ?: 77.0595) ?>;
+
+  if (document.getElementById('accLeafletMap') && destId > 0) {
+    new MidhilaMap({
+      containerId: 'accLeafletMap',
+      destinationId: destId,
+      latitude: destLat,
+      longitude: destLng,
+      zoom: 12
+    });
+  }
+});
 </script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

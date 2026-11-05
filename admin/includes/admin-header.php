@@ -821,6 +821,10 @@ try {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
           <span>Accommodations</span>
         </a>
+        <a href="<?= ADMIN_URL ?>/places-manager.php" class="admin-nav-item <?= ($adminScript === 'places-manager.php') ? 'is-active' : '' ?>">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+          <span>OSM Places &amp; Dining</span>
+        </a>
         <a href="<?= ADMIN_URL ?>/corporate-venues.php" class="admin-nav-item <?= in_array($adminScript, ['corporate-venues.php', 'corporate-venue-edit.php']) ? 'is-active' : '' ?>">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
           <span>Corporate Venues</span>
