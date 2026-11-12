@@ -17,7 +17,7 @@ if (is_admin_logged_in()) {
 
 $errorMessage = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     if (!verify_csrf_token()) {
         $errorMessage = 'Security validation failed. Please reload the page.';
     } else {

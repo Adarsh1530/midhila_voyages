@@ -6,7 +6,6 @@
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/csrf.php';
-require_once __DIR__ . '/i18n.php';
 
 /**
  * Safe HTML string escaping
@@ -31,24 +30,6 @@ function get_setting(string $key, string $default = ''): string {
             }
         } catch (Exception $e) {
             error_log("Failed to load site settings: " . $e->getMessage());
-        }
-    }
-
-    if (function_exists('current_lang')) {
-        $lang = current_lang();
-        if ($lang !== 'en') {
-            // 1. Check for explicit localized setting key in site_settings (e.g. hero_headline_1_ml)
-            $langKey = $key . '_' . $lang;
-            if (!empty($settingsCache[$langKey])) {
-                return $settingsCache[$langKey];
-            }
-            // 2. Check translation dictionary __t('setting_' . $key)
-            if (function_exists('__t')) {
-                $dictVal = __t('setting_' . $key, '');
-                if (!empty($dictVal) && $dictVal !== ('setting_' . $key)) {
-                    return $dictVal;
-                }
-            }
         }
     }
 
@@ -267,20 +248,4 @@ function truncate_words(?string $text, int $limit = 20, string $ellipsis = '...'
         return implode(' ', $words) . $ellipsis;
     }
     return implode(' ', $words);
-}
-
-/**
- * Generate standard sequential booking reference number (MV-YYYY-XXXX)
- */
-function generate_booking_reference(?PDO $db = null): string {
-    if ($db === null) {
-        $db = getDB();
-    }
-    $year = date('Y');
-    try {
-        $count = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `reference_no` LIKE 'MV-{$year}-%'")->fetchColumn() + 1;
-    } catch (Exception $e) {
-        $count = rand(1000, 9999);
-    }
-    return sprintf("MV-%s-%04d", $year, $count);
 }
