@@ -127,6 +127,32 @@ $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
       }, 'google_translate_element');
     }
 
+    // Suppress Google Translate top toolbar banner and keep body aligned to 0px
+    (function() {
+      function suppressGoogleTranslateBanner() {
+        var banners = document.querySelectorAll('iframe.skiptranslate, .goog-te-banner-frame, .VIpgJd-ZVi9I-OR9QNe-HandL, iframe[id*=":1.container"]');
+        for (var i = 0; i < banners.length; i++) {
+          banners[i].style.setProperty('display', 'none', 'important');
+          banners[i].style.setProperty('visibility', 'hidden', 'important');
+          banners[i].style.setProperty('height', '0px', 'important');
+        }
+        if (document.body && document.body.style.top && document.body.style.top !== '0px') {
+          document.body.style.setProperty('top', '0px', 'important');
+          document.body.style.setProperty('position', 'static', 'important');
+        }
+      }
+      
+      var observer = new MutationObserver(suppressGoogleTranslateBanner);
+      if (document.body) {
+        observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
+      } else {
+        document.addEventListener('DOMContentLoaded', function() {
+          observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
+        });
+      }
+      setInterval(suppressGoogleTranslateBanner, 250);
+    })();
+
     // Synchronize Google Translate combo with active website language selection
     document.addEventListener('DOMContentLoaded', function() {
       var activeLang = <?= json_encode(current_lang()) ?>;

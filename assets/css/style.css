@@ -1460,3 +1460,56 @@ html:is([lang="ml"], [lang="ta"], .lang-ml, .lang-ta) .mobile-drawer__link {
   padding: 10px 0 !important;
 }
 
+/* =====================================================================
+   GOOGLE TRANSLATE SILENT INTEGRATION — HIDE TOP TOOLBAR BANNER FRAME
+   ===================================================================== */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame,
+iframe.skiptranslate,
+body > iframe.skiptranslate,
+body > iframe[id*=":1.container"],
+body > .skiptranslate:not(#google_translate_element),
+.VIpgJd-ZVi9I-OR9QNe-HandL,
+.VIpgJd-ZVi9I-OR9QNe-HandL-nohd,
+.VIpgJd-ZVi9I-aZ2wEe-wOHMyf,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  max-height: 0 !important;
+  border: none !important;
+  pointer-events: none !important;
+  z-index: -9999 !important;
+}
+
+html, body {
+  top: 0px !important;
+  position: static !important;
+  margin-top: 0px !important;
+}
+
+.goog-text-highlight {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.goog-te-gadget,
+.goog-te-gadget span,
+.goog-logo-link {
+  display: none !important;
+}
+
+#google_translate_element {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+
