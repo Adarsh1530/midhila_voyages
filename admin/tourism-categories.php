@@ -25,18 +25,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $catId = (int)($_POST['id'] ?? 0);
             $slug = slugify($_POST['slug'] ?? $_POST['name_en']);
             $nameEn = trim($_POST['name_en'] ?? '');
-            $nameMl = trim($_POST['name_ml'] ?? '');
-            $nameTa = trim($_POST['name_ta'] ?? '');
             $taglineEn = trim($_POST['tagline_en'] ?? '');
-            $taglineMl = trim($_POST['tagline_ml'] ?? '');
-            $taglineTa = trim($_POST['tagline_ta'] ?? '');
             $descEn = trim($_POST['description_en'] ?? '');
-            $descMl = trim($_POST['description_ml'] ?? '');
-            $descTa = trim($_POST['description_ta'] ?? '');
             $featuredImg = trim($_POST['featured_image'] ?? '');
             $displayOrder = (int)($_POST['display_order'] ?? 0);
             $isKerala = isset($_POST['is_kerala_focus']) ? 1 : 0;
             $isActive = isset($_POST['is_active']) ? 1 : 0;
+
+            // Automated website translation handles Malayalam and Tamil dynamically
+            $nameMl = '';
+            $nameTa = '';
+            $taglineMl = '';
+            $taglineTa = '';
+            $descMl = '';
+            $descTa = '';
+            if ($catId > 0) {
+                $currStmt = $db->prepare("SELECT name_ml, name_ta, tagline_ml, tagline_ta, description_ml, description_ta FROM `tourism_categories` WHERE id = ?");
+                $currStmt->execute([$catId]);
+                $currRow = $currStmt->fetch() ?: [];
+                $nameMl = $currRow['name_ml'] ?? '';
+                $nameTa = $currRow['name_ta'] ?? '';
+                $taglineMl = $currRow['tagline_ml'] ?? '';
+                $taglineTa = $currRow['tagline_ta'] ?? '';
+                $descMl = $currRow['description_ml'] ?? '';
+                $descTa = $currRow['description_ta'] ?? '';
+            }
 
             if ($catId > 0) {
                 $upd = $db->prepare("
@@ -114,7 +127,7 @@ require_once __DIR__ . '/includes/admin-header.php';
   <div>
     <div style="margin-bottom:20px;">
       <h3 style="font-size:1.25rem;color:var(--admin-navy);font-weight:700;">Tourism Categories</h3>
-      <p style="font-size:0.86rem;color:var(--admin-muted);margin:0;">The 5 dedicated Kerala tourism pillars and custom categories with multi-language copy.</p>
+      <p style="font-size:0.86rem;color:var(--admin-muted);margin:0;">The 5 dedicated Kerala tourism pillars and custom categories with automated whole-website translation.</p>
     </div>
 
     <div class="admin-table-container">
@@ -122,7 +135,6 @@ require_once __DIR__ . '/includes/admin-header.php';
         <thead>
           <tr>
             <th>Discipline / Category</th>
-            <th>Malayalam / Tamil</th>
             <th>Focus</th>
             <th>Status</th>
             <th style="text-align:right;">Actions</th>
@@ -135,10 +147,6 @@ require_once __DIR__ . '/includes/admin-header.php';
                 <div style="font-weight:700;color:#0F172A;font-size:0.95rem;"><?= e($cat['name_en']) ?></div>
                 <div style="font-size:0.75rem;color:var(--admin-gold);font-weight:600;margin-top:2px;"><?= e($cat['tagline_en']) ?></div>
                 <div style="font-size:0.75rem;color:#94A3B8;font-family:monospace;">slug: <?= e($cat['slug']) ?></div>
-              </td>
-              <td style="font-size:0.84rem;">
-                <div style="color:#0F172A;"><?= e($cat['name_ml'] ?: '—') ?></div>
-                <div style="color:#64748B;font-size:0.78rem;"><?= e($cat['name_ta'] ?: '—') ?></div>
               </td>
               <td>
                 <?= $cat['is_kerala_focus'] ? '<span class="badge badge-success">Kerala Focus</span>' : '<span class="badge badge-neutral">National</span>' ?>
@@ -173,7 +181,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <?= $editCategory ? ('Edit: ' . e($editCategory['name_en'])) : 'Add New Category' ?>
       </h3>
       <p style="font-size:0.82rem;color:#64748B;margin-bottom:20px;">
-        Define names, taglines, and descriptions across English, Malayalam, and Tamil.
+        Define category name, tagline, description, and display order. The public website automatically translates all content into Malayalam and Tamil in real time.
       </p>
 
       <form method="POST" action="">
@@ -182,7 +190,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <input type="hidden" name="id" value="<?= (int)($editCategory['id'] ?? 0) ?>">
 
         <div style="margin-bottom:14px;">
-          <label>Category Name (English) *</label>
+          <label>Category Name *</label>
           <input type="text" name="name_en" required value="<?= e($editCategory['name_en'] ?? '') ?>" placeholder="e.g. Hill Station Tourism">
         </div>
 
@@ -194,34 +202,12 @@ require_once __DIR__ . '/includes/admin-header.php';
         <?php endif; ?>
 
         <div style="margin-bottom:14px;">
-          <label>Tagline (English)</label>
+          <label>Tagline</label>
           <input type="text" name="tagline_en" value="<?= e($editCategory['tagline_en'] ?? '') ?>" placeholder="e.g. Misty Peaks &amp; Tea Plantations">
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
-          <div>
-            <label>Name (Malayalam / മലയാളം)</label>
-            <input type="text" name="name_ml" value="<?= e($editCategory['name_ml'] ?? '') ?>" placeholder="ഹിൽ സ്റ്റേഷൻ ടൂറിസം">
-          </div>
-          <div>
-            <label>Name (Tamil / தமிழ்)</label>
-            <input type="text" name="name_ta" value="<?= e($editCategory['name_ta'] ?? '') ?>" placeholder="மலைவாசஸ்தல சுற்றுலா">
-          </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
-          <div>
-            <label>Tagline (Malayalam)</label>
-            <input type="text" name="tagline_ml" value="<?= e($editCategory['tagline_ml'] ?? '') ?>" placeholder="മലയോര കുളിർമയും തേയിലത്തോട്ടങ്ങളും">
-          </div>
-          <div>
-            <label>Tagline (Tamil)</label>
-            <input type="text" name="tagline_ta" value="<?= e($editCategory['tagline_ta'] ?? '') ?>" placeholder="பனிமூட்டமான மலைகள் மற்றும் தேயிலைத் தோட்டங்கள்">
-          </div>
-        </div>
-
         <div style="margin-bottom:14px;">
-          <label>Description (English)</label>
+          <label>Description</label>
           <textarea name="description_en" rows="3" placeholder="Overview of destinations in this category..."><?= e($editCategory['description_en'] ?? '') ?></textarea>
         </div>
 

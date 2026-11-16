@@ -151,11 +151,6 @@ require_once __DIR__ . '/includes/admin-header.php';
           <tr>
             <td>
               <div style="font-weight:700;color:#0F172A;font-size:0.95rem;"><?= e($acc['name_en']) ?></div>
-              <?php if (!empty($acc['name_ml']) || !empty($acc['name_ta'])): ?>
-                <div style="font-size:0.75rem;color:#64748B;">
-                  <?= e($acc['name_ml'] ?: $acc['name_ta']) ?>
-                </div>
-              <?php endif; ?>
               <div style="font-size:0.8rem;color:#94A3B8;margin-top:2px;">
                 <?= e($acc['location_address'] ?: 'Kerala, India') ?>
               </div>

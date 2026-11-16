@@ -132,11 +132,6 @@ require_once __DIR__ . '/includes/admin-header.php';
           <tr>
             <td>
               <div style="font-weight:700;color:#0F172A;font-size:0.95rem;"><?= e($vn['name_en']) ?></div>
-              <?php if (!empty($vn['name_ml']) || !empty($vn['name_ta'])): ?>
-                <div style="font-size:0.75rem;color:#64748B;">
-                  <?= e($vn['name_ml'] ?: $vn['name_ta']) ?>
-                </div>
-              <?php endif; ?>
               <div style="font-size:0.8rem;color:#94A3B8;margin-top:2px;">
                 📍 <?= e($vn['city'] ?: 'Kerala') ?> • <?= e($vn['location_address'] ?: '') ?>
               </div>

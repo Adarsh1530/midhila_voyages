@@ -41,6 +41,42 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
   <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/animations.css">
   <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/responsive.css">
 
+  <style>
+    /* Google Translate Silent Seamless Integration */
+    .goog-te-banner-frame.skiptranslate,
+    .goog-te-banner-frame,
+    iframe.goog-te-banner-frame,
+    #goog-gt-tt,
+    .goog-te-balloon-frame,
+    .goog-tooltip,
+    .goog-tooltip:hover {
+      display: none !important;
+      visibility: hidden !important;
+    }
+    body {
+      top: 0px !important;
+      position: static !important;
+    }
+    .goog-text-highlight {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+    .goog-te-gadget,
+    .goog-te-gadget span,
+    .goog-logo-link {
+      display: none !important;
+    }
+    #google_translate_element {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+    .notranslate {
+      translate: no;
+    }
+  </style>
+
   <!-- Three.js 3D Engine & GSAP ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -162,11 +198,11 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
       </nav>
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:12px;padding-top:20px;border-top:1px solid var(--color-border);">
+    <div style="display:flex;flex-direction:column;gap:12px;padding-top:20px;border-top:1px solid var(--color-border);" class="notranslate">
       <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px;">
-        <a href="<?= htmlspecialchars(lang_url('en')) ?>" style="padding:6px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:0.8rem;text-decoration:none;font-weight:700;color:<?= current_lang() === 'en' ? '#FFFFFF;background:#0F172A' : '#334155;background:#FFFFFF' ?>;">English</a>
-        <a href="<?= htmlspecialchars(lang_url('ml')) ?>" style="padding:6px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:0.8rem;text-decoration:none;font-weight:700;color:<?= current_lang() === 'ml' ? '#FFFFFF;background:#0F172A' : '#334155;background:#FFFFFF' ?>;">മലയാളം</a>
-        <a href="<?= htmlspecialchars(lang_url('ta')) ?>" style="padding:6px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:0.8rem;text-decoration:none;font-weight:700;color:<?= current_lang() === 'ta' ? '#FFFFFF;background:#0F172A' : '#334155;background:#FFFFFF' ?>;">தமிழ்</a>
+        <a href="<?= htmlspecialchars(lang_url('en')) ?>" onclick="return switchWebsiteLanguage('en', event);" style="padding:6px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:0.8rem;text-decoration:none;font-weight:700;color:<?= current_lang() === 'en' ? '#FFFFFF;background:#0F172A' : '#334155;background:#FFFFFF' ?>;">English</a>
+        <a href="<?= htmlspecialchars(lang_url('ml')) ?>" onclick="return switchWebsiteLanguage('ml', event);" style="padding:6px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:0.8rem;text-decoration:none;font-weight:700;color:<?= current_lang() === 'ml' ? '#FFFFFF;background:#0F172A' : '#334155;background:#FFFFFF' ?>;">മലയാളം</a>
+        <a href="<?= htmlspecialchars(lang_url('ta')) ?>" onclick="return switchWebsiteLanguage('ta', event);" style="padding:6px 12px;border-radius:6px;border:1px solid #CBD5E1;font-size:0.8rem;text-decoration:none;font-weight:700;color:<?= current_lang() === 'ta' ? '#FFFFFF;background:#0F172A' : '#334155;background:#FFFFFF' ?>;">தமிழ்</a>
       </div>
       <a href="<?= BASE_URL ?>/enquiry.php" class="btn-cinematic-primary" style="width:100%;">
         <?= __t('btn_plan_trip') ?>
@@ -178,6 +214,33 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
   </div>
 
   <script>
+    // Universal Website Language Switcher
+    function switchWebsiteLanguage(langCode, event) {
+      if (event && event.preventDefault) {
+        event.preventDefault();
+      }
+      var gtVal = (langCode === 'en') ? '/en/en' : ('/en/' + langCode);
+      var expires = new Date(Date.now() + 30 * 86400 * 1000).toUTCString();
+      
+      document.cookie = 'googtrans=' + gtVal + '; path=/; expires=' + expires + '; SameSite=Lax';
+      try {
+        document.cookie = 'googtrans=' + gtVal + '; domain=' + window.location.hostname + '; path=/; expires=' + expires + '; SameSite=Lax';
+        document.cookie = 'googtrans=' + gtVal + '; domain=.' + window.location.hostname + '; path=/; expires=' + expires + '; SameSite=Lax';
+      } catch (err) {}
+      document.cookie = 'mv_lang=' + langCode + '; path=/; expires=' + expires + '; SameSite=Lax';
+      
+      var selectEl = document.querySelector('.goog-te-combo');
+      if (selectEl) {
+        selectEl.value = langCode;
+        selectEl.dispatchEvent(new Event('change'));
+      }
+      
+      var url = new URL(window.location.href);
+      url.searchParams.set('lang', langCode);
+      window.location.href = url.toString();
+      return false;
+    }
+
     // Language Switcher Dropdown Click Handler
     document.addEventListener('DOMContentLoaded', function() {
       var switcherBtn = document.getElementById('langSwitcherBtn');

@@ -37,8 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $destinationId = (int)($_POST['destination_id'] ?? 0);
         $tourismCategoryId = !empty($_POST['tourism_category_id']) ? (int)$_POST['tourism_category_id'] : null;
         $nameEn = trim($_POST['name_en'] ?? '');
-        $nameMl = trim($_POST['name_ml'] ?? '');
-        $nameTa = trim($_POST['name_ta'] ?? '');
+        // Automated translation dynamically translates property details for visitors
+        $nameMl = '';
+        $nameTa = '';
+        if ($id > 0 && !empty($accommodation)) {
+            $nameMl = $accommodation['name_ml'] ?? '';
+            $nameTa = $accommodation['name_ta'] ?? '';
+        }
         $category = trim($_POST['category'] ?? 'Resort');
         $locationAddress = trim($_POST['location_address'] ?? '');
         $contactPerson = trim($_POST['contact_person'] ?? '');
@@ -122,7 +127,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
       <div>
-        <label>Property Name (English) *</label>
+        <label>Property Name *</label>
         <input type="text" name="name_en" required value="<?= e($accommodation['name_en'] ?? '') ?>" placeholder="e.g. Blankate Tea Plantation Resort">
       </div>
       <div>
@@ -135,18 +140,6 @@ require_once __DIR__ . '/includes/admin-header.php';
             </option>
           <?php endforeach; ?>
         </select>
-      </div>
-    </div>
-
-    <!-- Multilingual Names -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
-      <div>
-        <label>Property Name (Malayalam / മലയാളം)</label>
-        <input type="text" name="name_ml" value="<?= e($accommodation['name_ml'] ?? '') ?>" placeholder="മലയാളം നാമം">
-      </div>
-      <div>
-        <label>Property Name (Tamil / தமிழ்)</label>
-        <input type="text" name="name_ta" value="<?= e($accommodation['name_ta'] ?? '') ?>" placeholder="தமிழ் பெயர்">
       </div>
     </div>
 

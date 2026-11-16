@@ -115,5 +115,39 @@ $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
   <!-- Promotional Offer Popup Modal Component -->
   <?php include __DIR__ . '/offer-popup.php'; ?>
 
+  <!-- Automated Full-Website Translation Engine (Google Translate Core) -->
+  <div id="google_translate_element" style="display:none;" class="notranslate"></div>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,ml,ta',
+        autoDisplay: false,
+        multilanguagePage: true
+      }, 'google_translate_element');
+    }
+
+    // Synchronize Google Translate combo with active website language selection
+    document.addEventListener('DOMContentLoaded', function() {
+      var activeLang = <?= json_encode(current_lang()) ?>;
+      if (activeLang && activeLang !== 'en') {
+        var attempts = 0;
+        var syncInterval = setInterval(function() {
+          var combo = document.querySelector('.goog-te-combo');
+          if (combo) {
+            if (combo.value !== activeLang) {
+              combo.value = activeLang;
+              combo.dispatchEvent(new Event('change'));
+            }
+            clearInterval(syncInterval);
+          }
+          attempts++;
+          if (attempts > 30) clearInterval(syncInterval);
+        }, 150);
+      }
+    });
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
+
 </body>
 </html>

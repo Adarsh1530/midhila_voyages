@@ -47,16 +47,27 @@ function init_language(): string {
         $_SESSION['mv_lang'] = $lang;
         if (!headers_sent()) {
             setcookie('mv_lang', $lang, time() + (86400 * 30), '/');
+            $gtVal = ($lang === 'en') ? '/en/en' : ('/en/' . $lang);
+            setcookie('googtrans', $gtVal, time() + (86400 * 30), '/');
         }
     }
     // 2. Session
     elseif (!empty($_SESSION['mv_lang']) && in_array($_SESSION['mv_lang'], $supported, true)) {
         $lang = $_SESSION['mv_lang'];
     }
-    // 3. Cookie
+    // 3. Cookie mv_lang
     elseif (!empty($_COOKIE['mv_lang']) && in_array($_COOKIE['mv_lang'], $supported, true)) {
         $lang = $_COOKIE['mv_lang'];
         $_SESSION['mv_lang'] = $lang;
+    }
+    // 4. Cookie googtrans (/en/ml, /en/ta)
+    elseif (!empty($_COOKIE['googtrans'])) {
+        $parts = explode('/', trim($_COOKIE['googtrans'], '/'));
+        $target = end($parts);
+        if (in_array($target, $supported, true)) {
+            $lang = $target;
+            $_SESSION['mv_lang'] = $lang;
+        }
     }
 
     return $lang;
@@ -1100,7 +1111,7 @@ function render_language_switcher(): string {
     $languages = get_supported_languages();
     $current = current_lang();
     
-    $html = '<div class="lang-switcher" id="langSwitcher" style="position:relative;display:inline-flex;align-items:center;">';
+    $html = '<div class="lang-switcher notranslate" id="langSwitcher" style="position:relative;display:inline-flex;align-items:center;">';
     $html .= '<button type="button" class="lang-switcher__btn" id="langSwitcherBtn" aria-expanded="false" style="background:#FFFFFF;border:1.5px solid #E2E8F0;border-radius:20px;padding:6px 12px;font-size:0.82rem;font-weight:700;color:#0F172A;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all 0.2s;">';
     $html .= '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>';
     $html .= '<span>' . htmlspecialchars($languages[$current]['native']) . '</span>';
@@ -1113,7 +1124,7 @@ function render_language_switcher(): string {
         $url = htmlspecialchars(lang_url($code));
         $bg = $isActive ? '#F1F5F9' : '#FFFFFF';
         $weight = $isActive ? '700' : '500';
-        $html .= "<a href=\"{$url}\" style=\"display:flex;align-items:center;justify-content:space-between;padding:10px 14px;color:#0F172A;text-decoration:none;font-size:0.84rem;font-weight:{$weight};background:{$bg};border-bottom:1px solid #F8FAFC;transition:background 0.15s;\">";
+        $html .= "<a href=\"{$url}\" data-lang=\"{$code}\" onclick=\"return switchWebsiteLanguage('{$code}', event);\" style=\"display:flex;align-items:center;justify-content:space-between;padding:10px 14px;color:#0F172A;text-decoration:none;font-size:0.84rem;font-weight:{$weight};background:{$bg};border-bottom:1px solid #F8FAFC;transition:background 0.15s;\">";
         $html .= "<span>{$info['native']}</span>";
         if ($isActive) {
             $html .= "<span style=\"color:#059669;font-size:0.85rem;\">✓</span>";

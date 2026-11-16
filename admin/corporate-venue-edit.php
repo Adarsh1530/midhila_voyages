@@ -35,8 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $venueType = trim($_POST['venue_type'] ?? 'conference_hall');
         $destinationId = !empty($_POST['destination_id']) ? (int)$_POST['destination_id'] : null;
         $nameEn = trim($_POST['name_en'] ?? '');
-        $nameMl = trim($_POST['name_ml'] ?? '');
-        $nameTa = trim($_POST['name_ta'] ?? '');
+        // Automated translation dynamically translates venue details for visitors
+        $nameMl = '';
+        $nameTa = '';
+        if ($id > 0 && !empty($venue)) {
+            $nameMl = $venue['name_ml'] ?? '';
+            $nameTa = $venue['name_ta'] ?? '';
+        }
         $city = trim($_POST['city'] ?? 'Kochi');
         $locationAddress = trim($_POST['location_address'] ?? '');
         $contactPerson = trim($_POST['contact_person'] ?? '');
@@ -115,7 +120,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
       <div>
-        <label>Venue Name (English) *</label>
+        <label>Venue Name *</label>
         <input type="text" name="name_en" required value="<?= e($venue['name_en'] ?? '') ?>" placeholder="e.g. Grand Horizon Convention Centre">
       </div>
       <div>
@@ -125,18 +130,6 @@ require_once __DIR__ . '/includes/admin-header.php';
           <option value="conference_hall" <?= (($venue['venue_type'] ?? '') === 'conference_hall') ? 'selected' : '' ?>>Conference Hall (Corporate Boardroom / Summit)</option>
           <option value="seminar_hall" <?= (($venue['venue_type'] ?? '') === 'seminar_hall') ? 'selected' : '' ?>>Seminar Hall (Workshops &amp; Academic)</option>
         </select>
-      </div>
-    </div>
-
-    <!-- Multilingual Names -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
-      <div>
-        <label>Venue Name (Malayalam / മലയാളം)</label>
-        <input type="text" name="name_ml" value="<?= e($venue['name_ml'] ?? '') ?>" placeholder="മലയാളം നാമം">
-      </div>
-      <div>
-        <label>Venue Name (Tamil / தமிழ்)</label>
-        <input type="text" name="name_ta" value="<?= e($venue['name_ta'] ?? '') ?>" placeholder="தமிழ் பெயர்">
       </div>
     </div>
 
