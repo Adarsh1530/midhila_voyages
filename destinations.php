@@ -42,10 +42,10 @@ require_once __DIR__ . '/includes/header.php';
   
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
     <h1 class="editorial-headline-large" style="margin-bottom:16px;">
-      Curated Travel Destinations
+      <?= e(get_setting('dest_heading_1', 'Curated Travel Destinations')) ?>
     </h1>
     <p class="editorial-subtext" style="margin:0 auto;">
-      From the timeless sacred ghats of Varanasi to the tranquil emerald waterways of Kerala and remote island atolls.
+      <?= e(get_setting('dest_heading_2', 'From the timeless sacred ghats of Varanasi to the tranquil emerald waterways of Kerala and remote island atolls.')) ?>
     </p>
   </div>
 </section>
@@ -58,15 +58,15 @@ require_once __DIR__ . '/includes/header.php';
     <div style="display:flex;justify-content:center;gap:12px;margin-bottom:48px;flex-wrap:wrap;">
       <a href="<?= BASE_URL ?>/destinations.php?cat=all" 
          class="filter-pill <?= ($filterCat === 'all') ? 'is-active' : '' ?>" style="padding:10px 22px;">
-        All Horizons (<?= count($destinations) ?>)
+        <?= e(__t('dest_all_horizons', 'All Horizons')) ?> (<?= count($destinations) ?>)
       </a>
       <a href="<?= BASE_URL ?>/destinations.php?cat=domestic" 
          class="filter-pill <?= ($filterCat === 'domestic') ? 'is-active' : '' ?>" style="padding:10px 22px;">
-        Incredible India (Domestic)
+        <?= e(__t('dest_india_domestic', 'Incredible India (Domestic)')) ?>
       </a>
       <a href="<?= BASE_URL ?>/destinations.php?cat=international" 
          class="filter-pill <?= ($filterCat === 'international') ? 'is-active' : '' ?>" style="padding:10px 22px;">
-        Global Escapes
+        <?= e(__t('dest_global_escapes', 'Global Escapes')) ?>
       </a>
     </div>
 
@@ -79,9 +79,9 @@ require_once __DIR__ . '/includes/header.php';
         ?>
           <div class="dest-showcase-card reveal-fade-up">
             <div class="dest-showcase-card__img-wrap" style="height:280px;">
-              <a href="<?= BASE_URL ?>/destination.php?slug=<?= urlencode($destSlug) ?>" aria-label="Explore <?= e($dest['name']) ?>">
+              <a href="<?= BASE_URL ?>/destination.php?slug=<?= urlencode($destSlug) ?>" aria-label="Explore <?= e(loc($dest, 'name')) ?>">
                 <img src="<?= e($destImg) ?>" 
-                     alt="<?= e($dest['name']) ?>" 
+                     alt="<?= e(loc($dest, 'name')) ?>" 
                      class="dest-showcase-card__img" 
                      loading="lazy" 
                      width="420" 
@@ -90,18 +90,18 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div class="dest-showcase-card__content">
               <div class="dest-coordinates">
-                <?= e($dest['region_state'] ?? 'India') ?> &bull; Curated Circuit
+                <?= e($dest['region_state'] ?? 'India') ?> &bull; <?= e(__t('curated_circuit', 'Curated Circuit')) ?>
               </div>
               <h3 class="dest-title">
                 <a href="<?= BASE_URL ?>/destination.php?slug=<?= urlencode($destSlug) ?>">
-                  <?= e($dest['name']) ?>
+                  <?= e(loc($dest, 'name')) ?>
                 </a>
               </h3>
               <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.65;margin-bottom:18px;">
-                <?= e(truncate_words($dest['description'] ?? '', 20)) ?>
+                <?= e(truncate_words(loc($dest, 'description'), 20)) ?>
               </p>
               <a href="<?= BASE_URL ?>/destination.php?slug=<?= urlencode($destSlug) ?>" class="link-editorial-arrow">
-                <span>View Itineraries &amp; Guide</span>
+                <span><?= e(__t('view_itineraries_guide', 'View Itineraries & Guide')) ?></span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </a>
             </div>

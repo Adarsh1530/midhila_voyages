@@ -21,12 +21,12 @@ $sort = $_GET['sort'] ?? 'featured';
 
 // Fetch categories and destinations for filter UI
 $cats = $db->query("SELECT * FROM `package_categories` WHERE `is_active` = 1 ORDER BY `display_order` ASC")->fetchAll();
-$dests = $db->query("SELECT `id`, `name`, `slug` FROM `destinations` WHERE `is_published` = 1 ORDER BY `name` ASC")->fetchAll();
+$dests = $db->query("SELECT `id`, `name`, `name_ml`, `name_ta`, `slug` FROM `destinations` WHERE `is_published` = 1 ORDER BY `name` ASC")->fetchAll();
 
 // Build query
 $sql = "
-    SELECT p.*, d.name AS destination_name, d.region_state, d.slug AS destination_slug,
-           c.name AS category_name, c.slug AS category_slug
+    SELECT p.*, d.name AS destination_name, d.name_ml AS destination_name_ml, d.name_ta AS destination_name_ta, d.region_state, d.slug AS destination_slug,
+           c.name AS category_name, c.name_ml AS category_name_ml, c.name_ta AS category_name_ta, c.slug AS category_slug
     FROM `packages` p
     JOIN `destinations` d ON p.destination_id = d.id
     JOIN `package_categories` c ON p.category_id = c.id
@@ -90,10 +90,10 @@ require_once __DIR__ . '/includes/header.php';
   
   <div class="container" style="position:relative;z-index:2;text-align:center;max-width:820px;">
     <h1 class="editorial-headline-large" style="margin-bottom:16px;">
-      Signature Tour Packages
+      <?= e(get_setting('pkg_heading_1', 'Signature Tour Packages')) ?>
     </h1>
     <p class="editorial-subtext" style="margin:0 auto;">
-      Every itinerary curated with verified private accommodations, chauffeured transfers, and transparent pricing.
+      <?= e(get_setting('pkg_heading_2', 'Every itinerary curated with verified private accommodations, chauffeured transfers, and transparent pricing.')) ?>
     </p>
   </div>
 </section>
@@ -106,12 +106,12 @@ require_once __DIR__ . '/includes/header.php';
         
         <!-- Destination Filter -->
         <div>
-          <label class="editorial-label">Destination</label>
+          <label class="editorial-label"><?= e(__t('form_select_destination', 'Destination')) ?></label>
           <select name="destination" class="editorial-select">
-            <option value="">All Destinations</option>
+            <option value=""><?= e(__t('form_select_destination', 'All Destinations')) ?></option>
             <?php foreach ($dests as $d): ?>
               <option value="<?= e($d['slug']) ?>" <?= ($destinationFilter === $d['slug'] || $destinationFilter === $d['name']) ? 'selected' : '' ?>>
-                <?= e($d['name']) ?>
+                <?= e(loc($d, 'name')) ?>
               </option>
             <?php endforeach; ?>
           </select>
@@ -119,12 +119,12 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Category Filter -->
         <div>
-          <label class="editorial-label">Travel Style</label>
+          <label class="editorial-label"><?= e(__t('nav_packages', 'Travel Style')) ?></label>
           <select name="category" class="editorial-select">
-            <option value="">All Categories</option>
+            <option value=""><?= e(__t('all_itineraries', 'All Categories')) ?></option>
             <?php foreach ($cats as $c): ?>
               <option value="<?= e($c['slug']) ?>" <?= ($categoryFilter === $c['slug'] || $categoryFilter === $c['name']) ? 'selected' : '' ?>>
-                <?= e($c['name']) ?>
+                <?= e(loc($c, 'name')) ?>
               </option>
             <?php endforeach; ?>
           </select>

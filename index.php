@@ -23,6 +23,13 @@ $destStmt = $db->query("
 ");
 $featuredDestinations = $destStmt->fetchAll();
 
+// 1b. Fetch Kerala Tourism Categories
+$tourismCategories = [];
+try {
+    $tcStmt = $db->query("SELECT * FROM `tourism_categories` WHERE `is_active` = 1 ORDER BY `display_order` ASC");
+    $tourismCategories = $tcStmt->fetchAll();
+} catch (Exception $e) {}
+
 // 2. Fetch Package Categories
 $catStmt = $db->query("
     SELECT * FROM `package_categories` 
@@ -33,7 +40,8 @@ $categories = $catStmt->fetchAll();
 
 // 3. Fetch Featured Tour Packages
 $pkgStmt = $db->query("
-    SELECT p.*, d.name AS destination_name, d.region_state, c.name AS category_name, c.slug AS category_slug
+    SELECT p.*, d.name AS destination_name, d.name_ml AS destination_name_ml, d.name_ta AS destination_name_ta, d.region_state, 
+           c.name AS category_name, c.name_ml AS category_name_ml, c.name_ta AS category_name_ta, c.slug AS category_slug
     FROM `packages` p
     JOIN `destinations` d ON p.destination_id = d.id
     JOIN `package_categories` c ON p.category_id = c.id
@@ -45,7 +53,8 @@ $packages = $pkgStmt->fetchAll();
 
 // 4. Fetch Dedicated Pilgrimage Packages
 $pilgrimStmt = $db->query("
-    SELECT p.*, d.name AS destination_name, d.region_state, c.name AS category_name, c.slug AS category_slug
+    SELECT p.*, d.name AS destination_name, d.name_ml AS destination_name_ml, d.name_ta AS destination_name_ta, d.region_state, 
+           c.name AS category_name, c.name_ml AS category_name_ml, c.name_ta AS category_name_ta, c.slug AS category_slug
     FROM `packages` p
     JOIN `destinations` d ON p.destination_id = d.id
     JOIN `package_categories` c ON p.category_id = c.id
@@ -218,24 +227,168 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div class="dest-showcase-card__content">
               <div class="dest-coordinates">
-                <?= e($dest['region_state'] ?? 'India') ?> &bull; Curated Circuit
+                <?= e($dest['region_state'] ?? 'India') ?> &bull; <?= e(__t('curated_circuit', 'Curated Circuit')) ?>
               </div>
               <h3 class="dest-title">
                 <a href="<?= BASE_URL ?>/destination.php?slug=<?= urlencode($destSlug) ?>">
-                  <?= e($dest['name']) ?>
+                  <?= e(loc($dest, 'name')) ?>
                 </a>
               </h3>
               <p style="font-size:0.9rem;color:var(--color-text-muted);line-height:1.65;margin-bottom:16px;">
-                <?= e(truncate_words($dest['description'] ?? '', 18)) ?>
+                <?= e(truncate_words(loc($dest, 'description'), 18)) ?>
               </p>
               <a href="<?= BASE_URL ?>/destination.php?slug=<?= urlencode($destSlug) ?>" class="link-editorial-arrow">
-                <span>Discover Itinerary</span>
+                <span><?= e(__t('discover_itinerary', 'Discover Itinerary')) ?></span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </a>
             </div>
           </div>
         <?php endforeach; ?>
       <?php endif; ?>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider-hairline"></div>
+
+<!-- =====================================================================
+     CHAPTER II-B: GOD'S OWN COUNTRY — DEDICATED KERALA TOURISM MODULE
+     ===================================================================== -->
+<section class="section-padding" id="kerala-tourism-showcase" style="position:relative;background:#FFFFFF;">
+  <div class="container">
+    
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:48px;">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;background:#F0FDF4;border:1px solid #BBF7D0;color:#15803D;font-size:0.8rem;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.05em;">
+          <span>🌴 <?= e(__t('nav_kerala_tourism', 'Dedicated Kerala Tourism')) ?></span>
+        </div>
+        <h2 class="editorial-headline-large" style="margin-bottom:8px;">
+          <?= e(__t('kerala_hero_title', 'God\'s Own Country • Tailored Experiences')) ?><br>
+          <span style="font-family:var(--font-editorial);font-style:italic;font-weight:400;color:var(--color-gold-deep);">
+            5 Signature Kerala Tourism Disciplines
+          </span>
+        </h2>
+        <p style="font-size:0.95rem;color:var(--color-text-muted);max-width:640px;line-height:1.6;">
+          <?= e(__t('kerala_hero_sub', 'Discover Kerala through our specialized tourism categories with curated destinations, verified boutique stays, private chauffeurs, and customized itineraries.')) ?>
+        </p>
+      </div>
+
+      <div>
+        <a href="<?= BASE_URL ?>/kerala-tourism.php" class="btn-cinematic-primary">
+          <span><?= e(__t('explore_all_packages', 'Explore All Kerala Tours')) ?></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 5 Kerala Categories Grid -->
+    <div class="kerala-disciplines-grid">
+      <?php if (!empty($tourismCategories)): ?>
+        <?php foreach ($tourismCategories as $cat): 
+          $catName = loc($cat, 'name', $cat['name_en'] ?? '');
+          $catTag = loc($cat, 'tagline', $cat['tagline_en'] ?? '');
+          $catDesc = loc($cat, 'description', $cat['description_en'] ?? '');
+          $catImg = !empty($cat['featured_image']) ? $cat['featured_image'] : (ASSETS_URL . '/images/placeholder.svg');
+        ?>
+          <div class="dest-showcase-card" style="display:flex;flex-direction:column;border:1px solid #E2E8F0;border-radius:14px;overflow:hidden;background:#FFFFFF;box-shadow:0 2px 10px rgba(15,23,42,0.04);transition:transform 0.25s, box-shadow 0.25s;">
+            <div style="position:relative;height:210px;overflow:hidden;background:#0F172A;">
+              <a href="<?= BASE_URL ?>/kerala-tourism.php?category=<?= urlencode($cat['slug']) ?>">
+                <img src="<?= e($catImg) ?>" alt="<?= e($catName) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" loading="lazy" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              </a>
+              <span style="position:absolute;top:14px;left:14px;background:rgba(15,23,42,0.85);backdrop-filter:blur(6px);color:#FFFFFF;padding:4px 10px;border-radius:6px;font-size:0.75rem;font-weight:700;letter-spacing:0.04em;">
+                <?= e($cat['slug'] === 'pilgrimage' ? 'TEMPLE & SACRED' : ($cat['slug'] === 'hill-stations' ? 'MIST & MOUNTAINS' : ($cat['slug'] === 'backwaters' ? 'HOUSEBOATS & LAGOONS' : ($cat['slug'] === 'beaches' ? 'COASTAL RETREATS' : 'REJUVENATION')))) ?>
+              </span>
+            </div>
+            <div style="padding:22px;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between;">
+              <div>
+                <h3 style="font-size:1.15rem;font-weight:700;color:var(--color-navy);margin-bottom:6px;">
+                  <a href="<?= BASE_URL ?>/kerala-tourism.php?category=<?= urlencode($cat['slug']) ?>" style="color:inherit;text-decoration:none;">
+                    <?= e($catName) ?>
+                  </a>
+                </h3>
+                <div style="font-size:0.8rem;color:var(--color-gold-deep);font-weight:600;margin-bottom:10px;">
+                  <?= e($catTag) ?>
+                </div>
+                <p style="font-size:0.86rem;color:var(--color-text-muted);line-height:1.55;margin-bottom:16px;">
+                  <?= e(truncate_words($catDesc, 16)) ?>
+                </p>
+              </div>
+              <div style="padding-top:14px;border-top:1px solid #F1F5F9;display:flex;justify-content:space-between;align-items:center;">
+                <a href="<?= BASE_URL ?>/kerala-tourism.php?category=<?= urlencode($cat['slug']) ?>" class="link-editorial-arrow" style="font-size:0.84rem;font-weight:700;">
+                  <span><?= e(__t('btn_view_packages', 'View Packages')) ?></span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      <?php endif; ?>
+    </div>
+
+    <!-- 3 Quick Access Interactive Service Cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:20px;">
+      
+      <!-- Card 1: Destination Accommodation -->
+      <div style="background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color 0.2s;">
+        <div>
+          <div style="width:48px;height:48px;border-radius:12px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </div>
+          <h3 style="font-size:1.2rem;font-weight:700;color:var(--color-navy);margin-bottom:8px;">
+            <?= e(__t('nav_accommodation', 'Accommodation Booking')) ?>
+          </h3>
+          <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.6;margin-bottom:20px;">
+            Filter hotels, tea plantation resorts, beach villas, and houseboats by destination with custom room views, dietary options, and facilities.
+          </p>
+        </div>
+        <div>
+          <a href="<?= BASE_URL ?>/accommodation.php" class="btn-cinematic-primary" style="display:inline-flex;width:auto;">
+            <span>Browse Accommodations &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Custom Tour Planner -->
+      <div style="background:#FFFDF5;border:1.5px solid #FEF08A;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="width:48px;height:48px;border-radius:12px;background:#FEF3C7;color:#D97706;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <h3 style="font-size:1.2rem;font-weight:700;color:var(--color-navy);margin-bottom:8px;">
+            <?= e(__t('nav_custom_tour', 'Customised Tour Planner')) ?>
+          </h3>
+          <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.6;margin-bottom:20px;">
+            Specify your route, transport preference (Sedan, Innova, Urbania), private chauffeur, days, dietary choices, and receive a bespoke itinerary proposal.
+          </p>
+        </div>
+        <div>
+          <a href="<?= BASE_URL ?>/custom-tour.php" class="btn-cinematic-primary" style="display:inline-flex;width:auto;background:#C5A059;border-color:#C5A059;">
+            <span>Plan Custom Trip &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3: Corporate & Business Events -->
+      <div style="background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="width:48px;height:48px;border-radius:12px;background:#F3E8FF;color:#7E22CE;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <h3 style="font-size:1.2rem;font-weight:700;color:var(--color-navy);margin-bottom:8px;">
+            <?= e(__t('nav_corporate', 'Corporate & Business Events')) ?>
+          </h3>
+          <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.6;margin-bottom:20px;">
+            Reserve conference halls, seminar auditoriums, and convention centres with theater/roundtable seating, AV equipment, catering, and guest accommodation.
+          </p>
+        </div>
+        <div>
+          <a href="<?= BASE_URL ?>/corporate-events.php" class="btn-cinematic-primary" style="display:inline-flex;width:auto;">
+            <span>Corporate Venues &rarr;</span>
+          </a>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -271,11 +424,11 @@ require_once __DIR__ . '/includes/header.php';
 
     <!-- Category Filter Pills -->
     <div class="filter-pills" style="margin-bottom:40px;">
-      <a href="<?= BASE_URL ?>/packages.php" class="filter-pill is-active">All Itineraries</a>
+      <a href="<?= BASE_URL ?>/packages.php" class="filter-pill is-active"><?= e(__t('all_itineraries', 'All Itineraries')) ?></a>
       <?php if (!empty($categories)): ?>
         <?php foreach ($categories as $cat): ?>
           <a href="<?= BASE_URL ?>/packages.php?category=<?= urlencode($cat['slug']) ?>" class="filter-pill">
-            <?= e($cat['name']) ?>
+            <?= e(loc($cat, 'name')) ?>
           </a>
         <?php endforeach; ?>
       <?php endif; ?>
@@ -352,10 +505,10 @@ require_once __DIR__ . '/includes/header.php';
 
           <div style="display:flex;align-items:center;flex-wrap:wrap;gap:16px;">
             <a href="<?= BASE_URL ?>/pilgrimage.php" class="btn-cinematic-gold">
-              <span>View Pilgrimage Circuit</span>
+              <span><?= e(__t('btn_explore_sacred', 'View Pilgrimage Circuit')) ?></span>
             </a>
             <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to reserve seats for the upcoming Pilgrim Tour.")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
-              <span>Reserve via WhatsApp</span>
+              <span><?= e(__t('btn_whatsapp_us', 'Reserve via WhatsApp')) ?></span>
             </a>
           </div>
         </div>
@@ -363,7 +516,7 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Featured Price Badge & Image Frame -->
         <div class="pilgrim-banner__right">
           <div style="background:#FFFFFF;border:2px solid rgba(197, 160, 89, 0.4);border-radius:var(--radius-lg);padding:32px 24px;box-shadow:var(--shadow-card);">
-            <span style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Special Yatra Package</span>
+            <span style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;"><?= e(__t('signature_5day_circuit', 'Special Yatra Package')) ?></span>
             <div style="font-size:3rem;font-weight:800;color:var(--color-text-headline);line-height:1;margin:12px 0 6px;">
               <?= e(get_setting('pilgrim_featured_price', '₹6,500')) ?>
             </div>
@@ -453,7 +606,7 @@ require_once __DIR__ . '/includes/header.php';
   <div class="container">
     
     <div style="text-align:center;max-width:700px;margin:0 auto 50px;">
-      <h2 class="editorial-headline-large">Journeys Remembered.</h2>
+      <h2 class="editorial-headline-large"><?= e(__t('testimonials_title', 'Journeys Remembered.')) ?></h2>
     </div>
 
     <div class="packages-grid">
@@ -470,7 +623,7 @@ require_once __DIR__ . '/includes/header.php';
               <strong style="color:var(--color-text-headline);font-size:0.9rem;"><?= e($t['client_name'] ?? $t['customer_name'] ?? 'Traveller') ?></strong>
               <span style="display:block;font-size:0.75rem;color:var(--color-text-muted);"><?= e($t['location'] ?? $t['customer_location'] ?? 'India') ?></span>
             </div>
-            <span style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;">Verified Journey</span>
+            <span style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:700;"><?= e(__t('verified_journey', 'Verified Journey')) ?></span>
           </div>
         </div>
       <?php endforeach; ?>
@@ -500,26 +653,26 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="form-row-2col">
           <div class="editorial-form-group">
-            <label class="editorial-label">Your Name *</label>
+            <label class="editorial-label"><?= e(__t('form_full_name', 'Your Name *')) ?></label>
             <input type="text" name="name" class="editorial-input" placeholder="e.g. Adarsh" required>
           </div>
 
           <div class="editorial-form-group">
-            <label class="editorial-label">Phone / WhatsApp Number *</label>
+            <label class="editorial-label"><?= e(__t('form_phone', 'Phone / WhatsApp Number *')) ?></label>
             <input type="tel" name="phone" class="editorial-input" placeholder="+91 98765 43210" required>
           </div>
         </div>
 
         <div class="form-row-2col">
           <div class="editorial-form-group">
-            <label class="editorial-label">Email Address *</label>
+            <label class="editorial-label"><?= e(__t('form_email', 'Email Address *')) ?></label>
             <input type="email" name="email" class="editorial-input" placeholder="you@domain.com" required>
           </div>
 
           <div class="editorial-form-group">
-            <label class="editorial-label">Preferred Destination</label>
+            <label class="editorial-label"><?= e(__t('form_select_destination', 'Preferred Destination')) ?></label>
             <select name="destination" class="editorial-select">
-              <option value="">Select Destination</option>
+              <option value=""><?= e(__t('form_select_destination', 'Select Destination')) ?></option>
               <option value="kerala">Kerala Backwaters &amp; Munnar</option>
               <option value="tamil-nadu">Tamil Nadu Temple Circuit</option>
               <option value="varanasi">Varanasi &amp; Prayagraj</option>
@@ -532,7 +685,7 @@ require_once __DIR__ . '/includes/header.php';
         </div>
 
         <div class="editorial-form-group">
-          <label class="editorial-label">Travel Notes / Preferences</label>
+          <label class="editorial-label"><?= e(__t('form_additional_req', 'Travel Notes / Preferences')) ?></label>
           <textarea name="message" class="editorial-textarea" rows="3" placeholder="Tell us about travelers, expected dates, and any special accommodations..."></textarea>
         </div>
 
@@ -543,7 +696,7 @@ require_once __DIR__ . '/includes/header.php';
           </button>
 
           <span style="font-size:0.8rem;color:var(--color-text-muted);">
-            Prefer instant messaging? <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to enquire about travel packages.")) ?>" target="_blank" rel="noopener noreferrer" style="color:var(--color-whatsapp);font-weight:700;">Chat on WhatsApp &rarr;</a>
+            <?= e(__t('prefer_instant_messaging', 'Prefer instant messaging?')) ?> <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to enquire about travel packages.")) ?>" target="_blank" rel="noopener noreferrer" style="color:var(--color-whatsapp);font-weight:700;"><?= e(__t('chat_on_whatsapp', 'Chat on WhatsApp')) ?> &rarr;</a>
           </span>
         </div>
       </form>

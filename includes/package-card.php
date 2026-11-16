@@ -6,14 +6,14 @@
 if (!isset($package)) return;
 
 $pkgId = $package['id'] ?? 0;
-$pkgTitle = $package['title'] ?? 'Signature Journey';
+$pkgTitle = loc($package, 'title', $package['title'] ?? 'Signature Journey');
 $pkgSlug = $package['slug'] ?? 'package-' . $pkgId;
 $pkgDuration = $package['duration_days'] ?? 5;
 $pkgNights = max(1, $pkgDuration - 1);
 $pkgPrice = $package['price'] ?? 0;
-$pkgCategory = $package['category_name'] ?? 'Curated';
-$pkgDestination = $package['destination_name'] ?? 'India';
-$pkgExcerpt = $package['short_description'] ?? 'An immersive luxury itinerary crafted with private chauffeured transfers, curated stays, and authentic cultural exploration.';
+$pkgCategory = loc($package, 'category_name', $package['category_name'] ?? 'Curated');
+$pkgDestination = loc($package, 'destination_name', $package['destination_name'] ?? 'India');
+$pkgExcerpt = loc($package, 'short_description', $package['short_description'] ?? 'An immersive luxury itinerary crafted with private chauffeured transfers, curated stays, and authentic cultural exploration.');
 $pkgImage = !empty($package['featured_image']) ? $package['featured_image'] : (ASSETS_URL . '/images/placeholder.svg');
 
 $waMessage = "Hello MIDHILA VOYAGES, I am interested in the \"" . $pkgTitle . "\" package (" . $pkgDuration . " Days). Please share the complete itinerary and pricing details.";
@@ -36,7 +36,7 @@ $cardDetailUrl = BASE_URL . '/package.php?slug=' . urlencode($pkgSlug);
     <!-- Duration Pill -->
     <span class="editorial-pkg-card__duration">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-      <?= (int)$pkgDuration ?>D / <?= (int)$pkgNights ?>N
+      <?= (int)$pkgDuration ?><?= e(__t('days_abbr', 'D')) ?> / <?= (int)$pkgNights ?><?= e(__t('nights_abbr', 'N')) ?>
     </span>
 
     <!-- Category Pill -->
@@ -64,19 +64,19 @@ $cardDetailUrl = BASE_URL . '/package.php?slug=' . urlencode($pkgSlug);
     <!-- Pricing & Dual CTAs -->
     <div class="editorial-pkg-card__footer">
       <div class="editorial-pkg-card__price-box">
-        <span class="editorial-pkg-card__price-label">Starting From</span>
+        <span class="editorial-pkg-card__price-label"><?= e(__t('starting_from', 'Starting From')) ?></span>
         <div class="editorial-pkg-card__price-value">
           <?php if ($pkgPrice > 0): ?>
             <?= format_price($pkgPrice) ?>
           <?php else: ?>
-            <span style="font-size:1rem;color:var(--color-gold-deep);">On Request</span>
+            <span style="font-size:1rem;color:var(--color-gold-deep);"><?= e(__t('on_request', 'On Request')) ?></span>
           <?php endif; ?>
         </div>
       </div>
 
       <div class="editorial-pkg-card__actions">
         <a href="<?= e($cardDetailUrl) ?>" class="editorial-pkg-card__btn-view">
-          Itinerary &rarr;
+          <?= e(__t('btn_view_details', 'Itinerary')) ?> &rarr;
         </a>
         <a href="<?= e($cardWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="editorial-pkg-card__btn-wa" title="WhatsApp Enquiry" aria-label="WhatsApp Enquiry for <?= e($pkgTitle) ?>">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
