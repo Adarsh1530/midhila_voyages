@@ -243,11 +243,11 @@ function get_all_roles(): array {
         'payment_handle' => [
             'label' => 'Payment Handle',
             'badge' => 'PAYMENT HANDLE',
-            'desc' => 'Audits Razorpay payment transactions, captured revenue, payment reconciliations, and booking payment statuses.',
+            'desc' => 'Manages passenger reservations, booking confirmations, vouchers, and guest personal details.',
             'color' => '#059669',
             'badge_bg' => '#ECFDF5',
             'badge_fg' => '#047857',
-            'tag' => 'Finance & Payment Auditing'
+            'tag' => 'Bookings & Reservations'
         ]
     ];
 }

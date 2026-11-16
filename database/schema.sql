@@ -325,6 +325,8 @@ DROP TABLE IF EXISTS `package_categories`;
 CREATE TABLE `package_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(80) NOT NULL,
+  `name_ml` varchar(255) DEFAULT NULL,
+  `name_ta` varchar(255) DEFAULT NULL,
   `slug` varchar(80) NOT NULL,
   `description` text DEFAULT NULL,
   `icon_svg` text DEFAULT NULL,

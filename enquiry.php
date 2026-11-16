@@ -38,7 +38,7 @@ $errors = [];
 $submittedRecord = null;
 $agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     if (!verify_csrf_token()) {
         $errors[] = 'Your security session has expired. Please refresh the page and submit again.';
     } else {

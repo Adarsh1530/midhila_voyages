@@ -38,7 +38,7 @@ if (!$booking) {
 $pageTitle = 'Booking Confirmed | Voucher #' . e($ref) . ' | Midhila Voyages';
 $agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 
-$waMsg = "Hello MIDHILA VOYAGES, I have successfully completed the payment for Booking Reference #{$ref} ({$booking['package_title']}). Please share the official confirmed itinerary voucher.";
+$waMsg = "Hello MIDHILA VOYAGES, I have reserved my booking for Booking Reference #{$ref} ({$booking['package_title']}). Please coordinate my itinerary voucher.";
 $waUrl = build_whatsapp_url($agencyWhatsApp, $waMsg);
 
 require_once __DIR__ . '/includes/header.php';
@@ -217,16 +217,13 @@ require_once __DIR__ . '/includes/header.php';
 
         <div>
           <h4 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);margin-bottom:12px;font-weight:700;">
-            Tariff &amp; Payment Status
+            Tariff &amp; Reservation Details
           </h4>
           <div style="line-height:1.75;font-size:0.92rem;color:var(--color-text-body);">
-            <div><strong>Total Package Cost:</strong> <?= format_price((float)$booking['total_amount']) ?></div>
-            <div><strong>Amount Received:</strong> <span style="color:#059669;font-weight:700;"><?= format_price((float)$booking['paid_amount']) ?></span></div>
-            <div><strong>Balance Remaining:</strong> <?= format_price(max(0, (float)$booking['total_amount'] - (float)$booking['paid_amount'])) ?></div>
-            <div><strong>Payment Mode:</strong> <?= ucfirst(e($booking['payment_type'] ?? 'Deposit')) ?> Online</div>
-            <?php if (!empty($booking['gateway_payment_id'])): ?>
-              <div style="font-size:0.8rem;color:var(--color-text-muted);">Txn ID: <?= e($booking['gateway_payment_id']) ?></div>
-            <?php endif; ?>
+            <div><strong>Estimated Tour Cost:</strong> <?= format_price((float)$booking['total_amount']) ?></div>
+            <div><strong>Reservation Status:</strong> <span style="color:#059669;font-weight:700;">Confirmed &amp; Stored</span></div>
+            <div><strong>Personal Details:</strong> Registered in System</div>
+            <div><strong>Payment Processing:</strong> Zero Online Fee / Direct Concierge</div>
           </div>
         </div>
 

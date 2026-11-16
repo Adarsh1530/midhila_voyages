@@ -36,7 +36,7 @@ require_once __DIR__ . '/includes/header.php';
 
       <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:28px;">
         <a href="<?= BASE_URL ?>/booking.php" class="btn-cinematic-primary" style="padding:14px 28px;">
-          <span>Retry Payment Online</span>
+          <span>Return to Booking Reservation</span>
         </a>
 
         <a href="<?= e($waUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" style="padding:14px 26px;">
