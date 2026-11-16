@@ -31,7 +31,7 @@ if (!empty($popupImage) && !preg_match('#^https?://#i', $popupImage)) {
 
 // Build WhatsApp URL if no custom link provided
 if (empty($popupBtnLink)) {
-    $agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+    $agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
     $waText = "Hello MIDHILA VOYAGES, I saw your ongoing offer '{$popupTitle}' (" . ($popupPrice ? $popupPrice : 'Special Deal') . ") on your website and would like to claim / book it.";
     $popupBtnLink = build_whatsapp_url($agencyWhatsApp, $waText);
     $isWhatsApp = true;

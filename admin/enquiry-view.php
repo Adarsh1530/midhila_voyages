@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_acknowledgement_
                   . "• Destination / Venue: " . ($enquiry['destination_name'] ?: ($enquiry['corporate_venue_type'] ?? 'Custom Journey')) . "\n"
                   . "• Requested Dates: " . ($enquiry['departure_date'] ?: 'Flexible') . "\n"
                   . "• Travellers / Delegates: " . (int)$enquiry['adults_count'] . " Adults" . ($enquiry['children_count'] > 0 ? (", " . (int)$enquiry['children_count'] . " Children") : "") . "\n\n"
-                  . "Our dedicated concierge desk is actively reviewing property and chauffeur availability. Should you require urgent changes, kindly connect with us at +91 8075021427 or reply directly to this notice.\n\n"
+                  . "Our dedicated concierge desk is actively reviewing property and chauffeur availability. Should you require urgent changes, kindly connect with us at +91 62829 48227 or reply directly to this notice.\n\n"
                   . "Warm Regards,\nMidhila Voyages Operations Desk\ninfo@midhilavoyages.com";
 
             // Log Email

@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (whatsappPreviewBtn) {
     whatsappPreviewBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const phone = whatsappPreviewBtn.getAttribute('data-phone') || '911234567890';
+      const phone = whatsappPreviewBtn.getAttribute('data-phone') || '916282948227';
       const msg = buildWhatsAppMessage();
       const waUrl = `https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`;
       window.open(waUrl, '_blank', 'noopener,noreferrer');

@@ -70,7 +70,7 @@ require_once __DIR__ . '/includes/header.php';
         We employ industry-standard TLS encryption across our website and administrative portal to protect personal information from unauthorized access or alteration.
       </p>
       <p style="margin-bottom:0;">
-        For privacy-related questions or data deletion requests, contact our privacy desk at <strong><?= e($agencyEmail) ?></strong> or phone <strong>+91 8075021427</strong>.
+        For privacy-related questions or data deletion requests, contact our privacy desk at <strong><?= e($agencyEmail) ?></strong> or phone <strong><a href="tel:+916282948227" style="color:inherit;text-decoration:none;">+91 62829 48227</a></strong>.
       </p>
 
     </div>

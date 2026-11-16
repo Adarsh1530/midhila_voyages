@@ -53,7 +53,7 @@ $pkgStmt->execute([$dest['id']]);
 $packages = $pkgStmt->fetchAll();
 
 $highlights = !empty($dest['highlights']) ? array_map('trim', explode(',', $dest['highlights'])) : [];
-$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+$agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 $destDisplayName = loc($dest, 'name');
 
 $waDestMsg = "Hello MIDHILA VOYAGES, I am interested in visiting {$destDisplayName}. Please share available tour packages and customized itinerary options.";

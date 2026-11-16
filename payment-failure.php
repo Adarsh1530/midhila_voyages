@@ -10,7 +10,7 @@ require_once __DIR__ . '/includes/functions.php';
 
 $ref = trim($_GET['ref'] ?? '');
 $pageTitle = 'Payment Incomplete | Midhila Voyages';
-$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+$agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 
 $waMsg = "Hello MIDHILA VOYAGES, my payment attempt for booking reference #{$ref} was unsuccessful. Could you please assist me with manual bank transfer or link checkout?";
 $waUrl = build_whatsapp_url($agencyWhatsApp, $waMsg);
@@ -45,7 +45,7 @@ require_once __DIR__ . '/includes/header.php';
       </div>
 
       <div style="margin-top:36px;border-top:1px solid var(--color-border);padding-top:20px;font-size:0.86rem;color:var(--color-text-muted);">
-        Need urgent assistance? Call our desk directly at <strong style="color:var(--color-text-headline);">+91 8075021427</strong>, <strong>9446154048</strong>
+        Need urgent assistance? Call our desk directly at <strong style="color:var(--color-text-headline);"><a href="tel:+916282948227" style="color:inherit;text-decoration:none;">+91 62829 48227</a></strong>
       </div>
 
     </div>

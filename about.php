@@ -11,7 +11,7 @@ require_once __DIR__ . '/includes/functions.php';
 $pageTitle = 'About Midhila Voyages | The Art of Paced Travel & Devotion';
 $pageDescription = 'Learn about Midhila Voyages, our origins, our core philosophy of quiet luxury, sacred reverence, and transparent travel concierge services across India.';
 
-$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+$agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 
 require_once __DIR__ . '/includes/header.php';
 ?>

@@ -459,7 +459,7 @@ require_once __DIR__ . '/includes/header.php';
             <div class="form-grid-2col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_phone') ?> *</label>
-                <input type="tel" name="phone" required placeholder="+91 9876543210" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
+                <input type="tel" name="phone" required placeholder="+91 62829 48227" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_email') ?> *</label>

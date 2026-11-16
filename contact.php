@@ -12,9 +12,8 @@ require_once __DIR__ . '/includes/csrf.php';
 $pageTitle = 'Contact Us | Speak to Our Travel Specialists | Midhila Voyages';
 $pageDescription = 'Get in touch with Midhila Voyages. Reach our travel desk by phone, email, WhatsApp, or visit our office in Kerala, India.';
 
-$agencyPhone = get_setting('primary_phone', '+91 8075021427');
-$agencySecondaryPhone = get_setting('secondary_phone', '+91 9446154048');
-$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+$agencyPhone = get_setting('primary_phone', '+91 62829 48227');
+$agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 $agencyEmail = get_setting('primary_email', 'contact@midhilavoyages.com');
 $agencyAddress = get_setting('office_address', 'Midhila Voyages, Travel & Pilgrimage Hub, Kerala, India');
 $workingHours = get_setting('working_hours', 'Monday – Saturday: 9:00 AM – 7:30 PM (IST)');
@@ -133,7 +132,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div class="editorial-form-group">
               <label class="editorial-label"><?= e(__t('form_phone', 'Phone / WhatsApp Number *')) ?></label>
-              <input type="tel" name="phone" class="editorial-input" placeholder="+91 80750 21427" required>
+              <input type="tel" name="phone" class="editorial-input" placeholder="+91 62829 48227" required>
             </div>
           </div>
 
@@ -178,12 +177,9 @@ require_once __DIR__ . '/includes/header.php';
 
           <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:28px;">
             <div>
-              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);font-weight:700;">Primary Contact Numbers</div>
-              <div style="font-size:1.05rem;font-weight:700;color:var(--color-text-headline);margin-top:2px;">
-                +91 8075021427
-              </div>
-              <div style="font-size:0.95rem;color:var(--color-text-body);margin-top:2px;">
-                +91 9446154048 &bull; +91 8943669027
+              <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-muted);font-weight:700;">Direct Phone &amp; WhatsApp</div>
+              <div style="font-size:1.15rem;font-weight:700;color:var(--color-text-headline);margin-top:2px;">
+                <a href="tel:+916282948227" style="color:inherit;text-decoration:none;">+91 62829 48227</a>
               </div>
             </div>
 

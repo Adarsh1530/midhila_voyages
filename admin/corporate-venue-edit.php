@@ -209,7 +209,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       </div>
       <div>
         <label>Coordinator Phone</label>
-        <input type="tel" name="contact_phone" value="<?= e($venue['contact_phone'] ?? '') ?>" placeholder="+91 80750 21427">
+        <input type="tel" name="contact_phone" value="<?= e($venue['contact_phone'] ?? '') ?>" placeholder="+91 62829 48227">
       </div>
       <div>
         <label>Coordinator Email</label>

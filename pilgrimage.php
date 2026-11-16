@@ -25,7 +25,7 @@ $stmt = $db->query("
 ");
 $pilgrimPackages = $stmt->fetchAll();
 
-$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+$agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 
 require_once __DIR__ . '/includes/header.php';
 ?>

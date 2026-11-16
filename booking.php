@@ -106,7 +106,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div class="editorial-form-group">
               <label class="editorial-label">Phone / WhatsApp *</label>
-              <input type="tel" name="customer_phone" id="bkgPhone" class="editorial-input" required placeholder="+91 80750 21427">
+              <input type="tel" name="customer_phone" id="bkgPhone" class="editorial-input" required placeholder="+91 62829 48227">
             </div>
           </div>
 

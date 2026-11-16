@@ -11,7 +11,7 @@ require_once __DIR__ . '/includes/functions.php';
 $pageTitle = 'Travel Services & Concierge | Midhila Voyages';
 $pageDescription = 'Discover comprehensive travel management services by Midhila Voyages: customized holidays, pilgrimage coordination, ticketing, stays, and 24/7 chauffeured logistics.';
 
-$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+$agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 $waServiceUrl = build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to inquire about your travel services.");
 
 require_once __DIR__ . '/includes/header.php';

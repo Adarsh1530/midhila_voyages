@@ -91,8 +91,8 @@ $testStmt = $db->query("
 ");
 $testimonials = $testStmt->fetchAll();
 
-$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
-$agencyPhone = get_setting('primary_phone', '+91 8075021427');
+$agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
+$agencyPhone = get_setting('primary_phone', '+91 62829 48227');
 
 require_once __DIR__ . '/includes/header.php';
 ?>
@@ -528,7 +528,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <div style="font-size:0.84rem;color:var(--color-text-body);font-weight:600;">
-              Hotlines: <?= e(get_setting('pilgrim_hotlines', '+91 8075021427, 9446154048')) ?>
+              Hotline: <a href="tel:+916282948227" style="color:inherit;text-decoration:none;">+91 62829 48227</a>
             </div>
           </div>
         </div>

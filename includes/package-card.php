@@ -17,7 +17,7 @@ $pkgExcerpt = loc($package, 'short_description', $package['short_description'] ?
 $pkgImage = !empty($package['featured_image']) ? $package['featured_image'] : (ASSETS_URL . '/images/placeholder.svg');
 
 $waMessage = "Hello MIDHILA VOYAGES, I am interested in the \"" . $pkgTitle . "\" package (" . $pkgDuration . " Days). Please share the complete itinerary and pricing details.";
-$cardWaUrl = build_whatsapp_url(get_setting('whatsapp_number', '+918075021427'), $waMessage);
+$cardWaUrl = build_whatsapp_url(get_setting('whatsapp_number', '+916282948227'), $waMessage);
 $cardDetailUrl = BASE_URL . '/package.php?slug=' . urlencode($pkgSlug);
 ?>
 

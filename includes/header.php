@@ -11,8 +11,8 @@ $pageTitle = $pageTitle ?? get_setting('site_name', 'MIDHILA VOYAGES') . ' | Tra
 $pageDescription = $pageDescription ?? get_setting('site_description', 'Bespoke domestic, international, and sacred pilgrimage journeys crafted with care, integrity, and personalised luxury.');
 $currentScript = basename($_SERVER['PHP_SELF']);
 
-$agencyPhone = get_setting('primary_phone', '+91 8075021427');
-$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+$agencyPhone = get_setting('primary_phone', '+91 62829 48227');
+$agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 $defaultWaMsg = "Hello MIDHILA VOYAGES, I would like to explore tour packages and plan my journey.";
 $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 ?>

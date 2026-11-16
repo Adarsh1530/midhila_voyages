@@ -36,7 +36,7 @@ $categories = $db->query("SELECT id, name, slug FROM package_categories WHERE is
 
 $errors = [];
 $submittedRecord = null;
-$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+$agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf_token()) {
@@ -281,7 +281,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_phone') ?></label>
-              <input type="tel" name="phone" required placeholder="+91 8075021427" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+              <input type="tel" name="phone" required placeholder="+91 62829 48227" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             </div>
           </div>
           <div class="form-grid-2col">
@@ -291,7 +291,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;">WhatsApp Number (if different)</label>
-              <input type="tel" name="whatsapp" placeholder="+91 8075021427" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+              <input type="tel" name="whatsapp" placeholder="+91 62829 48227" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             </div>
           </div>
         </div>

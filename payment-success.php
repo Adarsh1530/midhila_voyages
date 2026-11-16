@@ -36,7 +36,7 @@ if (!$booking) {
 }
 
 $pageTitle = 'Booking Confirmed | Voucher #' . e($ref) . ' | Midhila Voyages';
-$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+$agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 
 $waMsg = "Hello MIDHILA VOYAGES, I have successfully completed the payment for Booking Reference #{$ref} ({$booking['package_title']}). Please share the official confirmed itinerary voucher.";
 $waUrl = build_whatsapp_url($agencyWhatsApp, $waMsg);
@@ -242,7 +242,7 @@ require_once __DIR__ . '/includes/header.php';
       <div style="border-top:1px solid var(--color-border);padding-top:20px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;font-size:0.8rem;color:var(--color-text-muted);">
         <div style="max-width:440px;line-height:1.6;">
           <strong style="color:var(--color-text-headline);display:block;margin-bottom:4px;">MIDHILA VOYAGES &bull; Travel Management</strong>
-          Hotlines: +91 8075021427, 9446154048, 8943669027 &bull; Kerala, India<br>
+          Hotline: +91 62829 48227 &bull; Kerala, India<br>
           This is an electronically generated and authorized travel confirmation voucher.
         </div>
         <div style="text-align:right;">

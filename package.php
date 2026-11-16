@@ -76,7 +76,7 @@ $relStmt = $db->prepare("
 $relStmt->execute([$package['id'], $package['destination_id'], $package['category_id']]);
 $relatedPackages = $relStmt->fetchAll();
 
-$agencyWhatsApp = get_setting('whatsapp_number', '+918075021427');
+$agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 $pkgDisplayTitle = loc($package, 'title');
 $durationText = ($package['duration_days'] ?? 1) . ' ' . __t('days_abbr', 'Days') . ' / ' . ($package['duration_nights'] ?? 0) . ' ' . __t('nights_abbr', 'Nights');
 
