@@ -809,7 +809,10 @@ try {
       <?php if (is_super_admin()): ?>
         <div style="height:1px;background:#F1F5F9;margin:8px 8px;"></div>
         <a href="<?= ADMIN_URL ?>/users.php" class="admin-nav-item <?= ($adminScript === 'users.php') ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
-          <span style="font-weight:600;">Admin Passwords</span>
+          <span style="font-weight:600;">Staff Accounts</span>
+        </a>
+        <a href="<?= ADMIN_URL ?>/privileges.php" class="admin-nav-item <?= ($adminScript === 'privileges.php') ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
+          <span style="font-weight:600;">Privilege Settings</span>
         </a>
       <?php endif; ?>
     </nav>

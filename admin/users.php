@@ -157,63 +157,23 @@ if (isset($_GET['edit_id'])) {
     $editUser = $stmt->fetch();
 }
 
-$adminTitle = 'User Management System | MIDHILA VOYAGES';
-$adminHeading = 'User Management System';
+$adminTitle = 'Staff Accounts | MIDHILA VOYAGES';
+$adminHeading = 'Staff Accounts & Passwords';
 
 require_once __DIR__ . '/includes/admin-header.php';
 ?>
 
-<!-- 1. SPLIT ROLE CLARITY CARDS -->
-<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-bottom:28px;">
-  
-  <!-- Role 1: Super Admin -->
-  <div class="admin-card" style="padding:18px 20px;margin-bottom:0;border-left:4px solid #0F172A;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <span style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:#64748B;letter-spacing:0.06em;">Primary Role</span>
-      <span style="background:#0F172A;color:#FFFFFF;padding:3px 9px;border-radius:6px;font-size:0.72rem;font-weight:700;">SUPER ADMIN</span>
-    </div>
-    <div style="font-size:1.1rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Full System Control</div>
-    <p style="font-size:0.8rem;color:#64748B;line-height:1.45;margin-bottom:10px;">
-      Unrestricted clearance to all modules: Payments Audit, Tour Catalog, Reservations, Offer Popup, and User Management.
-    </p>
-    <div style="font-size:0.78rem;font-weight:600;color:#0F172A;">
-      Active Logins: <strong><?= $roleCounts['super_admin'] ?></strong>
-    </div>
-  </div>
-
-  <!-- Role 2: Travel Manage -->
-  <div class="admin-card" style="padding:18px 20px;margin-bottom:0;border-left:4px solid #2563EB;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <span style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:#64748B;letter-spacing:0.06em;">Split Role</span>
-      <span style="background:#EFF6FF;color:#1D4ED8;padding:3px 9px;border-radius:6px;font-size:0.72rem;font-weight:700;border:1px solid #BFDBFE;">TRAVEL MANAGE</span>
-    </div>
-    <div style="font-size:1.1rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Tours &amp; Reservations</div>
-    <p style="font-size:0.8rem;color:#64748B;line-height:1.45;margin-bottom:10px;">
-      Manages Tour Packages, Destinations, Categories, Gallery, Offer Popup, Inquiries, and Bookings. (Restricted from Payments).
-    </p>
-    <div style="font-size:0.78rem;font-weight:600;color:#1D4ED8;">
-      Active Logins: <strong><?= $roleCounts['travel_manage'] ?></strong>
-    </div>
-  </div>
-
-  <!-- Role 3: Payment Handle -->
-  <div class="admin-card" style="padding:18px 20px;margin-bottom:0;border-left:4px solid #059669;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <span style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:#64748B;letter-spacing:0.06em;">Split Role</span>
-      <span style="background:#ECFDF5;color:#047857;padding:3px 9px;border-radius:6px;font-size:0.72rem;font-weight:700;border:1px solid #A7F3D0;">PAYMENT HANDLE</span>
-    </div>
-    <div style="font-size:1.1rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Financial &amp; Payment Audit</div>
-    <p style="font-size:0.8rem;color:#64748B;line-height:1.45;margin-bottom:10px;">
-      Audits Razorpay gateway transactions, captured revenue, reconciliation, and customer booking payment records. (Restricted from Catalog).
-    </p>
-    <div style="font-size:0.78rem;font-weight:600;color:#047857;">
-      Active Logins: <strong><?= $roleCounts['payment_handle'] ?></strong>
-    </div>
-  </div>
-
+<!-- Module Switcher Tabs -->
+<div style="display:flex;gap:10px;margin-bottom:24px;border-bottom:1px solid #E2E8F0;padding-bottom:14px;">
+  <a href="<?= ADMIN_URL ?>/users.php" style="background:#0F172A;color:#FFFFFF;font-weight:700;padding:9px 18px;border-radius:8px;font-size:0.9rem;text-decoration:none;display:inline-flex;align-items:center;">
+    <span>Staff Accounts &amp; Logins</span>
+  </a>
+  <a href="<?= ADMIN_URL ?>/privileges.php" style="background:#FFFFFF;color:#475569;border:1px solid #CBD5E1;font-weight:600;padding:9px 18px;border-radius:8px;font-size:0.9rem;text-decoration:none;display:inline-flex;align-items:center;">
+    <span>Privilege Settings</span>
+  </a>
 </div>
 
-<!-- 2. MAIN USER MANAGEMENT WORKSPACE -->
+<!-- MAIN USER MANAGEMENT WORKSPACE -->
 <div style="display:grid;grid-template-columns:minmax(320px, 1fr) 1.8fr;gap:28px;align-items:start;">
   
   <!-- Add / Edit User Form Card -->
