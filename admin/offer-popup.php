@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'popup_offer_frequency' => ['group' => 'offer_popup', 'default' => 'session'],
         ];
 
-        // Handle Image Upload if provided
+        // Handle Image Upload if provided (limit: 500 KB with auto-compression)
         if (!empty($_FILES['popup_offer_file']['name'])) {
-            $up = upload_image($_FILES['popup_offer_file'], 'offers', 5);
+            $up = upload_image($_FILES['popup_offer_file'], 'offers', 500);
             if ($up['success'] && !empty($up['path'])) {
                 update_setting('popup_offer_image', $up['path'], 'offer_popup');
             }
@@ -115,9 +115,9 @@ require_once __DIR__ . '/includes/admin-header.php';
           <h5 style="font-size:0.95rem;font-weight:700;color:#0F172A;margin-bottom:12px;">1. Offer Promotional Image / Flyer</h5>
           
           <div style="margin-bottom:14px;">
-            <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Upload Image File (JPG, PNG or WebP)</label>
+            <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Upload Image File (JPG, PNG or WebP &le; 500 KB)</label>
             <input type="file" name="popup_offer_file" accept="image/*" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
-            <span style="font-size:0.76rem;color:#64748B;display:block;margin-top:4px;">Upload your promotional poster or banner from your computer (Max 5MB).</span>
+            <span style="font-size:0.76rem;color:#64748B;display:block;margin-top:4px;">Upload your promotional poster or banner from your computer (Max 500 KB, auto-compressed).</span>
           </div>
 
           <div>

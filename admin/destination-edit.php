@@ -65,9 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $description = $tagline ?: "Explore the natural beauty and heritage of {$name}, curated by Midhila Voyages.";
         }
 
-        // Handle image upload if provided
+        // Handle image upload if provided (limit: 500 KB with auto-compression)
         if (!empty($_FILES['image_file']['name'])) {
-            $uploadResult = upload_image($_FILES['image_file'], 'destinations', 5);
+            $uploadResult = upload_image($_FILES['image_file'], 'destinations', 500);
             if ($uploadResult['success']) {
                 $imageUrl = $uploadResult['path'];
             } else {
@@ -242,7 +242,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
           <div>
-            <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Upload Image File (JPG, PNG, WebP &le; 5MB):</span>
+            <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Upload Image File (JPG, PNG, WebP &le; 500 KB):</span>
             <input type="file" name="image_file" id="destImageFile" accept="image/jpeg,image/png,image/webp">
           </div>
           <div>

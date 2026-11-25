@@ -181,15 +181,127 @@ function log_activity(?int $admin_id, string $action_type, string $description):
 }
 
 /**
- * Secure Image File Uploader
- * Validates MIME type, extension, size, and generates unguessable filename
+ * Compress and optimize image to strictly remain under target max bytes (default 500 KB = 512,000 bytes)
+ * Uses GD library with iterative quality and dimensional scaling.
+ */
+function compress_image_to_target(string $sourcePath, string $destinationPath, string $mimeType, int $maxBytes = 512000): bool {
+    if (!extension_loaded('gd')) {
+        if (filesize($sourcePath) <= $maxBytes) {
+            return @copy($sourcePath, $destinationPath);
+        }
+        return false;
+    }
+
+    $img = null;
+    switch ($mimeType) {
+        case 'image/jpeg':
+            $img = @imagecreatefromjpeg($sourcePath);
+            break;
+        case 'image/png':
+            $img = @imagecreatefrompng($sourcePath);
+            break;
+        case 'image/webp':
+            $img = @imagecreatefromwebp($sourcePath);
+            break;
+    }
+
+    if (!$img) {
+        if (filesize($sourcePath) <= $maxBytes) {
+            return @copy($sourcePath, $destinationPath);
+        }
+        return false;
+    }
+
+    $origWidth = imagesx($img);
+    $origHeight = imagesy($img);
+
+    // If dimensions exceed 1600px, scale down proportionally
+    $maxDimension = 1600;
+    if ($origWidth > $maxDimension || $origHeight > $maxDimension) {
+        $scale = min($maxDimension / $origWidth, $maxDimension / $origHeight);
+        $newWidth = (int)($origWidth * $scale);
+        $newHeight = (int)($origHeight * $scale);
+        $resized = imagescale($img, $newWidth, $newHeight);
+        if ($resized) {
+            imagedestroy($img);
+            $img = $resized;
+        }
+    }
+
+    $qualities = [82, 75, 68, 60, 52, 45, 38];
+    $saved = false;
+
+    if ($mimeType === 'image/png') {
+        imagealphablending($img, false);
+        imagesavealpha($img, true);
+        imagepng($img, $destinationPath, 7);
+        if (file_exists($destinationPath) && filesize($destinationPath) <= $maxBytes) {
+            $saved = true;
+        } else {
+            // Scale down to 1200px and re-compress PNG
+            $scaled = imagescale($img, (int)(imagesx($img) * 0.8));
+            if ($scaled) {
+                imagealphablending($scaled, false);
+                imagesavealpha($scaled, true);
+                imagepng($scaled, $destinationPath, 9);
+                imagedestroy($scaled);
+            }
+            if (file_exists($destinationPath) && filesize($destinationPath) <= $maxBytes) {
+                $saved = true;
+            }
+        }
+    } elseif ($mimeType === 'image/webp') {
+        foreach ($qualities as $q) {
+            imagewebp($img, $destinationPath, $q);
+            if (file_exists($destinationPath) && filesize($destinationPath) <= $maxBytes) {
+                $saved = true;
+                break;
+            }
+        }
+    } else {
+        // JPEG
+        foreach ($qualities as $q) {
+            imagejpeg($img, $destinationPath, $q);
+            if (file_exists($destinationPath) && filesize($destinationPath) <= $maxBytes) {
+                $saved = true;
+                break;
+            }
+        }
+        if (!$saved) {
+            $smaller = imagescale($img, 1100);
+            if ($smaller) {
+                imagejpeg($smaller, $destinationPath, 55);
+                imagedestroy($smaller);
+                if (file_exists($destinationPath) && filesize($destinationPath) <= $maxBytes) {
+                    $saved = true;
+                }
+            }
+        }
+    }
+
+    imagedestroy($img);
+
+    // Strict validation: Stored file must exist and be <= $maxBytes (500 KB)
+    if (file_exists($destinationPath) && filesize($destinationPath) <= $maxBytes) {
+        return true;
+    }
+
+    if (file_exists($destinationPath)) {
+        @unlink($destinationPath);
+    }
+    return false;
+}
+
+/**
+ * Secure Image File Uploader & 500 KB Compressor
+ * Validates MIME type, extension, compresses and enforces strictly <= 500 KB limit.
  *
  * @param array $file $_FILES['input_name']
- * @param string $subDir 'destinations', 'packages', 'gallery'
- * @param int $maxSizeMb Max file size in megabytes
+ * @param string $subDir 'destinations', 'packages', 'gallery', 'offers'
+ * @param int $maxSizeKb Max file size in kilobytes (strictly 500 KB)
  * @return array ['success' => bool, 'path' => string|null, 'error' => string|null]
  */
-function upload_image(array $file, string $subDir = 'general', int $maxSizeMb = 5): array {
+function upload_image(array $file, string $subDir = 'general', int $maxSizeKb = 500): array {
     if (!isset($file['error']) || is_array($file['error'])) {
         return ['success' => false, 'path' => null, 'error' => 'Invalid file parameter.'];
     }
@@ -202,10 +314,7 @@ function upload_image(array $file, string $subDir = 'general', int $maxSizeMb = 
         return ['success' => false, 'path' => null, 'error' => 'Upload error code: ' . $file['error']];
     }
 
-    $maxBytes = $maxSizeMb * 1024 * 1024;
-    if ($file['size'] > $maxBytes) {
-        return ['success' => false, 'path' => null, 'error' => "File size exceeds the {$maxSizeMb}MB limit."];
-    }
+    $maxBytes = $maxSizeKb * 1024; // 500 KB = 512,000 bytes
 
     // Inspect real MIME type using Fileinfo
     $finfo = new finfo(FILEINFO_MIME_TYPE);
@@ -231,8 +340,23 @@ function upload_image(array $file, string $subDir = 'general', int $maxSizeMb = 
 
     $destinationPath = $targetDirectory . DIRECTORY_SEPARATOR . $randomName;
 
-    if (!move_uploaded_file($file['tmp_name'], $destinationPath)) {
-        return ['success' => false, 'path' => null, 'error' => 'Failed to save uploaded file.'];
+    // Automatic compression engine: Compress and optimize image to strictly <= 500KB
+    $compressed = compress_image_to_target($file['tmp_name'], $destinationPath, $mimeType, $maxBytes);
+
+    if (!$compressed) {
+        if ($file['size'] > $maxBytes) {
+            return ['success' => false, 'path' => null, 'error' => 'Image size exceeds the 500 KB limit (' . round($file['size'] / 1024, 1) . ' KB uploaded). Please upload an image under 500 KB.'];
+        }
+        if (!move_uploaded_file($file['tmp_name'], $destinationPath)) {
+            return ['success' => false, 'path' => null, 'error' => 'Failed to save uploaded file.'];
+        }
+    }
+
+    // Verify stored file size is strictly <= 500 KB
+    $storedSize = @filesize($destinationPath);
+    if ($storedSize && $storedSize > $maxBytes) {
+        @unlink($destinationPath);
+        return ['success' => false, 'path' => null, 'error' => 'Image exceeds 500 KB maximum limit. Uploaded file could not be compressed under 500 KB.'];
     }
 
     // Relative web-accessible path

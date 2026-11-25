@@ -432,6 +432,49 @@
       });
     }
 
+    // 500 KB Upload Limit & Auto-Compression File Validator
+    document.addEventListener('change', function(e) {
+      if (e.target && e.target.type === 'file' && e.target.files && e.target.files.length > 0) {
+        var MAX_BYTES = 500 * 1024; // 500 KB
+        var parent = e.target.parentNode;
+        var existingMsg = parent.querySelector('.upload-limit-feedback');
+        if (existingMsg) existingMsg.remove();
+
+        var msg = document.createElement('div');
+        msg.className = 'upload-limit-feedback';
+        msg.style.fontSize = '0.78rem';
+        msg.style.marginTop = '6px';
+        msg.style.padding = '4px 8px';
+        msg.style.borderRadius = '4px';
+
+        var files = e.target.files;
+        var hasOversized = false;
+        var descList = [];
+
+        for (var i = 0; i < files.length; i++) {
+          var f = files[i];
+          var kb = Math.round(f.size / 1024);
+          if (f.size > MAX_BYTES) {
+            hasOversized = true;
+            descList.push(f.name + ' (' + kb + ' KB)');
+          }
+        }
+
+        if (hasOversized) {
+          msg.style.background = '#FEF3C7';
+          msg.style.color = '#92400E';
+          msg.style.border = '1px solid #FDE68A';
+          msg.textContent = 'Selected: ' + descList.join(', ') + '. Automatic compressor will optimize and shrink this below 500 KB upon saving.';
+        } else {
+          msg.style.background = '#F0FDF4';
+          msg.style.color = '#166534';
+          msg.style.border = '1px solid #BBF7D0';
+          msg.textContent = 'Image file size is within the 500 KB limit (' + Math.round(files[0].size / 1024) + ' KB).';
+        }
+        parent.appendChild(msg);
+      }
+    });
+
   })();
   </script>
 </body>

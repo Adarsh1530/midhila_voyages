@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_photo'])) {
 
         if ($curPhoto) {
             if (!empty($_FILES['image_file']['name'])) {
-                $res = upload_image($_FILES['image_file'], 'gallery', 5);
+                $res = upload_image($_FILES['image_file'], 'gallery', 500);
                 if ($res['success']) {
                     $imageUrl = $res['path'];
                 } else {
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_photo'])) {
         $imageUrl = trim($_POST['image_url'] ?? '');
 
         if (!empty($_FILES['image_file']['name'])) {
-            $res = upload_image($_FILES['image_file'], 'gallery', 5);
+            $res = upload_image($_FILES['image_file'], 'gallery', 500);
             if ($res['success']) {
                 $imageUrl = $res['path'];
             } else {
@@ -167,7 +167,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       </div>
 
       <div style="background:var(--admin-bg);padding:14px;border-radius:6px;border:1px solid var(--admin-border);margin-bottom:20px;">
-        <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Upload Image File (JPG, PNG, WebP &le; 5MB)</label>
+        <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Upload Image File (JPG, PNG, WebP &le; 500 KB)</label>
         <input type="file" name="image_file" id="galleryFileInput" accept="image/jpeg,image/png,image/webp" style="margin-bottom:10px;">
         
         <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--admin-navy);margin-bottom:4px;">Or Image Path / External Web URL:</label>

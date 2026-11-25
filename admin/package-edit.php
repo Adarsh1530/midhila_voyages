@@ -82,9 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $catId = (int)$cats[0]['id'];
         }
 
-        // Handle image upload if provided
+        // Handle image upload if provided (limit: 500 KB with auto-compression)
         if (!empty($_FILES['image_file']['name'])) {
-            $uploadResult = upload_image($_FILES['image_file'], 'packages', 5);
+            $uploadResult = upload_image($_FILES['image_file'], 'packages', 500);
             if ($uploadResult['success']) {
                 $imageUrl = $uploadResult['path'];
             } else {
@@ -205,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 'error'    => $_FILES['gallery_files']['error'][$idx],
                                 'size'     => $_FILES['gallery_files']['size'][$idx] ?? 0
                             ];
-                            $upRes = upload_image($singleFile, 'packages', 5);
+                            $upRes = upload_image($singleFile, 'packages', 500);
                             if ($upRes['success']) {
                                 $insImg->execute([$pkgId, $upRes['path'], $title, 10]);
                             }
@@ -388,7 +388,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
           <div>
-            <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Upload Image File (JPG, PNG, WebP):</span>
+            <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Upload Image File (JPG, PNG, WebP &le; 500 KB):</span>
             <input type="file" name="image_file" id="pkgImageFile" accept="image/jpeg,image/png,image/webp">
           </div>
           <div>
@@ -420,7 +420,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
             <div>
-              <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Upload More Gallery Photos (Select Multiple):</span>
+              <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Upload More Gallery Photos (JPG, PNG, WebP &le; 500 KB):</span>
               <input type="file" name="gallery_files[]" multiple accept="image/jpeg,image/png,image/webp">
             </div>
             <div>
