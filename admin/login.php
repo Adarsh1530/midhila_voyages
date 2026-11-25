@@ -190,7 +190,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
 
     <?php if (!empty($errorMessage)): ?>
       <div class="error-alert">
-        ⚠ <?= e($errorMessage) ?>
+        <?= e($errorMessage) ?>
       </div>
     <?php endif; ?>
 

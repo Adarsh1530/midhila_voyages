@@ -71,10 +71,10 @@ require_once __DIR__ . '/includes/admin-header.php';
 <!-- Simple Top Category Switcher -->
 <div style="display:flex;gap:10px;margin-bottom:20px;border-bottom:1px solid #E2E8F0;padding-bottom:14px;">
   <a href="<?= ADMIN_URL ?>/accommodations.php" style="background:#FFFFFF;color:#475569;border:1px solid #CBD5E1;padding:9px 18px;border-radius:8px;font-size:0.9rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
-    <span>🏨 Hotels &amp; Resorts</span>
+    <span>Hotels &amp; Resorts</span>
   </a>
   <a href="<?= ADMIN_URL ?>/corporate-venues.php" style="background:#0F172A;color:#FFFFFF;padding:9px 18px;border-radius:8px;font-size:0.9rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
-    <span>🏢 Corporate Event Venues</span>
+    <span>Corporate Event Venues</span>
   </a>
 </div>
 
@@ -143,7 +143,7 @@ require_once __DIR__ . '/includes/admin-header.php';
             <td>
               <div style="font-weight:700;color:#0F172A;font-size:0.95rem;"><?= e($vn['name_en']) ?></div>
               <div style="font-size:0.8rem;color:#94A3B8;margin-top:2px;">
-                📍 <?= e($vn['city'] ?: 'Kerala') ?> • <?= e($vn['location_address'] ?: '') ?>
+                <?= e($vn['city'] ?: 'Kerala') ?> • <?= e($vn['location_address'] ?: '') ?>
               </div>
             </td>
             <td>

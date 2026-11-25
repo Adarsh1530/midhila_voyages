@@ -197,13 +197,13 @@ require_once __DIR__ . '/includes/admin-header.php';
 <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;margin-bottom:20px;border-bottom:1px solid #E2E8F0;">
   <?php 
   $tabsMap = [
-    'all' => ['label' => 'All Inquiries', 'icon' => '📂'],
-    'tour_package' => ['label' => 'Tour Packages', 'icon' => '🧭'],
-    'custom_tour' => ['label' => 'Customised Tours', 'icon' => '✨'],
-    'accommodation' => ['label' => 'Accommodations', 'icon' => '🏨'],
-    'kerala_tourism' => ['label' => 'Kerala Tourism', 'icon' => '🌴'],
-    'pilgrimage' => ['label' => 'Pilgrimage Sacred', 'icon' => '🛕'],
-    'corporate_event' => ['label' => 'Corporate Events', 'icon' => '💼']
+    'all' => ['label' => 'All Inquiries'],
+    'tour_package' => ['label' => 'Tour Packages'],
+    'custom_tour' => ['label' => 'Customised Tours'],
+    'accommodation' => ['label' => 'Accommodations'],
+    'kerala_tourism' => ['label' => 'Kerala Tourism'],
+    'pilgrimage' => ['label' => 'Pilgrimage Sacred'],
+    'corporate_event' => ['label' => 'Corporate Events']
   ];
   foreach ($tabsMap as $tKey => $tMeta): 
     $isActive = ($tab === $tKey);
@@ -211,7 +211,6 @@ require_once __DIR__ . '/includes/admin-header.php';
   ?>
     <a href="<?= ADMIN_URL ?>/enquiries.php?tab=<?= $tKey ?><?= $statusFilter ? '&status=' . urlencode($statusFilter) : '' ?><?= $search ? '&q=' . urlencode($search) : '' ?>" 
        style="display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:10px;font-size:0.86rem;font-weight:600;white-space:nowrap;text-decoration:none;transition:all 0.15s;<?= $isActive ? 'background:#0F172A;color:#FFFFFF;box-shadow:0 2px 8px rgba(15,23,42,0.12);' : 'background:#FFFFFF;color:#475569;border:1px solid #E2E8F0;' ?>">
-      <span><?= $tMeta['icon'] ?></span>
       <span><?= $tMeta['label'] ?></span>
       <span style="padding:2px 7px;border-radius:999px;font-size:0.75rem;font-weight:700;<?= $isActive ? 'background:rgba(255,255,255,0.2);color:#FFFFFF;' : 'background:#F1F5F9;color:#0F172A;' ?>">
         <?= $countVal ?>
@@ -283,7 +282,6 @@ require_once __DIR__ . '/includes/admin-header.php';
       <?php if (empty($enquiries)): ?>
         <tr>
           <td colspan="8" style="text-align:center;padding:48px 20px;color:var(--admin-muted);">
-            <div style="font-size:2rem;margin-bottom:8px;">📬</div>
             <div style="font-weight:600;font-size:1rem;color:#0F172A;margin-bottom:4px;">No enquiries found</div>
             <div style="font-size:0.85rem;">No customer records match this tab or filter criteria.</div>
           </td>
@@ -358,7 +356,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                 <div style="font-size:0.78rem;color:#7E22CE;"><?= e($enq['corporate_venue_type'] ?: 'Venue Request') ?></div>
               <?php elseif (!empty($enq['accommodation_name'])): ?>
                 <div style="font-weight:600;color:#0F172A;"><?= e($enq['accommodation_name']) ?></div>
-                <div style="font-size:0.78rem;color:#2563EB;">📍 <?= e($enq['destination_name'] ?: 'Kerala') ?></div>
+                <div style="font-size:0.78rem;color:#2563EB;"><?= e($enq['destination_name'] ?: 'Kerala') ?></div>
               <?php elseif (!empty($enq['package_title'])): ?>
                 <div style="font-weight:600;color:#0F172A;"><?= e($enq['package_title']) ?></div>
                 <div style="font-size:0.78rem;color:var(--admin-gold);"><?= e($enq['destination_name'] ?: 'Curated Circuit') ?></div>

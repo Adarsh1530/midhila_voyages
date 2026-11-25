@@ -760,14 +760,12 @@ try {
     <nav class="admin-nav" style="padding:16px 10px;gap:4px;">
       <!-- 1. Main Dashboard -->
       <a href="<?= ADMIN_URL ?>/dashboard.php" class="admin-nav-item <?= ($adminScript === 'dashboard.php') ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
-        <span style="font-size:1.2rem;line-height:1;">🏠</span>
         <span style="font-weight:600;">Home / Dashboard</span>
       </a>
 
       <!-- 2. Inquiries & Leads -->
       <?php if (has_role(['super_admin', 'travel_manage', 'payment_handle'])): ?>
         <a href="<?= ADMIN_URL ?>/enquiries.php" class="admin-nav-item <?= in_array($adminScript, ['enquiries.php', 'enquiry-view.php']) ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
-          <span style="font-size:1.2rem;line-height:1;">💬</span>
           <span style="font-weight:600;">Customer Inquiries</span>
           <?php if ($newEnquiryCount > 0): ?>
             <span style="background:#EF4444;color:#FFFFFF;padding:2px 8px;border-radius:999px;font-size:0.75rem;font-weight:700;margin-left:auto;"><?= $newEnquiryCount ?> New</span>
@@ -776,7 +774,6 @@ try {
 
         <!-- 3. Confirmed Bookings -->
         <a href="<?= ADMIN_URL ?>/bookings.php" class="admin-nav-item <?= ($adminScript === 'bookings.php') ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
-          <span style="font-size:1.2rem;line-height:1;">🎟️</span>
           <span style="font-weight:600;">Tour Bookings</span>
         </a>
       <?php endif; ?>
@@ -786,17 +783,14 @@ try {
       <!-- 4. Website Tours & Content Management -->
       <?php if (has_role(['super_admin', 'travel_manage'])): ?>
         <a href="<?= ADMIN_URL ?>/packages.php" class="admin-nav-item <?= in_array($adminScript, ['packages.php', 'package-edit.php']) ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
-          <span style="font-size:1.2rem;line-height:1;">🎒</span>
           <span style="font-weight:600;">Tour Packages</span>
         </a>
 
         <a href="<?= ADMIN_URL ?>/accommodations.php" class="admin-nav-item <?= in_array($adminScript, ['accommodations.php', 'accommodation-edit.php', 'corporate-venues.php', 'corporate-venue-edit.php']) ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
-          <span style="font-size:1.2rem;line-height:1;">🏨</span>
           <span style="font-weight:600;">Hotels &amp; Stays</span>
         </a>
 
         <a href="<?= ADMIN_URL ?>/destinations.php" class="admin-nav-item <?= in_array($adminScript, ['destinations.php', 'destination-edit.php', 'tourism-categories.php']) ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
-          <span style="font-size:1.2rem;line-height:1;">📍</span>
           <span style="font-weight:600;">Destinations</span>
         </a>
 
@@ -804,12 +798,10 @@ try {
 
         <!-- 5. Promotional Offer & Gallery -->
         <a href="<?= ADMIN_URL ?>/offer-popup.php" class="admin-nav-item <?= in_array($adminScript, ['offer-popup.php']) ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
-          <span style="font-size:1.2rem;line-height:1;">📢</span>
           <span style="font-weight:600;">Offer Popup Banner</span>
         </a>
 
         <a href="<?= ADMIN_URL ?>/gallery.php" class="admin-nav-item <?= ($adminScript === 'gallery.php') ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
-          <span style="font-size:1.2rem;line-height:1;">📸</span>
           <span style="font-weight:600;">Photo Gallery</span>
         </a>
       <?php endif; ?>
@@ -817,7 +809,6 @@ try {
       <?php if (is_super_admin()): ?>
         <div style="height:1px;background:#F1F5F9;margin:8px 8px;"></div>
         <a href="<?= ADMIN_URL ?>/users.php" class="admin-nav-item <?= ($adminScript === 'users.php') ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
-          <span style="font-size:1.2rem;line-height:1;">👤</span>
           <span style="font-weight:600;">Admin Passwords</span>
         </a>
       <?php endif; ?>

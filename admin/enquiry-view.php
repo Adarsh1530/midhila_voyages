@@ -300,17 +300,16 @@ require_once __DIR__ . '/includes/admin-header.php';
   </a>
   <div style="display:flex;gap:10px;align-items:center;">
     <a href="tel:<?= e($cleanPhone) ?>" class="admin-btn admin-btn-outline" style="font-weight:700;">
-      📞 Call Customer
+      Call Customer
     </a>
     <a href="<?= e($waUrl) ?>" target="_blank" rel="noopener noreferrer" class="admin-btn" style="background:#25D366;color:#FFF;font-weight:700;">
-      💬 Open WhatsApp
+      Open WhatsApp
     </a>
   </div>
 </div>
 
 <!-- Mandatory Disclaimer Alert Banner -->
 <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-left:5px solid #2563EB;padding:14px 18px;border-radius:8px;margin-bottom:24px;font-size:0.88rem;color:#1E3A8A;display:flex;align-items:flex-start;gap:12px;">
-  <span style="font-size:1.2rem;line-height:1;">ℹ️</span>
   <div>
     <strong>System Policy Reminder:</strong> Room and venue availability is never automatically confirmed. Manual verification by admin with hotel/venue providers is required before confirming reservations with clients.
   </div>
@@ -392,7 +391,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <?php if ($enquiry['enquiry_type'] === 'corporate_event'): ?>
         <!-- Corporate Event Details -->
         <h4 style="font-size:1rem;color:#0F172A;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
-          <span>💼</span> Corporate &amp; Event Specification
+          Corporate &amp; Event Specification
         </h4>
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:14px;background:#FFFFFF;border:1px solid #E2E8F0;padding:18px;border-radius:10px;margin-bottom:20px;">
           <div>
@@ -435,7 +434,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <?php else: ?>
         <!-- Tourism, Accommodation & Travel Preferences -->
         <h4 style="font-size:1rem;color:#0F172A;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
-          <span>🧭</span> Travel &amp; Accommodation Parameters
+          Travel &amp; Accommodation Parameters
         </h4>
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));gap:14px;background:#FFFFFF;border:1px solid #E2E8F0;padding:18px;border-radius:10px;margin-bottom:20px;">
           <div>
@@ -550,7 +549,6 @@ require_once __DIR__ . '/includes/admin-header.php';
           <div style="background:#F0FDF4;border:1px solid #BBF7D0;padding:18px 20px;border-radius:10px;margin-bottom:20px;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
               <h5 style="font-size:0.92rem;font-weight:700;color:#166534;margin:0;display:flex;align-items:center;gap:6px;">
-                <span>🗺️</span>
                 <span>Customer Selected Spots (OpenStreetMap Directory):</span>
               </h5>
               <span class="badge badge-success"><?= count($selPlaces) ?> Selected</span>
@@ -592,11 +590,10 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div style="background:#F8FAFC;border:1.5px solid #CBD5E1;padding:20px;border-radius:10px;margin-bottom:20px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
             <h5 style="font-size:0.95rem;font-weight:700;color:#0F172A;margin:0;display:flex;align-items:center;gap:6px;">
-              <span>🤖</span>
               <span>Grounded AI Travel Proposal &amp; Schedule</span>
             </h5>
             <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('itineraryRawContent').innerText).then(()=>alert('Itinerary copied to clipboard!'))" class="admin-btn admin-btn-outline" style="padding:4px 10px;font-size:0.75rem;">
-              📋 Copy Proposal
+              Copy Proposal
             </button>
           </div>
           <div id="itineraryRawContent" style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:8px;padding:16px;font-size:0.86rem;line-height:1.7;color:#334155;white-space:pre-wrap;max-height:420px;overflow-y:auto;font-family:inherit;">
@@ -616,7 +613,7 @@ require_once __DIR__ . '/includes/admin-header.php';
           <input type="hidden" name="send_acknowledgement_email" value="1">
           <input type="email" name="recipient_email" value="<?= e($enquiry['email']) ?>" required placeholder="client@example.com" style="flex-grow:1;min-width:240px;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
           <button type="submit" class="admin-btn admin-btn-primary" style="padding:8px 16px;font-size:0.86rem;">
-            ✉️ Dispatch Email Notice
+            Dispatch Email Notice
           </button>
         </form>
       </div>

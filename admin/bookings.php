@@ -149,9 +149,6 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div class="admin-stat-value"><?= number_format($kpiTotal) ?></div>
       <div class="admin-stat-sub">Stored in database</div>
     </div>
-    <div class="admin-stat-icon" style="background:#EFF6FF;color:#2563EB;">
-      📋
-    </div>
   </div>
 
   <div class="admin-stat-card">
@@ -159,9 +156,6 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div class="admin-stat-label">Confirmed</div>
       <div class="admin-stat-value" style="color:#16A34A;"><?= number_format($kpiConfirmed) ?></div>
       <div class="admin-stat-sub">Ready to travel</div>
-    </div>
-    <div class="admin-stat-icon" style="background:#F0FDF4;color:#16A34A;">
-      ✅
     </div>
   </div>
 
@@ -171,9 +165,6 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div class="admin-stat-value" style="color:#D97706;"><?= number_format($kpiPending) ?></div>
       <div class="admin-stat-sub">Awaiting confirmation</div>
     </div>
-    <div class="admin-stat-icon" style="background:#FFFBEB;color:#D97706;">
-      ⏳
-    </div>
   </div>
 
   <div class="admin-stat-card">
@@ -181,9 +172,6 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div class="admin-stat-label">Total Travellers</div>
       <div class="admin-stat-value" style="color:#0F172A;"><?= number_format($kpiTravellers) ?></div>
       <div class="admin-stat-sub">Registered guests</div>
-    </div>
-    <div class="admin-stat-icon" style="background:#F8FAFC;color:#0F172A;border:1px solid #E2E8F0;">
-      👥
     </div>
   </div>
 </div>
@@ -233,7 +221,6 @@ require_once __DIR__ . '/includes/admin-header.php';
         <?php if (empty($bookings)): ?>
           <tr>
             <td colspan="7" style="text-align:center;padding:50px 20px;">
-              <div style="font-size:2.5rem;margin-bottom:12px;">🔍</div>
               <h4 style="font-size:1.1rem;color:var(--admin-navy);margin-bottom:6px;">No Bookings Found</h4>
               <p style="font-size:0.88rem;color:var(--admin-muted);max-width:400px;margin:0 auto 16px;">
                 <?= (!empty($search) || $filterStatus !== 'all') ? 'No bookings matched your filter criteria.' : 'There are currently no customer booking reservations recorded.' ?>
@@ -268,10 +255,10 @@ require_once __DIR__ . '/includes/admin-header.php';
                 <strong style="color:#0F172A;display:block;font-size:0.95rem;"><?= e($bk['customer_name']) ?></strong>
                 <div style="font-size:0.82rem;color:#64748B;margin-top:3px;line-height:1.5;">
                   <a href="tel:<?= e($bk['customer_phone']) ?>" style="color:#0F172A;text-decoration:none;font-weight:600;">
-                    📞 <?= e($bk['customer_phone']) ?>
+                    <?= e($bk['customer_phone']) ?>
                   </a>
                   <?php if (!empty($bk['customer_email'])): ?>
-                    <br><a href="mailto:<?= e($bk['customer_email']) ?>" style="color:#2563EB;text-decoration:none;">✉️ <?= e($bk['customer_email']) ?></a>
+                    <br><a href="mailto:<?= e($bk['customer_email']) ?>" style="color:#2563EB;text-decoration:none;"><?= e($bk['customer_email']) ?></a>
                   <?php endif; ?>
                 </div>
               </td>
@@ -289,7 +276,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                   <?php endif; ?>
                   <?php if (!empty($bk['destination_name'])): ?>
                     <span style="font-size:0.72rem;background:#FEF3C7;color:#92400E;padding:2px 6px;border-radius:4px;font-weight:600;">
-                      📍 <?= e($bk['destination_name']) ?>
+                      <?= e($bk['destination_name']) ?>
                     </span>
                   <?php endif; ?>
                 </div>
@@ -298,10 +285,10 @@ require_once __DIR__ . '/includes/admin-header.php';
               <!-- 4. Travel Date & Guests -->
               <td>
                 <div style="font-weight:600;color:#0F172A;font-size:0.9rem;">
-                  📅 <?= !empty($bk['travel_date']) ? date('d M Y', strtotime($bk['travel_date'])) : 'Flexible' ?>
+                  <?= !empty($bk['travel_date']) ? date('d M Y', strtotime($bk['travel_date'])) : 'Flexible' ?>
                 </div>
                 <div style="font-size:0.8rem;color:#64748B;margin-top:2px;">
-                  👥 <?= (int)$bk['travellers_count'] ?> Guest<?= (int)$bk['travellers_count'] === 1 ? '' : 's' ?>
+                  <?= (int)$bk['travellers_count'] ?> Guest<?= (int)$bk['travellers_count'] === 1 ? '' : 's' ?>
                 </div>
               </td>
 
@@ -335,7 +322,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                           onclick="openStatusUpdateModal(<?= (int)$bk['id'] ?>, '<?= e(addslashes($bk['booking_reference'])) ?>', '<?= e(addslashes($bk['customer_name'])) ?>', '<?= e($bk['booking_status']) ?>')"
                           style="white-space:nowrap;padding:5px 10px;font-size:0.8rem;"
                           title="Update Status">
-                    ✏️ Status
+                    Status
                   </button>
 
                   <a href="<?= BASE_URL ?>/payment-success.php?ref=<?= e($bk['booking_reference']) ?>" 
@@ -343,7 +330,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                      class="admin-btn admin-btn-outline admin-btn-sm" 
                      style="white-space:nowrap;padding:5px 10px;font-size:0.8rem;"
                      title="View &amp; Print A4 Passenger Voucher">
-                    📄 Voucher
+                    Voucher
                   </a>
                 </div>
               </td>

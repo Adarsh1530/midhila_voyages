@@ -72,9 +72,6 @@ require_once __DIR__ . '/includes/admin-header.php';
   <!-- Top Status & Actions Banner -->
   <div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;padding:22px 26px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
     <div style="display:flex;align-items:center;gap:14px;">
-      <div style="width:44px;height:44px;border-radius:10px;background:#FEF3C7;color:#D97706;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">
-        🎉
-      </div>
       <div>
         <h3 style="font-size:1.25rem;font-weight:700;color:#0F172A;margin-bottom:2px;">Ongoing Offer Promotional Popup</h3>
         <p style="font-size:0.84rem;color:#64748B;margin:0;">Automatically presents seasonal deals, packages, and flyers to attract visitors.</p>
@@ -103,11 +100,11 @@ require_once __DIR__ . '/includes/admin-header.php';
           <div style="display:flex;gap:20px;align-items:center;">
             <label style="display:inline-flex;align-items:center;gap:8px;font-size:0.92rem;font-weight:600;color:#059669;cursor:pointer;">
               <input type="radio" name="popup_offer_active" value="1" <?= (val('popup_offer_active', '1') === '1') ? 'checked' : '' ?> style="accent-color:#059669;">
-              <span>🟢 Active (Enabled on Website)</span>
+              <span>Active (Enabled on Website)</span>
             </label>
             <label style="display:inline-flex;align-items:center;gap:8px;font-size:0.92rem;font-weight:600;color:#64748B;cursor:pointer;">
               <input type="radio" name="popup_offer_active" value="0" <?= (val('popup_offer_active', '1') === '0') ? 'checked' : '' ?> style="accent-color:#64748B;">
-              <span>⚪ Inactive (Temporarily Hidden)</span>
+              <span>Inactive (Temporarily Hidden)</span>
             </label>
           </div>
           <span style="font-size:0.76rem;color:#64748B;display:block;margin-top:6px;">When set to Active, visitors opening the website will see this promotional offer popup.</span>

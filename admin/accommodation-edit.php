@@ -263,7 +263,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
     <div style="display:flex;gap:14px;align-items:center;">
       <button type="submit" class="admin-btn" style="background:#16A34A;color:#FFFFFF;border:none;font-weight:800;font-size:1.05rem;padding:14px 34px;border-radius:10px;box-shadow:0 4px 14px rgba(22,163,74,0.3);cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
-        <span>💾 <?= $id > 0 ? 'Save Changes' : 'Publish Hotel / Stay' ?></span>
+        <span><?= $id > 0 ? 'Save Changes' : 'Publish Hotel / Stay' ?></span>
       </button>
       <a href="<?= ADMIN_URL ?>/accommodations.php" class="admin-btn admin-btn-outline" style="padding:13px 22px;font-weight:600;font-size:0.95rem;">Cancel</a>
     </div>

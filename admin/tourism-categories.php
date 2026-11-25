@@ -133,10 +133,10 @@ require_once __DIR__ . '/includes/admin-header.php';
 <!-- Simple Top Category Switcher -->
 <div style="display:flex;gap:10px;margin-bottom:20px;border-bottom:1px solid #E2E8F0;padding-bottom:14px;">
   <a href="<?= ADMIN_URL ?>/destinations.php" style="background:#FFFFFF;color:#475569;border:1px solid #CBD5E1;padding:9px 18px;border-radius:8px;font-size:0.9rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
-    <span>📍 All Destinations</span>
+    <span>All Destinations</span>
   </a>
   <a href="<?= ADMIN_URL ?>/tourism-categories.php" style="background:#0F172A;color:#FFFFFF;padding:9px 18px;border-radius:8px;font-size:0.9rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
-    <span>🌴 Kerala Tourism Pillars</span>
+    <span>Kerala Tourism Pillars</span>
   </a>
 </div>
 
@@ -257,7 +257,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
         <div style="display:flex;gap:10px;">
           <button type="submit" class="admin-btn admin-btn-success" style="background:#16A34A;border-color:#16A34A;font-weight:700;padding:12px 24px;color:#fff;">
-            💾 <?= $editCategory ? 'Save Changes' : 'Publish Category' ?>
+            <?= $editCategory ? 'Save Changes' : 'Publish Category' ?>
           </button>
           <?php if ($editCategory): ?>
             <a href="<?= ADMIN_URL ?>/tourism-categories.php" class="admin-btn admin-btn-outline" style="padding:12px 18px;">Cancel</a>

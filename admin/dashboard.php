@@ -89,7 +89,7 @@ require_once __DIR__ . '/includes/admin-header.php';
   <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
     <div>
       <h2 style="font-size:1.45rem;font-weight:800;color:#0F172A;margin:0 0 6px 0;display:flex;align-items:center;gap:8px;">
-        <span>👋 Welcome, <?= e($_SESSION['admin_user_name'] ?? 'Midhila Manager') ?>!</span>
+        <span>Welcome, <?= e($_SESSION['admin_user_name'] ?? 'Midhila Manager') ?>!</span>
       </h2>
       <p style="font-size:0.9rem;color:#64748B;margin:0;">
         Click any button below to update your website instantly — simple, fast, and easy for anyone!
@@ -98,7 +98,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
     <div style="display:flex;gap:10px;align-items:center;">
       <a href="<?= BASE_URL ?>/index.php" target="_blank" class="admin-btn admin-btn-outline" style="font-weight:700;padding:10px 18px;display:inline-flex;align-items:center;gap:8px;font-size:0.9rem;">
-        <span>🌐 View Live Website</span> &nearr;
+        <span>View Live Website</span> &nearr;
       </a>
     </div>
   </div>
@@ -112,8 +112,7 @@ require_once __DIR__ . '/includes/admin-header.php';
   <!-- Card 1: Tour Packages -->
   <div style="background:#F0F7FF;border:1.5px solid #BAE6FD;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
     <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <span style="font-size:2rem;line-height:1;">🎒</span>
+      <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px;">
         <span style="background:#0284C7;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
           <?= $totalPackages ?> PACKAGES LIVE
         </span>
@@ -125,10 +124,10 @@ require_once __DIR__ . '/includes/admin-header.php';
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:12px;border-top:1px solid #E0F2FE;">
       <a href="<?= ADMIN_URL ?>/package-edit.php" class="admin-btn admin-btn-primary" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;">
-        ➕ Add Package
+        Add Package
       </a>
       <a href="<?= ADMIN_URL ?>/packages.php" class="admin-btn admin-btn-outline" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#FFFFFF;">
-        👀 Manage (<?= $totalPackages ?>)
+        Manage (<?= $totalPackages ?>)
       </a>
     </div>
   </div>
@@ -136,8 +135,7 @@ require_once __DIR__ . '/includes/admin-header.php';
   <!-- Card 2: Hotels & Stays -->
   <div style="background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
     <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <span style="font-size:2rem;line-height:1;">🏨</span>
+      <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px;">
         <span style="background:#16A34A;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
           <?= ($totalAccommodations + $totalVenues) ?> STAYS LIVE
         </span>
@@ -149,10 +147,10 @@ require_once __DIR__ . '/includes/admin-header.php';
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:12px;border-top:1px solid #DCFCE7;">
       <a href="<?= ADMIN_URL ?>/accommodation-edit.php" class="admin-btn admin-btn-primary" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#15803D;border-color:#15803D;">
-        ➕ Add Hotel
+        Add Hotel
       </a>
       <a href="<?= ADMIN_URL ?>/accommodations.php" class="admin-btn admin-btn-outline" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#FFFFFF;">
-        👀 Manage (<?= $totalAccommodations ?>)
+        Manage (<?= $totalAccommodations ?>)
       </a>
     </div>
   </div>
@@ -160,20 +158,19 @@ require_once __DIR__ . '/includes/admin-header.php';
   <!-- Card 3: Customer Inquiries -->
   <div style="background:#FFF7ED;border:1.5px solid #FED7AA;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
     <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <span style="font-size:2rem;line-height:1;">💬</span>
+      <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px;">
         <span style="background:<?= $newEnquiries > 0 ? '#DC2626' : '#EA580C' ?>;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
           <?= $newEnquiries > 0 ? "{$newEnquiries} NEW LEADS" : "{$totalEnquiries} TOTAL LEADS" ?>
         </span>
       </div>
       <h3 style="font-size:1.25rem;font-weight:800;color:#0F172A;margin:0 0 6px 0;">Customer Inquiries</h3>
       <p style="font-size:0.86rem;color:#475569;margin:0 0 16px 0;line-height:1.5;">
-        <?= $newEnquiries > 0 ? "🔥 <strong style='color:#DC2626;'>{$newEnquiries} customer inquiries</strong> are waiting for your response!" : "All customer leads are up to date. Click below to contact travelers." ?>
+        <?= $newEnquiries > 0 ? "<strong style='color:#DC2626;'>{$newEnquiries} customer inquiries</strong> are waiting for your response!" : "All customer leads are up to date. Click below to contact travelers." ?>
       </p>
     </div>
     <div style="padding-top:12px;border-top:1px solid #FFEDD5;">
       <a href="<?= ADMIN_URL ?>/enquiries.php" class="admin-btn" style="width:100%;font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#EA580C;color:#FFFFFF;border:none;">
-        💬 Open Customer Inquiries (WhatsApp) &rarr;
+        Open Customer Inquiries (WhatsApp) &rarr;
       </a>
     </div>
   </div>
@@ -181,8 +178,7 @@ require_once __DIR__ . '/includes/admin-header.php';
   <!-- Card 4: Tour Bookings -->
   <div style="background:#FAF5FF;border:1.5px solid #E9D5FF;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
     <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <span style="font-size:2rem;line-height:1;">🎟️</span>
+      <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px;">
         <span style="background:#9333EA;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
           <?= $totalBookings ?> BOOKINGS
         </span>
@@ -194,7 +190,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     </div>
     <div style="padding-top:12px;border-top:1px solid #F3E8FF;">
       <a href="<?= ADMIN_URL ?>/bookings.php" class="admin-btn" style="width:100%;font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#9333EA;color:#FFFFFF;border:none;">
-        🎟️ View Bookings &amp; Print Vouchers &rarr;
+        View Bookings &amp; Print Vouchers &rarr;
       </a>
     </div>
   </div>
@@ -202,8 +198,7 @@ require_once __DIR__ . '/includes/admin-header.php';
   <!-- Card 5: Destinations -->
   <div style="background:#FFFBEB;border:1.5px solid #FDE68A;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
     <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <span style="font-size:2rem;line-height:1;">📍</span>
+      <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px;">
         <span style="background:#D97706;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
           <?= $totalDestinations ?> DESTINATIONS
         </span>
@@ -215,10 +210,10 @@ require_once __DIR__ . '/includes/admin-header.php';
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:12px;border-top:1px solid #FEF3C7;">
       <a href="<?= ADMIN_URL ?>/destination-edit.php" class="admin-btn admin-btn-primary" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#B45309;border-color:#B45309;">
-        ➕ Add Place
+        Add Place
       </a>
       <a href="<?= ADMIN_URL ?>/destinations.php" class="admin-btn admin-btn-outline" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#FFFFFF;">
-        👀 View (<?= $totalDestinations ?>)
+        View (<?= $totalDestinations ?>)
       </a>
     </div>
   </div>
@@ -226,15 +221,14 @@ require_once __DIR__ . '/includes/admin-header.php';
   <!-- Card 6: Special Offer Popup Banner -->
   <div style="background:#FDF2F8;border:1.5px solid #FBCFE8;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
     <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <span style="font-size:2rem;line-height:1;">📢</span>
+      <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px;">
         <?php if ($popupOfferActive): ?>
           <span style="background:#16A34A;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
-            🟢 POPUP ACTIVE
+            POPUP ACTIVE
           </span>
         <?php else: ?>
           <span style="background:#64748B;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
-            ⚪ POPUP PAUSED
+            POPUP PAUSED
           </span>
         <?php endif; ?>
       </div>
@@ -245,7 +239,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     </div>
     <div style="padding-top:12px;border-top:1px solid #FCE7F3;">
       <a href="<?= ADMIN_URL ?>/offer-popup.php" class="admin-btn" style="width:100%;font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#DB2777;color:#FFFFFF;border:none;">
-        ⚙️ Turn On/Off or Change Offer &rarr;
+        Turn On/Off or Change Offer &rarr;
       </a>
     </div>
   </div>
@@ -262,7 +256,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px;">
       <div>
         <h3 style="font-size:1.2rem;color:#0F172A;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:8px;">
-          <span>💬 Recent Customer Inquiries</span>
+          <span>Recent Customer Inquiries</span>
           <?php if ($newEnquiries > 0): ?>
             <span style="background:#DC2626;color:#FFF;font-size:0.75rem;padding:2px 8px;border-radius:999px;font-weight:700;"><?= $newEnquiries ?> New</span>
           <?php endif; ?>
@@ -276,7 +270,6 @@ require_once __DIR__ . '/includes/admin-header.php';
 
     <?php if (empty($recentEnquiries)): ?>
       <div style="text-align:center;padding:40px 20px;background:#F8FAFC;border-radius:12px;border:1.5px dashed #CBD5E1;">
-        <div style="font-size:2.4rem;margin-bottom:8px;">📬</div>
         <div style="font-size:1.05rem;font-weight:700;color:#0F172A;">No Inquiries Received Yet</div>
         <p style="font-size:0.86rem;color:#64748B;margin-top:6px;max-width:500px;margin-left:auto;margin-right:auto;">
           When visitors fill the inquiry form on your website, their name, destination, and phone number will appear right here with a green WhatsApp chat button!
@@ -320,7 +313,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                 </td>
                 <td>
                   <a href="tel:<?= e($enq['phone']) ?>" style="font-size:0.88rem;font-weight:700;color:#0F172A;text-decoration:none;">
-                    📞 <?= e($enq['phone']) ?>
+                    <?= e($enq['phone']) ?>
                   </a>
                 </td>
                 <td>
@@ -344,7 +337,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                 <td style="text-align:right;">
                   <div style="display:inline-flex;gap:6px;justify-content:flex-end;">
                     <a href="<?= e($waLeadUrl) ?>" target="_blank" rel="noopener noreferrer" class="admin-btn admin-btn-sm" style="background:#25D366;color:#FFFFFF;border:none;font-weight:700;padding:6px 12px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;">
-                      <span>💬 WhatsApp</span>
+                      <span>WhatsApp</span>
                     </a>
                     <a href="<?= ADMIN_URL ?>/enquiry-view.php?id=<?= (int)$enq['id'] ?>" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:600;padding:6px 12px;">
                       <span>View</span>
@@ -364,7 +357,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px;">
       <div>
         <h3 style="font-size:1.2rem;color:#0F172A;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:8px;">
-          <span>🎟️ Recent Tour Bookings</span>
+          <span>Recent Tour Bookings</span>
         </h3>
         <p style="font-size:0.84rem;color:#64748B;margin:0;">Stored customer personal details and instant printable vouchers</p>
       </div>
@@ -375,7 +368,6 @@ require_once __DIR__ . '/includes/admin-header.php';
 
     <?php if (empty($recentBookings)): ?>
       <div style="text-align:center;padding:40px 20px;background:#F8FAFC;border-radius:12px;border:1.5px dashed #CBD5E1;">
-        <div style="font-size:2.4rem;margin-bottom:8px;">🎟️</div>
         <div style="font-size:1.05rem;font-weight:700;color:#0F172A;">No Bookings Recorded Yet</div>
         <p style="font-size:0.86rem;color:#64748B;margin-top:6px;max-width:500px;margin-left:auto;margin-right:auto;">
           When travelers book any tour package, their reservation details will appear here with an instant printable voucher and WhatsApp link.
@@ -415,7 +407,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                 </td>
                 <td>
                   <a href="tel:<?= e($b['customer_phone']) ?>" style="color:#0F172A;font-size:0.88rem;text-decoration:none;font-weight:700;">
-                    📞 <?= e($b['customer_phone']) ?>
+                    <?= e($b['customer_phone']) ?>
                   </a>
                 </td>
                 <td>
@@ -435,10 +427,10 @@ require_once __DIR__ . '/includes/admin-header.php';
                 <td style="text-align:right;">
                   <div style="display:inline-flex;gap:6px;justify-content:flex-end;">
                     <a href="<?= e($waBkgUrl) ?>" target="_blank" rel="noopener noreferrer" class="admin-btn admin-btn-sm" style="background:#25D366;color:#FFFFFF;border:none;font-weight:700;padding:6px 12px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;" title="WhatsApp Guest">
-                      <span>💬 WhatsApp</span>
+                      <span>WhatsApp</span>
                     </a>
                     <a href="<?= BASE_URL ?>/payment-success.php?ref=<?= e($b['booking_reference']) ?>" target="_blank" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:700;padding:6px 12px;">
-                      <span>🎟️ Voucher</span>
+                      <span>Voucher</span>
                     </a>
                   </div>
                 </td>
