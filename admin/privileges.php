@@ -51,10 +51,10 @@ foreach ($users as $u) {
     }
 }
 
-$defaultRoleSetting = val('default_staff_role', 'travel_manage');
-$sessionTimeoutSetting = (int)val('session_timeout_hours', '8');
-$deleteProtectionSetting = (val('privilege_delete_protection', '1') === '1');
-$waDirectSetting = (val('privilege_wa_direct', '1') === '1');
+$defaultRoleSetting = get_setting('default_staff_role', 'travel_manage');
+$sessionTimeoutSetting = (int)get_setting('session_timeout_hours', '8');
+$deleteProtectionSetting = (get_setting('privilege_delete_protection', '1') === '1');
+$waDirectSetting = (get_setting('privilege_wa_direct', '1') === '1');
 
 $adminTitle = 'Privilege Settings | MIDHILA VOYAGES';
 $adminHeading = 'Privilege Settings';
