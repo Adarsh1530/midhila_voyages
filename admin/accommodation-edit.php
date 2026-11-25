@@ -62,8 +62,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $specialInstructions = trim($_POST['special_instructions'] ?? '');
         $isActive = isset($_POST['is_active']) ? 1 : 0;
 
+        if ($destinationId <= 0 && !empty($destinations)) {
+            $destinationId = (int)$destinations[0]['id'];
+        }
+        if (empty($featuredImage)) {
+            $featuredImage = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80';
+        }
+
         if (empty($nameEn)) {
-            set_flash_message('error', 'Accommodation Name (English) is required.');
+            set_flash_message('error', 'Please enter a Property Name.');
         } else {
             if ($id > 0) {
                 // Update
@@ -254,11 +261,11 @@ require_once __DIR__ . '/includes/admin-header.php';
       </label>
     </div>
 
-    <div style="display:flex;gap:12px;">
-      <button type="submit" class="admin-btn admin-btn-primary">
-        <?= $id > 0 ? 'Update Accommodation' : 'Register Accommodation' ?>
+    <div style="display:flex;gap:14px;align-items:center;">
+      <button type="submit" class="admin-btn" style="background:#16A34A;color:#FFFFFF;border:none;font-weight:800;font-size:1.05rem;padding:14px 34px;border-radius:10px;box-shadow:0 4px 14px rgba(22,163,74,0.3);cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+        <span>💾 <?= $id > 0 ? 'Save Changes' : 'Publish Hotel / Stay' ?></span>
       </button>
-      <a href="<?= ADMIN_URL ?>/accommodations.php" class="admin-btn admin-btn-outline">Cancel</a>
+      <a href="<?= ADMIN_URL ?>/accommodations.php" class="admin-btn admin-btn-outline" style="padding:13px 22px;font-weight:600;font-size:0.95rem;">Cancel</a>
     </div>
 
   </form>

@@ -10,6 +10,11 @@ require_once dirname(__DIR__) . '/includes/functions.php';
 require_once dirname(__DIR__) . '/includes/auth.php';
 require_once dirname(__DIR__) . '/includes/csrf.php';
 
+// Prevent browser caching of login page
+header('Cache-Control: no-cache, no-store, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: 0');
+
 if (is_admin_logged_in()) {
     header('Location: ' . ADMIN_URL . '/dashboard.php');
     exit;

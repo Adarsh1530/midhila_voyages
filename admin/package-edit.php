@@ -72,8 +72,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $isPublished = !empty($_POST['is_published']) ? 1 : 0;
         $imageUrl = trim($_POST['image_url'] ?? '');
 
-        if (empty($title) || $destId <= 0 || $catId <= 0) {
-            $errors[] = 'Please fill in the package title, destination, and category.';
+        if (empty($title)) {
+            $errors[] = 'Please enter a Tour Package Title.';
+        }
+        if ($destId <= 0 && !empty($dests)) {
+            $destId = (int)$dests[0]['id'];
+        }
+        if ($catId <= 0 && !empty($cats)) {
+            $catId = (int)$cats[0]['id'];
         }
 
         // Handle image upload if provided
@@ -87,7 +93,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (empty($imageUrl) && !$package) {
-            $errors[] = 'Featured image is required for tour packages.';
+            $imageUrl = 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80';
+        }
+        if (empty($shortDesc)) {
+            $shortDesc = $subtitle ?: "Curated holiday tour package experiencing {$title}.";
+        }
+        if (empty($overview)) {
+            $overview = $shortDesc;
         }
 
         if (empty($errors)) {
@@ -484,11 +496,11 @@ require_once __DIR__ . '/includes/admin-header.php';
       </div>
     </div>
 
-    <div style="display:flex;gap:12px;margin-bottom:40px;">
-      <button type="submit" class="admin-btn admin-btn-primary" style="padding:12px 28px;font-size:1rem;">
-        <span><?= $package ? 'Update Tour Package' : 'Publish Tour Package' ?></span>
+    <div style="display:flex;gap:14px;margin-bottom:40px;align-items:center;">
+      <button type="submit" class="admin-btn" style="background:#16A34A;color:#FFFFFF;border:none;font-weight:800;font-size:1.05rem;padding:14px 34px;border-radius:10px;box-shadow:0 4px 14px rgba(22,163,74,0.3);cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+        <span>💾 <?= $package ? 'Save Changes' : 'Publish Tour Package' ?></span>
       </button>
-      <a href="<?= ADMIN_URL ?>/packages.php" class="admin-btn admin-btn-outline" style="padding:12px 20px;">Cancel</a>
+      <a href="<?= ADMIN_URL ?>/packages.php" class="admin-btn admin-btn-outline" style="padding:13px 22px;font-weight:600;font-size:0.95rem;">Cancel</a>
     </div>
 
   </form>

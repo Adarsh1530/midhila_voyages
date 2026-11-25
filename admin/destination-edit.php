@@ -56,7 +56,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $imageUrl = trim($_POST['image_url'] ?? '');
 
         if (empty($name)) {
-            $errors[] = 'Destination name is required.';
+            $errors[] = 'Please enter a Destination name.';
+        }
+        if (empty($regionState)) {
+            $regionState = 'Kerala';
+        }
+        if (empty($description)) {
+            $description = $tagline ?: "Explore the natural beauty and heritage of {$name}, curated by Midhila Voyages.";
         }
 
         // Handle image upload if provided
@@ -70,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (empty($imageUrl) && !$destination) {
-            $errors[] = 'Please provide an image URL or upload an image file.';
+            $imageUrl = 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=80';
         }
 
         if (empty($errors)) {
@@ -264,11 +270,11 @@ require_once __DIR__ . '/includes/admin-header.php';
         </label>
       </div>
 
-      <div style="display:flex;gap:12px;">
-        <button type="submit" class="admin-btn admin-btn-primary" style="padding:10px 24px;">
-          <span><?= $destination ? 'Update Destination' : 'Save Destination' ?></span>
+      <div style="display:flex;gap:14px;align-items:center;">
+        <button type="submit" class="admin-btn" style="background:#16A34A;color:#FFFFFF;border:none;font-weight:800;font-size:1.05rem;padding:14px 34px;border-radius:10px;box-shadow:0 4px 14px rgba(22,163,74,0.3);cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+          <span>💾 <?= $destination ? 'Save Changes' : 'Save Destination' ?></span>
         </button>
-        <a href="<?= ADMIN_URL ?>/destinations.php" class="admin-btn admin-btn-outline">Cancel</a>
+        <a href="<?= ADMIN_URL ?>/destinations.php" class="admin-btn admin-btn-outline" style="padding:13px 22px;font-weight:600;font-size:0.95rem;">Cancel</a>
       </div>
 
     </form>

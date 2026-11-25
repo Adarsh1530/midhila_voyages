@@ -23,11 +23,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if ($action === 'save_category') {
             $catId = (int)($_POST['id'] ?? 0);
-            $slug = slugify($_POST['slug'] ?? $_POST['name_en']);
+            $slug = slugify(!empty($_POST['slug']) ? $_POST['slug'] : ($_POST['name_en'] ?? ''));
+            if (empty($slug)) {
+                $slug = 'category-' . time();
+            }
             $nameEn = trim($_POST['name_en'] ?? '');
+            if (empty($nameEn)) {
+                $nameEn = 'Kerala Tourism Experience';
+            }
             $taglineEn = trim($_POST['tagline_en'] ?? '');
             $descEn = trim($_POST['description_en'] ?? '');
             $featuredImg = trim($_POST['featured_image'] ?? '');
+            if (empty($featuredImg)) {
+                $featuredImg = 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1200&q=80';
+            }
             $displayOrder = (int)($_POST['display_order'] ?? 0);
             $isKerala = isset($_POST['is_kerala_focus']) ? 1 : 0;
             $isActive = isset($_POST['is_active']) ? 1 : 0;
@@ -116,10 +125,20 @@ if ($editId > 0) {
 }
 
 $adminTitle = 'Kerala Tourism Categories | MIDHILA VOYAGES';
-$adminHeading = 'Kerala Tourism Disciplines';
+$adminHeading = 'Kerala Tourism Categories';
 
 require_once __DIR__ . '/includes/admin-header.php';
 ?>
+
+<!-- Simple Top Category Switcher -->
+<div style="display:flex;gap:10px;margin-bottom:20px;border-bottom:1px solid #E2E8F0;padding-bottom:14px;">
+  <a href="<?= ADMIN_URL ?>/destinations.php" style="background:#FFFFFF;color:#475569;border:1px solid #CBD5E1;padding:9px 18px;border-radius:8px;font-size:0.9rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+    <span>📍 All Destinations</span>
+  </a>
+  <a href="<?= ADMIN_URL ?>/tourism-categories.php" style="background:#0F172A;color:#FFFFFF;padding:9px 18px;border-radius:8px;font-size:0.9rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+    <span>🌴 Kerala Tourism Pillars</span>
+  </a>
+</div>
 
 <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:28px;">
   
@@ -134,7 +153,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <table class="admin-table">
         <thead>
           <tr>
-            <th>Discipline / Category</th>
+            <th>Category Name</th>
             <th>Focus</th>
             <th>Status</th>
             <th style="text-align:right;">Actions</th>
@@ -196,8 +215,8 @@ require_once __DIR__ . '/includes/admin-header.php';
 
         <?php if (!$editCategory): ?>
           <div style="margin-bottom:14px;">
-            <label>Category Slug (e.g. hill-stations) *</label>
-            <input type="text" name="slug" required placeholder="e.g. hill-stations">
+            <label>Category Slug (optional, auto-generated)</label>
+            <input type="text" name="slug" placeholder="e.g. hill-stations (or leave blank to auto-create)">
           </div>
         <?php endif; ?>
 
@@ -237,11 +256,11 @@ require_once __DIR__ . '/includes/admin-header.php';
         </div>
 
         <div style="display:flex;gap:10px;">
-          <button type="submit" class="admin-btn admin-btn-primary">
-            <?= $editCategory ? 'Save Changes' : 'Add Category' ?>
+          <button type="submit" class="admin-btn admin-btn-success" style="background:#16A34A;border-color:#16A34A;font-weight:700;padding:12px 24px;color:#fff;">
+            💾 <?= $editCategory ? 'Save Changes' : 'Publish Category' ?>
           </button>
           <?php if ($editCategory): ?>
-            <a href="<?= ADMIN_URL ?>/tourism-categories.php" class="admin-btn admin-btn-outline">Cancel</a>
+            <a href="<?= ADMIN_URL ?>/tourism-categories.php" class="admin-btn admin-btn-outline" style="padding:12px 18px;">Cancel</a>
           <?php endif; ?>
         </div>
 

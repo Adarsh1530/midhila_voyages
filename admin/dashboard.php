@@ -68,140 +68,184 @@ $recentBookings = $db->query("
     ORDER BY b.id DESC LIMIT 6
 ")->fetchAll();
 
-$adminTitle   = 'Dashboard Overview | MIDHILA VOYAGES';
-$adminHeading = 'Operations Console';
+$popupOfferActive = 1;
+try {
+    $poStmt = $db->query("SELECT setting_value FROM `site_settings` WHERE setting_key = 'popup_offer_active'");
+    if ($poRow = $poStmt->fetch()) {
+        $popupOfferActive = (int)$poRow['setting_value'];
+    }
+} catch (Exception $e) {}
+
+$adminTitle   = 'Easy Admin Manager | MIDHILA VOYAGES';
+$adminHeading = 'Website Manager';
 
 require_once __DIR__ . '/includes/admin-header.php';
 ?>
 
 <!-- =====================================================================
-     OPERATIONAL SUMMARY HEADER & QUICK ACTIONS
+     FRIENDLY TOP WELCOME BAR
      ===================================================================== -->
-<div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;padding:22px 24px;margin-bottom:28px;box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+<div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:14px;padding:22px 26px;margin-bottom:26px;box-shadow:0 1px 3px rgba(0,0,0,0.03);">
   <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
     <div>
-      <div style="font-size:0.75rem;text-transform:uppercase;color:#C5A059;font-weight:700;letter-spacing:0.1em;margin-bottom:4px;">
-        Daily Management Console
-      </div>
-      <h2 style="font-size:1.4rem;font-weight:700;color:#0F172A;margin:0 0 4px 0;">
-        Welcome back, <?= e($_SESSION['admin_user_name'] ?? 'Operations Manager') ?>
+      <h2 style="font-size:1.45rem;font-weight:800;color:#0F172A;margin:0 0 6px 0;display:flex;align-items:center;gap:8px;">
+        <span>👋 Welcome, <?= e($_SESSION['admin_user_name'] ?? 'Midhila Manager') ?>!</span>
       </h2>
-      <p style="font-size:0.86rem;color:#64748B;margin:0;">
-        Review client bookings, follow up on trip inquiries, and manage the Kerala tour catalog.
+      <p style="font-size:0.9rem;color:#64748B;margin:0;">
+        Click any button below to update your website instantly — simple, fast, and easy for anyone!
       </p>
     </div>
 
-    <!-- Daily Quick Action Shortcuts -->
-    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-      <a href="<?= ADMIN_URL ?>/package-edit.php" class="admin-btn admin-btn-primary admin-btn-sm" style="display:inline-flex;align-items:center;gap:6px;font-weight:700;background:#0F172A;">
-        <span>+ Add Tour Package</span>
-      </a>
-      <a href="<?= ADMIN_URL ?>/accommodation-edit.php" class="admin-btn admin-btn-outline admin-btn-sm" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;">
-        <span>+ Add Hotel / Stay</span>
-      </a>
-      <a href="<?= ADMIN_URL ?>/corporate-venue-edit.php" class="admin-btn admin-btn-outline admin-btn-sm" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;">
-        <span>+ Add Venue</span>
-      </a>
-      <a href="<?= ADMIN_URL ?>/offer-popup.php" class="admin-btn admin-btn-outline admin-btn-sm" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;">
-        <span>Manage Offer Popup</span>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <a href="<?= BASE_URL ?>/index.php" target="_blank" class="admin-btn admin-btn-outline" style="font-weight:700;padding:10px 18px;display:inline-flex;align-items:center;gap:8px;font-size:0.9rem;">
+        <span>🌐 View Live Website</span> &nearr;
       </a>
     </div>
   </div>
 </div>
 
 <!-- =====================================================================
-     KEY METRICS CARDS (DAILY COCKPIT)
+     6 BIG, EASY ACTION CARDS (CHILD-SIMPLE WEBSITE MANAGEMENT)
      ===================================================================== -->
-<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:20px;margin-bottom:28px;">
-  
-  <!-- Card: Inquiries -->
-  <div class="admin-card" style="padding:22px;margin-bottom:0;display:flex;flex-direction:column;justify-content:space-between;">
+<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(310px, 1fr));gap:20px;margin-bottom:32px;">
+
+  <!-- Card 1: Tour Packages -->
+  <div style="background:#F0F7FF;border:1.5px solid #BAE6FD;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
     <div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <span style="font-size:0.75rem;text-transform:uppercase;color:#64748B;font-weight:700;letter-spacing:0.06em;">Client Inquiries</span>
-        <div style="width:40px;height:40px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <span style="font-size:2rem;line-height:1;">🎒</span>
+        <span style="background:#0284C7;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
+          <?= $totalPackages ?> PACKAGES LIVE
+        </span>
       </div>
-      <div style="font-size:2rem;font-weight:800;color:#0F172A;line-height:1;margin-bottom:6px;"><?= $totalEnquiries ?></div>
-      <div style="font-size:0.82rem;color:#64748B;">
-        <?php if ($newEnquiries > 0): ?>
-          <span style="color:#DC2626;font-weight:700;">● <?= $newEnquiries ?> new awaiting review</span>
+      <h3 style="font-size:1.25rem;font-weight:800;color:#0F172A;margin:0 0 6px 0;">Tour Packages</h3>
+      <p style="font-size:0.86rem;color:#475569;margin:0 0 16px 0;line-height:1.5;">
+        Add new holiday tours, edit prices, change photos, and update trip days shown on your website.
+      </p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:12px;border-top:1px solid #E0F2FE;">
+      <a href="<?= ADMIN_URL ?>/package-edit.php" class="admin-btn admin-btn-primary" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;">
+        ➕ Add Package
+      </a>
+      <a href="<?= ADMIN_URL ?>/packages.php" class="admin-btn admin-btn-outline" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#FFFFFF;">
+        👀 Manage (<?= $totalPackages ?>)
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 2: Hotels & Stays -->
+  <div style="background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <span style="font-size:2rem;line-height:1;">🏨</span>
+        <span style="background:#16A34A;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
+          <?= ($totalAccommodations + $totalVenues) ?> STAYS LIVE
+        </span>
+      </div>
+      <h3 style="font-size:1.25rem;font-weight:800;color:#0F172A;margin:0 0 6px 0;">Hotels &amp; Stays</h3>
+      <p style="font-size:0.86rem;color:#475569;margin:0 0 16px 0;line-height:1.5;">
+        Add or edit partner resorts, hotels, and houseboats. Display room rates, amenities, and photos.
+      </p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:12px;border-top:1px solid #DCFCE7;">
+      <a href="<?= ADMIN_URL ?>/accommodation-edit.php" class="admin-btn admin-btn-primary" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#15803D;border-color:#15803D;">
+        ➕ Add Hotel
+      </a>
+      <a href="<?= ADMIN_URL ?>/accommodations.php" class="admin-btn admin-btn-outline" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#FFFFFF;">
+        👀 Manage (<?= $totalAccommodations ?>)
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 3: Customer Inquiries -->
+  <div style="background:#FFF7ED;border:1.5px solid #FED7AA;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <span style="font-size:2rem;line-height:1;">💬</span>
+        <span style="background:<?= $newEnquiries > 0 ? '#DC2626' : '#EA580C' ?>;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
+          <?= $newEnquiries > 0 ? "{$newEnquiries} NEW LEADS" : "{$totalEnquiries} TOTAL LEADS" ?>
+        </span>
+      </div>
+      <h3 style="font-size:1.25rem;font-weight:800;color:#0F172A;margin:0 0 6px 0;">Customer Inquiries</h3>
+      <p style="font-size:0.86rem;color:#475569;margin:0 0 16px 0;line-height:1.5;">
+        <?= $newEnquiries > 0 ? "🔥 <strong style='color:#DC2626;'>{$newEnquiries} customer inquiries</strong> are waiting for your response!" : "All customer leads are up to date. Click below to contact travelers." ?>
+      </p>
+    </div>
+    <div style="padding-top:12px;border-top:1px solid #FFEDD5;">
+      <a href="<?= ADMIN_URL ?>/enquiries.php" class="admin-btn" style="width:100%;font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#EA580C;color:#FFFFFF;border:none;">
+        💬 Open Customer Inquiries (WhatsApp) &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 4: Tour Bookings -->
+  <div style="background:#FAF5FF;border:1.5px solid #E9D5FF;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <span style="font-size:2rem;line-height:1;">🎟️</span>
+        <span style="background:#9333EA;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
+          <?= $totalBookings ?> BOOKINGS
+        </span>
+      </div>
+      <h3 style="font-size:1.25rem;font-weight:800;color:#0F172A;margin:0 0 6px 0;">Tour Bookings</h3>
+      <p style="font-size:0.86rem;color:#475569;margin:0 0 16px 0;line-height:1.5;">
+        View customer personal booking details, reservation travel dates, and generate printable travel vouchers.
+      </p>
+    </div>
+    <div style="padding-top:12px;border-top:1px solid #F3E8FF;">
+      <a href="<?= ADMIN_URL ?>/bookings.php" class="admin-btn" style="width:100%;font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#9333EA;color:#FFFFFF;border:none;">
+        🎟️ View Bookings &amp; Print Vouchers &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 5: Destinations -->
+  <div style="background:#FFFBEB;border:1.5px solid #FDE68A;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <span style="font-size:2rem;line-height:1;">📍</span>
+        <span style="background:#D97706;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
+          <?= $totalDestinations ?> DESTINATIONS
+        </span>
+      </div>
+      <h3 style="font-size:1.25rem;font-weight:800;color:#0F172A;margin:0 0 6px 0;">Destinations &amp; Places</h3>
+      <p style="font-size:0.86rem;color:#475569;margin:0 0 16px 0;line-height:1.5;">
+        Manage Kerala tourist spots like Munnar, Alleppey, Wayanad, Kovalam, and sacred temple yatras.
+      </p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:12px;border-top:1px solid #FEF3C7;">
+      <a href="<?= ADMIN_URL ?>/destination-edit.php" class="admin-btn admin-btn-primary" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#B45309;border-color:#B45309;">
+        ➕ Add Place
+      </a>
+      <a href="<?= ADMIN_URL ?>/destinations.php" class="admin-btn admin-btn-outline" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#FFFFFF;">
+        👀 View (<?= $totalDestinations ?>)
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 6: Special Offer Popup Banner -->
+  <div style="background:#FDF2F8;border:1.5px solid #FBCFE8;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <span style="font-size:2rem;line-height:1;">📢</span>
+        <?php if ($popupOfferActive): ?>
+          <span style="background:#16A34A;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
+            🟢 POPUP ACTIVE
+          </span>
         <?php else: ?>
-          <span style="color:#059669;font-weight:600;">● All inquiries up to date</span>
+          <span style="background:#64748B;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
+            ⚪ POPUP PAUSED
+          </span>
         <?php endif; ?>
       </div>
+      <h3 style="font-size:1.25rem;font-weight:800;color:#0F172A;margin:0 0 6px 0;">Special Offer Banner</h3>
+      <p style="font-size:0.86rem;color:#475569;margin:0 0 16px 0;line-height:1.5;">
+        Turn your website offer popup ON or OFF with 1 click. Change offer banner text, discounts, and photo.
+      </p>
     </div>
-    <div style="margin-top:16px;padding-top:12px;border-top:1px solid #F1F5F9;">
-      <a href="<?= ADMIN_URL ?>/enquiries.php" style="font-size:0.82rem;font-weight:700;color:#2563EB;display:inline-flex;align-items:center;gap:4px;">
-        Open Inquiries &rarr;
-      </a>
-    </div>
-  </div>
-
-  <!-- Card: Confirmed Bookings -->
-  <div class="admin-card" style="padding:22px;margin-bottom:0;display:flex;flex-direction:column;justify-content:space-between;">
-    <div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <span style="font-size:0.75rem;text-transform:uppercase;color:#64748B;font-weight:700;letter-spacing:0.06em;">Bookings &amp; Reservations</span>
-        <div style="width:40px;height:40px;border-radius:10px;background:#F0FDF4;color:#16A34A;display:flex;align-items:center;justify-content:center;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-        </div>
-      </div>
-      <div style="font-size:2rem;font-weight:800;color:#0F172A;line-height:1;margin-bottom:6px;"><?= $totalBookings ?></div>
-      <div style="font-size:0.82rem;color:#64748B;">
-        <strong style="color:#16A34A;"><?= $confirmedBookings ?></strong> confirmed &bull; <strong style="color:#D97706;"><?= $pendingBookings ?></strong> pending
-      </div>
-    </div>
-    <div style="margin-top:16px;padding-top:12px;border-top:1px solid #F1F5F9;">
-      <a href="<?= ADMIN_URL ?>/bookings.php" style="font-size:0.82rem;font-weight:700;color:#16A34A;display:inline-flex;align-items:center;gap:4px;">
-        Manage Bookings &rarr;
-      </a>
-    </div>
-  </div>
-
-  <!-- Card: Tour Packages Catalog -->
-  <div class="admin-card" style="padding:22px;margin-bottom:0;display:flex;flex-direction:column;justify-content:space-between;">
-    <div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <span style="font-size:0.75rem;text-transform:uppercase;color:#64748B;font-weight:700;letter-spacing:0.06em;">Tour Packages</span>
-        <div style="width:40px;height:40px;border-radius:10px;background:#FFFBEB;color:#D97706;display:flex;align-items:center;justify-content:center;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
-        </div>
-      </div>
-      <div style="font-size:2rem;font-weight:800;color:#0F172A;line-height:1;margin-bottom:6px;">
-        <?= $totalPackages ?>
-      </div>
-      <div style="font-size:0.82rem;color:#64748B;">
-        Across <strong style="color:#0F172A;"><?= $totalDestinations ?></strong> published destinations
-      </div>
-    </div>
-    <div style="margin-top:16px;padding-top:12px;border-top:1px solid #F1F5F9;">
-      <a href="<?= ADMIN_URL ?>/packages.php" style="font-size:0.82rem;font-weight:700;color:#D97706;display:inline-flex;align-items:center;gap:4px;">
-        View Packages &rarr;
-      </a>
-    </div>
-  </div>
-
-  <!-- Card: Kerala Tourism Pillars & Stays -->
-  <div class="admin-card" style="padding:22px;margin-bottom:0;display:flex;flex-direction:column;justify-content:space-between;">
-    <div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <span style="font-size:0.75rem;text-transform:uppercase;color:#64748B;font-weight:700;letter-spacing:0.06em;">Kerala Stays &amp; Venues</span>
-        <div style="width:40px;height:40px;border-radius:10px;background:#F8FAFC;color:#0F172A;display:flex;align-items:center;justify-content:center;border:1px solid #E2E8F0;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-        </div>
-      </div>
-      <div style="font-size:2rem;font-weight:800;color:#0F172A;line-height:1;margin-bottom:6px;">
-        <?= ($totalAccommodations + $totalVenues) ?>
-      </div>
-      <div style="font-size:0.82rem;color:#64748B;">
-        <strong><?= $totalAccommodations ?></strong> Hotels &bull; <strong><?= $totalVenues ?></strong> Venues
-      </div>
-    </div>
-    <div style="margin-top:16px;padding-top:12px;border-top:1px solid #F1F5F9;">
-      <a href="<?= ADMIN_URL ?>/accommodations.php" style="font-size:0.82rem;font-weight:700;color:#0F172A;display:inline-flex;align-items:center;gap:4px;">
-        Manage Accommodations &rarr;
+    <div style="padding-top:12px;border-top:1px solid #FCE7F3;">
+      <a href="<?= ADMIN_URL ?>/offer-popup.php" class="admin-btn" style="width:100%;font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#DB2777;color:#FFFFFF;border:none;">
+        ⚙️ Turn On/Off or Change Offer &rarr;
       </a>
     </div>
   </div>
@@ -209,76 +253,34 @@ require_once __DIR__ . '/includes/admin-header.php';
 </div>
 
 <!-- =====================================================================
-     OPERATIONAL WORKFLOW STATUS PIPELINE
-     ===================================================================== -->
-<div class="admin-card" style="padding:22px 24px;margin-bottom:28px;">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
-    <div>
-      <h3 style="font-size:1.1rem;color:#0F172A;font-weight:700;margin:0 0 4px 0;">Trip Inquiry Workflow Pipeline</h3>
-      <p style="font-size:0.8rem;color:#64748B;margin:0;">Real-time breakdown of leads through the 8 availability and confirmation stages</p>
-    </div>
-    <a href="<?= ADMIN_URL ?>/enquiries.php" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:600;">
-      View All Inquiries
-    </a>
-  </div>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:12px;">
-    
-    <a href="<?= ADMIN_URL ?>/enquiries.php?status=new" style="background:#FEF2F2;border:1px solid #FCA5A5;border-radius:8px;padding:12px;text-decoration:none;display:block;">
-      <div style="font-size:0.7rem;text-transform:uppercase;color:#991B1B;font-weight:700;">1. New Inquiries</div>
-      <div style="font-size:1.5rem;font-weight:800;color:#991B1B;margin-top:4px;"><?= $wfStats['new'] ?></div>
-    </a>
-
-    <a href="<?= ADMIN_URL ?>/enquiries.php?status=checking_availability" style="background:#FFFBEB;border:1px solid #FCD34D;border-radius:8px;padding:12px;text-decoration:none;display:block;">
-      <div style="font-size:0.7rem;text-transform:uppercase;color:#92400E;font-weight:700;">2. Checking Hotel</div>
-      <div style="font-size:1.5rem;font-weight:800;color:#92400E;margin-top:4px;"><?= $wfStats['checking_availability'] ?></div>
-    </a>
-
-    <a href="<?= ADMIN_URL ?>/enquiries.php?status=availability_confirmed" style="background:#EFF6FF;border:1px solid #93C5FD;border-radius:8px;padding:12px;text-decoration:none;display:block;">
-      <div style="font-size:0.7rem;text-transform:uppercase;color:#1E40AF;font-weight:700;">3. Available</div>
-      <div style="font-size:1.5rem;font-weight:800;color:#1E40AF;margin-top:4px;"><?= $wfStats['availability_confirmed'] ?></div>
-    </a>
-
-    <a href="<?= ADMIN_URL ?>/enquiries.php?status=customer_contacted" style="background:#F5F3FF;border:1px solid #C4B5FD;border-radius:8px;padding:12px;text-decoration:none;display:block;">
-      <div style="font-size:0.7rem;text-transform:uppercase;color:#5B21B6;font-weight:700;">4. Contacted</div>
-      <div style="font-size:1.5rem;font-weight:800;color:#5B21B6;margin-top:4px;"><?= $wfStats['customer_contacted'] ?></div>
-    </a>
-
-    <a href="<?= ADMIN_URL ?>/enquiries.php?status=followup_required" style="background:#FFF7ED;border:1px solid #FDBA74;border-radius:8px;padding:12px;text-decoration:none;display:block;">
-      <div style="font-size:0.7rem;text-transform:uppercase;color:#9A3412;font-weight:700;">5. Follow-Up</div>
-      <div style="font-size:1.5rem;font-weight:800;color:#9A3412;margin-top:4px;"><?= $wfStats['followup_required'] ?></div>
-    </a>
-
-    <a href="<?= ADMIN_URL ?>/enquiries.php?status=booking_confirmed" style="background:#F0FDF4;border:1px solid #86EFAC;border-radius:8px;padding:12px;text-decoration:none;display:block;">
-      <div style="font-size:0.7rem;text-transform:uppercase;color:#166534;font-weight:700;">6. Confirmed</div>
-      <div style="font-size:1.5rem;font-weight:800;color:#166534;margin-top:4px;"><?= $wfStats['booking_confirmed'] ?></div>
-    </a>
-
-  </div>
-</div>
-
-<!-- =====================================================================
-     RECENT BOOKINGS & RECENT INQUIRIES TABLES
+     RECENT CUSTOMER INQUIRIES (LEADS WITH 1-CLICK WHATSAPP & CALL)
      ===================================================================== -->
 <div style="display:grid;grid-template-columns:1fr;gap:28px;">
 
-  <!-- Section: Recent Customer Booking Reservations -->
-  <div class="admin-card" style="padding:24px 28px;margin-bottom:0;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+  <!-- Section: Recent Customer Inquiries -->
+  <div class="admin-card" style="padding:24px 28px;margin-bottom:0;border-radius:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px;">
       <div>
-        <h3 style="font-size:1.15rem;color:#0F172A;font-weight:700;margin-bottom:4px;">Recent Booking Reservations</h3>
-        <p style="font-size:0.82rem;color:#64748B;margin:0;">Stored customer personal details and reserved itineraries</p>
+        <h3 style="font-size:1.2rem;color:#0F172A;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:8px;">
+          <span>💬 Recent Customer Inquiries</span>
+          <?php if ($newEnquiries > 0): ?>
+            <span style="background:#DC2626;color:#FFF;font-size:0.75rem;padding:2px 8px;border-radius:999px;font-weight:700;"><?= $newEnquiries ?> New</span>
+          <?php endif; ?>
+        </h3>
+        <p style="font-size:0.84rem;color:#64748B;margin:0;">Travelers who filled the inquiry form on your website. Chat with them on WhatsApp with 1 tap!</p>
       </div>
-      <a href="<?= ADMIN_URL ?>/bookings.php" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:700;">
-        <span>View All Bookings &rarr;</span>
+      <a href="<?= ADMIN_URL ?>/enquiries.php" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:700;">
+        <span>View All Inquiries (<?= $totalEnquiries ?>) &rarr;</span>
       </a>
     </div>
 
-    <?php if (empty($recentBookings)): ?>
-      <div style="text-align:center;padding:40px 20px;background:#F8FAFC;border-radius:10px;border:1px dashed #CBD5E1;">
-        <div style="font-size:2rem;margin-bottom:8px;">🎟️</div>
-        <div style="font-size:0.95rem;font-weight:600;color:#0F172A;">No booking reservations recorded yet</div>
-        <p style="font-size:0.84rem;color:#64748B;margin-top:4px;">Customer reservations submitted via packages will appear here immediately.</p>
+    <?php if (empty($recentEnquiries)): ?>
+      <div style="text-align:center;padding:40px 20px;background:#F8FAFC;border-radius:12px;border:1.5px dashed #CBD5E1;">
+        <div style="font-size:2.4rem;margin-bottom:8px;">📬</div>
+        <div style="font-size:1.05rem;font-weight:700;color:#0F172A;">No Inquiries Received Yet</div>
+        <p style="font-size:0.86rem;color:#64748B;margin-top:6px;max-width:500px;margin-left:auto;margin-right:auto;">
+          When visitors fill the inquiry form on your website, their name, destination, and phone number will appear right here with a green WhatsApp chat button!
+        </p>
       </div>
     <?php else: ?>
       <div style="overflow-x:auto;">
@@ -287,97 +289,11 @@ require_once __DIR__ . '/includes/admin-header.php';
             <tr>
               <th>Ref No</th>
               <th>Customer Name</th>
-              <th>Phone / WhatsApp</th>
-              <th>Tour Package</th>
-              <th>Departure Date</th>
-              <th>Guests</th>
-              <th>Status</th>
-              <th style="text-align:right;">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($recentBookings as $b): ?>
-              <?php
-                $cleanPhone = preg_replace('/[^0-9]/', '', $b['customer_phone'] ?? '');
-                if (strlen($cleanPhone) === 10) $cleanPhone = '91' . $cleanPhone;
-                $waMsg = urlencode("Hello {$b['customer_name']}, this is Midhila Voyages regarding your Booking Ref #{$b['booking_reference']}.");
-                $waBkgUrl = "https://wa.me/{$cleanPhone}?text={$waMsg}";
-              ?>
-              <tr>
-                <td>
-                  <a href="<?= BASE_URL ?>/payment-success.php?ref=<?= e($b['booking_reference']) ?>" target="_blank" style="font-family:monospace;font-size:0.86rem;font-weight:700;color:#0F172A;text-decoration:none;">
-                    <?= e($b['booking_reference']) ?> ↗
-                  </a>
-                </td>
-                <td>
-                  <strong style="color:#0F172A;"><?= e($b['customer_name']) ?></strong>
-                </td>
-                <td>
-                  <a href="tel:<?= e($b['customer_phone']) ?>" style="color:#0F172A;font-size:0.86rem;text-decoration:none;font-weight:600;">
-                    📞 <?= e($b['customer_phone']) ?>
-                  </a>
-                </td>
-                <td>
-                  <div style="font-weight:600;color:#0F172A;"><?= e($b['package_title'] ?: 'Custom Tour Package') ?></div>
-                </td>
-                <td style="font-size:0.86rem;color:#334155;">
-                  <?= !empty($b['travel_date']) ? date('d M Y', strtotime($b['travel_date'])) : 'Flexible' ?>
-                </td>
-                <td style="font-size:0.86rem;color:#334155;">
-                  <?= (int)$b['travellers_count'] ?> Guest<?= (int)$b['travellers_count'] === 1 ? '' : 's' ?>
-                </td>
-                <td>
-                  <span class="badge <?= ($b['booking_status'] === 'confirmed') ? 'badge-success' : (($b['booking_status'] === 'pending') ? 'badge-warning' : 'badge-neutral') ?>">
-                    <?= ucfirst(e($b['booking_status'] ?? 'pending')) ?>
-                  </span>
-                </td>
-                <td style="text-align:right;">
-                  <div style="display:inline-flex;gap:6px;justify-content:flex-end;">
-                    <a href="<?= e($waBkgUrl) ?>" target="_blank" rel="noopener noreferrer" class="admin-btn admin-btn-sm" style="background:#25D366;color:#FFFFFF;border:none;font-weight:600;padding:5px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;" title="WhatsApp Guest">
-                      <span>WhatsApp</span>
-                    </a>
-                    <a href="<?= BASE_URL ?>/payment-success.php?ref=<?= e($b['booking_reference']) ?>" target="_blank" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:600;padding:5px 10px;">
-                      <span>Voucher</span>
-                    </a>
-                  </div>
-                </td>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
-      </div>
-    <?php endif; ?>
-  </div>
-
-  <!-- Section: Recent Inquiries -->
-  <div class="admin-card" style="padding:24px 28px;margin-bottom:0;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
-      <div>
-        <h3 style="font-size:1.15rem;color:#0F172A;font-weight:700;margin-bottom:4px;">Recent Trip Inquiries</h3>
-        <p style="font-size:0.82rem;color:#64748B;margin:0;">Incoming leads for Kerala holidays, pilgrimages, and customized stays</p>
-      </div>
-      <a href="<?= ADMIN_URL ?>/enquiries.php" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:700;">
-        <span>View All Inquiries &rarr;</span>
-      </a>
-    </div>
-
-    <?php if (empty($recentEnquiries)): ?>
-      <div style="text-align:center;padding:40px 20px;background:#F8FAFC;border-radius:10px;border:1px dashed #CBD5E1;">
-        <div style="font-size:2rem;margin-bottom:8px;">📬</div>
-        <div style="font-size:0.95rem;font-weight:600;color:#0F172A;">No inquiries received yet</div>
-      </div>
-    <?php else: ?>
-      <div style="overflow-x:auto;">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Ref No</th>
-              <th>Traveler</th>
               <th>Destination / Stay</th>
-              <th>Contact Phone</th>
+              <th>Phone Number</th>
               <th>Status</th>
               <th>Received</th>
-              <th style="text-align:right;">Actions</th>
+              <th style="text-align:right;">Quick Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -395,7 +311,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                   </a>
                 </td>
                 <td>
-                  <strong style="color:#0F172A;"><?= e($enq['full_name']) ?></strong>
+                  <strong style="color:#0F172A;font-size:0.95rem;"><?= e($enq['full_name']) ?></strong>
                 </td>
                 <td>
                   <div style="font-weight:600;color:#0F172A;font-size:0.88rem;">
@@ -403,7 +319,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                   </div>
                 </td>
                 <td>
-                  <a href="tel:<?= e($enq['phone']) ?>" style="font-size:0.86rem;font-weight:600;color:#0F172A;text-decoration:none;">
+                  <a href="tel:<?= e($enq['phone']) ?>" style="font-size:0.88rem;font-weight:700;color:#0F172A;text-decoration:none;">
                     📞 <?= e($enq['phone']) ?>
                   </a>
                 </td>
@@ -427,11 +343,102 @@ require_once __DIR__ . '/includes/admin-header.php';
                 </td>
                 <td style="text-align:right;">
                   <div style="display:inline-flex;gap:6px;justify-content:flex-end;">
-                    <a href="<?= e($waLeadUrl) ?>" target="_blank" rel="noopener noreferrer" class="admin-btn admin-btn-sm" style="background:#25D366;color:#FFFFFF;border:none;font-weight:600;padding:5px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;">
-                      <span>WhatsApp</span>
+                    <a href="<?= e($waLeadUrl) ?>" target="_blank" rel="noopener noreferrer" class="admin-btn admin-btn-sm" style="background:#25D366;color:#FFFFFF;border:none;font-weight:700;padding:6px 12px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;">
+                      <span>💬 WhatsApp</span>
                     </a>
-                    <a href="<?= ADMIN_URL ?>/enquiry-view.php?id=<?= (int)$enq['id'] ?>" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:600;padding:5px 10px;">
-                      <span>View Lead</span>
+                    <a href="<?= ADMIN_URL ?>/enquiry-view.php?id=<?= (int)$enq['id'] ?>" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:600;padding:6px 12px;">
+                      <span>View</span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+    <?php endif; ?>
+  </div>
+
+  <!-- Section: Recent Bookings -->
+  <div class="admin-card" style="padding:24px 28px;margin-bottom:0;border-radius:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <h3 style="font-size:1.2rem;color:#0F172A;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:8px;">
+          <span>🎟️ Recent Tour Bookings</span>
+        </h3>
+        <p style="font-size:0.84rem;color:#64748B;margin:0;">Stored customer personal details and instant printable vouchers</p>
+      </div>
+      <a href="<?= ADMIN_URL ?>/bookings.php" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:700;">
+        <span>View All Bookings (<?= $totalBookings ?>) &rarr;</span>
+      </a>
+    </div>
+
+    <?php if (empty($recentBookings)): ?>
+      <div style="text-align:center;padding:40px 20px;background:#F8FAFC;border-radius:12px;border:1.5px dashed #CBD5E1;">
+        <div style="font-size:2.4rem;margin-bottom:8px;">🎟️</div>
+        <div style="font-size:1.05rem;font-weight:700;color:#0F172A;">No Bookings Recorded Yet</div>
+        <p style="font-size:0.86rem;color:#64748B;margin-top:6px;max-width:500px;margin-left:auto;margin-right:auto;">
+          When travelers book any tour package, their reservation details will appear here with an instant printable voucher and WhatsApp link.
+        </p>
+      </div>
+    <?php else: ?>
+      <div style="overflow-x:auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Ref No</th>
+              <th>Customer Name</th>
+              <th>Phone Number</th>
+              <th>Tour Package</th>
+              <th>Departure Date</th>
+              <th>Guests</th>
+              <th>Status</th>
+              <th style="text-align:right;">Quick Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($recentBookings as $b): ?>
+              <?php
+                $cleanPhone = preg_replace('/[^0-9]/', '', $b['customer_phone'] ?? '');
+                if (strlen($cleanPhone) === 10) $cleanPhone = '91' . $cleanPhone;
+                $waMsg = urlencode("Hello {$b['customer_name']}, this is Midhila Voyages regarding your Booking Ref #{$b['booking_reference']}.");
+                $waBkgUrl = "https://wa.me/{$cleanPhone}?text={$waMsg}";
+              ?>
+              <tr>
+                <td>
+                  <a href="<?= BASE_URL ?>/payment-success.php?ref=<?= e($b['booking_reference']) ?>" target="_blank" style="font-family:monospace;font-size:0.86rem;font-weight:700;color:#0F172A;text-decoration:none;">
+                    <?= e($b['booking_reference']) ?> ↗
+                  </a>
+                </td>
+                <td>
+                  <strong style="color:#0F172A;font-size:0.95rem;"><?= e($b['customer_name']) ?></strong>
+                </td>
+                <td>
+                  <a href="tel:<?= e($b['customer_phone']) ?>" style="color:#0F172A;font-size:0.88rem;text-decoration:none;font-weight:700;">
+                    📞 <?= e($b['customer_phone']) ?>
+                  </a>
+                </td>
+                <td>
+                  <div style="font-weight:600;color:#0F172A;"><?= e($b['package_title'] ?: 'Custom Tour Package') ?></div>
+                </td>
+                <td style="font-size:0.86rem;color:#334155;">
+                  <?= !empty($b['travel_date']) ? date('d M Y', strtotime($b['travel_date'])) : 'Flexible' ?>
+                </td>
+                <td style="font-size:0.86rem;color:#334155;">
+                  <?= (int)$b['travellers_count'] ?> Guest<?= (int)$b['travellers_count'] === 1 ? '' : 's' ?>
+                </td>
+                <td>
+                  <span class="badge <?= ($b['booking_status'] === 'confirmed') ? 'badge-success' : (($b['booking_status'] === 'pending') ? 'badge-warning' : 'badge-neutral') ?>">
+                    <?= ucfirst(e($b['booking_status'] ?? 'pending')) ?>
+                  </span>
+                </td>
+                <td style="text-align:right;">
+                  <div style="display:inline-flex;gap:6px;justify-content:flex-end;">
+                    <a href="<?= e($waBkgUrl) ?>" target="_blank" rel="noopener noreferrer" class="admin-btn admin-btn-sm" style="background:#25D366;color:#FFFFFF;border:none;font-weight:700;padding:6px 12px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;" title="WhatsApp Guest">
+                      <span>💬 WhatsApp</span>
+                    </a>
+                    <a href="<?= BASE_URL ?>/payment-success.php?ref=<?= e($b['booking_reference']) ?>" target="_blank" class="admin-btn admin-btn-outline admin-btn-sm" style="font-weight:700;padding:6px 12px;">
+                      <span>🎟️ Voucher</span>
                     </a>
                   </div>
                 </td>

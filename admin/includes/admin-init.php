@@ -17,5 +17,10 @@ require_once dirname(__DIR__, 2) . '/includes/csrf.php';
 
 require_admin_login();
 
+// Prevent browser caching of dynamic admin management views
+header('Cache-Control: no-cache, no-store, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: 0');
+
 $currentAdmin = get_logged_in_admin();
 $db = getDB();

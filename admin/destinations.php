@@ -40,6 +40,16 @@ $adminHeading = 'Destinations Catalog';
 require_once __DIR__ . '/includes/admin-header.php';
 ?>
 
+<!-- Simple Top Category Switcher -->
+<div style="display:flex;gap:10px;margin-bottom:20px;border-bottom:1px solid #E2E8F0;padding-bottom:14px;">
+  <a href="<?= ADMIN_URL ?>/destinations.php" style="background:#0F172A;color:#FFFFFF;padding:9px 18px;border-radius:8px;font-size:0.9rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+    <span>📍 All Destinations</span>
+  </a>
+  <a href="<?= ADMIN_URL ?>/tourism-categories.php" style="background:#FFFFFF;color:#475569;border:1px solid #CBD5E1;padding:9px 18px;border-radius:8px;font-size:0.9rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">
+    <span>🌴 Kerala Tourism Pillars</span>
+  </a>
+</div>
+
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:16px;">
   <div>
     <h3 style="font-size:1.15rem;color:var(--admin-navy);">All Destinations</h3>
