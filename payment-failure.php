@@ -40,7 +40,7 @@ require_once __DIR__ . '/includes/header.php';
         </a>
 
         <a href="<?= e($waUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" style="padding:14px 26px;">
-          <span>Assisted WhatsApp Checkout</span>
+          <span><?= e(__t('btn_whatsapp_us', 'Enquiry on WhatsApp')) ?></span>
         </a>
       </div>
 

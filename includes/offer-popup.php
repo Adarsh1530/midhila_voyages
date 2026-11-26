@@ -20,7 +20,7 @@ $popupPrice = get_setting('popup_offer_price', '₹6,500');
 $popupPriceSub = get_setting('popup_offer_price_sub', 'per person • 5D / 4N');
 $popupDates = get_setting('popup_offer_dates', 'Upcoming Tour Dates: 23.12.26 to 27.12.26');
 $popupImage = get_setting('popup_offer_image', 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80');
-$popupBtnText = get_setting('popup_offer_btn_text', 'Claim Offer on WhatsApp');
+$popupBtnText = get_setting('popup_offer_btn_text', 'Enquiry on WhatsApp');
 $popupBtnLink = get_setting('popup_offer_link', '');
 $popupFrequency = get_setting('popup_offer_frequency', 'session'); // 'session' or 'always'
 

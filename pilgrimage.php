@@ -53,7 +53,7 @@ require_once __DIR__ . '/includes/header.php';
         <span>Explore Sacred Circuits</span>
       </a>
       <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to arrange a family/group pilgrimage tour.")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
-        <span>Group Yatra Enquiry</span>
+        <span><?= e(__t('btn_whatsapp_us', 'Enquiry on WhatsApp')) ?></span>
       </a>
     </div>
   </div>
@@ -140,7 +140,7 @@ require_once __DIR__ . '/includes/header.php';
           </p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;">
             <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I want to reserve slots for the 5-Day Pilgrim Tour (₹6,500).")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
-              <span><?= e(__t('btn_whatsapp_us', 'Reserve via WhatsApp')) ?></span>
+              <span><?= e(__t('btn_whatsapp_us', 'Enquiry on WhatsApp')) ?></span>
             </a>
             <a href="<?= BASE_URL ?>/enquiry.php?package=pilgrim-tour" class="btn-cinematic-primary">
               <span><?= e(__t('btn_book_now', 'Book Online')) ?></span>

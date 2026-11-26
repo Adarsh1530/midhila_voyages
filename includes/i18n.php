@@ -247,9 +247,9 @@ function get_translation_dictionary(): array {
             'ta' => 'விவரங்களை காண்க'
         ],
         'btn_whatsapp_us' => [
-            'en' => 'WhatsApp Specialist',
-            'ml' => 'വാട്സ്ആപ്പിൽ സംസാരിക്കാം',
-            'ta' => 'வாட்ஸ்அப் மூலம் தொடர்புகொள்ள'
+            'en' => 'Enquiry on WhatsApp',
+            'ml' => 'വാട്സ്ആപ്പിൽ അന്വേഷിക്കാം',
+            'ta' => 'வாட்ஸ்அப்பில் விசாரிக்க'
         ],
         'btn_filter' => [
             'en' => 'Filter Options',
@@ -832,9 +832,9 @@ function get_translation_dictionary(): array {
             'ta' => 'பயண கோரிக்கையை அனுப்புக'
         ],
         'chat_on_whatsapp' => [
-            'en' => 'Chat on WhatsApp',
-            'ml' => 'വാട്സ്ആപ്പിൽ സംസാരിക്കാം',
-            'ta' => 'வாட்ஸ்அப்பில் உரையாட'
+            'en' => 'Enquiry on WhatsApp',
+            'ml' => 'വാട്സ്ആപ്പിൽ അന്വേഷിക്കാം',
+            'ta' => 'வாட்ஸ்அப்பில் விசாரிக்க'
         ],
         'prefer_instant_messaging' => [
             'en' => 'Prefer instant messaging?',

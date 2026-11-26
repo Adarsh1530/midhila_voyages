@@ -177,7 +177,7 @@ require_once __DIR__ . '/includes/header.php';
           <div style="display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--color-border);padding-top:20px;">
             <a href="<?= e($waDestUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" style="width:100%;justify-content:center;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.54 2.11.83 3.292.83 3.183 0 5.768-2.587 5.768-5.766.001-3.181-2.585-5.767-5.764-5.767zm7.653 5.766c0 4.225-3.438 7.663-7.654 7.663-1.309 0-2.569-.334-3.674-.925l-4.148 1.088 1.107-4.041c-.696-1.187-1.077-2.55-1.077-3.957 0-4.224 3.438-7.662 7.654-7.662 4.226 0 7.662 3.438 7.662 7.662z"/></svg>
-              <span><?= e(__t('btn_whatsapp_us', 'Enquire for')) ?> <?= e($destDisplayName) ?></span>
+              <span><?= e(__t('btn_whatsapp_us', 'Enquiry on WhatsApp')) ?></span>
             </a>
 
             <a href="<?= BASE_URL ?>/custom-tour.php?destination_id=<?= (int)$dest['id'] ?>" class="btn-cinematic-primary" style="width:100%;justify-content:center;">
@@ -212,7 +212,7 @@ require_once __DIR__ . '/includes/header.php';
     <?php if (empty($packages)): ?>
       <div style="padding:60px 20px;border:1px dashed var(--color-border);border-radius:var(--radius-md);text-align:center;background:#FAFAFA;">
         <p style="color:var(--color-text-muted);margin-bottom:16px;">We design bespoke private itineraries for <?= e($destDisplayName) ?> on request.</p>
-        <a href="<?= e($waDestUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid"><?= e(__t('btn_whatsapp_us', 'Chat with Our Specialist')) ?></a>
+        <a href="<?= e($waDestUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid"><?= e(__t('btn_whatsapp_us', 'Enquiry on WhatsApp')) ?></a>
       </div>
     <?php else: ?>
       <div class="packages-grid">

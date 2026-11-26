@@ -307,7 +307,7 @@ require_once __DIR__ . '/includes/header.php';
     </p>
     <div style="display:flex;gap:10px;">
       <a href="<?= e($submittedRecord['wa_url']) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid" style="flex:1;justify-content:center;padding:12px;">
-        <span>Chat on WhatsApp</span>
+        <span><?= e(__t('btn_whatsapp_us', 'Enquiry on WhatsApp')) ?></span>
       </a>
       <a href="<?= BASE_URL ?>/index.php" class="btn-cinematic-secondary" style="flex:1;justify-content:center;padding:12px;">
         <span>Back to Home</span>

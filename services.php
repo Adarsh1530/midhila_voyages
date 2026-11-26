@@ -34,7 +34,7 @@ require_once __DIR__ . '/includes/header.php';
       <?= e(get_setting('services_hero_subtitle', 'From private chauffeured road transit to sacred darshan planning and luxury boutique stays, our concierge manages every detail.')) ?>
     </p>
     <a href="<?= e($waServiceUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
-      <span><?= e(get_setting('services_cta_text', 'Consult with a Travel Specialist')) ?></span>
+      <span><?= e(__t('btn_whatsapp_us', 'Enquiry on WhatsApp')) ?></span>
     </a>
   </div>
 </section>

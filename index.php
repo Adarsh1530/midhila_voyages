@@ -488,7 +488,7 @@ require_once __DIR__ . '/includes/header.php';
               <span><?= e(__t('btn_explore_sacred', 'View Pilgrimage Circuit')) ?></span>
             </a>
             <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to reserve seats for the upcoming Pilgrim Tour.")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
-              <span><?= e(__t('btn_whatsapp_us', 'Reserve via WhatsApp')) ?></span>
+              <span><?= e(__t('btn_whatsapp_us', 'Enquiry on WhatsApp')) ?></span>
             </a>
           </div>
         </div>
@@ -670,7 +670,7 @@ require_once __DIR__ . '/includes/header.php';
           </button>
 
           <span style="font-size:0.8rem;color:var(--color-text-muted);">
-            <?= e(__t('prefer_instant_messaging', 'Prefer instant messaging?')) ?> <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to enquire about travel packages.")) ?>" target="_blank" rel="noopener noreferrer" style="color:var(--color-whatsapp);font-weight:700;"><?= e(__t('chat_on_whatsapp', 'Chat on WhatsApp')) ?> &rarr;</a>
+            <?= e(__t('prefer_instant_messaging', 'Prefer instant messaging?')) ?> <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to enquire about travel packages.")) ?>" target="_blank" rel="noopener noreferrer" style="color:var(--color-whatsapp);font-weight:700;"><?= e(__t('btn_whatsapp_us', 'Enquiry on WhatsApp')) ?> &rarr;</a>
           </span>
         </div>
       </form>

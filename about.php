@@ -98,7 +98,7 @@ require_once __DIR__ . '/includes/header.php';
       </p>
       <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
         <a href="<?= e(build_whatsapp_url($agencyWhatsApp, "Hello MIDHILA VOYAGES, I would like to consult with a travel curator.")) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-solid">
-          <span><?= e(__t('btn_whatsapp_us', 'WhatsApp Specialist')) ?></span>
+          <span><?= e(__t('btn_whatsapp_us', 'Enquiry on WhatsApp')) ?></span>
         </a>
         <a href="<?= BASE_URL ?>/contact.php" class="btn-cinematic-primary">
           <span><?= e(__t('nav_contact', 'Contact Our Office')) ?></span>
