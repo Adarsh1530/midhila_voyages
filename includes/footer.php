@@ -78,7 +78,6 @@ $footerWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
           </p>
           <div class="footer-links">
             <a href="<?= BASE_URL ?>/about.php" class="footer-link"><?= e(__t('footer_link_philosophy', 'The Midhila Philosophy')) ?></a>
-            <a href="<?= BASE_URL ?>/faq.php" class="footer-link"><?= e(__t('footer_link_faqs', 'Frequently Asked Questions')) ?></a>
             <a href="<?= BASE_URL ?>/terms.php" class="footer-link"><?= e(__t('footer_link_terms', 'Terms of Service')) ?></a>
             <a href="<?= BASE_URL ?>/privacy.php" class="footer-link"><?= e(__t('footer_link_privacy', 'Privacy Policy')) ?></a>
             <a href="<?= BASE_URL ?>/refund-policy.php" class="footer-link"><?= e(__t('footer_link_refund', 'Booking & Refund Policy')) ?></a>

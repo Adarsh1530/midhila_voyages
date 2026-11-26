@@ -73,16 +73,7 @@ $galleryStmt = $db->query("
 ");
 $galleryItems = $galleryStmt->fetchAll();
 
-// 6. Fetch FAQs
-$faqStmt = $db->query("
-    SELECT * FROM `faqs`
-    WHERE `is_published` = 1
-    ORDER BY `display_order` ASC
-    LIMIT 6
-");
-$faqs = $faqStmt->fetchAll();
-
-// 7. Fetch Verified Testimonials
+// 6. Fetch Verified Testimonials
 $testStmt = $db->query("
     SELECT * FROM `testimonials`
     WHERE `is_verified` = 1 AND `is_featured` = 1

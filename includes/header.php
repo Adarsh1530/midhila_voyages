@@ -169,9 +169,9 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
         <a href="<?= BASE_URL ?>/packages.php" class="nav-link <?= in_array($currentScript, ['packages.php', 'package.php']) ? 'is-active' : '' ?>"><?= __t('nav_packages') ?></a>
         <a href="<?= BASE_URL ?>/contact.php" class="nav-link <?= ($currentScript === 'contact.php') ? 'is-active' : '' ?>"><?= __t('nav_contact') ?></a>
         
-        <!-- More Dropdown for Destinations, Custom Tour, Pilgrimage Tourism, and FAQs -->
+        <!-- More Dropdown for Destinations, Custom Tour, and Pilgrimage Tourism -->
         <div class="nav-dropdown" id="navMoreDropdown">
-          <button type="button" class="nav-dropdown-btn <?= in_array($currentScript, ['destinations.php', 'destination.php', 'custom-tour.php', 'pilgrimage.php', 'faq.php']) ? 'is-active' : '' ?>" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="nav-dropdown-btn <?= in_array($currentScript, ['destinations.php', 'destination.php', 'custom-tour.php', 'pilgrimage.php']) ? 'is-active' : '' ?>" aria-haspopup="true" aria-expanded="false">
             <span><?= __t('nav_more', 'More') ?></span>
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
@@ -179,7 +179,6 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
             <a href="<?= BASE_URL ?>/destinations.php" class="nav-dropdown-item <?= in_array($currentScript, ['destinations.php', 'destination.php']) ? 'is-active' : '' ?>"><?= __t('nav_destinations') ?></a>
             <a href="<?= BASE_URL ?>/custom-tour.php" class="nav-dropdown-item <?= ($currentScript === 'custom-tour.php') ? 'is-active' : '' ?>"><?= __t('nav_custom_tour') ?></a>
             <a href="<?= BASE_URL ?>/pilgrimage.php" class="nav-dropdown-item <?= ($currentScript === 'pilgrimage.php') ? 'is-active' : '' ?>"><?= __t('nav_pilgrimage') ?></a>
-            <a href="<?= BASE_URL ?>/faq.php" class="nav-dropdown-item <?= ($currentScript === 'faq.php') ? 'is-active' : '' ?>"><?= __t('nav_faqs') ?></a>
           </div>
         </div>
       </nav>
@@ -236,7 +235,6 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
             <a href="<?= BASE_URL ?>/destinations.php" class="mobile-drawer__link <?= in_array($currentScript, ['destinations.php', 'destination.php']) ? 'is-active' : '' ?>" style="font-size:1.1rem;padding-bottom:6px;"><?= __t('nav_destinations') ?></a>
             <a href="<?= BASE_URL ?>/custom-tour.php" class="mobile-drawer__link <?= ($currentScript === 'custom-tour.php') ? 'is-active' : '' ?>" style="font-size:1.1rem;padding-bottom:6px;"><?= __t('nav_custom_tour') ?></a>
             <a href="<?= BASE_URL ?>/pilgrimage.php" class="mobile-drawer__link <?= ($currentScript === 'pilgrimage.php') ? 'is-active' : '' ?>" style="font-size:1.1rem;padding-bottom:6px;"><?= __t('nav_pilgrimage') ?></a>
-            <a href="<?= BASE_URL ?>/faq.php" class="mobile-drawer__link <?= ($currentScript === 'faq.php') ? 'is-active' : '' ?>" style="font-size:1.1rem;padding-bottom:6px;"><?= __t('nav_faqs') ?></a>
           </div>
         </div>
       </nav>
