@@ -182,6 +182,20 @@ function is_payment_handler(): bool {
 function require_role($allowedRoles, ?string $redirectUrl = null): void {
     require_admin_login();
 
+    // Dynamically enforce module privilege check if viewing a registered console module
+    $currentModule = get_current_admin_module();
+    if ($currentModule !== null && !has_privilege_access($currentModule)) {
+        $currentRole = get_admin_role();
+        $roleLabel = get_role_label($currentRole);
+        set_flash_message('error', "Access Restricted: Your account role ({$roleLabel}) does not have privilege access to this section.");
+
+        if ($redirectUrl === null) {
+            $redirectUrl = ADMIN_URL . '/dashboard.php';
+        }
+        header('Location: ' . $redirectUrl);
+        exit;
+    }
+
     if (!has_role($allowedRoles)) {
         $currentRole = get_admin_role();
         $roleLabel = get_role_label($currentRole);
@@ -189,7 +203,7 @@ function require_role($allowedRoles, ?string $redirectUrl = null): void {
 
         if ($redirectUrl === null) {
             if ($currentRole === 'payment_handle') {
-                $redirectUrl = ADMIN_URL . '/payments.php';
+                $redirectUrl = ADMIN_URL . '/bookings.php';
             } else {
                 $redirectUrl = ADMIN_URL . '/dashboard.php';
             }
@@ -250,4 +264,156 @@ function get_all_roles(): array {
             'tag' => 'Bookings & Reservations'
         ]
     ];
+}
+
+/**
+ * Return all 9 official admin console navigation modules matching sidebar
+ */
+function get_admin_modules(): array {
+    return [
+        'dashboard' => [
+            'name' => 'Home / Dashboard',
+            'file' => 'dashboard.php',
+            'desc' => 'Overview KPI counts, analytics & quick action cards',
+        ],
+        'enquiries' => [
+            'name' => 'Customer Inquiries',
+            'file' => 'enquiries.php',
+            'desc' => 'Trip inquiries & 1-tap direct WhatsApp communication',
+        ],
+        'bookings' => [
+            'name' => 'Tour Bookings',
+            'file' => 'bookings.php',
+            'desc' => 'Guest reservations, traveller rosters & printable travel vouchers',
+        ],
+        'packages' => [
+            'name' => 'Tour Packages',
+            'file' => 'packages.php',
+            'desc' => 'Create, edit & price holiday packages, day itineraries & stays',
+        ],
+        'destinations' => [
+            'name' => 'Destinations',
+            'file' => 'destinations.php',
+            'desc' => 'Showcase destinations, highlights, best time to visit & spots',
+        ],
+        'offer_popup' => [
+            'name' => 'Offer Popup Banner',
+            'file' => 'offer-popup.php',
+            'desc' => 'Seasonal promo flyer, deal headline & popup display status',
+        ],
+        'gallery' => [
+            'name' => 'Photo Gallery',
+            'file' => 'gallery.php',
+            'desc' => 'Photo library showcase upload (≤ 500 KB compressed)',
+        ],
+        'users' => [
+            'name' => 'Staff Accounts',
+            'file' => 'users.php',
+            'desc' => 'Create staff credentials, passwords & assign access roles',
+        ],
+        'privileges' => [
+            'name' => 'Privilege Settings',
+            'file' => 'privileges.php',
+            'desc' => 'Manage role-based check-in & check-out access clearance',
+        ],
+    ];
+}
+
+/**
+ * Default module privileges configuration
+ */
+function get_default_module_privileges(): array {
+    return [
+        'dashboard'    => ['super_admin', 'travel_manage', 'payment_handle'],
+        'enquiries'    => ['super_admin', 'travel_manage', 'payment_handle'],
+        'bookings'     => ['super_admin', 'travel_manage', 'payment_handle'],
+        'packages'     => ['super_admin', 'travel_manage'],
+        'destinations' => ['super_admin', 'travel_manage'],
+        'offer_popup'  => ['super_admin', 'travel_manage'],
+        'gallery'      => ['super_admin', 'travel_manage'],
+        'users'        => ['super_admin'],
+        'privileges'   => ['super_admin'],
+    ];
+}
+
+/**
+ * Retrieve current module privileges mapping from database or defaults
+ */
+function get_module_privileges(): array {
+    static $cachedPrivs = null;
+    if ($cachedPrivs !== null) {
+        return $cachedPrivs;
+    }
+
+    $defaults = get_default_module_privileges();
+    $raw = get_setting('module_privileges', '');
+
+    if (!empty($raw)) {
+        $decoded = json_decode($raw, true);
+        if (is_array($decoded)) {
+            foreach ($defaults as $m => $roles) {
+                if (!isset($decoded[$m]) || !is_array($decoded[$m])) {
+                    $decoded[$m] = $roles;
+                }
+                // Super admin always retains unrestricted clearance
+                if (!in_array('super_admin', $decoded[$m], true)) {
+                    $decoded[$m][] = 'super_admin';
+                }
+            }
+            $cachedPrivs = $decoded;
+            return $cachedPrivs;
+        }
+    }
+
+    $cachedPrivs = $defaults;
+    return $cachedPrivs;
+}
+
+/**
+ * Check if the given role (or current logged-in role) has privilege access to a module
+ */
+function has_privilege_access(string $module, ?string $role = null): bool {
+    if ($role === null) {
+        if (!is_admin_logged_in()) {
+            return false;
+        }
+        $role = get_admin_role();
+    }
+
+    // Super Admin always has 100% full clearance
+    if ($role === 'super_admin') {
+        return true;
+    }
+
+    // Support legacy role aliases
+    if ($role === 'manager' || $role === 'editor') {
+        $role = 'travel_manage';
+    }
+
+    $privs = get_module_privileges();
+    $allowed = $privs[$module] ?? [];
+
+    return in_array($role, $allowed, true);
+}
+
+/**
+ * Detect the current admin module based on the active script filename
+ */
+function get_current_admin_module(): ?string {
+    $script = basename($_SERVER['PHP_SELF'] ?? '');
+    $map = [
+        'dashboard.php'        => 'dashboard',
+        'enquiries.php'        => 'enquiries',
+        'enquiry-view.php'     => 'enquiries',
+        'bookings.php'         => 'bookings',
+        'packages.php'         => 'packages',
+        'package-edit.php'     => 'packages',
+        'destinations.php'     => 'destinations',
+        'destination-edit.php' => 'destinations',
+        'offer-popup.php'      => 'offer_popup',
+        'gallery.php'          => 'gallery',
+        'users.php'            => 'users',
+        'privileges.php'       => 'privileges',
+    ];
+    return $map[$script] ?? null;
 }
