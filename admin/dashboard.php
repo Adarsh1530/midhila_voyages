@@ -1,7 +1,7 @@
 <?php
 /**
  * MIDHILA VOYAGES — Admin Dashboard Overview
- * Daily Operations Hub — Enquiries, Bookings, Accommodations, and Tour Packages
+ * Daily Operations Hub — Enquiries, Bookings, Destinations, and Tour Packages
  */
 
 require_once __DIR__ . '/includes/admin-init.php';
@@ -23,8 +23,7 @@ $wfStats = [
     'customer_contacted' => 0,
     'followup_required' => 0,
     'booking_confirmed' => 0,
-    'cancelled' => 0,
-    'corporate_event' => 0
+    'cancelled' => 0
 ];
 try {
     $wfStats['checking_availability']   = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` = 'checking_availability'")->fetchColumn();
@@ -34,7 +33,6 @@ try {
     $wfStats['followup_required']       = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` = 'followup_required'")->fetchColumn();
     $wfStats['booking_confirmed']       = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` = 'booking_confirmed' OR `status` = 'converted'")->fetchColumn();
     $wfStats['cancelled']               = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `workflow_status` IN ('cancelled', 'rejected') OR `status` = 'closed'")->fetchColumn();
-    $wfStats['corporate_event']         = (int)$db->query("SELECT COUNT(*) FROM `enquiries` WHERE `enquiry_type` = 'corporate_event'")->fetchColumn();
 } catch (Exception $e) {}
 
 $totalBookings     = (int)$db->query("SELECT COUNT(*) FROM `bookings`")->fetchColumn();
@@ -46,7 +44,7 @@ $totalDestinations  = (int)$db->query("SELECT COUNT(*) FROM `destinations` WHERE
 
 // 2. Fetch Recent Enquiries
 $recentEnquiries = $db->query("
-    SELECT `id`, `reference_no`, `full_name`, `phone`, `whatsapp`, `destination_name`, `accommodation_name`,
+    SELECT `id`, `reference_no`, `full_name`, `phone`, `whatsapp`, `destination_name`, `package_title`,
            `enquiry_type`, `workflow_status`, `travel_category`, `travel_requirements`, `status`, `created_at`
     FROM `enquiries`
     ORDER BY `id` DESC LIMIT 6
@@ -251,7 +249,7 @@ require_once __DIR__ . '/includes/admin-header.php';
             <tr>
               <th>Ref No</th>
               <th>Customer Name</th>
-              <th>Destination / Stay</th>
+              <th>Destination / Package</th>
               <th>Phone Number</th>
               <th>Status</th>
               <th>Received</th>
@@ -277,7 +275,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                 </td>
                 <td>
                   <div style="font-weight:600;color:#0F172A;font-size:0.88rem;">
-                    <?= e($enq['destination_name'] ?: ($enq['accommodation_name'] ?: 'Custom Tour')) ?>
+                    <?= e($enq['destination_name'] ?: ($enq['package_title'] ?: 'Custom Tour')) ?>
                   </div>
                 </td>
                 <td>

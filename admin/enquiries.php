@@ -49,7 +49,7 @@ $tab = trim($_GET['tab'] ?? 'all');
 $statusFilter = trim($_GET['status'] ?? '');
 $search = trim($_GET['q'] ?? '');
 
-$validTabs = ['all', 'tour_package', 'custom_tour', 'accommodation', 'kerala_tourism', 'pilgrimage', 'corporate_event'];
+$validTabs = ['all', 'tour_package', 'custom_tour', 'kerala_tourism', 'pilgrimage'];
 if (!in_array($tab, $validTabs, true)) {
     $tab = 'all';
 }
@@ -96,9 +96,9 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
     
     fputcsv($output, [
         'Reference No', 'Type', 'Workflow Status', 'Full Name', 'Phone', 'Email', 
-        'Destination / Venue', 'Package Title', 'Accommodation', 'Rooms', 'Duration (Days)',
+        'Destination', 'Package Title', 'Hotel Category', 'Rooms', 'Duration (Days)',
         'Travel Date', 'Adults', 'Children', 'Food Pref', 'Food Type', 'Sightseeing', 
-        'Corporate Org', 'Event Type', 'Participants', 'Language', 'Submitted At'
+        'Language', 'Submitted At'
     ]);
     
     $exportStmt = $db->prepare("SELECT * FROM `enquiries` {$whereSQL} ORDER BY `id` DESC");
@@ -112,9 +112,9 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
             $row['full_name'],
             $row['phone'],
             $row['email'],
-            $row['destination_name'] ?: ($row['corporate_venue_type'] ?? ''),
+            $row['destination_name'] ?: ($row['package_title'] ?? 'Custom Plan'),
             $row['package_title'],
-            $row['accommodation_name'],
+            $row['accommodation_preference'] ?: 'Standard',
             $row['rooms_count'] ?? 1,
             $row['duration_days'] ?? '',
             $row['departure_date'],
@@ -123,9 +123,6 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
             $row['food_preference'],
             $row['food_type'],
             $row['sightseeing_preference'],
-            $row['corporate_organisation_name'],
-            $row['corporate_event_type'],
-            $row['corporate_participants_count'],
             $row['language'] ?? 'en',
             $row['created_at']
         ]);
@@ -162,10 +159,8 @@ $tabCounts = [
     'all' => get_tab_count($db, 'all'),
     'tour_package' => get_tab_count($db, 'tour_package'),
     'custom_tour' => get_tab_count($db, 'custom_tour'),
-    'accommodation' => get_tab_count($db, 'accommodation'),
     'kerala_tourism' => get_tab_count($db, 'kerala_tourism'),
     'pilgrimage' => get_tab_count($db, 'pilgrimage'),
-    'corporate_event' => get_tab_count($db, 'corporate_event'),
 ];
 
 $adminTitle = 'Centralised Booking Enquiries | MIDHILA VOYAGES';
@@ -268,9 +263,9 @@ require_once __DIR__ . '/includes/admin-header.php';
       <tr>
         <th>Reference &amp; Type</th>
         <th>Customer &amp; Contact</th>
-        <th>Trip / Event Target</th>
-        <th>Travel / Event Dates</th>
-        <th>Guests / Scope</th>
+        <th>Destination / Package</th>
+        <th>Travel Dates</th>
+        <th>Passengers / Seats</th>
         <th>Workflow Status</th>
         <th>Submitted</th>
         <th style="text-align:right;">Actions</th>
@@ -349,17 +344,14 @@ require_once __DIR__ . '/includes/admin-header.php';
             </td>
 
             <td>
-              <?php if ($enqType === 'corporate_event'): ?>
-                <div style="font-weight:600;color:#0F172A;"><?= e($enq['corporate_event_type'] ?: 'Business Event') ?></div>
-                <div style="font-size:0.78rem;color:#7E22CE;"><?= e($enq['corporate_venue_type'] ?: 'Venue Request') ?></div>
-              <?php elseif (!empty($enq['accommodation_name'])): ?>
-                <div style="font-weight:600;color:#0F172A;"><?= e($enq['accommodation_name']) ?></div>
-                <div style="font-size:0.78rem;color:#2563EB;"><?= e($enq['destination_name'] ?: 'Kerala') ?></div>
-              <?php elseif (!empty($enq['package_title'])): ?>
+              <?php if (!empty($enq['package_title'])): ?>
                 <div style="font-weight:600;color:#0F172A;"><?= e($enq['package_title']) ?></div>
                 <div style="font-size:0.78rem;color:var(--admin-gold);"><?= e($enq['destination_name'] ?: 'Curated Circuit') ?></div>
+              <?php elseif (!empty($enq['destination_name'])): ?>
+                <div style="font-weight:600;color:#0F172A;"><?= e($enq['destination_name']) ?></div>
+                <div style="font-size:0.78rem;color:#64748B;">Custom Plan</div>
               <?php else: ?>
-                <div style="font-weight:600;color:#0F172A;"><?= e($enq['destination_name'] ?: 'Custom Plan') ?></div>
+                <div style="font-weight:600;color:#0F172A;">Custom Tour</div>
                 <div style="font-size:0.78rem;color:#64748B;">Bespoke Route</div>
               <?php endif; ?>
             </td>
@@ -374,17 +366,11 @@ require_once __DIR__ . '/includes/admin-header.php';
             </td>
 
             <td style="font-size:0.85rem;">
-              <?php if ($enqType === 'corporate_event'): ?>
-                <strong><?= (int)($enq['corporate_participants_count'] ?? 0) ?></strong> Delegates
-              <?php else: ?>
-                <strong><?= (int)$enq['adults_count'] ?></strong> Adults
-                <?php if ($enq['children_count'] > 0): ?>
-                  , <?= (int)$enq['children_count'] ?> Child
-                <?php endif; ?>
-                <?php if (!empty($enq['rooms_count'])): ?>
-                  <div style="font-size:0.76rem;color:#64748B;"><?= (int)$enq['rooms_count'] ?> Room(s)</div>
-                <?php endif; ?>
-              <?php endif; ?>
+              <?php
+                $totalPax = (int)$enq['adults_count'] + (int)$enq['children_count'];
+              ?>
+              <strong><?= (int)$enq['adults_count'] ?></strong> Adults<?= $enq['children_count'] > 0 ? (', ' . (int)$enq['children_count'] . ' Child') : '' ?>
+              <div style="font-size:0.76rem;color:#64748B;"><?= $totalPax > 0 ? "{$totalPax} Seat" . ($totalPax > 1 ? 's' : '') : '1 Seat' ?></div>
             </td>
 
             <td>

@@ -25,7 +25,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename=midhila_report_' . $startDate . '_to_' . $endDate . '.csv');
     $output = fopen('php://output', 'w');
-    fputcsv($output, ['Ref No', 'Type', 'Workflow Status', 'Full Name', 'Phone', 'Destination / Venue', 'Departure', 'Adults', 'Children', 'Budget', 'Created At']);
+    fputcsv($output, ['Ref No', 'Type', 'Workflow Status', 'Full Name', 'Phone', 'Destination', 'Departure', 'Adults', 'Children', 'Budget', 'Created At']);
 
     $stmt = $db->prepare("SELECT * FROM `enquiries` WHERE " . implode(' AND ', $where) . " ORDER BY id DESC");
     $stmt->execute($params);
@@ -36,7 +36,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
             $row['workflow_status'] ?: $row['status'],
             $row['full_name'],
             $row['phone'],
-            $row['destination_name'] ?: ($row['corporate_venue_type'] ?? ''),
+            $row['destination_name'] ?: ($row['package_title'] ?? 'Custom Plan'),
             $row['departure_date'],
             $row['adults_count'],
             $row['children_count'],

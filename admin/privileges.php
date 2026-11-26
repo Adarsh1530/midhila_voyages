@@ -125,7 +125,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       </div>
       <div style="font-size:1.15rem;font-weight:700;color:#0F172A;margin-bottom:6px;">Tours &amp; Content Operations</div>
       <p style="font-size:0.84rem;color:#475569;line-height:1.5;margin-bottom:14px;">
-        Manages Tour Packages, Hotels &amp; Stays, Destinations, Kerala Tourism Pillars, Photo Gallery, Offer Banner, and responds to customer inquiries.
+        Manages Tour Packages, Destinations, Kerala Tourism Pillars, Photo Gallery, Offer Banner, and responds to customer inquiries.
       </p>
       <div style="border-top:1px solid #F1F5F9;padding-top:12px;display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;">
         <span style="color:#64748B;">Clearance Level:</span>

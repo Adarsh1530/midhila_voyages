@@ -72,7 +72,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:16px;">
   <div>
     <h3 style="font-size:1.25rem;color:var(--admin-navy);font-weight:700;">Customer Registry</h3>
-    <p style="font-size:0.86rem;color:var(--admin-muted);margin:0;">Centralized directory of prospective travellers, repeat guests, and corporate organizers.</p>
+    <p style="font-size:0.86rem;color:var(--admin-muted);margin:0;">Centralized directory of prospective travellers, families, and repeat guests.</p>
   </div>
   <a href="<?= ADMIN_URL ?>/customers.php?export=csv<?= $search ? '&q=' . urlencode($search) : '' ?><?= $filterRepeat ? '&repeat_only=1' : '' ?>" class="admin-btn admin-btn-outline">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>

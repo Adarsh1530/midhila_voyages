@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_acknowledgement_
                   . $mandatoryDisclaimer . "\n\n"
                   . "Enquiry Summary:\n"
                   . "• Booking Reference: " . $refNo . "\n"
-                  . "• Destination / Venue: " . ($enquiry['destination_name'] ?: ($enquiry['corporate_venue_type'] ?? 'Custom Journey')) . "\n"
+                  . "• Destination: " . ($enquiry['destination_name'] ?: ($enquiry['package_title'] ?: 'Custom Journey')) . "\n"
                   . "• Requested Dates: " . ($enquiry['departure_date'] ?: 'Flexible') . "\n"
                   . "• Travellers / Delegates: " . (int)$enquiry['adults_count'] . " Adults" . ($enquiry['children_count'] > 0 ? (", " . (int)$enquiry['children_count'] . " Children") : "") . "\n\n"
                   . "Our dedicated concierge desk is actively reviewing property and chauffeur availability. Should you require urgent changes, kindly connect with us at +91 62829 48227 or reply directly to this notice.\n\n"
@@ -344,130 +344,136 @@ require_once __DIR__ . '/includes/admin-header.php';
           <div style="font-weight:600;"><?= ucwords(str_replace('_', ' ', e($enquiry['sightseeing_preference'] ?: 'Included'))) ?></div>
         </div>
           <div>
+            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Hotel Category:</span>
+            <div style="font-weight:600;color:#0F172A;"><?= e($enquiry['accommodation_preference'] ?: 'As Per Itinerary') ?></div>
+          </div>
+          <div>
             <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Budget Range:</span>
             <div style="font-weight:600;"><?= e($enquiry['budget_range'] ?: 'Standard') ?></div>
           </div>
-          
-          <?php if (!empty($enquiry['preferred_room_types'])): ?>
-            <div style="grid-column:1/-1;">
-              <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Preferred Room &amp; View Types:</span>
-              <div style="font-weight:600;color:#0F172A;margin-top:2px;">
-                <?php 
-                  $rTypes = @json_decode($enquiry['preferred_room_types'], true);
-                  if (is_array($rTypes)) {
-                    foreach ($rTypes as $rt) {
-                      echo '<span class="badge badge-neutral" style="margin-right:6px;margin-bottom:4px;">' . e(ucwords(str_replace('_', ' ', $rt))) . '</span>';
-                    }
-                  } else {
-                    echo e($enquiry['preferred_room_types']);
-                  }
-                ?>
-              </div>
-            </div>
-          <?php endif; ?>
+        </div>
 
-          <?php if (!empty($enquiry['required_facilities'])): ?>
-            <div style="grid-column:1/-1;">
-              <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Required Amenities &amp; Facilities:</span>
-              <div style="font-weight:600;color:#0F172A;margin-top:2px;">
-                <?php 
-                  $facs = @json_decode($enquiry['required_facilities'], true);
-                  if (is_array($facs)) {
-                    foreach ($facs as $fc) {
-                      echo '<span class="badge badge-info" style="margin-right:6px;margin-bottom:4px;">' . e(ucwords(str_replace('_', ' ', $fc))) . '</span>';
-                    }
-                  } else {
-                    echo e($enquiry['required_facilities']);
-                  }
-                ?>
-              </div>
-            </div>
-          <?php endif; ?>
+      <?php
+        $rawRequirements = $enquiry['travel_requirements'] ?? '';
+        $seatRows = [];
+        $prefItems = [];
+        $otherNotes = [];
+        $totalSeatsText = '';
+        
+        $reqLines = explode("\n", $rawRequirements);
+        foreach ($reqLines as $rLine) {
+            $tLine = trim($rLine);
+            if (empty($tLine)) continue;
+            if (strpos($tLine, '• Seat') === 0) {
+                $seatRows[] = $tLine;
+            } elseif (strpos($tLine, 'Total Seats:') === 0) {
+                $totalSeatsText = $tLine;
+            } elseif (strpos($tLine, 'Hotel Category:') === 0 || strpos($tLine, 'Food & Meal Preferences:') === 0 || strpos($tLine, 'Vehicle:') === 0) {
+                $prefItems[] = $tLine;
+            } elseif ($tLine !== 'Passenger Seat Details:') {
+                $otherNotes[] = $tLine;
+            }
+        }
+      ?>
 
-          <?php if (!empty($enquiry['sightseeing_places'])): ?>
-            <div style="grid-column:1/-1;">
-              <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Specific Sightseeing Places Requested:</span>
-              <div style="font-size:0.88rem;color:#0F172A;margin-top:2px;"><?= nl2br(e($enquiry['sightseeing_places'])) ?></div>
+      <!-- Passenger Seat Details Roster (If Submitted Via Plan Journey Form) -->
+      <?php if (!empty($seatRows)): ?>
+        <div style="background:#FFFFFF;border:1.5px solid #CBD5E1;border-radius:10px;padding:20px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+            <h5 style="font-size:0.98rem;font-weight:800;color:#0F172A;margin:0;display:flex;align-items:center;gap:8px;">
+              <span>Passenger Seat Breakdown</span>
+            </h5>
+            <span class="badge badge-info" style="font-weight:700;font-size:0.75rem;">
+              <?= e($totalSeatsText ?: (count($seatRows) . ' Seat' . (count($seatRows) > 1 ? 's' : ''))) ?>
+            </span>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="admin-table" style="margin:0;">
+              <thead>
+                <tr style="background:#F8FAFC;">
+                  <th style="padding:8px 12px;font-size:0.78rem;">Seat #</th>
+                  <th style="padding:8px 12px;font-size:0.78rem;">Passenger Name</th>
+                  <th style="padding:8px 12px;font-size:0.78rem;">Phone / WhatsApp</th>
+                  <th style="padding:8px 12px;font-size:0.78rem;">Age &amp; Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($seatRows as $sLine): ?>
+                  <?php
+                    $clean = ltrim($sLine, '• ');
+                    $parts = explode('|', $clean);
+                    $seatNamePart = trim($parts[0] ?? '');
+                    $seatPhonePart = trim($parts[1] ?? '');
+                    $seatAgePart = trim($parts[2] ?? '');
+
+                    $seatNum = 'Seat';
+                    $passName = $seatNamePart;
+                    if (strpos($seatNamePart, ':') !== false) {
+                        [$seatNum, $passName] = explode(':', $seatNamePart, 2);
+                        $seatNum = trim($seatNum);
+                        $passName = trim($passName);
+                    }
+                    $passPhone = str_ireplace('Phone:', '', $seatPhonePart);
+                    $passPhone = trim($passPhone);
+                    $passAge = trim($seatAgePart);
+                  ?>
+                  <tr>
+                    <td style="padding:8px 12px;font-weight:700;color:#0F172A;white-space:nowrap;">
+                      <?= e($seatNum) ?>
+                    </td>
+                    <td style="padding:8px 12px;font-weight:600;color:#0F172A;">
+                      <?= e($passName) ?>
+                    </td>
+                    <td style="padding:8px 12px;color:#475569;">
+                      <?= !empty($passPhone) ? e($passPhone) : '<span style="color:#94A3B8;">Same as Primary</span>' ?>
+                    </td>
+                    <td style="padding:8px 12px;">
+                      <span class="badge <?= (stripos($passAge, 'Child') !== false || stripos($passAge, 'Infant') !== false) ? 'badge-warning' : 'badge-neutral' ?>" style="font-size:0.75rem;">
+                        <?= e($passAge) ?>
+                      </span>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Travel & Food Preferences Box -->
+          <?php if (!empty($prefItems)): ?>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid #F1F5F9;display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;">
+              <?php foreach ($prefItems as $pItem): ?>
+                <?php
+                  [$pLabel, $pVal] = array_pad(explode(':', $pItem, 2), 2, '');
+                ?>
+                <div style="background:#F8FAFC;padding:10px 14px;border-radius:8px;border:1px solid #E2E8F0;">
+                  <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;font-weight:700;display:block;margin-bottom:2px;"><?= e(trim($pLabel)) ?>:</span>
+                  <strong style="font-size:0.86rem;color:#0F172A;"><?= e(trim($pVal)) ?></strong>
+                </div>
+              <?php endforeach; ?>
             </div>
           <?php endif; ?>
         </div>
+      <?php endif; ?>
 
-      <!-- Travel Requirements & Dietary Instructions -->
-      <?php if (!empty($enquiry['travel_requirements']) || !empty($enquiry['food_special_instructions'])): ?>
+      <!-- Client Notes / Special Instructions -->
+      <?php if (!empty($otherNotes) || !empty($enquiry['food_special_instructions']) || (empty($seatRows) && !empty($rawRequirements))): ?>
         <div style="background:#FFFBEB;border:1px solid #FDE68A;padding:16px 20px;border-radius:10px;margin-bottom:20px;">
-          <h5 style="font-size:0.88rem;font-weight:700;color:#92400E;margin-bottom:6px;">Client Notes &amp; Dietary Instructions:</h5>
-          <?php if (!empty($enquiry['travel_requirements'])): ?>
+          <h5 style="font-size:0.88rem;font-weight:700;color:#92400E;margin-bottom:6px;">Client Requirements &amp; Notes:</h5>
+          <?php if (!empty($seatRows) && !empty($otherNotes)): ?>
             <p style="font-size:0.88rem;color:#78350F;line-height:1.6;margin-bottom:6px;">
-              <strong>Requirements:</strong> <?= nl2br(e($enquiry['travel_requirements'])) ?>
+              <?= nl2br(e(implode("\n", $otherNotes))) ?>
+            </p>
+          <?php elseif (empty($seatRows) && !empty($rawRequirements)): ?>
+            <p style="font-size:0.88rem;color:#78350F;line-height:1.6;margin-bottom:6px;">
+              <?= nl2br(e($rawRequirements)) ?>
             </p>
           <?php endif; ?>
           <?php if (!empty($enquiry['food_special_instructions'])): ?>
             <p style="font-size:0.88rem;color:#78350F;line-height:1.6;margin:0;">
-              <strong>Special Food Instructions:</strong> <?= nl2br(e($enquiry['food_special_instructions'])) ?>
+              <strong>Dietary Instructions:</strong> <?= nl2br(e($enquiry['food_special_instructions'])) ?>
             </p>
           <?php endif; ?>
-        </div>
-      <?php endif; ?>
-
-      <!-- Customer-Selected Mapped Places (OpenStreetMap) -->
-      <?php if (!empty($enquiry['selected_places_json'])): ?>
-        <?php 
-          $selPlaces = @json_decode($enquiry['selected_places_json'], true);
-          if (is_array($selPlaces) && !empty($selPlaces)):
-        ?>
-          <div style="background:#F0FDF4;border:1px solid #BBF7D0;padding:18px 20px;border-radius:10px;margin-bottom:20px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-              <h5 style="font-size:0.92rem;font-weight:700;color:#166534;margin:0;display:flex;align-items:center;gap:6px;">
-                <span>Customer Selected Spots (OpenStreetMap Directory):</span>
-              </h5>
-              <span class="badge badge-success"><?= count($selPlaces) ?> Selected</span>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:10px;">
-              <?php foreach ($selPlaces as $sp): ?>
-                <?php 
-                  $spName = is_array($sp) ? ($sp['name'] ?? 'Unnamed Spot') : (string)$sp;
-                  $spCat  = is_array($sp) ? ($sp['category'] ?? 'attraction') : 'place';
-                  $spLat  = is_array($sp) ? ($sp['latitude'] ?? null) : null;
-                  $spLng  = is_array($sp) ? ($sp['longitude'] ?? null) : null;
-                  $spPrice = is_array($sp) ? ($sp['indicative_price'] ?? 0) : 0;
-                  $osmLink = ($spLat && $spLng) ? "https://www.openstreetmap.org/?mlat={$spLat}&mlon={$spLng}#map=16/{$spLat}/{$spLng}" : null;
-                ?>
-                <div style="background:#FFFFFF;border:1px solid #DCFCE7;border-radius:8px;padding:10px 14px;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
-                  <div style="font-weight:700;font-size:0.86rem;color:#0F172A;display:flex;justify-content:space-between;align-items:flex-start;">
-                    <span><?= e($spName) ?></span>
-                    <span class="badge <?= ($spCat === 'hotel' || $spCat === 'resort') ? 'badge-info' : (($spCat === 'restaurant' || $spCat === 'cafe') ? 'badge-warning' : 'badge-success') ?>" style="font-size:0.65rem;">
-                      <?= ucfirst(e($spCat)) ?>
-                    </span>
-                  </div>
-                  <?php if ($spPrice > 0): ?>
-                    <div style="font-size:0.75rem;color:#059669;font-weight:600;margin-top:2px;">₹<?= number_format($spPrice) ?></div>
-                  <?php endif; ?>
-                  <?php if ($osmLink): ?>
-                    <div style="margin-top:4px;">
-                      <a href="<?= e($osmLink) ?>" target="_blank" rel="noopener noreferrer" style="font-size:0.72rem;color:#2563EB;font-weight:600;">View Coordinates &nearr;</a>
-                    </div>
-                  <?php endif; ?>
-                </div>
-              <?php endforeach; ?>
-            </div>
-          </div>
-        <?php endif; ?>
-      <?php endif; ?>
-
-      <!-- Grounded AI Custom Itinerary Proposal -->
-      <?php if (!empty($enquiry['itinerary_content'])): ?>
-        <div style="background:#F8FAFC;border:1.5px solid #CBD5E1;padding:20px;border-radius:10px;margin-bottom:20px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
-            <h5 style="font-size:0.95rem;font-weight:700;color:#0F172A;margin:0;display:flex;align-items:center;gap:6px;">
-              <span>Grounded AI Travel Proposal &amp; Schedule</span>
-            </h5>
-            <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('itineraryRawContent').innerText).then(()=>alert('Itinerary copied to clipboard!'))" class="admin-btn admin-btn-outline" style="padding:4px 10px;font-size:0.75rem;">
-              Copy Proposal
-            </button>
-          </div>
-          <div id="itineraryRawContent" style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:8px;padding:16px;font-size:0.86rem;line-height:1.7;color:#334155;white-space:pre-wrap;max-height:420px;overflow-y:auto;font-family:inherit;">
-<?= htmlspecialchars($enquiry['itinerary_content']) ?>
-          </div>
         </div>
       <?php endif; ?>
 
