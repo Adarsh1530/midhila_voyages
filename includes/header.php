@@ -9,7 +9,13 @@ require_once __DIR__ . '/functions.php';
 
 $pageTitle = $pageTitle ?? get_setting('site_name', 'MIDHILA VOYAGES') . ' | Travelled by Scroll • Sacred & Sublime Horizons';
 $pageDescription = $pageDescription ?? get_setting('site_description', 'Bespoke domestic, international, and sacred pilgrimage journeys crafted with care, integrity, and personalised luxury.');
-$currentScript = basename($_SERVER['PHP_SELF']);
+$requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$requestPath = trim($requestPath, '/');
+$currentScript = !empty($requestPath) ? basename($requestPath) : basename($_SERVER['PHP_SELF'] ?? 'index.php');
+if (empty($currentScript) || $currentScript === '/' || $currentScript === 'api') {
+    $currentScript = 'index.php';
+}
+$isRootHomePage = empty($requestPath) || in_array($requestPath, ['index.php', 'index']);
 
 $agencyPhone = get_setting('primary_phone', '+91 62829 48227');
 $agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
@@ -112,13 +118,34 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 </head>
 <body>
 
-  <!-- Minimal Discrete Voyage Loader (< 0.6s non-blocking) -->
+  <?php if ($isRootHomePage): ?>
+  <!-- Minimal Discrete Voyage Loader (< 0.6s non-blocking) - First Entry to Homepage Only -->
+  <script>
+    (function() {
+      try {
+        if (sessionStorage.getItem('mv_intro_seen')) {
+          document.documentElement.classList.add('hide-voyage-loader');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    html.hide-voyage-loader #voyageLoader {
+      display: none !important;
+    }
+  </style>
   <div class="voyage-loader" id="voyageLoader" aria-hidden="true">
     <div class="voyage-loader__mark">MIDHILA VOYAGES</div>
     <div class="voyage-loader__bar">
       <div class="voyage-loader__progress"></div>
     </div>
   </div>
+  <script>
+    try {
+      sessionStorage.setItem('mv_intro_seen', '1');
+    } catch (e) {}
+  </script>
+  <?php endif; ?>
 
   <!-- Pure White Floating Header -->
   <header class="site-header" id="siteHeader">

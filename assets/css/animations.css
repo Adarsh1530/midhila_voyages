@@ -227,9 +227,11 @@
   pointer-events: none;
 }
 
-.voyage-loader.is-hidden {
+.voyage-loader.is-hidden,
+html.hide-voyage-loader #voyageLoader {
   opacity: 0;
   visibility: hidden;
+  display: none !important;
 }
 
 .voyage-loader__mark {

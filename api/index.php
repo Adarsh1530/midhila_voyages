@@ -54,7 +54,9 @@ if (file_exists($target) && is_file($target)) {
 
     if ($ext === 'php') {
         $_SERVER['SCRIPT_FILENAME'] = $target;
-        $_SERVER['SCRIPT_NAME'] = '/' . ltrim(str_replace($root, '', $target), '/\\');
+        $relScript = '/' . ltrim(str_replace($root, '', $target), '/\\');
+        $_SERVER['SCRIPT_NAME'] = $relScript;
+        $_SERVER['PHP_SELF'] = $relScript;
         chdir(dirname($target));
         require $target;
         exit;
@@ -64,5 +66,6 @@ if (file_exists($target) && is_file($target)) {
 // Default fallback to homepage index.php
 $_SERVER['SCRIPT_FILENAME'] = $root . '/index.php';
 $_SERVER['SCRIPT_NAME'] = '/index.php';
+$_SERVER['PHP_SELF'] = '/index.php';
 chdir($root);
 require $root . '/index.php';

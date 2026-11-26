@@ -6,10 +6,19 @@
 (function () {
   'use strict';
 
-  // 1. Fast, non-blocking Voyage Loader dismiss
+  // 1. Fast, non-blocking Voyage Loader dismiss (Only on first entry)
   function initLoader() {
     const loader = document.getElementById('voyageLoader');
     if (!loader) return;
+
+    try {
+      if (sessionStorage.getItem('mv_intro_seen')) {
+        if (loader.parentNode) loader.parentNode.removeChild(loader);
+        return;
+      }
+      sessionStorage.setItem('mv_intro_seen', '1');
+    } catch (e) {}
+
     const hideLoader = () => {
       loader.classList.add('is-hidden');
       setTimeout(() => {
