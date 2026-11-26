@@ -37,12 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'CSRF validation error. Please submit again.';
     } else {
         $name = trim($_POST['name'] ?? '');
-        $slug = slugify(trim($_POST['slug'] ?? '') ?: $name);
+        $slug = slugify($name) ?: ('dest-' . time());
         $category = in_array($_POST['category'] ?? '', ['domestic', 'international']) ? $_POST['category'] : 'domestic';
-        $regionState = trim($_POST['region_state'] ?? '');
-        $country = trim($_POST['country'] ?? 'India');
-        $tagline = trim($_POST['tagline'] ?? '');
-        $description = trim($_POST['description'] ?? '');
+        $regionState = 'Kerala';
+        $country = 'India';
+        $tagline = '';
+        $description = "Explore the scenic beauty and attractions of {$name}, curated by Midhila Voyages.";
         $highlights = trim($_POST['highlights'] ?? '');
         $bestTime = trim($_POST['best_time_to_visit'] ?? '');
         $lat = !empty($_POST['latitude']) ? (float)$_POST['latitude'] : null;
@@ -53,16 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $altText = trim($_POST['alt_text'] ?? $name);
         $metaTitle = trim($_POST['meta_title'] ?? '');
         $metaDescription = trim($_POST['meta_description'] ?? '');
-        $imageUrl = trim($_POST['image_url'] ?? '');
+        $imageUrl = $destination['featured_image'] ?? '';
 
         if (empty($name)) {
             $errors[] = 'Please enter a Destination name.';
-        }
-        if (empty($regionState)) {
-            $regionState = 'Kerala';
-        }
-        if (empty($description)) {
-            $description = $tagline ?: "Explore the natural beauty and heritage of {$name}, curated by Midhila Voyages.";
         }
 
         // Handle image upload if provided (limit: 500 KB with auto-compression)
@@ -180,40 +174,6 @@ require_once __DIR__ . '/includes/admin-header.php';
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px;">
-        <div>
-          <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Slug (URL Identifier)</label>
-          <input type="text" name="slug" placeholder="Enter your slug" 
-                 value="<?= e($_POST['slug'] ?? $destination['slug'] ?? '') ?>"
-                 style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
-        </div>
-        <div>
-          <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Region / State *</label>
-          <input type="text" name="region_state" required placeholder="Enter your region or state" 
-                 value="<?= e($_POST['region_state'] ?? $destination['region_state'] ?? '') ?>"
-                 style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
-        </div>
-        <div>
-          <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Country *</label>
-          <input type="text" name="country" required placeholder="Enter your country" 
-                 value="<?= e($_POST['country'] ?? $destination['country'] ?? 'India') ?>"
-                 style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
-        </div>
-      </div>
-
-      <div style="margin-bottom:20px;">
-        <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Tagline / Short Hook</label>
-        <input type="text" name="tagline" placeholder="Enter your tagline" 
-               value="<?= e($_POST['tagline'] ?? $destination['tagline'] ?? '') ?>"
-               style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
-      </div>
-
-      <div style="margin-bottom:20px;">
-        <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Detailed Description *</label>
-        <textarea name="description" rows="5" required placeholder="Enter your description" 
-                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;line-height:1.6;"><?= e($_POST['description'] ?? $destination['description'] ?? '') ?></textarea>
-      </div>
-
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Key Highlights (Comma-separated)</label>
@@ -233,25 +193,11 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="background:var(--admin-bg);padding:18px;border-radius:8px;border:1px solid var(--admin-border);margin-bottom:24px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:8px;">Featured Photography *</label>
         
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;background:#FFF;padding:12px;border-radius:6px;border:1px solid var(--admin-border);">
-          <img id="destImagePreview" src="<?= e(get_image_url($destination['featured_image'] ?? '')) ?>" alt="Preview" style="width:100px;height:70px;object-fit:cover;border-radius:4px;border:1px solid var(--admin-border);" onerror="this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-          <div>
-            <div style="font-size:0.85rem;font-weight:600;color:var(--admin-navy);">Live Preview</div>
-            <div style="font-size:0.75rem;color:var(--admin-muted);" id="destPreviewStatus"><?= !empty($destination['featured_image']) ? 'Current image shown. Select a file or paste URL to replace.' : 'No image selected yet.' ?></div>
-          </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-          <div>
-            <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Upload Image File (JPG, PNG, WebP &le; 500 KB):</span>
-            <input type="file" name="image_file" id="destImageFile" accept="image/jpeg,image/png,image/webp">
-          </div>
-          <div>
-            <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Or Image Path / External Web URL:</span>
-            <input type="text" name="image_url" id="destImageUrl" placeholder="https://images.unsplash.com/... or uploads/..." 
-                   value="<?= e($_POST['image_url'] ?? $destination['featured_image'] ?? '') ?>"
-                   style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
-          </div>
+        <div>
+          <input type="file" name="image_file" id="destImageFile" accept="image/jpeg,image/png,image/webp">
+          <?php if (!empty($destination['featured_image'])): ?>
+            <div style="font-size:0.78rem;color:var(--admin-muted);margin-top:6px;">Current photo: <?= e(basename($destination['featured_image'])) ?> (upload a new file to change)</div>
+          <?php endif; ?>
         </div>
       </div>
 
@@ -282,45 +228,5 @@ require_once __DIR__ . '/includes/admin-header.php';
   </div>
 
 </div>
-
-<script>
-(function() {
-  const urlInput = document.getElementById('destImageUrl');
-  const fileInput = document.getElementById('destImageFile');
-  const previewImg = document.getElementById('destImagePreview');
-  const previewStatus = document.getElementById('destPreviewStatus');
-  const placeholder = '<?= ASSETS_URL ?>/images/placeholder.svg';
-
-  if (urlInput && previewImg) {
-    urlInput.addEventListener('input', function() {
-      const val = this.value.trim();
-      if (val) {
-        let fullSrc = val;
-        if (!val.startsWith('http://') && !val.startsWith('https://')) {
-          fullSrc = '<?= BASE_URL ?>/' + val.replace(/^\/+/, '');
-        }
-        previewImg.src = fullSrc;
-        previewStatus.textContent = 'Previewing image URL...';
-      } else {
-        previewImg.src = placeholder;
-        previewStatus.textContent = 'No image selected.';
-      }
-    });
-  }
-
-  if (fileInput && previewImg) {
-    fileInput.addEventListener('change', function() {
-      if (this.files && this.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          previewImg.src = e.target.result;
-          previewStatus.textContent = 'Ready to upload: ' + fileInput.files[0].name;
-        };
-        reader.readAsDataURL(this.files[0]);
-      }
-    });
-  }
-})();
-</script>
 
 <?php require_once __DIR__ . '/includes/admin-footer.php'; ?>

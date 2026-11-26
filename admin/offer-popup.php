@@ -34,6 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        // Auto-clear removed fields to keep public popup clean
+        update_setting('popup_offer_dates', '', 'offer_popup');
+        update_setting('popup_offer_subtitle', '', 'offer_popup');
+
         foreach ($offerFields as $key => $meta) {
             if (isset($_POST[$key])) {
                 $val = trim((string)$_POST[$key]);
@@ -114,15 +118,10 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div style="margin-bottom:24px;border-bottom:1px solid #F1F5F9;padding-bottom:20px;">
           <h5 style="font-size:0.95rem;font-weight:700;color:#0F172A;margin-bottom:12px;">1. Offer Promotional Image / Flyer</h5>
           
-          <div style="margin-bottom:14px;">
+          <div style="margin-bottom:6px;">
             <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Upload Image File (JPG, PNG or WebP &le; 500 KB)</label>
             <input type="file" name="popup_offer_file" accept="image/*" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
             <span style="font-size:0.76rem;color:#64748B;display:block;margin-top:4px;">Upload your promotional poster or banner from your computer (Max 500 KB, auto-compressed).</span>
-          </div>
-
-          <div>
-            <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Or Paste Image URL</label>
-            <input type="text" name="popup_offer_image" value="<?= e(val('popup_offer_image', 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80')) ?>" placeholder="Enter your image URL" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
           </div>
         </div>
 
@@ -141,7 +140,7 @@ require_once __DIR__ . '/includes/admin-header.php';
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Featured Price (e.g. ₹6,500)</label>
               <input type="text" name="popup_offer_price" value="<?= e(val('popup_offer_price', '₹6,500')) ?>" placeholder="Enter your offer price" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.95rem;font-weight:700;color:#059669;">
@@ -150,16 +149,6 @@ require_once __DIR__ . '/includes/admin-header.php';
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Price Subtitle / Duration</label>
               <input type="text" name="popup_offer_price_sub" value="<?= e(val('popup_offer_price_sub', 'per person • 5D / 4N')) ?>" placeholder="Enter your price subtitle" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             </div>
-          </div>
-
-          <div style="margin-bottom:16px;">
-            <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Upcoming Tour Dates / Booking Note</label>
-            <input type="text" name="popup_offer_dates" value="<?= e(val('popup_offer_dates', 'Upcoming Tour Dates: 23.12.26 to 27.12.26')) ?>" placeholder="Enter your offer dates" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
-          </div>
-
-          <div>
-            <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Offer Description &amp; Highlights</label>
-            <textarea name="popup_offer_subtitle" rows="3" placeholder="Enter your offer description" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;line-height:1.6;"><?= e(val('popup_offer_subtitle', 'Experience Rameswaram, Madurai, Dhanushkodi & Thanjavur at ₹6,500/person. Sanitized AC transport & curated stays included.')) ?></textarea>
           </div>
         </div>
 
@@ -216,17 +205,9 @@ require_once __DIR__ . '/includes/admin-header.php';
               <?= e(val('popup_offer_title', 'Divine Destinations • 5-Day Sacred Yatra')) ?>
             </div>
 
-            <div style="font-size:1.4rem;font-weight:800;color:#059669;margin-bottom:4px;">
+            <div style="font-size:1.4rem;font-weight:800;color:#059669;margin-bottom:14px;">
               <?= e(val('popup_offer_price', '₹6,500')) ?>
             </div>
-
-            <div style="font-size:0.75rem;background:#F8FAFC;border:1px solid #E2E8F0;padding:3px 10px;border-radius:4px;display:inline-block;color:#475569;font-weight:600;margin-bottom:10px;">
-              <?= e(val('popup_offer_dates', 'Upcoming Tour Dates: 23.12.26 to 27.12.26')) ?>
-            </div>
-
-            <p style="font-size:0.78rem;color:#64748B;line-height:1.5;margin-bottom:14px;max-height:60px;overflow:hidden;">
-              <?= e(val('popup_offer_subtitle', 'Experience Rameswaram, Madurai, Dhanushkodi & Thanjavur at ₹6,500/person.')) ?>
-            </p>
 
             <div style="background:#25D366;color:#FFF;padding:10px 16px;border-radius:8px;font-size:0.86rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 12px rgba(37,211,102,0.3);">
               <span><?= e(val('popup_offer_btn_text', 'Claim Offer on WhatsApp')) ?></span>

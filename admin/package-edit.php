@@ -54,13 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $destId = (int)($_POST['destination_id'] ?? 0);
         $catId = (int)($_POST['category_id'] ?? 0);
         $title = trim($_POST['title'] ?? '');
-        $slug = slugify(trim($_POST['slug'] ?? '') ?: $title);
-        $subtitle = trim($_POST['subtitle'] ?? '');
+        $slug = slugify($title) ?: ('pkg-' . time());
+        $subtitle = '';
         $days = max(1, (int)($_POST['duration_days'] ?? 1));
         $nights = max(0, (int)($_POST['duration_nights'] ?? 0));
-        $shortDesc = trim($_POST['short_description'] ?? '');
-        $overview = trim($_POST['overview'] ?? '');
-        $isPriceOnRequest = !empty($_POST['is_price_on_request']) ? 1 : 0;
+        $shortDesc = "Curated holiday tour package experiencing {$title}.";
+        $overview = $shortDesc;
+        $isPriceOnRequest = 0;
         $price = !empty($_POST['starting_price']) ? (float)$_POST['starting_price'] : null;
         $currency = trim($_POST['currency'] ?? 'INR');
         $inclusions = trim($_POST['inclusions'] ?? '');
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $isFeatured = !empty($_POST['is_featured']) ? 1 : 0;
         $isPilgrimage = !empty($_POST['is_pilgrimage']) ? 1 : 0;
         $isPublished = !empty($_POST['is_published']) ? 1 : 0;
-        $imageUrl = trim($_POST['image_url'] ?? '');
+        $imageUrl = $package['featured_image'] ?? '';
 
         if (empty($title)) {
             $errors[] = 'Please enter a Tour Package Title.';
@@ -213,19 +213,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
 
-                // Process Additional Gallery Image URLs (one per line)
-                $extraUrls = trim($_POST['extra_gallery_urls'] ?? '');
-                if (!empty($extraUrls)) {
-                    $lines = preg_split('/[\r\n]+/', $extraUrls);
-                    $insImg = $db->prepare("INSERT INTO `package_images` (`package_id`, `image_url`, `caption`, `display_order`) VALUES (?, ?, ?, ?)");
-                    foreach ($lines as $line) {
-                        $line = trim($line);
-                        if (!empty($line)) {
-                            $insImg->execute([$pkgId, $line, $title, 10]);
-                        }
-                    }
-                }
-
                 $db->commit();
                 set_flash_message('success', "Package '{$title}' saved successfully.");
                 header('Location: ' . ADMIN_URL . '/packages.php');
@@ -275,7 +262,7 @@ require_once __DIR__ . '/includes/admin-header.php';
                style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:18px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Destination *</label>
           <select name="destination_id" required style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
@@ -299,16 +286,9 @@ require_once __DIR__ . '/includes/admin-header.php';
             <?php endforeach; ?>
           </select>
         </div>
-
-        <div>
-          <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Slug (URL)</label>
-          <input type="text" name="slug" placeholder="Enter your slug" 
-                 value="<?= e($_POST['slug'] ?? $package['slug'] ?? '') ?>"
-                 style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
-        </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;margin-bottom:18px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Duration (Days) *</label>
           <input type="number" name="duration_days" min="1" max="60" required placeholder="Enter your duration in days" 
@@ -321,24 +301,6 @@ require_once __DIR__ . '/includes/admin-header.php';
                  value="<?= (int)($_POST['duration_nights'] ?? $package['duration_nights'] ?? 4) ?>"
                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
         </div>
-        <div>
-          <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Subtitle / Tagline</label>
-          <input type="text" name="subtitle" placeholder="Enter your subtitle" 
-                 value="<?= e($_POST['subtitle'] ?? $package['subtitle'] ?? '') ?>"
-                 style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
-        </div>
-      </div>
-
-      <div style="margin-bottom:18px;">
-        <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Short Description (Cards & Previews) *</label>
-        <textarea name="short_description" rows="2" required placeholder="Enter your short description" 
-                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;"><?= e($_POST['short_description'] ?? $package['short_description'] ?? '') ?></textarea>
-      </div>
-
-      <div style="margin-bottom:18px;">
-        <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Full Package Overview *</label>
-        <textarea name="overview" rows="4" required placeholder="Enter your package overview" 
-                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;line-height:1.6;"><?= e($_POST['overview'] ?? $package['overview'] ?? '') ?></textarea>
       </div>
     </div>
 
@@ -346,19 +308,11 @@ require_once __DIR__ . '/includes/admin-header.php';
     <div class="admin-card">
       <h4 style="font-size:1.1rem;color:var(--admin-navy);margin-bottom:16px;border-bottom:1px solid var(--admin-border);padding-bottom:8px;">2. Pricing &amp; Inclusions</h4>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:18px;">
-        <div>
-          <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Starting Price (₹ INR)</label>
-          <input type="number" step="0.01" name="starting_price" placeholder="Enter your starting price" 
-                 value="<?= e($_POST['starting_price'] ?? $package['starting_price'] ?? '') ?>"
-                 style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
-        </div>
-        <div style="display:flex;align-items:center;padding-top:24px;">
-          <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;font-weight:600;cursor:pointer;">
-            <input type="checkbox" name="is_price_on_request" value="1" <?= (!empty($package['is_price_on_request'])) ? 'checked' : '' ?>>
-            <span>Show "Request a Quote" instead of price</span>
-          </label>
-        </div>
+      <div style="margin-bottom:18px;">
+        <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Starting Price (₹ INR)</label>
+        <input type="number" step="0.01" name="starting_price" placeholder="Enter your starting price" 
+               value="<?= e($_POST['starting_price'] ?? $package['starting_price'] ?? '') ?>"
+               style="width:100%;max-width:400px;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:18px;">
@@ -378,29 +332,15 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="background:var(--admin-bg);padding:18px;border-radius:8px;border:1px solid var(--admin-border);margin-bottom:20px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:8px;">Featured Package Photograph *</label>
         
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;background:#FFF;padding:12px;border-radius:6px;border:1px solid var(--admin-border);">
-          <img id="pkgImagePreview" src="<?= e(get_image_url($package['featured_image'] ?? '')) ?>" alt="Preview" style="width:100px;height:70px;object-fit:cover;border-radius:4px;border:1px solid var(--admin-border);" onerror="this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-          <div>
-            <div style="font-size:0.85rem;font-weight:600;color:var(--admin-navy);">Featured Image Preview</div>
-            <div style="font-size:0.75rem;color:var(--admin-muted);" id="pkgPreviewStatus"><?= !empty($package['featured_image']) ? 'Current image shown. Select a file or paste URL to replace.' : 'No image selected yet.' ?></div>
-          </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-          <div>
-            <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Upload Image File (JPG, PNG, WebP &le; 500 KB):</span>
-            <input type="file" name="image_file" id="pkgImageFile" accept="image/jpeg,image/png,image/webp">
-          </div>
-          <div>
-            <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Or Image Path / External Web URL:</span>
-            <input type="text" name="image_url" id="pkgImageUrl" placeholder="Enter your image URL" 
-                   value="<?= e($_POST['image_url'] ?? $package['featured_image'] ?? '') ?>"
-                   style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
-          </div>
+        <div style="margin-bottom:12px;">
+          <input type="file" name="image_file" id="pkgImageFile" accept="image/jpeg,image/png,image/webp">
+          <?php if (!empty($package['featured_image'])): ?>
+            <div style="font-size:0.78rem;color:var(--admin-muted);margin-top:6px;">Current image: <?= e(basename($package['featured_image'])) ?> (upload a new file to change)</div>
+          <?php endif; ?>
         </div>
 
         <!-- Supplementary Package Gallery Images -->
-        <div style="margin-top:20px;padding-top:16px;border-top:1px dashed var(--admin-border);">
+        <div style="margin-top:16px;padding-top:16px;border-top:1px dashed var(--admin-border);">
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Supplementary Gallery Images</label>
           <p style="font-size:0.78rem;color:var(--admin-muted);margin-bottom:12px;">Add additional photos showcased on the package detail page gallery.</p>
 
@@ -418,15 +358,9 @@ require_once __DIR__ . '/includes/admin-header.php';
             </div>
           <?php endif; ?>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-            <div>
-              <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Upload More Gallery Photos (JPG, PNG, WebP &le; 500 KB):</span>
-              <input type="file" name="gallery_files[]" multiple accept="image/jpeg,image/png,image/webp">
-            </div>
-            <div>
-              <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Or Add Image URLs (One per line):</span>
-              <textarea name="extra_gallery_urls" rows="2" placeholder="Enter your image URLs" style="width:100%;padding:6px 10px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.82rem;"></textarea>
-            </div>
+          <div>
+            <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Upload More Gallery Photos (JPG, PNG, WebP &le; 500 KB):</span>
+            <input type="file" name="gallery_files[]" multiple accept="image/jpeg,image/png,image/webp">
           </div>
         </div>
 
@@ -531,45 +465,6 @@ document.getElementById('addDayBtn').addEventListener('click', () => {
   `;
   container.appendChild(row);
 });
-
-// Live Featured Image Preview
-(function() {
-  const urlInput = document.getElementById('pkgImageUrl');
-  const fileInput = document.getElementById('pkgImageFile');
-  const previewImg = document.getElementById('pkgImagePreview');
-  const previewStatus = document.getElementById('pkgPreviewStatus');
-  const placeholder = '<?= ASSETS_URL ?>/images/placeholder.svg';
-
-  if (urlInput && previewImg) {
-    urlInput.addEventListener('input', function() {
-      const val = this.value.trim();
-      if (val) {
-        let fullSrc = val;
-        if (!val.startsWith('http://') && !val.startsWith('https://')) {
-          fullSrc = '<?= BASE_URL ?>/' + val.replace(/^\/+/, '');
-        }
-        previewImg.src = fullSrc;
-        previewStatus.textContent = 'Previewing image URL...';
-      } else {
-        previewImg.src = placeholder;
-        previewStatus.textContent = 'No image selected.';
-      }
-    });
-  }
-
-  if (fileInput && previewImg) {
-    fileInput.addEventListener('change', function() {
-      if (this.files && this.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          previewImg.src = e.target.result;
-          previewStatus.textContent = 'Ready to upload: ' + fileInput.files[0].name;
-        };
-        reader.readAsDataURL(this.files[0]);
-      }
-    });
-  }
-})();
 </script>
 
 <?php require_once __DIR__ . '/includes/admin-footer.php'; ?>

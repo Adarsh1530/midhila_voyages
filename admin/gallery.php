@@ -158,23 +158,12 @@ require_once __DIR__ . '/includes/admin-header.php';
         </select>
       </div>
 
-      <!-- Live Photo Preview -->
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;background:var(--admin-bg);padding:10px;border-radius:6px;border:1px solid var(--admin-border);">
-        <img id="galleryPreview" src="<?= e(get_image_url($editPhoto['image_url'] ?? '')) ?>" alt="Preview" style="width:90px;height:65px;object-fit:cover;border-radius:4px;border:1px solid var(--admin-border);" onerror="this.src='<?= ASSETS_URL ?>/images/placeholder.svg';">
-        <div>
-          <div style="font-size:0.82rem;font-weight:600;color:var(--admin-navy);">Photo Preview</div>
-          <div style="font-size:0.75rem;color:var(--admin-muted);" id="galleryPreviewStatus"><?= $editPhoto ? 'Current photo shown.' : 'No photo selected.' ?></div>
-        </div>
-      </div>
-
       <div style="background:var(--admin-bg);padding:14px;border-radius:6px;border:1px solid var(--admin-border);margin-bottom:20px;">
-        <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Upload Image File (JPG, PNG, WebP &le; 500 KB)</label>
-        <input type="file" name="image_file" id="galleryFileInput" accept="image/jpeg,image/png,image/webp" style="margin-bottom:10px;">
-        
-        <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--admin-navy);margin-bottom:4px;">Or Image Path / External Web URL:</label>
-        <input type="text" name="image_url" id="galleryUrlInput" placeholder="Enter your image URL" 
-               value="<?= e($editPhoto['image_url'] ?? '') ?>"
-               style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.85rem;">
+        <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Upload Image File (JPG, PNG, WebP &le; 500 KB) *</label>
+        <input type="file" name="image_file" id="galleryFileInput" accept="image/jpeg,image/png,image/webp">
+        <?php if (!empty($editPhoto['image_url'])): ?>
+          <div style="font-size:0.78rem;color:var(--admin-muted);margin-top:6px;">Current photo: <?= e(basename($editPhoto['image_url'])) ?> (upload new file to replace)</div>
+        <?php endif; ?>
       </div>
 
       <div style="display:flex;gap:10px;">
@@ -215,45 +204,5 @@ require_once __DIR__ . '/includes/admin-header.php';
   </div>
 
 </div>
-
-<script>
-(function() {
-  const urlInput = document.getElementById('galleryUrlInput');
-  const fileInput = document.getElementById('galleryFileInput');
-  const previewImg = document.getElementById('galleryPreview');
-  const previewStatus = document.getElementById('galleryPreviewStatus');
-  const placeholder = '<?= ASSETS_URL ?>/images/placeholder.svg';
-
-  if (urlInput && previewImg) {
-    urlInput.addEventListener('input', function() {
-      const val = this.value.trim();
-      if (val) {
-        let fullSrc = val;
-        if (!val.startsWith('http://') && !val.startsWith('https://')) {
-          fullSrc = '<?= BASE_URL ?>/' + val.replace(/^\/+/, '');
-        }
-        previewImg.src = fullSrc;
-        previewStatus.textContent = 'Previewing image URL...';
-      } else {
-        previewImg.src = placeholder;
-        previewStatus.textContent = 'No photo selected.';
-      }
-    });
-  }
-
-  if (fileInput && previewImg) {
-    fileInput.addEventListener('change', function() {
-      if (this.files && this.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          previewImg.src = e.target.result;
-          previewStatus.textContent = 'Ready to upload: ' + fileInput.files[0].name;
-        };
-        reader.readAsDataURL(this.files[0]);
-      }
-    });
-  }
-})();
-</script>
 
 <?php require_once __DIR__ . '/includes/admin-footer.php'; ?>

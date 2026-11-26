@@ -164,13 +164,10 @@ require_once __DIR__ . '/includes/admin-header.php';
 ?>
 
 <!-- Module Switcher Tabs -->
-<div style="display:flex;gap:10px;margin-bottom:24px;border-bottom:1px solid #E2E8F0;padding-bottom:14px;">
-  <a href="<?= ADMIN_URL ?>/users.php" style="background:#0F172A;color:#FFFFFF;font-weight:700;padding:9px 18px;border-radius:8px;font-size:0.9rem;text-decoration:none;display:inline-flex;align-items:center;">
+<div style="margin-bottom:24px;border-bottom:1px solid #E2E8F0;padding-bottom:14px;">
+  <span style="background:#0F172A;color:#FFFFFF;font-weight:700;padding:9px 18px;border-radius:8px;font-size:0.9rem;display:inline-flex;align-items:center;">
     <span>Staff Accounts &amp; Logins</span>
-  </a>
-  <a href="<?= ADMIN_URL ?>/privileges.php" style="background:#FFFFFF;color:#475569;border:1px solid #CBD5E1;font-weight:600;padding:9px 18px;border-radius:8px;font-size:0.9rem;text-decoration:none;display:inline-flex;align-items:center;">
-    <span>Privilege Settings</span>
-  </a>
+  </span>
 </div>
 
 <!-- MAIN USER MANAGEMENT WORKSPACE -->
@@ -227,12 +224,6 @@ require_once __DIR__ . '/includes/admin-header.php';
         </label>
         <input type="password" id="passwordInput" name="password" <?= $editUser ? '' : 'required' ?> placeholder="Enter your password" autocomplete="new-password">
         <div style="font-size:0.75rem;color:#64748B;margin-top:4px;">Used with the username above to sign in.</div>
-      </div>
-
-      <div class="admin-form-group">
-        <label for="emailInput">Email Address <span style="font-weight:400;color:#64748B;">(Optional / Notifications)</span></label>
-        <input type="email" id="emailInput" name="email" placeholder="Enter your email address" 
-               value="<?= e($editUser['email'] ?? '') ?>">
       </div>
 
       <div style="display:flex;gap:10px;margin-top:24px;border-top:1px solid #F1F5F9;padding-top:16px;">

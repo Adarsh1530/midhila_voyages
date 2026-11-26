@@ -57,9 +57,11 @@ $cardDetailUrl = BASE_URL . '/package.php?slug=' . urlencode($pkgSlug);
       </a>
     </h3>
 
+    <?php if (!empty($pkgExcerpt)): ?>
     <p class="editorial-pkg-card__excerpt">
       <?= e($pkgExcerpt) ?>
     </p>
+    <?php endif; ?>
 
     <!-- Pricing & Dual CTAs -->
     <div class="editorial-pkg-card__footer">
