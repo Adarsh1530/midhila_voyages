@@ -137,26 +137,26 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
       <!-- Desktop Navigation Menu -->
       <nav class="nav-menu" aria-label="Main Navigation">
         <a href="<?= BASE_URL ?>/index.php" class="nav-link <?= ($currentScript === 'index.php') ? 'is-active' : '' ?>"><?= __t('nav_home') ?></a>
+        <a href="<?= BASE_URL ?>/about.php" class="nav-link <?= ($currentScript === 'about.php') ? 'is-active' : '' ?>"><?= __t('nav_about') ?></a>
         <a href="<?= BASE_URL ?>/kerala-tourism.php" class="nav-link <?= in_array($currentScript, ['kerala-tourism.php']) ? 'is-active' : '' ?>" style="color:#0F172A;font-weight:700;">
           <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#10B981;margin-right:3px;"></span>
           <?= __t('nav_kerala_tourism') ?>
         </a>
         <a href="<?= BASE_URL ?>/packages.php" class="nav-link <?= in_array($currentScript, ['packages.php', 'package.php']) ? 'is-active' : '' ?>"><?= __t('nav_packages') ?></a>
-        <a href="<?= BASE_URL ?>/destinations.php" class="nav-link <?= in_array($currentScript, ['destinations.php', 'destination.php']) ? 'is-active' : '' ?>"><?= __t('nav_destinations') ?></a>
-        <a href="<?= BASE_URL ?>/accommodation.php" class="nav-link <?= ($currentScript === 'accommodation.php') ? 'is-active' : '' ?>"><?= __t('nav_accommodation') ?></a>
-        <a href="<?= BASE_URL ?>/custom-tour.php" class="nav-link <?= ($currentScript === 'custom-tour.php') ? 'is-active' : '' ?>"><?= __t('nav_custom_tour') ?></a>
+        <a href="<?= BASE_URL ?>/contact.php" class="nav-link <?= ($currentScript === 'contact.php') ? 'is-active' : '' ?>"><?= __t('nav_contact') ?></a>
         
-        <!-- More Dropdown for Corporate Events, Pilgrimage, About, Contact & FAQs -->
+        <!-- More Dropdown for Destinations, Accommodation, Custom Tour, Corporate Events, Pilgrimage Tourism, and FAQs -->
         <div class="nav-dropdown" id="navMoreDropdown">
-          <button type="button" class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="nav-dropdown-btn <?= in_array($currentScript, ['destinations.php', 'destination.php', 'accommodation.php', 'custom-tour.php', 'corporate-events.php', 'pilgrimage.php', 'faq.php']) ? 'is-active' : '' ?>" aria-haspopup="true" aria-expanded="false">
             <span><?= __t('nav_more', 'More') ?></span>
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="nav-dropdown-menu" id="navMoreMenu">
-            <a href="<?= BASE_URL ?>/corporate-events.php" class="nav-dropdown-item <?= ($currentScript === 'corporate-events.php') ? 'is-active' : '' ?>">🏢 <?= __t('nav_corporate_events') ?></a>
-            <a href="<?= BASE_URL ?>/pilgrimage.php" class="nav-dropdown-item <?= ($currentScript === 'pilgrimage.php') ? 'is-active' : '' ?>">🛕 <?= __t('nav_pilgrimage') ?></a>
-            <a href="<?= BASE_URL ?>/about.php" class="nav-dropdown-item <?= ($currentScript === 'about.php') ? 'is-active' : '' ?>"><?= __t('nav_about') ?></a>
-            <a href="<?= BASE_URL ?>/contact.php" class="nav-dropdown-item <?= ($currentScript === 'contact.php') ? 'is-active' : '' ?>"><?= __t('nav_contact') ?></a>
+            <a href="<?= BASE_URL ?>/destinations.php" class="nav-dropdown-item <?= in_array($currentScript, ['destinations.php', 'destination.php']) ? 'is-active' : '' ?>"><?= __t('nav_destinations') ?></a>
+            <a href="<?= BASE_URL ?>/accommodation.php" class="nav-dropdown-item <?= ($currentScript === 'accommodation.php') ? 'is-active' : '' ?>"><?= __t('nav_accommodation') ?></a>
+            <a href="<?= BASE_URL ?>/custom-tour.php" class="nav-dropdown-item <?= ($currentScript === 'custom-tour.php') ? 'is-active' : '' ?>"><?= __t('nav_custom_tour') ?></a>
+            <a href="<?= BASE_URL ?>/corporate-events.php" class="nav-dropdown-item <?= ($currentScript === 'corporate-events.php') ? 'is-active' : '' ?>"><?= __t('nav_corporate_events') ?></a>
+            <a href="<?= BASE_URL ?>/pilgrimage.php" class="nav-dropdown-item <?= ($currentScript === 'pilgrimage.php') ? 'is-active' : '' ?>"><?= __t('nav_pilgrimage') ?></a>
             <a href="<?= BASE_URL ?>/faq.php" class="nav-dropdown-item <?= ($currentScript === 'faq.php') ? 'is-active' : '' ?>"><?= __t('nav_faqs') ?></a>
           </div>
         </div>
@@ -185,7 +185,7 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
 
   <!-- Mobile Drawer Menu -->
   <div class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation">
-    <div>
+    <div style="overflow-y:auto;flex:1 1 auto;padding-right:4px;margin-bottom:16px;">
       <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid var(--color-border);">
         <div class="brand-logo">
           <img src="<?= ASSETS_URL ?>/images/logo/midhila-voyages-logo.png" 
@@ -195,21 +195,30 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
                width="154" 
                height="42">
         </div>
-        <button class="mobile-drawer__close" style="color:var(--color-text-main);font-size:1.8rem;line-height:1;" aria-label="Close menu">&times;</button>
+        <button class="mobile-drawer__close" style="color:var(--color-text-main);font-size:1.8rem;line-height:1;background:none;border:none;cursor:pointer;" aria-label="Close menu">&times;</button>
       </div>
 
-      <nav class="mobile-drawer__links">
+      <nav class="mobile-drawer__links" style="margin-top:24px;gap:14px;">
         <a href="<?= BASE_URL ?>/index.php" class="mobile-drawer__link <?= ($currentScript === 'index.php') ? 'is-active' : '' ?>"><?= __t('nav_home') ?></a>
-        <a href="<?= BASE_URL ?>/kerala-tourism.php" class="mobile-drawer__link <?= ($currentScript === 'kerala-tourism.php') ? 'is-active' : '' ?>" style="color:#0F172A;font-weight:700;">🌴 <?= __t('nav_kerala_tourism') ?></a>
-        <a href="<?= BASE_URL ?>/packages.php" class="mobile-drawer__link <?= in_array($currentScript, ['packages.php', 'package.php']) ? 'is-active' : '' ?>"><?= __t('nav_packages') ?></a>
-        <a href="<?= BASE_URL ?>/destinations.php" class="mobile-drawer__link <?= in_array($currentScript, ['destinations.php', 'destination.php']) ? 'is-active' : '' ?>"><?= __t('nav_destinations') ?></a>
-        <a href="<?= BASE_URL ?>/accommodation.php" class="mobile-drawer__link <?= ($currentScript === 'accommodation.php') ? 'is-active' : '' ?>"><?= __t('nav_accommodation') ?></a>
-        <a href="<?= BASE_URL ?>/custom-tour.php" class="mobile-drawer__link <?= ($currentScript === 'custom-tour.php') ? 'is-active' : '' ?>"><?= __t('nav_custom_tour') ?></a>
-        <a href="<?= BASE_URL ?>/corporate-events.php" class="mobile-drawer__link <?= ($currentScript === 'corporate-events.php') ? 'is-active' : '' ?>"><?= __t('nav_corporate_events') ?></a>
-        <a href="<?= BASE_URL ?>/pilgrimage.php" class="mobile-drawer__link <?= ($currentScript === 'pilgrimage.php') ? 'is-active' : '' ?>">🛕 <?= __t('nav_pilgrimage') ?></a>
         <a href="<?= BASE_URL ?>/about.php" class="mobile-drawer__link <?= ($currentScript === 'about.php') ? 'is-active' : '' ?>"><?= __t('nav_about') ?></a>
+        <a href="<?= BASE_URL ?>/kerala-tourism.php" class="mobile-drawer__link <?= ($currentScript === 'kerala-tourism.php') ? 'is-active' : '' ?>" style="color:#0F172A;font-weight:700;"><?= __t('nav_kerala_tourism') ?></a>
+        <a href="<?= BASE_URL ?>/packages.php" class="mobile-drawer__link <?= in_array($currentScript, ['packages.php', 'package.php']) ? 'is-active' : '' ?>"><?= __t('nav_packages') ?></a>
         <a href="<?= BASE_URL ?>/contact.php" class="mobile-drawer__link <?= ($currentScript === 'contact.php') ? 'is-active' : '' ?>"><?= __t('nav_contact') ?></a>
-        <a href="<?= BASE_URL ?>/faq.php" class="mobile-drawer__link <?= ($currentScript === 'faq.php') ? 'is-active' : '' ?>"><?= __t('nav_faqs') ?></a>
+
+        <!-- More Subgroup on Mobile -->
+        <div class="mobile-drawer__subgroup" style="margin-top:8px;padding-top:14px;border-top:1px dashed var(--color-border);">
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-gold);font-weight:700;margin-bottom:12px;">
+            <?= __t('nav_more', 'More') ?>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;padding-left:6px;">
+            <a href="<?= BASE_URL ?>/destinations.php" class="mobile-drawer__link <?= in_array($currentScript, ['destinations.php', 'destination.php']) ? 'is-active' : '' ?>" style="font-size:1.1rem;padding-bottom:6px;"><?= __t('nav_destinations') ?></a>
+            <a href="<?= BASE_URL ?>/accommodation.php" class="mobile-drawer__link <?= ($currentScript === 'accommodation.php') ? 'is-active' : '' ?>" style="font-size:1.1rem;padding-bottom:6px;"><?= __t('nav_accommodation') ?></a>
+            <a href="<?= BASE_URL ?>/custom-tour.php" class="mobile-drawer__link <?= ($currentScript === 'custom-tour.php') ? 'is-active' : '' ?>" style="font-size:1.1rem;padding-bottom:6px;"><?= __t('nav_custom_tour') ?></a>
+            <a href="<?= BASE_URL ?>/corporate-events.php" class="mobile-drawer__link <?= ($currentScript === 'corporate-events.php') ? 'is-active' : '' ?>" style="font-size:1.1rem;padding-bottom:6px;"><?= __t('nav_corporate_events') ?></a>
+            <a href="<?= BASE_URL ?>/pilgrimage.php" class="mobile-drawer__link <?= ($currentScript === 'pilgrimage.php') ? 'is-active' : '' ?>" style="font-size:1.1rem;padding-bottom:6px;"><?= __t('nav_pilgrimage') ?></a>
+            <a href="<?= BASE_URL ?>/faq.php" class="mobile-drawer__link <?= ($currentScript === 'faq.php') ? 'is-active' : '' ?>" style="font-size:1.1rem;padding-bottom:6px;"><?= __t('nav_faqs') ?></a>
+          </div>
+        </div>
       </nav>
     </div>
 
