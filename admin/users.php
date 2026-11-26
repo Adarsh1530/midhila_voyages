@@ -158,17 +158,10 @@ if (isset($_GET['edit_id'])) {
 }
 
 $adminTitle = 'Staff Accounts | MIDHILA VOYAGES';
-$adminHeading = 'Staff Accounts & Passwords';
+$adminHeading = 'Staff Accounts';
 
 require_once __DIR__ . '/includes/admin-header.php';
 ?>
-
-<!-- Module Switcher Tabs -->
-<div style="margin-bottom:24px;border-bottom:1px solid #E2E8F0;padding-bottom:14px;">
-  <span style="background:#0F172A;color:#FFFFFF;font-weight:700;padding:9px 18px;border-radius:8px;font-size:0.9rem;display:inline-flex;align-items:center;">
-    <span>Staff Accounts &amp; Logins</span>
-  </span>
-</div>
 
 <!-- MAIN USER MANAGEMENT WORKSPACE -->
 <div style="display:grid;grid-template-columns:minmax(320px, 1fr) 1.8fr;gap:28px;align-items:start;">
