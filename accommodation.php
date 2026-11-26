@@ -618,20 +618,15 @@ require_once __DIR__ . '/includes/header.php';
               E. Sightseeing &amp; Private Transport
             </h4>
             
-            <div style="margin-bottom:10px;">
+            <div>
               <select name="sightseeing_preference" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
                 <option value="" disabled selected>Select Your Sightseeing Preference</option>
                 <option value="with_sightseeing" selected><?= __t('sightseeing_with') ?></option>
                 <option value="private_vehicle"><?= __t('sightseeing_private') ?></option>
                 <option value="customised_sightseeing"><?= __t('sightseeing_customised') ?></option>
                 <option value="group_sightseeing"><?= __t('sightseeing_group') ?></option>
-                <option value="without_sightseeing"><?= __t('sightseeing_without') ?></option>
+                <option value="No Need">No Need</option>
               </select>
-            </div>
-
-            <div>
-              <label style="display:block;font-size:0.78rem;font-weight:600;color:#64748B;margin-bottom:4px;"><?= __t('sightseeing_places_wish') ?></label>
-              <textarea name="sightseeing_places" rows="2" placeholder="Enter your preferred sightseeing places" style="width:100%;padding:8px 12px;border:1px solid #CBD5E1;border-radius:6px;font-size:0.85rem;"></textarea>
             </div>
           </div>
 
@@ -678,14 +673,6 @@ require_once __DIR__ . '/includes/header.php';
                 <span><?= __t('fac_accessibility') ?></span>
               </label>
             </div>
-          </div>
-
-          <!-- Section G: Additional Travel Requirements -->
-          <div style="margin-bottom:20px;">
-            <h4 style="font-size:0.88rem;text-transform:uppercase;color:#0F172A;font-weight:700;letter-spacing:0.04em;margin-bottom:8px;border-bottom:1px solid #F1F5F9;padding-bottom:6px;">
-              G. Additional Travel Requirements
-            </h4>
-            <textarea name="travel_requirements" rows="2" placeholder="Enter your travel requirements" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;resize:vertical;"></textarea>
           </div>
 
           <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:20px;font-size:0.75rem;color:#64748B;line-height:1.5;">

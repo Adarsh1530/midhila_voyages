@@ -402,7 +402,7 @@ require_once __DIR__ . '/includes/header.php';
               <input type="text" name="corporate_av_needs" placeholder="Enter your audio-visual requirements" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;">
             </div>
 
-            <div style="display:flex;gap:16px;margin-bottom:14px;flex-wrap:wrap;">
+            <div style="display:flex;gap:16px;margin-bottom:6px;flex-wrap:wrap;">
               <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:600;color:#334155;">
                 <input type="checkbox" name="corporate_accommodation_needed" value="1">
                 <span><?= __t('corp_need_acc') ?></span>
@@ -411,11 +411,6 @@ require_once __DIR__ . '/includes/header.php';
                 <input type="checkbox" name="corporate_transport_needed" value="1">
                 <span><?= __t('corp_need_transport') ?></span>
               </label>
-            </div>
-
-            <div>
-              <label style="display:block;font-size:0.78rem;font-weight:600;color:#64748B;margin-bottom:4px;">Additional Requirements / Special Notes</label>
-              <textarea name="travel_requirements" rows="3" placeholder="Enter your additional requirements" style="width:100%;padding:9px 12px;border:1px solid #CBD5E1;border-radius:6px;font-size:0.86rem;"></textarea>
             </div>
           </div>
 

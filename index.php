@@ -665,28 +665,22 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="form-row-2col">
           <div class="editorial-form-group">
-            <label class="editorial-label"><?= e(__t('form_email', 'Email Address *')) ?></label>
-            <input type="email" name="email" class="editorial-input" placeholder="Enter your email address" required>
+            <label class="editorial-label"><?= e(__t('form_select_destination', 'Preferred Destination *')) ?></label>
+            <select name="destination_id" class="editorial-select" required>
+              <option value="" disabled selected>Select Your Destination</option>
+              <option value="1">Kerala Backwaters &amp; Munnar</option>
+              <option value="2">Tamil Nadu Temple Circuit</option>
+              <option value="3">Varanasi &amp; Prayagraj</option>
+              <option value="4">Himalayan Valleys</option>
+              <option value="5">Lakshadweep Atolls</option>
+              <option value="6">Andaman Islands</option>
+            </select>
           </div>
 
           <div class="editorial-form-group">
-            <label class="editorial-label"><?= e(__t('form_select_destination', 'Preferred Destination')) ?></label>
-            <select name="destination" class="editorial-select">
-              <option value="" disabled selected>Select Your Destination</option>
-              <option value="kerala">Kerala Backwaters &amp; Munnar</option>
-              <option value="tamil-nadu">Tamil Nadu Temple Circuit</option>
-              <option value="varanasi">Varanasi &amp; Prayagraj</option>
-              <option value="himalayas">Himalayan Valleys</option>
-              <option value="lakshadweep">Lakshadweep Atolls</option>
-              <option value="andaman">Andaman Islands</option>
-              <option value="other">Other / Custom Route</option>
-            </select>
+            <label class="editorial-label"><?= e(__t('form_start_date', 'Travel Starting Date *')) ?></label>
+            <input type="date" name="departure_date" class="editorial-input" required min="<?= date('Y-m-d') ?>" title="Select Your Travel Starting Date">
           </div>
-        </div>
-
-        <div class="editorial-form-group">
-          <label class="editorial-label"><?= e(__t('form_additional_req', 'Travel Notes / Preferences')) ?></label>
-          <textarea name="message" class="editorial-textarea" rows="3" placeholder="Enter your travel notes"></textarea>
         </div>
 
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:28px;">

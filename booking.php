@@ -204,11 +204,6 @@ require_once __DIR__ . '/includes/header.php';
             <input type="number" name="travellers_count" id="bkgTravellers" min="1" max="50" value="2" class="editorial-input" required placeholder="Enter your number of guests">
           </div>
 
-          <div class="editorial-form-group">
-            <label class="editorial-label">Special Requests or Specific Requirements</label>
-            <textarea name="special_requests" id="bkgNotes" class="editorial-textarea" rows="3" placeholder="Enter your special requests"></textarea>
-          </div>
-
           <button type="submit" id="proceedPayBtn" class="btn-cinematic-primary" style="width:100%;justify-content:center;padding:15px 32px;font-size:1.02rem;font-weight:700;">
             <span>Confirm Booking Reservation &rarr;</span>
           </button>

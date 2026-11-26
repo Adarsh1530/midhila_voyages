@@ -388,7 +388,7 @@ require_once __DIR__ . '/includes/header.php';
                 <option value="Tempo Traveller AC (12-17 Seats)">Tempo Traveller AC (12 to 17 Seats)</option>
                 <option value="Urbania Luxury Van">Force Urbania Luxury Van (10-14 Seats)</option>
                 <option value="Luxury Coach (26-45 Seats)">Luxury AC Bus / Coach (26 to 45 Seats)</option>
-                <option value="No Vehicle Needed">Only Hotels &amp; Itinerary (No Transport)</option>
+                <option value="No Need">No Need</option>
               </select>
             </div>
             <div>
@@ -401,6 +401,7 @@ require_once __DIR__ . '/includes/header.php';
                 <option value="Private Houseboat Stay">Private Luxury Houseboat (Alleppey/Kumarakom)</option>
                 <option value="Ayurvedic Wellness Retreat">Ayurvedic Wellness &amp; Rejuvenation Center</option>
                 <option value="Plantation Homestay">Authentic Plantation Homestay</option>
+                <option value="No Need">No Need</option>
               </select>
             </div>
           </div>
@@ -414,6 +415,7 @@ require_once __DIR__ . '/includes/header.php';
                 <option value="breakfast_dinner"><?= __t('food_breakfast_dinner') ?></option>
                 <option value="breakfast_only"><?= __t('food_breakfast_only') ?></option>
                 <option value="without_food"><?= __t('food_without') ?></option>
+                <option value="No Need">No Need</option>
               </select>
             </div>
             <div>
@@ -437,14 +439,6 @@ require_once __DIR__ . '/includes/header.php';
               </select>
             </div>
           </div>
-        </div>
-
-        <!-- 4. Special Requirements -->
-        <div style="margin-bottom:30px;">
-          <h3 style="font-size:1.05rem;color:#0F172A;font-weight:700;margin-bottom:12px;border-bottom:1px solid #F1F5F9;padding-bottom:8px;">
-            4. Special Wishes &amp; Sightseeing Interests
-          </h3>
-          <textarea name="travel_requirements" rows="4" placeholder="Enter your special requests" style="width:100%;padding:12px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;line-height:1.6;"></textarea>
         </div>
 
         <button type="submit" class="btn-cinematic-primary" style="width:100%;justify-content:center;padding:15px;font-size:1.05rem;">

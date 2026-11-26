@@ -507,13 +507,6 @@ require_once __DIR__ . '/includes/header.php';
               </select>
             </div>
           </div>
-
-          <div>
-            <label for="specialRequests" style="display:block;font-size:0.78rem;font-weight:600;color:#64748B;margin-bottom:6px;">
-              Special Requests / Temple Darshans / Sightseeing
-            </label>
-            <textarea id="specialRequests" name="special_requests" rows="3" placeholder="Enter your special requests" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;line-height:1.6;"></textarea>
-          </div>
         </div>
 
         <button type="submit" class="btn-cinematic-primary" style="width:100%;justify-content:center;padding:15px;font-size:1.05rem;">
