@@ -786,11 +786,7 @@ try {
           <span style="font-weight:600;">Tour Packages</span>
         </a>
 
-        <a href="<?= ADMIN_URL ?>/accommodations.php" class="admin-nav-item <?= in_array($adminScript, ['accommodations.php', 'accommodation-edit.php', 'corporate-venues.php', 'corporate-venue-edit.php']) ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
-          <span style="font-weight:600;">Hotels &amp; Stays</span>
-        </a>
-
-        <a href="<?= ADMIN_URL ?>/destinations.php" class="admin-nav-item <?= in_array($adminScript, ['destinations.php', 'destination-edit.php', 'tourism-categories.php']) ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
+        <a href="<?= ADMIN_URL ?>/destinations.php" class="admin-nav-item <?= in_array($adminScript, ['destinations.php', 'destination-edit.php']) ? 'is-active' : '' ?>" style="font-size:0.92rem;padding:11px 14px;border-radius:10px;">
           <span style="font-weight:600;">Destinations</span>
         </a>
 

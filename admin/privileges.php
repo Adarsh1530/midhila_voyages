@@ -218,15 +218,6 @@ require_once __DIR__ . '/includes/admin-header.php';
         </tr>
         <tr>
           <td>
-            <strong>Hotels &amp; Stays</strong>
-            <div style="font-size:0.75rem;color:#64748B;">Resorts, accommodations &amp; venues</div>
-          </td>
-          <td><span class="badge badge-success">Full Control</span></td>
-          <td><span class="badge badge-success">Full Control</span></td>
-          <td><span class="badge badge-neutral">Restricted</span></td>
-        </tr>
-        <tr>
-          <td>
             <strong>Destinations &amp; Places</strong>
             <div style="font-size:0.75rem;color:#64748B;">Kerala spots, backwaters, &amp; temples</div>
           </td>

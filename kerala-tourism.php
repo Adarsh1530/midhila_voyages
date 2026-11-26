@@ -90,8 +90,8 @@ require_once __DIR__ . '/includes/header.php';
     </p>
 
     <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
-      <a href="<?= BASE_URL ?>/accommodation.php" class="btn-cinematic-primary" style="padding:14px 28px;font-size:0.95rem;">
-        <span><?= __t('nav_accommodation') ?> &amp; Stays &rarr;</span>
+      <a href="<?= BASE_URL ?>/packages.php" class="btn-cinematic-primary" style="padding:14px 28px;font-size:0.95rem;">
+        <span><?= __t('btn_view_packages', 'View Holiday Packages') ?> &rarr;</span>
       </a>
       <a href="<?= BASE_URL ?>/custom-tour.php" class="btn-cinematic-secondary" style="padding:14px 28px;font-size:0.95rem;background:rgba(255,255,255,0.08);color:#FFFFFF;border-color:rgba(255,255,255,0.3);">
         <span><?= __t('btn_customise_this') ?></span>
@@ -158,12 +158,9 @@ require_once __DIR__ . '/includes/header.php';
             <p style="font-size:0.86rem;color:#64748B;line-height:1.6;margin-bottom:16px;">
               <?= loc($c, 'description') ?>
             </p>
-            <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid #F1F5F9;padding-top:14px;">
+            <div style="display:flex;align-items:center;justify-content:flex-end;border-top:1px solid #F1F5F9;padding-top:14px;">
               <a href="<?= BASE_URL ?>/kerala-tourism.php?cat=<?= urlencode($c['slug']) ?>" style="font-size:0.85rem;font-weight:700;color:#0F172A;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">
                 <span><?= e(__t('btn_view_packages', 'Explore Packages')) ?></span> &rarr;
-              </a>
-              <a href="<?= BASE_URL ?>/accommodation.php?cat=<?= urlencode($c['slug']) ?>" style="font-size:0.82rem;font-weight:600;color:#2563EB;text-decoration:none;">
-                <span><?= e(__t('nav_accommodation', 'View Stays')) ?></span>
               </a>
             </div>
           </div>
@@ -186,9 +183,6 @@ require_once __DIR__ . '/includes/header.php';
           <?= e(__t('nav_destinations', 'Storied Destinations & Regions')) ?>
         </h2>
       </div>
-      <a href="<?= BASE_URL ?>/accommodation.php" class="btn-cinematic-secondary" style="padding:9px 18px;font-size:0.86rem;">
-        <span><?= e(__t('nav_accommodation', 'Filter Accommodations')) ?> &rarr;</span>
-      </a>
     </div>
 
     <?php if (empty($filteredDestinations)): ?>
@@ -218,12 +212,9 @@ require_once __DIR__ . '/includes/header.php';
                   </div>
                 <?php endif; ?>
               </div>
-              <div style="display:flex;gap:8px;padding-top:12px;border-top:1px solid #F1F5F9;">
-                <a href="<?= BASE_URL ?>/accommodation.php?destination_id=<?= (int)$d['id'] ?>" class="btn-cinematic-secondary" style="flex:1;text-align:center;padding:7px 10px;font-size:0.78rem;">
-                  <span>Stays in <?= loc($d, 'name') ?></span>
-                </a>
-                <a href="<?= BASE_URL ?>/custom-tour.php?destination_id=<?= (int)$d['id'] ?>" class="btn-cinematic-primary" style="flex:1;text-align:center;padding:7px 10px;font-size:0.78rem;">
-                  <span>Plan Yatra</span>
+              <div style="padding-top:12px;border-top:1px solid #F1F5F9;">
+                <a href="<?= BASE_URL ?>/custom-tour.php?destination_id=<?= (int)$d['id'] ?>" class="btn-cinematic-primary" style="width:100%;text-align:center;padding:8px 10px;font-size:0.82rem;justify-content:center;">
+                  <span>Plan Journey to <?= loc($d, 'name') ?> &rarr;</span>
                 </a>
               </div>
             </div>
@@ -305,12 +296,9 @@ require_once __DIR__ . '/includes/header.php';
                   </a>
                 </div>
 
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                  <a href="<?= BASE_URL ?>/accommodation.php?destination_id=<?= (int)$pkg['destination_id'] ?>" class="btn-cinematic-secondary" style="text-align:center;padding:9px;font-size:0.8rem;">
-                    <span><?= e(__t('nav_accommodation', 'Stays')) ?></span>
-                  </a>
-                  <a href="<?= BASE_URL ?>/enquiry.php?package_id=<?= (int)$pkg['id'] ?>" class="btn-cinematic-primary" style="text-align:center;padding:9px;font-size:0.8rem;">
-                    <span><?= e(__t('btn_submit_enquiry', 'Enquire')) ?></span>
+                <div style="margin-top:8px;">
+                  <a href="<?= BASE_URL ?>/enquiry.php?package_id=<?= (int)$pkg['id'] ?>" class="btn-cinematic-primary" style="width:100%;text-align:center;padding:9px;font-size:0.85rem;justify-content:center;">
+                    <span><?= e(__t('btn_submit_enquiry', 'Plan My Journey')) ?> &rarr;</span>
                   </a>
                 </div>
               </div>
@@ -334,11 +322,11 @@ require_once __DIR__ . '/includes/header.php';
       <?= e(get_setting('cta_subtitle', 'Whether you wish to coordinate elderly pilgrimage darshans at Guruvayur, a romantic private houseboat night in Alleppey, or a complete corporate team offsite in Munnar, our directors coordinate every detail directly.')) ?>
     </p>
     <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
-      <a href="<?= BASE_URL ?>/accommodation.php" class="btn-cinematic-primary" style="padding:13px 26px;">
-        <span><?= __t('nav_accommodation') ?> Finder &rarr;</span>
+      <a href="<?= BASE_URL ?>/enquiry.php" class="btn-cinematic-primary" style="padding:13px 26px;">
+        <span><?= __t('btn_plan_trip') ?> &rarr;</span>
       </a>
-      <a href="<?= BASE_URL ?>/corporate-events.php" class="btn-cinematic-secondary" style="padding:13px 26px;color:#FFFFFF;border-color:rgba(255,255,255,0.3);">
-        <span><?= __t('nav_corporate_events') ?></span>
+      <a href="<?= BASE_URL ?>/custom-tour.php" class="btn-cinematic-secondary" style="padding:13px 26px;color:#FFFFFF;border-color:rgba(255,255,255,0.3);">
+        <span><?= __t('nav_custom_tour') ?></span>
       </a>
     </div>
   </div>

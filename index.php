@@ -326,30 +326,10 @@ require_once __DIR__ . '/includes/header.php';
       <?php endif; ?>
     </div>
 
-    <!-- 3 Quick Access Interactive Service Cards -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:20px;">
+    <!-- 2 Quick Access Interactive Service Cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:24px;">
       
-      <!-- Card 1: Destination Accommodation -->
-      <div style="background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color 0.2s;">
-        <div>
-          <div style="width:48px;height:48px;border-radius:12px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-          </div>
-          <h3 style="font-size:1.2rem;font-weight:700;color:var(--color-navy);margin-bottom:8px;">
-            <?= e(__t('nav_accommodation', 'Accommodation Booking')) ?>
-          </h3>
-          <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.6;margin-bottom:20px;">
-            Filter hotels, tea plantation resorts, beach villas, and houseboats by destination with custom room views, dietary options, and facilities.
-          </p>
-        </div>
-        <div>
-          <a href="<?= BASE_URL ?>/accommodation.php" class="btn-cinematic-primary" style="display:inline-flex;width:auto;">
-            <span>Browse Accommodations &rarr;</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Card 2: Custom Tour Planner -->
+      <!-- Card 1: Custom Tour Planner -->
       <div style="background:#FFFDF5;border:1.5px solid #FEF08A;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;">
         <div>
           <div style="width:48px;height:48px;border-radius:12px;background:#FEF3C7;color:#D97706;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
@@ -359,7 +339,7 @@ require_once __DIR__ . '/includes/header.php';
             <?= e(__t('nav_custom_tour', 'Customised Tour Planner')) ?>
           </h3>
           <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.6;margin-bottom:20px;">
-            Specify your route, transport preference (Sedan, Innova, Urbania), private chauffeur, days, dietary choices, and receive a bespoke itinerary proposal.
+            Specify your preferred destinations, route rhythm, private transport (Sedan, Innova, Urbania), chauffeur, and receive a bespoke itinerary proposal.
           </p>
         </div>
         <div>
@@ -369,22 +349,22 @@ require_once __DIR__ . '/includes/header.php';
         </div>
       </div>
 
-      <!-- Card 3: Corporate & Business Events -->
+      <!-- Card 2: Sacred Pilgrimage Yatras -->
       <div style="background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;">
         <div>
-          <div style="width:48px;height:48px;border-radius:12px;background:#F3E8FF;color:#7E22CE;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          <div style="width:48px;height:48px;border-radius:12px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
           </div>
           <h3 style="font-size:1.2rem;font-weight:700;color:var(--color-navy);margin-bottom:8px;">
-            <?= e(__t('nav_corporate', 'Corporate & Business Events')) ?>
+            <?= e(__t('nav_pilgrimage', 'Sacred Vedic Yatras')) ?>
           </h3>
           <p style="font-size:0.88rem;color:var(--color-text-muted);line-height:1.6;margin-bottom:20px;">
-            Reserve conference halls, seminar auditoriums, and convention centres with theater/roundtable seating, AV equipment, catering, and guest accommodation.
+            Handcrafted spiritual journeys across Rameswaram, Madurai, Varanasi, Ayodhya, and Thiruchendur with senior-citizen first care and pure vegetarian dining.
           </p>
         </div>
         <div>
-          <a href="<?= BASE_URL ?>/corporate-events.php" class="btn-cinematic-primary" style="display:inline-flex;width:auto;">
-            <span>Corporate Venues &rarr;</span>
+          <a href="<?= BASE_URL ?>/pilgrimage.php" class="btn-cinematic-primary" style="display:inline-flex;width:auto;">
+            <span>Explore Pilgrimages &rarr;</span>
           </a>
         </div>
       </div>

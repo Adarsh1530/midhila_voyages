@@ -43,14 +43,6 @@ $pendingBookings   = (int)$db->query("SELECT COUNT(*) FROM `bookings` WHERE `boo
 
 $totalPackages      = (int)$db->query("SELECT COUNT(*) FROM `packages` WHERE `is_published` = 1")->fetchColumn();
 $totalDestinations  = (int)$db->query("SELECT COUNT(*) FROM `destinations` WHERE `is_published` = 1")->fetchColumn();
-$totalAccommodations= 0;
-$totalVenues        = 0;
-$totalPillars       = 0;
-try {
-    $totalAccommodations = (int)$db->query("SELECT COUNT(*) FROM `accommodations` WHERE `is_active` = 1")->fetchColumn();
-    $totalVenues         = (int)$db->query("SELECT COUNT(*) FROM `corporate_venues` WHERE `is_active` = 1")->fetchColumn();
-    $totalPillars        = (int)$db->query("SELECT COUNT(*) FROM `tourism_categories` WHERE `is_active` = 1")->fetchColumn();
-} catch (Exception $e) {}
 
 // 2. Fetch Recent Enquiries
 $recentEnquiries = $db->query("
@@ -132,30 +124,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     </div>
   </div>
 
-  <!-- Card 2: Hotels & Stays -->
-  <div style="background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
-    <div>
-      <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px;">
-        <span style="background:#16A34A;color:#FFFFFF;font-size:0.78rem;font-weight:800;padding:3px 10px;border-radius:20px;">
-          <?= ($totalAccommodations + $totalVenues) ?> STAYS LIVE
-        </span>
-      </div>
-      <h3 style="font-size:1.25rem;font-weight:800;color:#0F172A;margin:0 0 6px 0;">Hotels &amp; Stays</h3>
-      <p style="font-size:0.86rem;color:#475569;margin:0 0 16px 0;line-height:1.5;">
-        Add or edit partner resorts, hotels, and houseboats. Display room rates, amenities, and photos.
-      </p>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:12px;border-top:1px solid #DCFCE7;">
-      <a href="<?= ADMIN_URL ?>/accommodation-edit.php" class="admin-btn admin-btn-primary" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#15803D;border-color:#15803D;">
-        Add Hotel
-      </a>
-      <a href="<?= ADMIN_URL ?>/accommodations.php" class="admin-btn admin-btn-outline" style="font-size:0.88rem;padding:9px 12px;font-weight:700;text-align:center;justify-content:center;background:#FFFFFF;">
-        Manage (<?= $totalAccommodations ?>)
-      </a>
-    </div>
-  </div>
-
-  <!-- Card 3: Customer Inquiries -->
+  <!-- Card 2: Customer Inquiries -->
   <div style="background:#FFF7ED;border:1.5px solid #FED7AA;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.02);">
     <div>
       <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px;">

@@ -181,7 +181,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       Centralised Enquiries Hub
     </h3>
     <p style="font-size:0.86rem;color:var(--admin-muted);margin:0;">
-      Real-time customer inquiries across Tour Packages, Custom Itineraries, Accommodations, Kerala Tourism, and Corporate Events.
+      Real-time customer inquiries across Tour Packages, Custom Itineraries, Kerala Tourism, and Sacred Pilgrimages.
     </p>
   </div>
   
@@ -193,17 +193,15 @@ require_once __DIR__ . '/includes/admin-header.php';
   </div>
 </div>
 
-<!-- Category Tabs (6 Modules + All) -->
+<!-- Category Tabs (4 Modules + All) -->
 <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;margin-bottom:20px;border-bottom:1px solid #E2E8F0;">
   <?php 
   $tabsMap = [
     'all' => ['label' => 'All Inquiries'],
     'tour_package' => ['label' => 'Tour Packages'],
     'custom_tour' => ['label' => 'Customised Tours'],
-    'accommodation' => ['label' => 'Accommodations'],
     'kerala_tourism' => ['label' => 'Kerala Tourism'],
-    'pilgrimage' => ['label' => 'Pilgrimage Sacred'],
-    'corporate_event' => ['label' => 'Corporate Events']
+    'pilgrimage' => ['label' => 'Pilgrimage Sacred']
   ];
   foreach ($tabsMap as $tKey => $tMeta): 
     $isActive = ($tab === $tKey);
