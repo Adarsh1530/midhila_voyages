@@ -344,7 +344,7 @@ require_once __DIR__ . '/includes/header.php';
         </div>
         <div>
           <a href="<?= BASE_URL ?>/custom-tour.php" class="btn-cinematic-primary" style="display:inline-flex;width:auto;background:#C5A059;border-color:#C5A059;">
-            <span>Plan Custom Trip &rarr;</span>
+            <span><?= e(__t('btn_plan_trip', 'Plan Journey')) ?> &rarr;</span>
           </a>
         </div>
       </div>

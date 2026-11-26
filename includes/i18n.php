@@ -227,7 +227,7 @@ function get_translation_dictionary(): array {
             'ta' => 'கேள்வி பதில்'
         ],
         'btn_plan_trip' => [
-            'en' => 'Plan My Journey',
+            'en' => 'Plan Journey',
             'ml' => 'യാത്ര പ്ലാൻ ചെയ്യാം',
             'ta' => 'பயண திட்டம்'
         ],

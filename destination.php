@@ -181,7 +181,7 @@ require_once __DIR__ . '/includes/header.php';
             </a>
 
             <a href="<?= BASE_URL ?>/custom-tour.php?destination_id=<?= (int)$dest['id'] ?>" class="btn-cinematic-primary" style="width:100%;justify-content:center;">
-              <span><?= e(__t('btn_plan_trip', 'Plan Custom Journey')) ?></span>
+              <span><?= e(__t('btn_plan_trip', 'Plan Journey')) ?></span>
             </a>
           </div>
 

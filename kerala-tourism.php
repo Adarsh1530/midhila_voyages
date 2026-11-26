@@ -214,7 +214,7 @@ require_once __DIR__ . '/includes/header.php';
               </div>
               <div style="padding-top:12px;border-top:1px solid #F1F5F9;">
                 <a href="<?= BASE_URL ?>/custom-tour.php?destination_id=<?= (int)$d['id'] ?>" class="btn-cinematic-primary" style="width:100%;text-align:center;padding:8px 10px;font-size:0.82rem;justify-content:center;">
-                  <span>Plan Journey to <?= loc($d, 'name') ?> &rarr;</span>
+                  <span><?= e(__t('btn_plan_trip', 'Plan Journey')) ?> &rarr;</span>
                 </a>
               </div>
             </div>
@@ -298,7 +298,7 @@ require_once __DIR__ . '/includes/header.php';
 
                 <div style="margin-top:8px;">
                   <a href="<?= BASE_URL ?>/enquiry.php?package_id=<?= (int)$pkg['id'] ?>" class="btn-cinematic-primary" style="width:100%;text-align:center;padding:9px;font-size:0.85rem;justify-content:center;">
-                    <span><?= e(__t('btn_submit_enquiry', 'Plan My Journey')) ?> &rarr;</span>
+                    <span><?= e(__t('btn_plan_trip', 'Plan Journey')) ?> &rarr;</span>
                   </a>
                 </div>
               </div>
