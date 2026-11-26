@@ -138,10 +138,7 @@ $globalWaUrl = build_whatsapp_url($agencyWhatsApp, $defaultWaMsg);
       <nav class="nav-menu" aria-label="Main Navigation">
         <a href="<?= BASE_URL ?>/index.php" class="nav-link <?= ($currentScript === 'index.php') ? 'is-active' : '' ?>"><?= __t('nav_home') ?></a>
         <a href="<?= BASE_URL ?>/about.php" class="nav-link <?= ($currentScript === 'about.php') ? 'is-active' : '' ?>"><?= __t('nav_about') ?></a>
-        <a href="<?= BASE_URL ?>/kerala-tourism.php" class="nav-link <?= in_array($currentScript, ['kerala-tourism.php']) ? 'is-active' : '' ?>" style="color:#0F172A;font-weight:700;">
-          <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#10B981;margin-right:3px;"></span>
-          <?= __t('nav_kerala_tourism') ?>
-        </a>
+        <a href="<?= BASE_URL ?>/kerala-tourism.php" class="nav-link <?= in_array($currentScript, ['kerala-tourism.php']) ? 'is-active' : '' ?>"><?= __t('nav_kerala_tourism') ?></a>
         <a href="<?= BASE_URL ?>/packages.php" class="nav-link <?= in_array($currentScript, ['packages.php', 'package.php']) ? 'is-active' : '' ?>"><?= __t('nav_packages') ?></a>
         <a href="<?= BASE_URL ?>/contact.php" class="nav-link <?= ($currentScript === 'contact.php') ? 'is-active' : '' ?>"><?= __t('nav_contact') ?></a>
         
