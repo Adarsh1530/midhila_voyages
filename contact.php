@@ -16,7 +16,7 @@ $agencyPhone = get_setting('primary_phone', '+91 62829 48227');
 $agencyWhatsApp = get_setting('whatsapp_number', '+916282948227');
 $agencyEmail = get_setting('primary_email', 'contact@midhilavoyages.com');
 $agencyAddress = get_setting('office_address', 'Midhila Voyages, Travel & Pilgrimage Hub, Kerala, India');
-$workingHours = get_setting('working_hours', 'Monday – Saturday: 9:00 AM – 7:30 PM (IST)');
+$workingHours = get_setting('working_hours', 'Monday - Saturday: 9:00 AM - 7:30 PM (IST)');
 
 $errors = [];
 $successMessage = '';

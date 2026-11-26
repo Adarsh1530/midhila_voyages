@@ -9,10 +9,35 @@ require_once __DIR__ . '/csrf.php';
 require_once __DIR__ . '/i18n.php';
 
 /**
- * Safe HTML string escaping
+ * Fix Mojibake / encoding artifacts from Windows-1252 / CP437 across text
+ */
+function fix_mojibake(?string $str): string {
+    if ($str === null || $str === '') return '';
+    static $replacements = [
+        'ÔÇô' => '–',
+        'ÔÇö' => '—',
+        'ÔÇÖ' => '’',
+        'ÔÇÿ' => '‘',
+        'ÔÇ£' => '“',
+        'ÔÇ¥' => '”',
+        'ÔÇ¢' => '•',
+        'Ôé╣' => '₹',
+        'â€“' => '–',
+        'â€”' => '—',
+        'â€™' => '’',
+        'â€˜' => '‘',
+        'â€œ' => '“',
+        'â€' => '”',
+        'â€¢' => '•',
+    ];
+    return strtr($str, $replacements);
+}
+
+/**
+ * Safe HTML string escaping with encoding cleanup
  */
 function e(?string $string): string {
-    return htmlspecialchars((string)$string, ENT_QUOTES, 'UTF-8');
+    return htmlspecialchars(fix_mojibake((string)$string), ENT_QUOTES, 'UTF-8');
 }
 
 /**
@@ -27,7 +52,7 @@ function get_setting(string $key, string $default = ''): string {
             $db = getDB();
             $stmt = $db->query("SELECT `setting_key`, `setting_value` FROM `site_settings`");
             while ($row = $stmt->fetch()) {
-                $settingsCache[$row['setting_key']] = $row['setting_value'];
+                $settingsCache[$row['setting_key']] = fix_mojibake($row['setting_value']);
             }
         } catch (Exception $e) {
             error_log("Failed to load site settings: " . $e->getMessage());
@@ -40,19 +65,19 @@ function get_setting(string $key, string $default = ''): string {
             // 1. Check for explicit localized setting key in site_settings (e.g. hero_headline_1_ml)
             $langKey = $key . '_' . $lang;
             if (!empty($settingsCache[$langKey])) {
-                return $settingsCache[$langKey];
+                return fix_mojibake($settingsCache[$langKey]);
             }
             // 2. Check translation dictionary __t('setting_' . $key)
             if (function_exists('__t')) {
                 $dictVal = __t('setting_' . $key, '');
                 if (!empty($dictVal) && $dictVal !== ('setting_' . $key)) {
-                    return $dictVal;
+                    return fix_mojibake($dictVal);
                 }
             }
         }
     }
 
-    return $settingsCache[$key] ?? $default;
+    return fix_mojibake($settingsCache[$key] ?? $default);
 }
 
 /**
