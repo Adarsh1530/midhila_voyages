@@ -75,72 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_workflow_statu
     }
 }
 
-// -------------------------------------------------------------
-// ACTION 2: RECORD HOTEL / VENUE AVAILABILITY CHECK
-// -------------------------------------------------------------
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['record_availability_check'])) {
-    if (verify_csrf_token()) {
-        $providerName = trim($_POST['provider_name'] ?? '');
-        $contactPerson = trim($_POST['contact_person'] ?? '');
-        $responseStatus = trim($_POST['response_status'] ?? 'pending');
-        $roomCategory = trim($_POST['available_room_category'] ?? '');
-        $roomQty = (int)($_POST['confirmed_room_quantity'] ?? 0);
-        $quotedPrice = !empty($_POST['quoted_price']) ? (float)$_POST['quoted_price'] : null;
-        $providerRemarks = trim($_POST['provider_remarks'] ?? '');
-        $adminRemarks = trim($_POST['admin_remarks'] ?? '');
-        $contactedAt = !empty($_POST['contacted_at']) ? $_POST['contacted_at'] : date('Y-m-d H:i:s');
 
-        if (!empty($providerName)) {
-            // Insert into availability_checks
-            $insCheck = $db->prepare("
-                INSERT INTO `availability_checks` 
-                (`enquiry_id`, `admin_id`, `provider_name`, `contact_person`, `contacted_at`, `response_status`, `available_room_category`, `confirmed_room_quantity`, `quoted_price`, `provider_remarks`, `admin_remarks`)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ");
-            $insCheck->execute([
-                $id, $adminId, $providerName, $contactPerson, $contactedAt, $responseStatus, 
-                $roomCategory, $roomQty, $quotedPrice, $providerRemarks, $adminRemarks
-            ]);
-
-            // Sync with enquiries table summary columns
-            $updEnq = $db->prepare("
-                UPDATE `enquiries` 
-                SET `availability_provider_name` = ?,
-                    `availability_contacted_at` = ?,
-                    `availability_response` = ?,
-                    `availability_room_category` = ?,
-                    `availability_room_quantity` = ?,
-                    `availability_quoted_price` = ?,
-                    `availability_remarks` = ?,
-                    `workflow_status` = CASE 
-                        WHEN ? = 'confirmed' THEN 'availability_confirmed'
-                        WHEN ? = 'unavailable' THEN 'availability_unavailable'
-                        ELSE 'checking_availability'
-                    END,
-                    `updated_at` = ?
-                WHERE `id` = ?
-            ");
-            $updEnq->execute([
-                $providerName, $contactedAt, $responseStatus, $roomCategory, $roomQty, 
-                $quotedPrice, $providerRemarks . ' | ' . $adminRemarks,
-                $responseStatus, $responseStatus,
-                date('Y-m-d H:i:s'), $id
-            ]);
-
-            // Audit
-            try {
-                $statusMap = ($responseStatus === 'confirmed') ? 'availability_confirmed' : (($responseStatus === 'unavailable') ? 'availability_unavailable' : 'checking_availability');
-                $hStmt = $db->prepare("INSERT INTO `booking_status_history` (`enquiry_id`, `admin_id`, `old_status`, `new_status`, `notes`) VALUES (?, ?, ?, ?, ?)");
-                $hStmt->execute([$id, $adminId, $enquiry['workflow_status'], $statusMap, "Hotel check recorded for {$providerName} - Response: {$responseStatus}"]);
-            } catch (Exception $e) {}
-
-            log_activity($adminId, 'record_availability', "Logged availability check for #{$enquiry['reference_no']} with {$providerName}");
-            set_flash_message('success', 'Hotel / Venue availability check successfully recorded.');
-            header('Location: ' . ADMIN_URL . '/enquiry-view.php?id=' . $id);
-            exit;
-        }
-    }
-}
 
 // -------------------------------------------------------------
 // ACTION 3: SEND CUSTOMER ACKNOWLEDGEMENT EMAIL
@@ -238,19 +173,7 @@ try {
     $notes = $notesStmt->fetchAll();
 } catch (Exception $e) {}
 
-// Fetch Availability Checks
-$checks = [];
-try {
-    $chkStmt = $db->prepare("
-        SELECT c.*, COALESCE(a.full_name, 'Staff') AS staff_name
-        FROM `availability_checks` c
-        LEFT JOIN `admins` a ON c.admin_id = a.id
-        WHERE c.enquiry_id = ?
-        ORDER BY c.id DESC
-    ");
-    $chkStmt->execute([$id]);
-    $checks = $chkStmt->fetchAll();
-} catch (Exception $e) {}
+
 
 // Fetch Status History
 $statusHistory = [];
@@ -308,12 +231,7 @@ require_once __DIR__ . '/includes/admin-header.php';
   </div>
 </div>
 
-<!-- Mandatory Disclaimer Alert Banner -->
-<div style="background:#EFF6FF;border:1px solid #BFDBFE;border-left:5px solid #2563EB;padding:14px 18px;border-radius:8px;margin-bottom:24px;font-size:0.88rem;color:#1E3A8A;display:flex;align-items:flex-start;gap:12px;">
-  <div>
-    <strong>System Policy Reminder:</strong> Room and venue availability is never automatically confirmed. Manual verification by admin with hotel/venue providers is required before confirming reservations with clients.
-  </div>
-</div>
+
 
 <div style="display:grid;grid-template-columns:1.8fr 1.2fr;gap:24px;">
   
@@ -388,92 +306,43 @@ require_once __DIR__ . '/includes/admin-header.php';
         </div>
       </div>
 
-      <!-- Detailed Requirements by Module -->
-      <?php if ($enquiry['enquiry_type'] === 'corporate_event'): ?>
-        <!-- Corporate Event Details -->
-        <h4 style="font-size:1rem;color:#0F172A;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
-          Corporate &amp; Event Specification
-        </h4>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:14px;background:#FFFFFF;border:1px solid #E2E8F0;padding:18px;border-radius:10px;margin-bottom:20px;">
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Event Type:</span>
-            <div style="font-weight:600;color:#0F172A;"><?= e($enquiry['corporate_event_type'] ?: 'Business Event') ?></div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Venue Category:</span>
-            <div style="font-weight:600;color:#7E22CE;"><?= e($enquiry['corporate_venue_type'] ?: 'Convention / Hall') ?></div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Delegates / Participants:</span>
-            <div style="font-weight:700;color:#0F172A;"><?= (int)($enquiry['corporate_participants_count'] ?? 0) ?> Guests</div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Seating Preference:</span>
-            <div style="font-weight:600;color:#0F172A;"><?= e($enquiry['corporate_seating_arrangement'] ?: 'Standard') ?></div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Guest Stay Required:</span>
-            <div style="font-weight:600;"><?= !empty($enquiry['corporate_accommodation_needed']) ? 'Yes (Rooms Required)' : 'No' ?></div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Transport / Chauffeur:</span>
-            <div style="font-weight:600;"><?= !empty($enquiry['corporate_transport_needed']) ? 'Yes (Airport & Shuttle)' : 'No' ?></div>
-          </div>
-          <?php if (!empty($enquiry['corporate_catering_needs'])): ?>
-            <div style="grid-column:1/-1;">
-              <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Food &amp; Catering Instructions:</span>
-              <div style="font-size:0.88rem;color:#0F172A;margin-top:2px;"><?= nl2br(e($enquiry['corporate_catering_needs'])) ?></div>
-            </div>
-          <?php endif; ?>
-          <?php if (!empty($enquiry['corporate_av_needs'])): ?>
-            <div style="grid-column:1/-1;">
-              <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Audio-Visual &amp; Tech Requirements:</span>
-              <div style="font-size:0.88rem;color:#0F172A;margin-top:2px;"><?= nl2br(e($enquiry['corporate_av_needs'])) ?></div>
-            </div>
-          <?php endif; ?>
+      <!-- Tourism & Travel Parameters -->
+      <h4 style="font-size:1rem;color:#0F172A;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+        Travel &amp; Journey Parameters
+      </h4>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));gap:14px;background:#FFFFFF;border:1px solid #E2E8F0;padding:18px;border-radius:10px;margin-bottom:20px;">
+        <div>
+          <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Destination:</span>
+          <div style="font-weight:700;color:#0F172A;"><?= e($enquiry['destination_name'] ?: 'Custom Plan') ?></div>
         </div>
-      <?php else: ?>
-        <!-- Tourism, Accommodation & Travel Preferences -->
-        <h4 style="font-size:1rem;color:#0F172A;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
-          Travel &amp; Accommodation Parameters
-        </h4>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));gap:14px;background:#FFFFFF;border:1px solid #E2E8F0;padding:18px;border-radius:10px;margin-bottom:20px;">
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Destination:</span>
-            <div style="font-weight:700;color:#0F172A;"><?= e($enquiry['destination_name'] ?: 'Custom Plan') ?></div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Selected Stay / Property:</span>
-            <div style="font-weight:600;color:#2563EB;"><?= e($enquiry['accommodation_name'] ?: 'None Pre-selected') ?></div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Package Circuit:</span>
-            <div style="font-weight:600;color:var(--admin-gold);"><?= e($enquiry['package_title'] ?: 'Bespoke Route') ?></div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Travel Dates:</span>
-            <div style="font-weight:600;color:#0F172A;"><?= e($enquiry['departure_date'] ?: 'Flexible') ?> to <?= e($enquiry['return_date'] ?: 'Flexible') ?></div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Travellers &amp; Rooms:</span>
-            <div style="font-weight:700;color:#0F172A;"><?= (int)$enquiry['adults_count'] ?>A <?= $enquiry['children_count'] > 0 ? (', ' . (int)$enquiry['children_count'] . 'C') : '' ?> (<?= (int)($enquiry['rooms_count'] ?? 1) ?> Rooms)</div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Transport Style:</span>
-            <div style="font-weight:600;"><?= e($enquiry['travel_type'] ?: ($enquiry['travel_category'] ?: 'Chauffeur Driven')) ?></div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Food Preference:</span>
-            <div style="font-weight:600;"><?= ucwords(str_replace('_', ' ', e($enquiry['food_preference'] ?: 'With Food'))) ?></div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Diet / Food Type:</span>
-            <div style="font-weight:600;"><?= ucwords(str_replace('_', ' ', e($enquiry['food_type'] ?: 'Both Veg / Non-Veg'))) ?></div>
-          </div>
-          <div>
-            <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Sightseeing Option:</span>
-            <div style="font-weight:600;"><?= ucwords(str_replace('_', ' ', e($enquiry['sightseeing_preference'] ?: 'With Sightseeing'))) ?></div>
-          </div>
+        <div>
+          <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Package Circuit:</span>
+          <div style="font-weight:600;color:var(--admin-gold);"><?= e($enquiry['package_title'] ?: 'Bespoke Route') ?></div>
+        </div>
+        <div>
+          <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Travel Dates:</span>
+          <div style="font-weight:600;color:#0F172A;"><?= e($enquiry['departure_date'] ?: 'Flexible') ?> to <?= e($enquiry['return_date'] ?: 'Flexible') ?></div>
+        </div>
+        <div>
+          <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Travellers:</span>
+          <div style="font-weight:700;color:#0F172A;"><?= (int)$enquiry['adults_count'] ?> Adults <?= $enquiry['children_count'] > 0 ? (', ' . (int)$enquiry['children_count'] . ' Children') : '' ?></div>
+        </div>
+        <div>
+          <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Transport Style:</span>
+          <div style="font-weight:600;"><?= e($enquiry['travel_type'] ?: ($enquiry['travel_category'] ?: 'Chauffeur Driven')) ?></div>
+        </div>
+        <div>
+          <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Food Preference:</span>
+          <div style="font-weight:600;"><?= ucwords(str_replace('_', ' ', e($enquiry['food_preference'] ?: 'Standard'))) ?></div>
+        </div>
+        <div>
+          <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Diet / Food Type:</span>
+          <div style="font-weight:600;"><?= ucwords(str_replace('_', ' ', e($enquiry['food_type'] ?: 'Both Veg / Non-Veg'))) ?></div>
+        </div>
+        <div>
+          <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Sightseeing Option:</span>
+          <div style="font-weight:600;"><?= ucwords(str_replace('_', ' ', e($enquiry['sightseeing_preference'] ?: 'Included'))) ?></div>
+        </div>
           <div>
             <span style="font-size:0.72rem;color:#64748B;text-transform:uppercase;">Budget Range:</span>
             <div style="font-weight:600;"><?= e($enquiry['budget_range'] ?: 'Standard') ?></div>
@@ -522,7 +391,6 @@ require_once __DIR__ . '/includes/admin-header.php';
             </div>
           <?php endif; ?>
         </div>
-      <?php endif; ?>
 
       <!-- Travel Requirements & Dietary Instructions -->
       <?php if (!empty($enquiry['travel_requirements']) || !empty($enquiry['food_special_instructions'])): ?>
@@ -618,107 +486,6 @@ require_once __DIR__ . '/includes/admin-header.php';
           </button>
         </form>
       </div>
-
-    </div>
-
-    <!-- =====================================================================
-         RECORD HOTEL / VENUE AVAILABILITY SECTION
-         ===================================================================== -->
-    <div class="admin-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-        <div>
-          <h3 style="font-size:1.15rem;color:#0F172A;font-weight:700;">Hotel &amp; Provider Availability Checks</h3>
-          <p style="font-size:0.82rem;color:#64748B;margin:0;">Record communication with hotels, resorts, or venues regarding room/date availability.</p>
-        </div>
-      </div>
-
-      <!-- Add Availability Form -->
-      <form method="POST" action="" style="background:#F8FAFC;border:1px solid #E2E8F0;padding:20px;border-radius:10px;margin-bottom:24px;">
-        <?= csrf_field() ?>
-        <input type="hidden" name="record_availability_check" value="1">
-        
-        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:14px;margin-bottom:14px;">
-          <div>
-            <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Provider / Hotel Name *</label>
-            <input type="text" name="provider_name" required value="<?= e($enquiry['accommodation_name']) ?>" placeholder="Enter your provider name" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
-          </div>
-          <div>
-            <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Contact Person / Manager</label>
-            <input type="text" name="contact_person" placeholder="Enter your contact person" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
-          </div>
-          <div>
-            <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Availability Response *</label>
-            <select name="response_status" required style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;background:#FFFFFF;">
-              <option value="" disabled>Select Your Availability Response</option>
-              <option value="confirmed">Confirmed (Rooms Available)</option>
-              <option value="unavailable">Unavailable (Sold Out / Fully Booked)</option>
-              <option value="pending">Pending Response</option>
-            </select>
-          </div>
-          <div>
-            <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Room / Hall Category</label>
-            <input type="text" name="available_room_category" placeholder="Enter your room category" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
-          </div>
-          <div>
-            <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Confirmed Room Quantity</label>
-            <input type="number" name="confirmed_room_quantity" min="1" value="<?= (int)($enquiry['rooms_count'] ?? 1) ?>" placeholder="Enter your number of rooms" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
-          </div>
-          <div>
-            <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Quoted Net Price (₹)</label>
-            <input type="number" step="0.01" name="quoted_price" placeholder="Enter your quoted price" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
-          </div>
-        </div>
-
-        <div style="margin-bottom:14px;">
-          <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Provider Remarks / Conditions</label>
-          <input type="text" name="provider_remarks" placeholder="Enter your provider remarks" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
-        </div>
-
-        <button type="submit" class="admin-btn admin-btn-primary" style="padding:8px 18px;font-size:0.88rem;">
-          Save Availability Check
-        </button>
-      </form>
-
-      <!-- History of Checks for this Enquiry -->
-      <h4 style="font-size:0.95rem;color:#0F172A;font-weight:700;margin-bottom:12px;">Previous Checks Log</h4>
-      <?php if (empty($checks)): ?>
-        <p style="font-size:0.84rem;color:#64748B;padding:12px;text-align:center;background:#F8FAFC;border-radius:8px;">
-          No property availability checks logged yet for this enquiry.
-        </p>
-      <?php else: ?>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <?php foreach ($checks as $chk): 
-            $resBadge = match($chk['response_status']) {
-              'confirmed' => ['label' => 'Confirmed Available', 'bg' => '#ECFDF5', 'color' => '#059669'],
-              'unavailable' => ['label' => 'Unavailable', 'bg' => '#FEF2F2', 'color' => '#DC2626'],
-              default => ['label' => 'Pending', 'bg' => '#FFFBEB', 'color' => '#D97706']
-            };
-          ?>
-            <div style="border:1px solid #E2E8F0;border-radius:8px;padding:14px;background:#FFFFFF;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;">
-              <div>
-                <div style="font-weight:700;color:#0F172A;font-size:0.92rem;"><?= e($chk['provider_name']) ?></div>
-                <div style="font-size:0.8rem;color:#64748B;margin-top:2px;">
-                  Spoke with: <strong><?= e($chk['contact_person'] ?: 'Desk') ?></strong> • Checked by <?= e($chk['staff_name']) ?> on <?= date('d M Y, h:i A', strtotime($chk['contacted_at'])) ?>
-                </div>
-                <?php if (!empty($chk['available_room_category'])): ?>
-                  <div style="font-size:0.82rem;color:#0F172A;margin-top:4px;">
-                    Rooms: <?= (int)$chk['confirmed_room_quantity'] ?>x <?= e($chk['available_room_category']) ?> 
-                    <?= $chk['quoted_price'] ? ('• Quoted: ₹' . number_format($chk['quoted_price'], 2)) : '' ?>
-                  </div>
-                <?php endif; ?>
-                <?php if (!empty($chk['provider_remarks'])): ?>
-                  <div style="font-size:0.8rem;color:#475569;margin-top:4px;font-style:italic;">
-                    "<?= e($chk['provider_remarks']) ?>"
-                  </div>
-                <?php endif; ?>
-              </div>
-              <span style="display:inline-block;padding:4px 10px;border-radius:999px;font-size:0.75rem;font-weight:700;background:<?= $resBadge['bg'] ?>;color:<?= $resBadge['color'] ?>;">
-                <?= $resBadge['label'] ?>
-              </span>
-            </div>
-          <?php endforeach; ?>
-        </div>
-      <?php endif; ?>
 
     </div>
 
