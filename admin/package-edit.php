@@ -279,7 +279,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Destination *</label>
           <select name="destination_id" required style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
-            <option value="">Select Destination</option>
+            <option value="">Select Your Destination</option>
             <?php foreach ($dests as $d): ?>
               <option value="<?= (int)$d['id'] ?>" <?= (($package['destination_id'] ?? 0) == $d['id']) ? 'selected' : '' ?>>
                 <?= e($d['name']) ?>
@@ -291,7 +291,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Category *</label>
           <select name="category_id" required style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
-            <option value="">Select Category</option>
+            <option value="">Select Your Category</option>
             <?php foreach ($cats as $c): ?>
               <option value="<?= (int)$c['id'] ?>" <?= (($package['category_id'] ?? 0) == $c['id']) ? 'selected' : '' ?>>
                 <?= e($c['name']) ?>

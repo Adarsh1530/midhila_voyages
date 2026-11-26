@@ -173,7 +173,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Category *</label>
           <select name="category" style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
-            <option value="" disabled>Select category</option>
+            <option value="" disabled>Select Your Category</option>
             <option value="domestic" <?= (($destination['category'] ?? '') === 'domestic') ? 'selected' : '' ?>>Domestic (Incredible India)</option>
             <option value="international" <?= (($destination['category'] ?? '') === 'international') ? 'selected' : '' ?>>International</option>
           </select>

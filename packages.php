@@ -108,7 +108,7 @@ require_once __DIR__ . '/includes/header.php';
         <div>
           <label class="editorial-label"><?= e(__t('form_select_destination', 'Destination')) ?></label>
           <select name="destination" class="editorial-select">
-            <option value="">Select Destination</option>
+            <option value="">Select Your Destination</option>
             <?php foreach ($dests as $d): ?>
               <option value="<?= e($d['slug']) ?>" <?= ($destinationFilter === $d['slug'] || $destinationFilter === $d['name']) ? 'selected' : '' ?>>
                 <?= e(loc($d, 'name')) ?>
@@ -121,7 +121,7 @@ require_once __DIR__ . '/includes/header.php';
         <div>
           <label class="editorial-label"><?= e(__t('nav_packages', 'Travel Style')) ?></label>
           <select name="category" class="editorial-select">
-            <option value="">Select Category</option>
+            <option value="">Select Your Travel Style</option>
             <?php foreach ($cats as $c): ?>
               <option value="<?= e($c['slug']) ?>" <?= ($categoryFilter === $c['slug'] || $categoryFilter === $c['name']) ? 'selected' : '' ?>>
                 <?= e(loc($c, 'name')) ?>
@@ -140,7 +140,7 @@ require_once __DIR__ . '/includes/header.php';
         <div>
           <label class="editorial-label">Sort Order</label>
           <select name="sort" class="editorial-select">
-            <option value="featured" <?= ($sort === 'featured') ? 'selected' : '' ?>>Select Sort Order (Featured)</option>
+            <option value="featured" <?= ($sort === 'featured') ? 'selected' : '' ?>>Select Your Sort Order (Featured)</option>
             <option value="price_asc" <?= ($sort === 'price_asc') ? 'selected' : '' ?>>Price: Low to High</option>
             <option value="price_desc" <?= ($sort === 'price_desc') ? 'selected' : '' ?>>Price: High to Low</option>
             <option value="duration_asc" <?= ($sort === 'duration_asc') ? 'selected' : '' ?>>Duration: Shortest</option>

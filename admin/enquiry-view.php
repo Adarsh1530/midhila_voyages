@@ -346,7 +346,7 @@ require_once __DIR__ . '/includes/admin-header.php';
           <input type="hidden" name="update_workflow_status" value="1">
           <div style="display:flex;gap:8px;">
             <select name="workflow_status" style="padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.85rem;background:#FFFFFF;font-weight:600;color:#0F172A;">
-              <option value="" disabled>Select workflow status</option>
+              <option value="" disabled>Select Your Workflow Status</option>
               <option value="new" <?= ($currentStatus === 'new') ? 'selected' : '' ?>>1. New Request</option>
               <option value="checking_availability" <?= ($currentStatus === 'checking_availability') ? 'selected' : '' ?>>2. Availability Checking</option>
               <option value="availability_confirmed" <?= ($currentStatus === 'availability_confirmed') ? 'selected' : '' ?>>3. Availability Confirmed</option>
@@ -649,7 +649,7 @@ require_once __DIR__ . '/includes/admin-header.php';
           <div>
             <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Availability Response *</label>
             <select name="response_status" required style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;background:#FFFFFF;">
-              <option value="" disabled>Select availability response</option>
+              <option value="" disabled>Select Your Availability Response</option>
               <option value="confirmed">Confirmed (Rooms Available)</option>
               <option value="unavailable">Unavailable (Sold Out / Fully Booked)</option>
               <option value="pending">Pending Response</option>
@@ -740,7 +740,7 @@ require_once __DIR__ . '/includes/admin-header.php';
           <div>
             <label style="font-size:0.75rem;font-weight:700;color:#64748B;">Channel</label>
             <select name="comm_channel" style="width:100%;padding:8px 10px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.85rem;background:#FFF;">
-              <option value="" disabled>Select communication channel</option>
+              <option value="" disabled>Select Your Communication Channel</option>
               <option value="phone">Phone Call</option>
               <option value="whatsapp">WhatsApp Message</option>
               <option value="email">Email</option>

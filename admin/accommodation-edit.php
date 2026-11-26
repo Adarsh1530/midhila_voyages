@@ -140,7 +140,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div>
         <label>Destination Location *</label>
         <select name="destination_id" required>
-          <option value="">Select Destination</option>
+          <option value="">Select Your Destination</option>
           <?php foreach ($destinations as $dst): ?>
             <option value="<?= (int)$dst['id'] ?>" <?= ((int)($accommodation['destination_id'] ?? 0) === (int)$dst['id']) ? 'selected' : '' ?>>
               <?= e($dst['name']) ?>
@@ -155,7 +155,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div>
         <label>Property Category</label>
         <select name="category">
-          <option value="" disabled>Select Property Category</option>
+          <option value="" disabled>Select Your Property Category</option>
           <?php 
             $cats = ['Resort', 'Hotel', 'Premium Houseboat', 'Ayurveda Retreat', 'Homestay', 'Eco Lodge'];
             $curCat = $accommodation['category'] ?? 'Resort';
@@ -168,7 +168,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div>
         <label>Kerala Tourism Category</label>
         <select name="tourism_category_id">
-          <option value="">Select Tourism Category</option>
+          <option value="">Select Your Tourism Category</option>
           <?php foreach ($tourismCategories as $tc): ?>
             <option value="<?= (int)$tc['id'] ?>" <?= ((int)($accommodation['tourism_category_id'] ?? 0) === (int)$tc['id']) ? 'selected' : '' ?>>
               <?= e($tc['name_en']) ?>
@@ -225,7 +225,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div>
           <label>Food Availability</label>
           <select name="food_availability">
-            <option value="" disabled>Select food plan</option>
+            <option value="" disabled>Select Your Food Plan</option>
             <option value="with_food" <?= (($accommodation['food_availability'] ?? '') === 'with_food') ? 'selected' : '' ?>>With Food (All Meals)</option>
             <option value="breakfast_included" <?= (($accommodation['food_availability'] ?? '') === 'breakfast_included') ? 'selected' : '' ?>>Breakfast Only</option>
             <option value="breakfast_dinner" <?= (($accommodation['food_availability'] ?? '') === 'breakfast_dinner') ? 'selected' : '' ?>>Breakfast and Dinner</option>

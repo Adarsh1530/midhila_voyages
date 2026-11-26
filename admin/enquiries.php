@@ -234,7 +234,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
       <!-- Status Filter Dropdown (9 Workflow Stages) -->
       <select name="status" style="padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFFFFF;color:#0F172A;outline:none;">
-        <option value="">Select status (All)</option>
+        <option value="">Select Your Status (All)</option>
         <option value="new" <?= ($statusFilter === 'new') ? 'selected' : '' ?>>1. New Request</option>
         <option value="checking_availability" <?= ($statusFilter === 'checking_availability') ? 'selected' : '' ?>>2. Availability Checking</option>
         <option value="availability_confirmed" <?= ($statusFilter === 'availability_confirmed') ? 'selected' : '' ?>>3. Availability Confirmed</option>

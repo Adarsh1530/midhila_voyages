@@ -126,7 +126,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div>
         <label>Venue Category *</label>
         <select name="venue_type" required>
-          <option value="" disabled>Select venue category</option>
+          <option value="" disabled>Select Your Venue Category</option>
           <option value="convention_centre" <?= (($venue['venue_type'] ?? '') === 'convention_centre') ? 'selected' : '' ?>>Convention Centre (Large Scale)</option>
           <option value="conference_hall" <?= (($venue['venue_type'] ?? '') === 'conference_hall') ? 'selected' : '' ?>>Conference Hall (Corporate Boardroom / Summit)</option>
           <option value="seminar_hall" <?= (($venue['venue_type'] ?? '') === 'seminar_hall') ? 'selected' : '' ?>>Seminar Hall (Workshops &amp; Academic)</option>
@@ -143,7 +143,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div>
         <label>Nearby Destination Linking</label>
         <select name="destination_id">
-          <option value="">Select Destination</option>
+          <option value="">Select Your Destination</option>
           <?php foreach ($destinations as $dst): ?>
             <option value="<?= (int)$dst['id'] ?>" <?= ((int)($venue['destination_id'] ?? 0) === (int)$dst['id']) ? 'selected' : '' ?>>
               <?= e($dst['name']) ?>

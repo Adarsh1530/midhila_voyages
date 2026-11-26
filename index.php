@@ -672,7 +672,7 @@ require_once __DIR__ . '/includes/header.php';
           <div class="editorial-form-group">
             <label class="editorial-label"><?= e(__t('form_select_destination', 'Preferred Destination')) ?></label>
             <select name="destination" class="editorial-select">
-              <option value="">Select Destination</option>
+              <option value="" disabled selected>Select Your Destination</option>
               <option value="kerala">Kerala Backwaters &amp; Munnar</option>
               <option value="tamil-nadu">Tamil Nadu Temple Circuit</option>
               <option value="varanasi">Varanasi &amp; Prayagraj</option>

@@ -166,7 +166,7 @@ require_once __DIR__ . '/includes/header.php';
           <div class="editorial-form-group">
             <label class="editorial-label">Select Package *</label>
             <select name="package_id" id="bookingPackageSelect" class="editorial-select" required>
-              <option value="">Select Package</option>
+              <option value="" disabled selected>Select Your Package</option>
               <?php foreach ($packages as $pkg): ?>
                 <option value="<?= (int)$pkg['id'] ?>" 
                         data-price="<?= (float)$pkg['starting_price'] ?>"
@@ -195,7 +195,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div class="editorial-form-group">
               <label class="editorial-label">Travel Departure Date *</label>
-              <input type="date" name="travel_date" id="bkgDate" class="editorial-input" required min="<?= date('Y-m-d') ?>" title="Select Travel Departure Date">
+              <input type="date" name="travel_date" id="bkgDate" class="editorial-input" required min="<?= date('Y-m-d') ?>" title="Select Your Travel Departure Date">
             </div>
           </div>
 

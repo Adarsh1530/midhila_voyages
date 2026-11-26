@@ -211,8 +211,9 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div class="admin-form-group">
         <label for="roleSelect">Split Access Role *</label>
         <select id="roleSelect" name="role" style="font-weight:600;">
+          <option value="" disabled <?= empty($editUser) ? 'selected' : '' ?>>Select Your Access Role</option>
           <?php foreach ($roles as $rKey => $rMeta): ?>
-            <option value="<?= e($rKey) ?>" <?= (($editUser['role'] ?? 'travel_manage') === $rKey) ? 'selected' : '' ?>>
+            <option value="<?= e($rKey) ?>" <?= (($editUser['role'] ?? '') === $rKey) ? 'selected' : '' ?>>
               <?= e($rMeta['label']) ?> — (<?= e($rMeta['tag']) ?>)
             </option>
           <?php endforeach; ?>

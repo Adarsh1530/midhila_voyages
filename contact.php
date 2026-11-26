@@ -145,7 +145,7 @@ require_once __DIR__ . '/includes/header.php';
             <div class="editorial-form-group">
               <label class="editorial-label"><?= e(__t('inquiry_subject', 'Inquiry Subject')) ?></label>
               <select name="subject" class="editorial-select">
-                <option value="">Select subject</option>
+                <option value="" disabled selected>Select Your Subject</option>
                 <option value="Pilgrim Tour Enquiry"><?= e(__t('nav_pilgrimage', 'Pilgrim Tour Reservation')) ?></option>
                 <option value="Custom Family Package"><?= e(__t('footer_link_family', 'Custom Family Package')) ?></option>
                 <option value="Honeymoon Itinerary"><?= e(__t('footer_link_romantic', 'Romantic Escape Planning')) ?></option>

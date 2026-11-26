@@ -377,7 +377,7 @@ require_once __DIR__ . '/includes/header.php';
                 Select Destination *
               </label>
               <select id="selectDestination" name="destination_id" required style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;cursor:pointer;">
-                <option value="">Select Destination</option>
+                <option value="" disabled <?= empty($preDestId) ? 'selected' : '' ?>>Select Your Destination</option>
                 <?php foreach ($destinations as $d): ?>
                   <option value="<?= (int)$d['id'] ?>" <?= ((int)$d['id'] === $preDestId) ? 'selected' : '' ?>>
                     <?= loc($d, 'name') ?> (<?= e($d['region_state']) ?>)
@@ -389,13 +389,13 @@ require_once __DIR__ . '/includes/header.php';
               <label for="travelStartDate" style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:6px;">
                 Travel Starting Date *
               </label>
-              <input type="date" id="travelStartDate" name="departure_date" required min="<?= date('Y-m-d') ?>" title="Select Travel Starting Date" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
+              <input type="date" id="travelStartDate" name="departure_date" required min="<?= date('Y-m-d') ?>" title="Select Your Travel Starting Date" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
             </div>
             <div>
               <label for="travelEndDate" style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:6px;">
                 Travel Ending Date
               </label>
-              <input type="date" id="travelEndDate" name="return_date" min="<?= date('Y-m-d') ?>" title="Select Travel Ending Date" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
+              <input type="date" id="travelEndDate" name="return_date" min="<?= date('Y-m-d') ?>" title="Select Your Travel Ending Date" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
             </div>
           </div>
         </div>
@@ -472,7 +472,8 @@ require_once __DIR__ . '/includes/header.php';
                 Hotel Category
               </label>
               <select id="hotelPref" name="hotel_preference" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;cursor:pointer;">
-                <option value="4-Star / Luxury Resort" selected>4-Star / Luxury Resort</option>
+                <option value="" disabled selected>Select Your Hotel Category</option>
+                <option value="4-Star / Luxury Resort">4-Star / Luxury Resort</option>
                 <option value="5-Star Palace & Heritage">5-Star Palace &amp; Heritage</option>
                 <option value="3-Star Clean Sanitised Hotel">3-Star Clean Sanitised Hotel</option>
                 <option value="Private Houseboat (Alleppey)">Private Houseboat (Alleppey)</option>
@@ -484,7 +485,8 @@ require_once __DIR__ . '/includes/header.php';
                 Food &amp; Meal Preferences
               </label>
               <select id="foodPref" name="food_preference" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;cursor:pointer;">
-                <option value="All meals included (Breakfast, Lunch, Dinner)" selected>All meals included (Breakfast, Lunch, Dinner)</option>
+                <option value="" disabled selected>Select Your Food &amp; Meal Preferences</option>
+                <option value="All meals included (Breakfast, Lunch, Dinner)">All meals included (Breakfast, Lunch, Dinner)</option>
                 <option value="Breakfast only (CP Plan)">Breakfast only (CP Plan)</option>
                 <option value="Half board (Breakfast + Dinner)">Half board (Breakfast + Dinner)</option>
                 <option value="Traditional Kerala Sadya & Local Cuisine">Traditional Kerala Sadya &amp; Local Cuisine</option>
@@ -496,7 +498,8 @@ require_once __DIR__ . '/includes/header.php';
                 Vehicle
               </label>
               <select id="vehiclePref" name="vehicle_preference" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;cursor:pointer;">
-                <option value="Innova Crysta AC" selected>Innova Crysta AC</option>
+                <option value="" disabled selected>Select Your Vehicle</option>
+                <option value="Innova Crysta AC">Innova Crysta AC</option>
                 <option value="AC Sedan (1-3 Pax)">AC Sedan (1-3 Pax)</option>
                 <option value="Tempo Traveller (12-17 Pax)">Tempo Traveller (12-17 Pax)</option>
                 <option value="Luxury Coach / Bus">Luxury Coach / Bus</option>

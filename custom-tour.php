@@ -263,7 +263,7 @@ require_once __DIR__ . '/includes/header.php';
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_select_destination') ?></label>
               <select name="destination_id" id="customTourDestSelect" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
-                <option value="0">Select Destination</option>
+                <option value="0">Select Your Destination</option>
                 <?php foreach ($destinations as $d): ?>
                   <option value="<?= (int)$d['id'] ?>" <?= ((int)$d['id'] === $preDestId) ? 'selected' : '' ?>>
                     <?= loc($d, 'name') ?> (<?= e($d['region_state']) ?>)
@@ -273,7 +273,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_start_date') ?></label>
-              <input type="date" name="departure_date" required min="<?= date('Y-m-d') ?>" title="Select travel starting date" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
+              <input type="date" name="departure_date" required min="<?= date('Y-m-d') ?>" title="Select Your Travel Starting Date" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_days') ?></label>
@@ -293,7 +293,7 @@ require_once __DIR__ . '/includes/header.php';
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_travel_type') ?></label>
               <select name="travel_type" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
-                <option value="" disabled>Select travel type</option>
+                <option value="" disabled>Select Your Travel Type</option>
                 <option value="family" selected>Family Holiday</option>
                 <option value="pilgrimage">Pilgrimage / Temple Yatra</option>
                 <option value="couple">Honeymoon / Couple</option>
@@ -382,7 +382,7 @@ require_once __DIR__ . '/includes/header.php';
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;">Preferred Private Vehicle</label>
               <select name="preferred_transport" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
-                <option value="" disabled>Select vehicle</option>
+                <option value="" disabled>Select Your Vehicle</option>
                 <option value="Toyota Innova Crysta AC" selected>Toyota Innova Crysta AC (6-7 Seats)</option>
                 <option value="Sedan (Dzire / Etios AC)">AC Sedan (Dzire / Etios - 1 to 3 Pax)</option>
                 <option value="Tempo Traveller AC (12-17 Seats)">Tempo Traveller AC (12 to 17 Seats)</option>
@@ -394,7 +394,7 @@ require_once __DIR__ . '/includes/header.php';
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;">Accommodation Comfort Level</label>
               <select name="accommodation_preference" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
-                <option value="" disabled>Select accommodation</option>
+                <option value="" disabled>Select Your Accommodation</option>
                 <option value="4-Star Luxury Resort" selected>4-Star / Premium Resort</option>
                 <option value="5-Star Palace / Heritage Sanctuary">5-Star Palace &amp; Heritage Sanctuary</option>
                 <option value="3-Star Clean Sanitised Hotel">3-Star Clean Sanitised Hotel</option>
@@ -409,7 +409,7 @@ require_once __DIR__ . '/includes/header.php';
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('pref_food_plan') ?></label>
               <select name="food_preference" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
-                <option value="" disabled>Select food plan</option>
+                <option value="" disabled>Select Your Food Plan</option>
                 <option value="all_meals" selected><?= __t('food_all_meals') ?></option>
                 <option value="breakfast_dinner"><?= __t('food_breakfast_dinner') ?></option>
                 <option value="breakfast_only"><?= __t('food_breakfast_only') ?></option>
@@ -419,7 +419,7 @@ require_once __DIR__ . '/includes/header.php';
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('pref_food_type') ?></label>
               <select name="food_type" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
-                <option value="" disabled>Select food type</option>
+                <option value="" disabled>Select Your Food Type</option>
                 <option value="both" selected><?= __t('food_type_both') ?></option>
                 <option value="vegetarian"><?= __t('food_type_veg') ?></option>
                 <option value="non_vegetarian"><?= __t('food_type_non_veg') ?></option>
@@ -429,7 +429,7 @@ require_once __DIR__ . '/includes/header.php';
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_budget_range') ?></label>
               <select name="budget_range" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
-                <option value="" disabled>Select budget range</option>
+                <option value="" disabled>Select Your Budget Range</option>
                 <option value="₹20,000 - ₹35,000">₹20,000 - ₹35,000</option>
                 <option value="₹35,000 - ₹60,000" selected>₹35,000 - ₹60,000</option>
                 <option value="₹60,000 - ₹1,00,000">₹60,000 - ₹1,00,000</option>

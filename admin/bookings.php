@@ -188,7 +188,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     </div>
 
     <select name="status" onchange="this.form.submit()" style="padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;font-weight:600;">
-      <option value="all" <?= ($filterStatus === 'all') ? 'selected' : '' ?>>Select status (All)</option>
+      <option value="all" <?= ($filterStatus === 'all') ? 'selected' : '' ?>>Select Your Status (All)</option>
       <option value="pending" <?= ($filterStatus === 'pending') ? 'selected' : '' ?>>Pending Review</option>
       <option value="confirmed" <?= ($filterStatus === 'confirmed') ? 'selected' : '' ?>>Confirmed</option>
       <option value="completed" <?= ($filterStatus === 'completed') ? 'selected' : '' ?>>Completed</option>
@@ -394,7 +394,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="margin-bottom:14px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Tour Package *</label>
         <select name="package_id" required style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
-          <option value="" disabled selected>Select Package</option>
+          <option value="" disabled selected>Select Your Package</option>
           <?php foreach ($packagesList as $p): ?>
             <option value="<?= (int)$p['id'] ?>"><?= e($p['title']) ?> (<?= format_price((float)$p['starting_price']) ?>)</option>
           <?php endforeach; ?>
@@ -419,7 +419,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         </div>
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Departure Date</label>
-          <input type="date" name="travel_date" value="<?= date('Y-m-d') ?>" title="Select travel date" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
+          <input type="date" name="travel_date" value="<?= date('Y-m-d') ?>" title="Select Your Travel Date" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
         </div>
       </div>
 
@@ -431,7 +431,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Initial Status</label>
           <select name="booking_status" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
-            <option value="" disabled>Select booking status</option>
+            <option value="" disabled>Select Your Booking Status</option>
             <option value="confirmed" selected>Confirmed</option>
             <option value="pending">Pending Review</option>
           </select>

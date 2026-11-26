@@ -443,7 +443,7 @@ require_once __DIR__ . '/includes/header.php';
                 Selected Destination *
               </label>
               <select name="destination_id" id="formDestinationSelect" onchange="switchDestination(this.value)" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;font-weight:600;color:#0F172A;" required>
-                <option value="" disabled>Select Destination</option>
+                <option value="" disabled selected>Select Your Destination</option>
                 <?php foreach ($allDestinations as $d): ?>
                   <option value="<?= (int)$d['id'] ?>" <?= ((int)$d['id'] === $selectedDestId) ? 'selected' : '' ?>>
                     📍 <?= e(loc($d, 'name')) ?><?= ($d['accommodation_count'] > 0) ? " ({$d['accommodation_count']} Stays Registered)" : '' ?>
@@ -472,11 +472,11 @@ require_once __DIR__ . '/includes/header.php';
             <div class="form-grid-3col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_start_date') ?> *</label>
-                <input type="date" name="departure_date" id="accStartDate" required min="<?= date('Y-m-d') ?>" onchange="calcDuration()" title="Select check-in date" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;background:#FFF;">
+                <input type="date" name="departure_date" id="accStartDate" required min="<?= date('Y-m-d') ?>" onchange="calcDuration()" title="Select Your Check-in Date" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;background:#FFF;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_end_date') ?> *</label>
-                <input type="date" name="return_date" id="accEndDate" required min="<?= date('Y-m-d') ?>" onchange="calcDuration()" title="Select check-out date" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;background:#FFF;">
+                <input type="date" name="return_date" id="accEndDate" required min="<?= date('Y-m-d') ?>" onchange="calcDuration()" title="Select Your Check-out Date" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;background:#FFF;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;">Number of Days</label>
@@ -505,8 +505,8 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;">Preferred Travel Type</label>
                 <select name="travel_type" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
-                  <option value="" disabled>Select travel type</option>
-                  <option value="family" selected>Family Vacation</option>
+                  <option value="" disabled selected>Select Your Travel Type</option>
+                  <option value="family">Family Vacation</option>
                   <option value="couple">Honeymoon / Couple</option>
                   <option value="friends">Friends &amp; Small Group</option>
                   <option value="solo">Solo Traveler</option>
@@ -517,9 +517,9 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;">Estimated Budget Range</label>
                 <select name="budget_range" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
-                  <option value="" disabled>Select budget range</option>
+                  <option value="" disabled selected>Select Your Budget Range</option>
                   <option value="Standard (₹15,000 - ₹30,000)">Standard (₹15,000 – ₹30,000)</option>
-                  <option value="Deluxe (₹30,000 - ₹60,000)" selected>Deluxe (₹30,000 – ₹60,000)</option>
+                  <option value="Deluxe (₹30,000 - ₹60,000)">Deluxe (₹30,000 – ₹60,000)</option>
                   <option value="Luxury (₹60,000 - ₹1,20,000)">Luxury (₹60,000 – ₹1,20,000)</option>
                   <option value="Ultra Luxury (₹1,20,000+)">Ultra Luxury (₹1,20,000+)</option>
                 </select>
@@ -586,9 +586,9 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('pref_food_plan') ?></label>
                 <select name="food_preference" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
-                  <option value="" disabled>Select food plan</option>
+                  <option value="" disabled selected>Select Your Food Plan</option>
                   <option value="with_food"><?= __t('food_with') ?></option>
-                  <option value="all_meals" selected><?= __t('food_all_meals') ?></option>
+                  <option value="all_meals"><?= __t('food_all_meals') ?></option>
                   <option value="breakfast_dinner"><?= __t('food_breakfast_dinner') ?></option>
                   <option value="breakfast_only"><?= __t('food_breakfast_only') ?></option>
                   <option value="without_food"><?= __t('food_without') ?></option>
@@ -597,8 +597,8 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('pref_food_type') ?></label>
                 <select name="food_type" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
-                  <option value="" disabled>Select food type</option>
-                  <option value="both" selected><?= __t('food_type_both') ?></option>
+                  <option value="" disabled selected>Select Your Food Type</option>
+                  <option value="both"><?= __t('food_type_both') ?></option>
                   <option value="vegetarian"><?= __t('food_type_veg') ?></option>
                   <option value="non_vegetarian"><?= __t('food_type_non_veg') ?></option>
                   <option value="special_dietary"><?= __t('food_type_special') ?></option>
@@ -620,7 +620,7 @@ require_once __DIR__ . '/includes/header.php';
             
             <div style="margin-bottom:10px;">
               <select name="sightseeing_preference" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
-                <option value="" disabled>Select sightseeing preference</option>
+                <option value="" disabled selected>Select Your Sightseeing Preference</option>
                 <option value="with_sightseeing" selected><?= __t('sightseeing_with') ?></option>
                 <option value="private_vehicle"><?= __t('sightseeing_private') ?></option>
                 <option value="customised_sightseeing"><?= __t('sightseeing_customised') ?></option>
