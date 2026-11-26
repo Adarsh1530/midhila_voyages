@@ -135,7 +135,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     </p>
   </div>
   <div style="display:flex;gap:10px;align-items:center;">
-    <button type="button" onclick="openNewBookingModal()" class="admin-btn admin-btn-primary admin-btn-sm" style="display:inline-flex;align-items:center;gap:6px;font-weight:700;">
+    <button type="button" id="btnOpenNewBooking" onclick="openNewBookingModal()" class="admin-btn admin-btn-primary admin-btn-sm" style="display:inline-flex;align-items:center;gap:6px;font-weight:700;">
       <span>+ Create New Booking</span>
     </button>
   </div>
@@ -227,6 +227,10 @@ require_once __DIR__ . '/includes/admin-header.php';
               </p>
               <?php if (!empty($search) || $filterStatus !== 'all'): ?>
                 <a href="<?= ADMIN_URL ?>/bookings.php" class="admin-btn admin-btn-outline">Reset Search Filters</a>
+              <?php else: ?>
+                <button type="button" onclick="openNewBookingModal()" class="admin-btn admin-btn-primary admin-btn-sm" style="display:inline-flex;align-items:center;gap:6px;font-weight:700;">
+                  <span>+ Record First Booking</span>
+                </button>
               <?php endif; ?>
             </td>
           </tr>
@@ -451,41 +455,103 @@ require_once __DIR__ . '/includes/admin-header.php';
   </div>
 </div>
 
+<style>
+/* Ensure custom modals in bookings page are immediately visible when active */
+#bookingStatusModal.is-active,
+#newBookingModal.is-active {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+#bookingStatusModal.is-active .admin-modal-card,
+#newBookingModal.is-active .admin-modal-card {
+  transform: scale(1) !important;
+}
+</style>
+
 <script>
-function openStatusUpdateModal(id, ref, name, status) {
-  document.getElementById('modalBookingId').value = id;
-  document.getElementById('modalBkgRefSubtitle').textContent = ref + ' — ' + name;
-  document.getElementById('modalBookingStatus').value = status;
+window.openStatusUpdateModal = function(id, ref, name, status) {
+  const idEl = document.getElementById('modalBookingId');
+  const subEl = document.getElementById('modalBkgRefSubtitle');
+  const stEl = document.getElementById('modalBookingStatus');
+  if (idEl) idEl.value = id;
+  if (subEl) subEl.textContent = ref + ' — ' + name;
+  if (stEl) stEl.value = status;
   
   const modal = document.getElementById('bookingStatusModal');
+  if (!modal) return;
   modal.style.display = 'flex';
+  modal.style.opacity = '1';
+  modal.style.visibility = 'visible';
+  modal.classList.add('is-active');
   modal.setAttribute('aria-hidden', 'false');
-}
+  const card = modal.querySelector('.admin-modal-card');
+  if (card) card.style.transform = 'scale(1)';
+};
 
-function closeStatusUpdateModal() {
+window.closeStatusUpdateModal = function() {
   const modal = document.getElementById('bookingStatusModal');
+  if (!modal) return;
+  modal.classList.remove('is-active');
+  modal.style.opacity = '0';
+  modal.style.visibility = 'hidden';
   modal.style.display = 'none';
   modal.setAttribute('aria-hidden', 'true');
-}
+};
 
-function openNewBookingModal() {
+window.openNewBookingModal = function() {
   const modal = document.getElementById('newBookingModal');
+  if (!modal) {
+    console.error('newBookingModal element not found');
+    return;
+  }
   modal.style.display = 'flex';
+  modal.style.opacity = '1';
+  modal.style.visibility = 'visible';
+  modal.classList.add('is-active');
   modal.setAttribute('aria-hidden', 'false');
-}
+  const card = modal.querySelector('.admin-modal-card');
+  if (card) card.style.transform = 'scale(1)';
+};
 
-function closeNewBookingModal() {
+window.closeNewBookingModal = function() {
   const modal = document.getElementById('newBookingModal');
+  if (!modal) return;
+  modal.classList.remove('is-active');
+  modal.style.opacity = '0';
+  modal.style.visibility = 'hidden';
   modal.style.display = 'none';
   modal.setAttribute('aria-hidden', 'true');
-}
+};
 
-// Close when clicking outside modal
-document.querySelectorAll('.admin-modal-overlay').forEach(el => {
-  el.addEventListener('click', function(e) {
-    if (e.target === this) {
-      this.style.display = 'none';
-      this.setAttribute('aria-hidden', 'true');
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('btnOpenNewBooking');
+  if (btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      openNewBookingModal();
+    });
+  }
+
+  // Close when clicking overlay backdrop
+  document.querySelectorAll('.admin-modal-overlay').forEach(el => {
+    el.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('is-active');
+        this.style.opacity = '0';
+        this.style.visibility = 'hidden';
+        this.style.display = 'none';
+        this.setAttribute('aria-hidden', 'true');
+      }
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeNewBookingModal();
+      closeStatusUpdateModal();
     }
   });
 });
