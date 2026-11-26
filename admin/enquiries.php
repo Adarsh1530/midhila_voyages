@@ -227,14 +227,14 @@ require_once __DIR__ . '/includes/admin-header.php';
     <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;flex-grow:1;">
       <!-- Search Input -->
       <div style="position:relative;flex-grow:1;min-width:240px;max-width:380px;">
-        <input type="text" name="q" value="<?= e($search) ?>" placeholder="Search by Ref #, Traveller Name, Phone, Email, Venue..." 
+        <input type="text" name="q" value="<?= e($search) ?>" placeholder="Enter your search query" 
                style="width:100%;padding:9px 14px 9px 36px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       </div>
 
       <!-- Status Filter Dropdown (9 Workflow Stages) -->
       <select name="status" style="padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFFFFF;color:#0F172A;outline:none;">
-        <option value="">All Statuses (Workflow)</option>
+        <option value="">Select status (All)</option>
         <option value="new" <?= ($statusFilter === 'new') ? 'selected' : '' ?>>1. New Request</option>
         <option value="checking_availability" <?= ($statusFilter === 'checking_availability') ? 'selected' : '' ?>>2. Availability Checking</option>
         <option value="availability_confirmed" <?= ($statusFilter === 'availability_confirmed') ? 'selected' : '' ?>>3. Availability Confirmed</option>

@@ -108,7 +108,7 @@ require_once __DIR__ . '/includes/header.php';
         <div>
           <label class="editorial-label"><?= e(__t('form_select_destination', 'Destination')) ?></label>
           <select name="destination" class="editorial-select">
-            <option value=""><?= e(__t('form_select_destination', 'All Destinations')) ?></option>
+            <option value="">Select Destination</option>
             <?php foreach ($dests as $d): ?>
               <option value="<?= e($d['slug']) ?>" <?= ($destinationFilter === $d['slug'] || $destinationFilter === $d['name']) ? 'selected' : '' ?>>
                 <?= e(loc($d, 'name')) ?>
@@ -121,7 +121,7 @@ require_once __DIR__ . '/includes/header.php';
         <div>
           <label class="editorial-label"><?= e(__t('nav_packages', 'Travel Style')) ?></label>
           <select name="category" class="editorial-select">
-            <option value=""><?= e(__t('all_itineraries', 'All Categories')) ?></option>
+            <option value="">Select Category</option>
             <?php foreach ($cats as $c): ?>
               <option value="<?= e($c['slug']) ?>" <?= ($categoryFilter === $c['slug'] || $categoryFilter === $c['name']) ? 'selected' : '' ?>>
                 <?= e(loc($c, 'name')) ?>
@@ -133,14 +133,14 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Keyword Search -->
         <div>
           <label class="editorial-label">Keyword</label>
-          <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="e.g. Rameswaram, Kerala" class="editorial-input">
+          <input type="text" name="q" value="<?= e($searchQuery) ?>" placeholder="Enter your search query" class="editorial-input">
         </div>
 
         <!-- Sorting -->
         <div>
           <label class="editorial-label">Sort Order</label>
           <select name="sort" class="editorial-select">
-            <option value="featured" <?= ($sort === 'featured') ? 'selected' : '' ?>>Featured First</option>
+            <option value="featured" <?= ($sort === 'featured') ? 'selected' : '' ?>>Select Sort Order (Featured)</option>
             <option value="price_asc" <?= ($sort === 'price_asc') ? 'selected' : '' ?>>Price: Low to High</option>
             <option value="price_desc" <?= ($sort === 'price_desc') ? 'selected' : '' ?>>Price: High to Low</option>
             <option value="duration_asc" <?= ($sort === 'duration_asc') ? 'selected' : '' ?>>Duration: Shortest</option>

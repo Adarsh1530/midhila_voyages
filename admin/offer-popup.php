@@ -122,7 +122,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
           <div>
             <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Or Paste Image URL</label>
-            <input type="text" name="popup_offer_image" value="<?= e(val('popup_offer_image', 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80')) ?>" placeholder="https://..." style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+            <input type="text" name="popup_offer_image" value="<?= e(val('popup_offer_image', 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80')) ?>" placeholder="Enter your image URL" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
           </div>
         </div>
 
@@ -133,33 +133,33 @@ require_once __DIR__ . '/includes/admin-header.php';
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Badge Tag</label>
-              <input type="text" name="popup_offer_badge" value="<?= e(val('popup_offer_badge', 'EXCLUSIVE ONGOING OFFER')) ?>" placeholder="e.g. SPECIAL OFFER" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+              <input type="text" name="popup_offer_badge" value="<?= e(val('popup_offer_badge', 'EXCLUSIVE ONGOING OFFER')) ?>" placeholder="Enter your badge tag" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Main Offer Headline *</label>
-              <input type="text" name="popup_offer_title" value="<?= e(val('popup_offer_title', 'Divine Destinations • 5-Day Sacred Yatra')) ?>" required style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+              <input type="text" name="popup_offer_title" value="<?= e(val('popup_offer_title', 'Divine Destinations • 5-Day Sacred Yatra')) ?>" required placeholder="Enter your offer headline" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             </div>
           </div>
 
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Featured Price (e.g. ₹6,500)</label>
-              <input type="text" name="popup_offer_price" value="<?= e(val('popup_offer_price', '₹6,500')) ?>" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.95rem;font-weight:700;color:#059669;">
+              <input type="text" name="popup_offer_price" value="<?= e(val('popup_offer_price', '₹6,500')) ?>" placeholder="Enter your offer price" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.95rem;font-weight:700;color:#059669;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Price Subtitle / Duration</label>
-              <input type="text" name="popup_offer_price_sub" value="<?= e(val('popup_offer_price_sub', 'per person • 5D / 4N')) ?>" placeholder="e.g. per person" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+              <input type="text" name="popup_offer_price_sub" value="<?= e(val('popup_offer_price_sub', 'per person • 5D / 4N')) ?>" placeholder="Enter your price subtitle" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             </div>
           </div>
 
           <div style="margin-bottom:16px;">
             <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Upcoming Tour Dates / Booking Note</label>
-            <input type="text" name="popup_offer_dates" value="<?= e(val('popup_offer_dates', 'Upcoming Tour Dates: 23.12.26 to 27.12.26')) ?>" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+            <input type="text" name="popup_offer_dates" value="<?= e(val('popup_offer_dates', 'Upcoming Tour Dates: 23.12.26 to 27.12.26')) ?>" placeholder="Enter your offer dates" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
           </div>
 
           <div>
             <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Offer Description &amp; Highlights</label>
-            <textarea name="popup_offer_subtitle" rows="3" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;line-height:1.6;"><?= e(val('popup_offer_subtitle', 'Experience Rameswaram, Madurai, Dhanushkodi & Thanjavur at ₹6,500/person. Sanitized AC transport & curated stays included.')) ?></textarea>
+            <textarea name="popup_offer_subtitle" rows="3" placeholder="Enter your offer description" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;line-height:1.6;"><?= e(val('popup_offer_subtitle', 'Experience Rameswaram, Madurai, Dhanushkodi & Thanjavur at ₹6,500/person. Sanitized AC transport & curated stays included.')) ?></textarea>
           </div>
         </div>
 
@@ -170,7 +170,7 @@ require_once __DIR__ . '/includes/admin-header.php';
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Button Label</label>
-              <input type="text" name="popup_offer_btn_text" value="<?= e(val('popup_offer_btn_text', 'Claim Offer on WhatsApp')) ?>" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+              <input type="text" name="popup_offer_btn_text" value="<?= e(val('popup_offer_btn_text', 'Claim Offer on WhatsApp')) ?>" placeholder="Enter your button text" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             </div>
             <div>
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Popup Frequency</label>
@@ -183,7 +183,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
           <div>
             <label style="display:block;font-size:0.82rem;font-weight:700;color:#1E293B;margin-bottom:6px;">Custom Destination URL (Optional)</label>
-            <input type="url" name="popup_offer_link" value="<?= e(val('popup_offer_link', '')) ?>" placeholder="Leave blank to automatically open WhatsApp chat" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+            <input type="url" name="popup_offer_link" value="<?= e(val('popup_offer_link', '')) ?>" placeholder="Enter your destination link URL" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             <span style="font-size:0.76rem;color:#64748B;display:block;margin-top:4px;">If left blank, clicking the button instantly opens WhatsApp chat with your agency with the offer pre-filled.</span>
           </div>
         </div>

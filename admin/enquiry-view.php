@@ -346,6 +346,7 @@ require_once __DIR__ . '/includes/admin-header.php';
           <input type="hidden" name="update_workflow_status" value="1">
           <div style="display:flex;gap:8px;">
             <select name="workflow_status" style="padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.85rem;background:#FFFFFF;font-weight:600;color:#0F172A;">
+              <option value="" disabled>Select workflow status</option>
               <option value="new" <?= ($currentStatus === 'new') ? 'selected' : '' ?>>1. New Request</option>
               <option value="checking_availability" <?= ($currentStatus === 'checking_availability') ? 'selected' : '' ?>>2. Availability Checking</option>
               <option value="availability_confirmed" <?= ($currentStatus === 'availability_confirmed') ? 'selected' : '' ?>>3. Availability Confirmed</option>
@@ -358,7 +359,7 @@ require_once __DIR__ . '/includes/admin-header.php';
             </select>
             <button type="submit" class="admin-btn admin-btn-primary admin-btn-sm" style="padding:8px 14px;">Update</button>
           </div>
-          <input type="text" name="status_note" placeholder="Status change reason (optional)..." style="font-size:0.78rem;padding:4px 8px;border:1px solid #CBD5E1;border-radius:6px;width:240px;">
+          <input type="text" name="status_note" placeholder="Enter your status note" style="font-size:0.78rem;padding:4px 8px;border:1px solid #CBD5E1;border-radius:6px;width:240px;">
         </form>
       </div>
 
@@ -611,7 +612,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <form method="POST" action="" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
           <?= csrf_field() ?>
           <input type="hidden" name="send_acknowledgement_email" value="1">
-          <input type="email" name="recipient_email" value="<?= e($enquiry['email']) ?>" required placeholder="client@example.com" style="flex-grow:1;min-width:240px;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
+          <input type="email" name="recipient_email" value="<?= e($enquiry['email']) ?>" required placeholder="Enter your email address" style="flex-grow:1;min-width:240px;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
           <button type="submit" class="admin-btn admin-btn-primary" style="padding:8px 16px;font-size:0.86rem;">
             Dispatch Email Notice
           </button>
@@ -639,15 +640,16 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:14px;margin-bottom:14px;">
           <div>
             <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Provider / Hotel Name *</label>
-            <input type="text" name="provider_name" required value="<?= e($enquiry['accommodation_name']) ?>" placeholder="e.g. Blankate Tea Plantation Resort" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
+            <input type="text" name="provider_name" required value="<?= e($enquiry['accommodation_name']) ?>" placeholder="Enter your provider name" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
           </div>
           <div>
             <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Contact Person / Manager</label>
-            <input type="text" name="contact_person" placeholder="e.g. Anand (Front Desk Manager)" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
+            <input type="text" name="contact_person" placeholder="Enter your contact person" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
           </div>
           <div>
             <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Availability Response *</label>
             <select name="response_status" required style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;background:#FFFFFF;">
+              <option value="" disabled>Select availability response</option>
               <option value="confirmed">Confirmed (Rooms Available)</option>
               <option value="unavailable">Unavailable (Sold Out / Fully Booked)</option>
               <option value="pending">Pending Response</option>
@@ -655,21 +657,21 @@ require_once __DIR__ . '/includes/admin-header.php';
           </div>
           <div>
             <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Room / Hall Category</label>
-            <input type="text" name="available_room_category" placeholder="e.g. Valley View Deluxe Suite" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
+            <input type="text" name="available_room_category" placeholder="Enter your room category" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
           </div>
           <div>
             <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Confirmed Room Quantity</label>
-            <input type="number" name="confirmed_room_quantity" min="1" value="<?= (int)($enquiry['rooms_count'] ?? 1) ?>" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
+            <input type="number" name="confirmed_room_quantity" min="1" value="<?= (int)($enquiry['rooms_count'] ?? 1) ?>" placeholder="Enter your number of rooms" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
           </div>
           <div>
             <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Quoted Net Price (₹)</label>
-            <input type="number" step="0.01" name="quoted_price" placeholder="e.g. 14500" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
+            <input type="number" step="0.01" name="quoted_price" placeholder="Enter your quoted price" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
           </div>
         </div>
 
         <div style="margin-bottom:14px;">
           <label style="font-size:0.78rem;font-weight:700;color:#334155;display:block;margin-bottom:4px;">Provider Remarks / Conditions</label>
-          <input type="text" name="provider_remarks" placeholder="e.g. Valid until tomorrow 4 PM; includes breakfast for 2 guests" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
+          <input type="text" name="provider_remarks" placeholder="Enter your provider remarks" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.88rem;">
         </div>
 
         <button type="submit" class="admin-btn admin-btn-primary" style="padding:8px 18px;font-size:0.88rem;">
@@ -738,6 +740,7 @@ require_once __DIR__ . '/includes/admin-header.php';
           <div>
             <label style="font-size:0.75rem;font-weight:700;color:#64748B;">Channel</label>
             <select name="comm_channel" style="width:100%;padding:8px 10px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.85rem;background:#FFF;">
+              <option value="" disabled>Select communication channel</option>
               <option value="phone">Phone Call</option>
               <option value="whatsapp">WhatsApp Message</option>
               <option value="email">Email</option>
@@ -746,13 +749,13 @@ require_once __DIR__ . '/includes/admin-header.php';
           </div>
           <div>
             <label style="font-size:0.75rem;font-weight:700;color:#64748B;">Subject</label>
-            <input type="text" name="comm_subject" value="Follow-up regarding dates and hotel options" style="width:100%;padding:8px 10px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.85rem;">
+            <input type="text" name="comm_subject" value="Follow-up regarding dates and hotel options" placeholder="Enter your subject" style="width:100%;padding:8px 10px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.85rem;">
           </div>
         </div>
 
         <div style="margin-bottom:12px;">
           <label style="font-size:0.75rem;font-weight:700;color:#64748B;">Summary of Conversation</label>
-          <textarea name="comm_message" rows="3" required placeholder="e.g. Traveller confirmed 4 adults and agreed to the Munnar 4-star proposal. Quoted ₹48,000 package." style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.86rem;outline:none;"></textarea>
+          <textarea name="comm_message" rows="3" required placeholder="Enter your conversation summary" style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.86rem;outline:none;"></textarea>
         </div>
 
         <button type="submit" class="admin-btn admin-btn-primary admin-btn-sm" style="width:100%;justify-content:center;">
@@ -769,7 +772,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <form method="POST" action="" style="margin-bottom:16px;">
         <?= csrf_field() ?>
         <input type="hidden" name="add_note" value="1">
-        <textarea name="note_text" rows="3" required placeholder="Add private note for internal operations..." 
+        <textarea name="note_text" rows="3" required placeholder="Enter your internal note" 
                   style="width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;font-size:0.86rem;margin-bottom:8px;outline:none;"></textarea>
         <button type="submit" class="admin-btn admin-btn-primary admin-btn-sm">Add Note</button>
       </form>

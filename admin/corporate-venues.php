@@ -92,11 +92,11 @@ require_once __DIR__ . '/includes/admin-header.php';
 <div class="admin-card" style="padding:16px 20px;margin-bottom:24px;">
   <form method="GET" action="" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
     <div style="position:relative;flex-grow:1;min-width:240px;max-width:340px;">
-      <input type="text" name="q" value="<?= e($search) ?>" placeholder="Search venue name, city, location..." style="width:100%;padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
+      <input type="text" name="q" value="<?= e($search) ?>" placeholder="Enter your search query" style="width:100%;padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
     </div>
 
     <select name="venue_type" style="padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFFFFF;">
-      <option value="">All Venue Types</option>
+      <option value="">Select Venue Category (All)</option>
       <option value="conference_hall" <?= ($typeFilter === 'conference_hall') ? 'selected' : '' ?>>Conference Hall</option>
       <option value="seminar_hall" <?= ($typeFilter === 'seminar_hall') ? 'selected' : '' ?>>Seminar Hall</option>
       <option value="convention_centre" <?= ($typeFilter === 'convention_centre') ? 'selected' : '' ?>>Convention Centre</option>

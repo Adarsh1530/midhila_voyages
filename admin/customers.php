@@ -99,7 +99,7 @@ require_once __DIR__ . '/includes/admin-header.php';
   <form method="GET" action="" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;">
     <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;flex-grow:1;">
       <div style="position:relative;flex-grow:1;min-width:260px;max-width:380px;">
-        <input type="text" name="q" value="<?= e($search) ?>" placeholder="Search customer name, phone, email, city..." style="width:100%;padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
+        <input type="text" name="q" value="<?= e($search) ?>" placeholder="Enter your search query" style="width:100%;padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
       </div>
 
       <label style="display:inline-flex;align-items:center;gap:6px;font-size:0.86rem;font-weight:600;color:#334155;cursor:pointer;">

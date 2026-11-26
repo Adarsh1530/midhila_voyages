@@ -443,6 +443,7 @@ require_once __DIR__ . '/includes/header.php';
                 Selected Destination *
               </label>
               <select name="destination_id" id="formDestinationSelect" onchange="switchDestination(this.value)" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;font-weight:600;color:#0F172A;" required>
+                <option value="" disabled>Select Destination</option>
                 <?php foreach ($allDestinations as $d): ?>
                   <option value="<?= (int)$d['id'] ?>" <?= ((int)$d['id'] === $selectedDestId) ? 'selected' : '' ?>>
                     📍 <?= e(loc($d, 'name')) ?><?= ($d['accommodation_count'] > 0) ? " ({$d['accommodation_count']} Stays Registered)" : '' ?>
@@ -453,17 +454,17 @@ require_once __DIR__ . '/includes/header.php';
             
             <div class="form-group" style="margin-bottom:14px;">
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_full_name') ?> *</label>
-              <input type="text" name="full_name" required placeholder="e.g. Maya Varma" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
+              <input type="text" name="full_name" required placeholder="Enter your full name" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
             </div>
 
             <div class="form-grid-2col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_phone') ?> *</label>
-                <input type="tel" name="phone" required placeholder="+91 62829 48227" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
+                <input type="tel" name="phone" required placeholder="Enter your phone number" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_email') ?> *</label>
-                <input type="email" name="email" required placeholder="maya@example.com" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
+                <input type="email" name="email" required placeholder="Enter your email address" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;">
               </div>
             </div>
 
@@ -471,15 +472,15 @@ require_once __DIR__ . '/includes/header.php';
             <div class="form-grid-3col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_start_date') ?> *</label>
-                <input type="date" name="departure_date" id="accStartDate" required min="<?= date('Y-m-d') ?>" onchange="calcDuration()" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;background:#FFF;">
+                <input type="date" name="departure_date" id="accStartDate" required min="<?= date('Y-m-d') ?>" onchange="calcDuration()" title="Select check-in date" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;background:#FFF;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_end_date') ?> *</label>
-                <input type="date" name="return_date" id="accEndDate" required min="<?= date('Y-m-d') ?>" onchange="calcDuration()" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;background:#FFF;">
+                <input type="date" name="return_date" id="accEndDate" required min="<?= date('Y-m-d') ?>" onchange="calcDuration()" title="Select check-out date" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;background:#FFF;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;">Number of Days</label>
-                <input type="number" name="duration_days" id="accDurationDays" value="3" min="1" max="90" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
+                <input type="number" name="duration_days" id="accDurationDays" value="3" min="1" max="90" placeholder="Enter your number of days" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
               </div>
             </div>
 
@@ -487,15 +488,15 @@ require_once __DIR__ . '/includes/header.php';
             <div class="form-grid-3col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_adults') ?> *</label>
-                <input type="number" name="adults_count" value="2" min="1" max="50" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
+                <input type="number" name="adults_count" value="2" min="1" max="50" placeholder="Enter your number of adults" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
               </div>
               <div>
                 <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_children') ?></label>
-                <input type="number" name="children_count" value="0" min="0" max="30" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
+                <input type="number" name="children_count" value="0" min="0" max="30" placeholder="Enter your number of children" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
               </div>
               <div>
                 <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_rooms') ?> *</label>
-                <input type="number" name="rooms_count" value="1" min="1" max="30" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
+                <input type="number" name="rooms_count" value="1" min="1" max="30" placeholder="Enter your number of rooms" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;text-align:center;">
               </div>
             </div>
 
@@ -504,6 +505,7 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;">Preferred Travel Type</label>
                 <select name="travel_type" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                  <option value="" disabled>Select travel type</option>
                   <option value="family" selected>Family Vacation</option>
                   <option value="couple">Honeymoon / Couple</option>
                   <option value="friends">Friends &amp; Small Group</option>
@@ -515,6 +517,7 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;">Estimated Budget Range</label>
                 <select name="budget_range" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                  <option value="" disabled>Select budget range</option>
                   <option value="Standard (₹15,000 - ₹30,000)">Standard (₹15,000 – ₹30,000)</option>
                   <option value="Deluxe (₹30,000 - ₹60,000)" selected>Deluxe (₹30,000 – ₹60,000)</option>
                   <option value="Luxury (₹60,000 - ₹1,20,000)">Luxury (₹60,000 – ₹1,20,000)</option>
@@ -583,6 +586,7 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('pref_food_plan') ?></label>
                 <select name="food_preference" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                  <option value="" disabled>Select food plan</option>
                   <option value="with_food"><?= __t('food_with') ?></option>
                   <option value="all_meals" selected><?= __t('food_all_meals') ?></option>
                   <option value="breakfast_dinner"><?= __t('food_breakfast_dinner') ?></option>
@@ -593,6 +597,7 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('pref_food_type') ?></label>
                 <select name="food_type" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                  <option value="" disabled>Select food type</option>
                   <option value="both" selected><?= __t('food_type_both') ?></option>
                   <option value="vegetarian"><?= __t('food_type_veg') ?></option>
                   <option value="non_vegetarian"><?= __t('food_type_non_veg') ?></option>
@@ -603,7 +608,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div>
               <label style="display:block;font-size:0.78rem;font-weight:600;color:#64748B;margin-bottom:4px;"><?= __t('food_instructions') ?></label>
-              <input type="text" name="food_special_instructions" placeholder="e.g. Jain food required, non-spicy for kids" style="width:100%;padding:8px 12px;border:1px solid #CBD5E1;border-radius:6px;font-size:0.85rem;">
+              <input type="text" name="food_special_instructions" placeholder="Enter your dietary instructions" style="width:100%;padding:8px 12px;border:1px solid #CBD5E1;border-radius:6px;font-size:0.85rem;">
             </div>
           </div>
 
@@ -615,6 +620,7 @@ require_once __DIR__ . '/includes/header.php';
             
             <div style="margin-bottom:10px;">
               <select name="sightseeing_preference" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                <option value="" disabled>Select sightseeing preference</option>
                 <option value="with_sightseeing" selected><?= __t('sightseeing_with') ?></option>
                 <option value="private_vehicle"><?= __t('sightseeing_private') ?></option>
                 <option value="customised_sightseeing"><?= __t('sightseeing_customised') ?></option>
@@ -625,7 +631,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div>
               <label style="display:block;font-size:0.78rem;font-weight:600;color:#64748B;margin-bottom:4px;"><?= __t('sightseeing_places_wish') ?></label>
-              <textarea name="sightseeing_places" rows="2" placeholder="e.g. Eravikulam National park, Mattupetty boating, Spice garden" style="width:100%;padding:8px 12px;border:1px solid #CBD5E1;border-radius:6px;font-size:0.85rem;"></textarea>
+              <textarea name="sightseeing_places" rows="2" placeholder="Enter your preferred sightseeing places" style="width:100%;padding:8px 12px;border:1px solid #CBD5E1;border-radius:6px;font-size:0.85rem;"></textarea>
             </div>
           </div>
 
@@ -679,7 +685,7 @@ require_once __DIR__ . '/includes/header.php';
             <h4 style="font-size:0.88rem;text-transform:uppercase;color:#0F172A;font-weight:700;letter-spacing:0.04em;margin-bottom:8px;border-bottom:1px solid #F1F5F9;padding-bottom:6px;">
               G. Additional Travel Requirements
             </h4>
-            <textarea name="travel_requirements" rows="2" placeholder="e.g. Ground floor room preferred, late evening check-in, infant baby cot required" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;resize:vertical;"></textarea>
+            <textarea name="travel_requirements" rows="2" placeholder="Enter your travel requirements" style="width:100%;padding:10px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;resize:vertical;"></textarea>
           </div>
 
           <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:20px;font-size:0.75rem;color:#64748B;line-height:1.5;">

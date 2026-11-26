@@ -133,14 +133,14 @@ require_once __DIR__ . '/includes/admin-header.php';
 
       <div style="margin-bottom:16px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Photo Title *</label>
-        <input type="text" name="title" required placeholder="e.g. Dawn Mist over Munnar Tea Valley" 
+        <input type="text" name="title" required placeholder="Enter your photo title" 
                value="<?= e($editPhoto['title'] ?? '') ?>"
                style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
       </div>
 
       <div style="margin-bottom:16px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Location Name *</label>
-        <input type="text" name="location_name" required placeholder="e.g. Munnar, Kerala" 
+        <input type="text" name="location_name" required placeholder="Enter your location name" 
                value="<?= e($editPhoto['location_name'] ?? '') ?>"
                style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
       </div>
@@ -149,6 +149,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Category</label>
         <?php $currentCat = $editPhoto['category'] ?? 'destinations'; ?>
         <select name="category" style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
+          <option value="" disabled>Select category</option>
           <option value="destinations" <?= $currentCat === 'destinations' ? 'selected' : '' ?>>Destinations</option>
           <option value="pilgrimages" <?= $currentCat === 'pilgrimages' ? 'selected' : '' ?>>Pilgrimages</option>
           <option value="nature" <?= $currentCat === 'nature' ? 'selected' : '' ?>>Nature &amp; Wildlife</option>
@@ -171,7 +172,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <input type="file" name="image_file" id="galleryFileInput" accept="image/jpeg,image/png,image/webp" style="margin-bottom:10px;">
         
         <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--admin-navy);margin-bottom:4px;">Or Image Path / External Web URL:</label>
-        <input type="text" name="image_url" id="galleryUrlInput" placeholder="https://images.unsplash.com/... or uploads/..." 
+        <input type="text" name="image_url" id="galleryUrlInput" placeholder="Enter your image URL" 
                value="<?= e($editPhoto['image_url'] ?? '') ?>"
                style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.85rem;">
       </div>

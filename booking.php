@@ -166,6 +166,7 @@ require_once __DIR__ . '/includes/header.php';
           <div class="editorial-form-group">
             <label class="editorial-label">Select Package *</label>
             <select name="package_id" id="bookingPackageSelect" class="editorial-select" required>
+              <option value="">Select Package</option>
               <?php foreach ($packages as $pkg): ?>
                 <option value="<?= (int)$pkg['id'] ?>" 
                         data-price="<?= (float)$pkg['starting_price'] ?>"
@@ -179,33 +180,33 @@ require_once __DIR__ . '/includes/header.php';
           <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label">Full Name *</label>
-              <input type="text" name="customer_name" id="bkgName" class="editorial-input" required placeholder="e.g. Maya Varma">
+              <input type="text" name="customer_name" id="bkgName" class="editorial-input" required placeholder="Enter your full name">
             </div>
             <div class="editorial-form-group">
               <label class="editorial-label">Phone / WhatsApp *</label>
-              <input type="tel" name="customer_phone" id="bkgPhone" class="editorial-input" required placeholder="+91 62829 48227">
+              <input type="tel" name="customer_phone" id="bkgPhone" class="editorial-input" required placeholder="Enter your phone number">
             </div>
           </div>
 
           <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label">Email Address *</label>
-              <input type="email" name="customer_email" id="bkgEmail" class="editorial-input" required placeholder="maya@domain.com">
+              <input type="email" name="customer_email" id="bkgEmail" class="editorial-input" required placeholder="Enter your email address">
             </div>
             <div class="editorial-form-group">
               <label class="editorial-label">Travel Departure Date *</label>
-              <input type="date" name="travel_date" id="bkgDate" class="editorial-input" required min="<?= date('Y-m-d') ?>">
+              <input type="date" name="travel_date" id="bkgDate" class="editorial-input" required min="<?= date('Y-m-d') ?>" title="Select Travel Departure Date">
             </div>
           </div>
 
           <div class="editorial-form-group">
             <label class="editorial-label">Number of Travellers / Guests *</label>
-            <input type="number" name="travellers_count" id="bkgTravellers" min="1" max="50" value="2" class="editorial-input" required>
+            <input type="number" name="travellers_count" id="bkgTravellers" min="1" max="50" value="2" class="editorial-input" required placeholder="Enter your number of guests">
           </div>
 
           <div class="editorial-form-group">
             <label class="editorial-label">Special Requests or Specific Requirements</label>
-            <textarea name="special_requests" id="bkgNotes" class="editorial-textarea" rows="3" placeholder="Airport pickup timing, vegetarian meal preference, room view preference, elderly assistance..."></textarea>
+            <textarea name="special_requests" id="bkgNotes" class="editorial-textarea" rows="3" placeholder="Enter your special requests"></textarea>
           </div>
 
           <button type="submit" id="proceedPayBtn" class="btn-cinematic-primary" style="width:100%;justify-content:center;padding:15px 32px;font-size:1.02rem;font-weight:700;">

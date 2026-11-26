@@ -121,11 +121,12 @@ require_once __DIR__ . '/includes/admin-header.php';
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
       <div>
         <label>Venue Name *</label>
-        <input type="text" name="name_en" required value="<?= e($venue['name_en'] ?? '') ?>" placeholder="e.g. Grand Horizon Convention Centre">
+        <input type="text" name="name_en" required value="<?= e($venue['name_en'] ?? '') ?>" placeholder="Enter your venue name">
       </div>
       <div>
         <label>Venue Category *</label>
         <select name="venue_type" required>
+          <option value="" disabled>Select venue category</option>
           <option value="convention_centre" <?= (($venue['venue_type'] ?? '') === 'convention_centre') ? 'selected' : '' ?>>Convention Centre (Large Scale)</option>
           <option value="conference_hall" <?= (($venue['venue_type'] ?? '') === 'conference_hall') ? 'selected' : '' ?>>Conference Hall (Corporate Boardroom / Summit)</option>
           <option value="seminar_hall" <?= (($venue['venue_type'] ?? '') === 'seminar_hall') ? 'selected' : '' ?>>Seminar Hall (Workshops &amp; Academic)</option>
@@ -137,12 +138,12 @@ require_once __DIR__ . '/includes/admin-header.php';
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px;">
       <div>
         <label>City / Hub</label>
-        <input type="text" name="city" value="<?= e($venue['city'] ?? 'Kochi') ?>" placeholder="e.g. Kochi, Trivandrum, Kozhikode">
+        <input type="text" name="city" value="<?= e($venue['city'] ?? 'Kochi') ?>" placeholder="Enter your city">
       </div>
       <div>
         <label>Nearby Destination Linking</label>
         <select name="destination_id">
-          <option value="">None / Regional</option>
+          <option value="">Select Destination</option>
           <?php foreach ($destinations as $dst): ?>
             <option value="<?= (int)$dst['id'] ?>" <?= ((int)($venue['destination_id'] ?? 0) === (int)$dst['id']) ? 'selected' : '' ?>>
               <?= e($dst['name']) ?>
@@ -153,15 +154,15 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div>
         <label>Base Price (₹) &amp; Unit</label>
         <div style="display:flex;gap:8px;">
-          <input type="number" step="0.01" name="indicative_price" value="<?= e($venue['indicative_price'] ?? '25000') ?>" placeholder="25000">
-          <input type="text" name="price_unit" value="<?= e($venue['price_unit'] ?? 'per day') ?>" placeholder="per day" style="width:110px;">
+          <input type="number" step="0.01" name="indicative_price" value="<?= e($venue['indicative_price'] ?? '25000') ?>" placeholder="Enter your price">
+          <input type="text" name="price_unit" value="<?= e($venue['price_unit'] ?? 'per day') ?>" placeholder="Enter your price unit" style="width:110px;">
         </div>
       </div>
     </div>
 
     <div style="margin-bottom:20px;">
       <label>Full Venue Address</label>
-      <input type="text" name="location_address" value="<?= e($venue['location_address'] ?? '') ?>" placeholder="e.g. Marine Drive, Ernakulam, Kerala 682031">
+      <input type="text" name="location_address" value="<?= e($venue['location_address'] ?? '') ?>" placeholder="Enter your venue address">
     </div>
 
     <!-- Capacity Specs -->
@@ -171,26 +172,26 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:16px;">
         <div>
           <label>Theater Capacity (Seats)</label>
-          <input type="number" name="capacity_theater" value="<?= (int)($venue['capacity_theater'] ?? 300) ?>" min="10">
+          <input type="number" name="capacity_theater" value="<?= (int)($venue['capacity_theater'] ?? 300) ?>" min="10" placeholder="Enter your seating capacity">
         </div>
         <div>
           <label>Classroom Capacity (Seats)</label>
-          <input type="number" name="capacity_classroom" value="<?= (int)($venue['capacity_classroom'] ?? 150) ?>" min="10">
+          <input type="number" name="capacity_classroom" value="<?= (int)($venue['capacity_classroom'] ?? 150) ?>" min="10" placeholder="Enter your seating capacity">
         </div>
         <div>
           <label>Round Table / Banquet (Seats)</label>
-          <input type="number" name="capacity_round_table" value="<?= (int)($venue['capacity_round_table'] ?? 120) ?>" min="10">
+          <input type="number" name="capacity_round_table" value="<?= (int)($venue['capacity_round_table'] ?? 120) ?>" min="10" placeholder="Enter your seating capacity">
         </div>
       </div>
 
       <div style="margin-bottom:16px;">
         <label>Audio-Visual Equipment &amp; Technology Specs</label>
-        <textarea name="av_equipment_specs" rows="3" placeholder="Dual 4K Laser Projectors, Motorized Screens, JBL Professional Sound System, Cordless &amp; Collar Mics, Stage Lighting, High-speed Wi-Fi, Hybrid Zoom Bridge"><?= e($venue['av_equipment_specs'] ?? 'Dual 4K Laser Projectors, Professional Line Array PA System, Wireless Microphones, Stage Podiums, High-speed Dedicated Fiber Wi-Fi') ?></textarea>
+        <textarea name="av_equipment_specs" rows="3" placeholder="Enter your audio-visual specifications"><?= e($venue['av_equipment_specs'] ?? 'Dual 4K Laser Projectors, Professional Line Array PA System, Wireless Microphones, Stage Podiums, High-speed Dedicated Fiber Wi-Fi') ?></textarea>
       </div>
 
       <div>
         <label>Catering &amp; Dining Facilities</label>
-        <input type="text" name="catering_options" value="<?= e($venue['catering_options'] ?? 'In-house multi-cuisine buffet dining, Dedicated banquet lawn, Live refreshment stalls') ?>" placeholder="In-house buffet, Live counters, Hi-Tea catering">
+        <input type="text" name="catering_options" value="<?= e($venue['catering_options'] ?? 'In-house multi-cuisine buffet dining, Dedicated banquet lawn, Live refreshment stalls') ?>" placeholder="Enter your catering options">
       </div>
     </div>
 
@@ -198,21 +199,21 @@ require_once __DIR__ . '/includes/admin-header.php';
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px;">
       <div>
         <label>Venue Coordinator</label>
-        <input type="text" name="contact_person" value="<?= e($venue['contact_person'] ?? '') ?>" placeholder="e.g. Renjith Kumar">
+        <input type="text" name="contact_person" value="<?= e($venue['contact_person'] ?? '') ?>" placeholder="Enter your coordinator name">
       </div>
       <div>
         <label>Coordinator Phone</label>
-        <input type="tel" name="contact_phone" value="<?= e($venue['contact_phone'] ?? '') ?>" placeholder="+91 62829 48227">
+        <input type="tel" name="contact_phone" value="<?= e($venue['contact_phone'] ?? '') ?>" placeholder="Enter your phone number">
       </div>
       <div>
         <label>Coordinator Email</label>
-        <input type="email" name="contact_email" value="<?= e($venue['contact_email'] ?? '') ?>" placeholder="events@midhilavoyages.com">
+        <input type="email" name="contact_email" value="<?= e($venue['contact_email'] ?? '') ?>" placeholder="Enter your email address">
       </div>
     </div>
 
     <div style="margin-bottom:20px;">
       <label>Featured Image URL</label>
-      <input type="text" name="featured_image" value="<?= e($venue['featured_image'] ?? '') ?>" placeholder="https://images.unsplash.com/...">
+      <input type="text" name="featured_image" value="<?= e($venue['featured_image'] ?? '') ?>" placeholder="Enter your image URL">
     </div>
 
     <div style="margin-bottom:24px;">

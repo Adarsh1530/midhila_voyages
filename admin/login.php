@@ -199,12 +199,12 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
 
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" required autocomplete="username" placeholder="Enter username" value="<?= e($_POST['username'] ?? '') ?>">
+        <input type="text" name="username" id="username" required autocomplete="username" placeholder="Enter your username" value="<?= e($_POST['username'] ?? '') ?>">
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" required autocomplete="current-password" placeholder="••••••••">
+        <input type="password" name="password" id="password" required autocomplete="current-password" placeholder="Enter your password">
       </div>
 
       <button type="submit" class="btn-login">Sign In &rarr;</button>

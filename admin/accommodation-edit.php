@@ -135,7 +135,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
       <div>
         <label>Property Name *</label>
-        <input type="text" name="name_en" required value="<?= e($accommodation['name_en'] ?? '') ?>" placeholder="e.g. Blankate Tea Plantation Resort">
+        <input type="text" name="name_en" required value="<?= e($accommodation['name_en'] ?? '') ?>" placeholder="Enter your property name">
       </div>
       <div>
         <label>Destination Location *</label>
@@ -155,6 +155,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div>
         <label>Property Category</label>
         <select name="category">
+          <option value="" disabled>Select Property Category</option>
           <?php 
             $cats = ['Resort', 'Hotel', 'Premium Houseboat', 'Ayurveda Retreat', 'Homestay', 'Eco Lodge'];
             $curCat = $accommodation['category'] ?? 'Resort';
@@ -167,7 +168,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div>
         <label>Kerala Tourism Category</label>
         <select name="tourism_category_id">
-          <option value="">Optional Tourism Category</option>
+          <option value="">Select Tourism Category</option>
           <?php foreach ($tourismCategories as $tc): ?>
             <option value="<?= (int)$tc['id'] ?>" <?= ((int)($accommodation['tourism_category_id'] ?? 0) === (int)$tc['id']) ? 'selected' : '' ?>>
               <?= e($tc['name_en']) ?>
@@ -178,8 +179,8 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div>
         <label>Indicative Price (₹) &amp; Unit</label>
         <div style="display:flex;gap:8px;">
-          <input type="number" step="0.01" name="indicative_price" value="<?= e($accommodation['indicative_price'] ?? '0.00') ?>" placeholder="4500">
-          <input type="text" name="price_unit" value="<?= e($accommodation['price_unit'] ?? 'per night') ?>" placeholder="per night" style="width:120px;">
+          <input type="number" step="0.01" name="indicative_price" value="<?= e($accommodation['indicative_price'] ?? '0.00') ?>" placeholder="Enter your price">
+          <input type="text" name="price_unit" value="<?= e($accommodation['price_unit'] ?? 'per night') ?>" placeholder="Enter your price unit" style="width:120px;">
         </div>
       </div>
     </div>
@@ -187,21 +188,21 @@ require_once __DIR__ . '/includes/admin-header.php';
     <!-- Address & Contacts -->
     <div style="margin-bottom:20px;">
       <label>Full Address / Location Coordinates</label>
-      <input type="text" name="location_address" value="<?= e($accommodation['location_address'] ?? '') ?>" placeholder="e.g. Tea County Road, Munnar, Idukki, Kerala 685612">
+      <input type="text" name="location_address" value="<?= e($accommodation['location_address'] ?? '') ?>" placeholder="Enter your full address">
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px;">
       <div>
         <label>Contact Person / Manager</label>
-        <input type="text" name="contact_person" value="<?= e($accommodation['contact_person'] ?? '') ?>" placeholder="e.g. Sreekumar">
+        <input type="text" name="contact_person" value="<?= e($accommodation['contact_person'] ?? '') ?>" placeholder="Enter your contact person">
       </div>
       <div>
         <label>Contact Phone</label>
-        <input type="tel" name="contact_phone" value="<?= e($accommodation['contact_phone'] ?? '') ?>" placeholder="+91 98470 12345">
+        <input type="tel" name="contact_phone" value="<?= e($accommodation['contact_phone'] ?? '') ?>" placeholder="Enter your contact phone number">
       </div>
       <div>
         <label>Contact Email</label>
-        <input type="email" name="contact_email" value="<?= e($accommodation['contact_email'] ?? '') ?>" placeholder="stay@example.com">
+        <input type="email" name="contact_email" value="<?= e($accommodation['contact_email'] ?? '') ?>" placeholder="Enter your contact email address">
       </div>
     </div>
 
@@ -212,11 +213,11 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">
         <div>
           <label>Available Room Views (comma-separated)</label>
-          <input type="text" name="room_views" value="<?= e($accommodation['room_views'] ?? 'Mountain-view, Tea plantation-view, Valley-view') ?>" placeholder="Mountain-view, Valley-view, Tea plantation-view, Lake-view, Beach-view">
+          <input type="text" name="room_views" value="<?= e($accommodation['room_views'] ?? 'Mountain-view, Tea plantation-view, Valley-view') ?>" placeholder="Enter your room views">
         </div>
         <div>
           <label>Room Categories (comma-separated)</label>
-          <input type="text" name="room_categories" value="<?= e($accommodation['room_categories'] ?? 'Standard, Deluxe, Premium Suite, Luxury Villa') ?>" placeholder="Standard, Deluxe, Premium, Luxury Villa">
+          <input type="text" name="room_categories" value="<?= e($accommodation['room_categories'] ?? 'Standard, Deluxe, Premium Suite, Luxury Villa') ?>" placeholder="Enter your room categories">
         </div>
       </div>
 
@@ -224,6 +225,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div>
           <label>Food Availability</label>
           <select name="food_availability">
+            <option value="" disabled>Select food plan</option>
             <option value="with_food" <?= (($accommodation['food_availability'] ?? '') === 'with_food') ? 'selected' : '' ?>>With Food (All Meals)</option>
             <option value="breakfast_included" <?= (($accommodation['food_availability'] ?? '') === 'breakfast_included') ? 'selected' : '' ?>>Breakfast Only</option>
             <option value="breakfast_dinner" <?= (($accommodation['food_availability'] ?? '') === 'breakfast_dinner') ? 'selected' : '' ?>>Breakfast and Dinner</option>
@@ -232,13 +234,13 @@ require_once __DIR__ . '/includes/admin-header.php';
         </div>
         <div>
           <label>Food Types Available</label>
-          <input type="text" name="food_types" value="<?= e($accommodation['food_types'] ?? 'Vegetarian, Non-vegetarian, Jain on request') ?>" placeholder="Vegetarian, Non-vegetarian, Vegan">
+          <input type="text" name="food_types" value="<?= e($accommodation['food_types'] ?? 'Vegetarian, Non-vegetarian, Jain on request') ?>" placeholder="Enter your food types">
         </div>
       </div>
 
       <div style="margin-bottom:16px;">
         <label>Property Facilities &amp; Amenities (comma-separated)</label>
-        <input type="text" name="additional_facilities" value="<?= e($accommodation['additional_facilities'] ?? 'Free Wi-Fi, Air conditioning, Private Balcony, Swimming Pool, Parking, In-house Restaurant, Room Service') ?>" placeholder="Wi-Fi, Swimming Pool, Balcony, Spa, AC, Restaurant">
+        <input type="text" name="additional_facilities" value="<?= e($accommodation['additional_facilities'] ?? 'Free Wi-Fi, Air conditioning, Private Balcony, Swimming Pool, Parking, In-house Restaurant, Room Service') ?>" placeholder="Enter your property amenities">
       </div>
     </div>
 
@@ -246,11 +248,11 @@ require_once __DIR__ . '/includes/admin-header.php';
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
       <div>
         <label>Featured Image URL</label>
-        <input type="text" name="featured_image" value="<?= e($accommodation['featured_image'] ?? '') ?>" placeholder="https://images.unsplash.com/...">
+        <input type="text" name="featured_image" value="<?= e($accommodation['featured_image'] ?? '') ?>" placeholder="Enter your image URL">
       </div>
       <div>
         <label>Special Instructions / Booking Policies</label>
-        <input type="text" name="special_instructions" value="<?= e($accommodation['special_instructions'] ?? '') ?>" placeholder="e.g. Check-in 1:00 PM, Check-out 11:00 AM">
+        <input type="text" name="special_instructions" value="<?= e($accommodation['special_instructions'] ?? '') ?>" placeholder="Enter your special instructions">
       </div>
     </div>
 

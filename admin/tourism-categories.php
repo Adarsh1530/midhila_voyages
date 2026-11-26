@@ -210,35 +210,35 @@ require_once __DIR__ . '/includes/admin-header.php';
 
         <div style="margin-bottom:14px;">
           <label>Category Name *</label>
-          <input type="text" name="name_en" required value="<?= e($editCategory['name_en'] ?? '') ?>" placeholder="e.g. Hill Station Tourism">
+          <input type="text" name="name_en" required value="<?= e($editCategory['name_en'] ?? '') ?>" placeholder="Enter your category name">
         </div>
 
         <?php if (!$editCategory): ?>
           <div style="margin-bottom:14px;">
             <label>Category Slug (optional, auto-generated)</label>
-            <input type="text" name="slug" placeholder="e.g. hill-stations (or leave blank to auto-create)">
+            <input type="text" name="slug" placeholder="Enter your slug">
           </div>
         <?php endif; ?>
 
         <div style="margin-bottom:14px;">
           <label>Tagline</label>
-          <input type="text" name="tagline_en" value="<?= e($editCategory['tagline_en'] ?? '') ?>" placeholder="e.g. Misty Peaks &amp; Tea Plantations">
+          <input type="text" name="tagline_en" value="<?= e($editCategory['tagline_en'] ?? '') ?>" placeholder="Enter your tagline">
         </div>
 
         <div style="margin-bottom:14px;">
           <label>Description</label>
-          <textarea name="description_en" rows="3" placeholder="Overview of destinations in this category..."><?= e($editCategory['description_en'] ?? '') ?></textarea>
+          <textarea name="description_en" rows="3" placeholder="Enter your description"><?= e($editCategory['description_en'] ?? '') ?></textarea>
         </div>
 
         <div style="margin-bottom:14px;">
           <label>Featured Photographic Backdrop URL</label>
-          <input type="text" name="featured_image" value="<?= e($editCategory['featured_image'] ?? '') ?>" placeholder="https://images.unsplash.com/...">
+          <input type="text" name="featured_image" value="<?= e($editCategory['featured_image'] ?? '') ?>" placeholder="Enter your image URL">
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
           <div>
             <label>Display Order</label>
-            <input type="number" name="display_order" value="<?= (int)($editCategory['display_order'] ?? 1) ?>" min="0">
+            <input type="number" name="display_order" value="<?= (int)($editCategory['display_order'] ?? 1) ?>" min="0" placeholder="Enter your display order">
           </div>
           <div style="padding-top:24px;">
             <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;">

@@ -96,7 +96,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     <!-- Search Box -->
     <div class="admin-card" style="padding:16px 20px;margin-bottom:20px;">
       <form method="GET" action="" style="display:flex;gap:10px;">
-        <input type="text" name="q" value="<?= e($search) ?>" placeholder="Search translation keys or phrases..." style="flex-grow:1;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
+        <input type="text" name="q" value="<?= e($search) ?>" placeholder="Enter your search query" style="flex-grow:1;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
         <button type="submit" class="admin-btn admin-btn-primary">Search</button>
         <?php if ($search): ?>
           <a href="<?= ADMIN_URL ?>/translations.php" class="admin-btn admin-btn-outline">Clear</a>
@@ -184,27 +184,27 @@ require_once __DIR__ . '/includes/admin-header.php';
 
         <div style="margin-bottom:14px;">
           <label>Translation Key Identifier *</label>
-          <input type="text" name="translation_key" required value="<?= e($editKey) ?>" <?= $editKey ? 'readonly style="background:#F1F5F9;"' : '' ?> placeholder="e.g. form_travel_type">
+          <input type="text" name="translation_key" required value="<?= e($editKey) ?>" <?= $editKey ? 'readonly style="background:#F1F5F9;"' : '' ?> placeholder="Enter your translation key">
         </div>
 
         <div style="margin-bottom:14px;">
           <label>Category Group</label>
-          <input type="text" name="group_name" value="<?= e($dbTranslations[$editKey]['group_name'] ?? 'ui') ?>" placeholder="e.g. navigation, forms, booking">
+          <input type="text" name="group_name" value="<?= e($dbTranslations[$editKey]['group_name'] ?? 'ui') ?>" placeholder="Enter your category group">
         </div>
 
         <div style="margin-bottom:14px;">
           <label>English Text *</label>
-          <textarea name="en_text" rows="2" required placeholder="English version..."><?= e($curEn) ?></textarea>
+          <textarea name="en_text" rows="2" required placeholder="Enter your English text"><?= e($curEn) ?></textarea>
         </div>
 
         <div style="margin-bottom:14px;">
           <label>Malayalam Text (മലയാളം)</label>
-          <textarea name="ml_text" rows="2" placeholder="മലയാളം പരിഭാഷ..."><?= e($curMl) ?></textarea>
+          <textarea name="ml_text" rows="2" placeholder="Enter your Malayalam text"><?= e($curMl) ?></textarea>
         </div>
 
         <div style="margin-bottom:18px;">
           <label>Tamil Text (தமிழ்)</label>
-          <textarea name="ta_text" rows="2" placeholder="தமிழ் மொழிபெயர்ப்பு..."><?= e($curTa) ?></textarea>
+          <textarea name="ta_text" rows="2" placeholder="Enter your Tamil text"><?= e($curTa) ?></textarea>
         </div>
 
         <div style="display:flex;gap:10px;">

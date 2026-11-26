@@ -173,6 +173,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Category *</label>
           <select name="category" style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
+            <option value="" disabled>Select category</option>
             <option value="domestic" <?= (($destination['category'] ?? '') === 'domestic') ? 'selected' : '' ?>>Domestic (Incredible India)</option>
             <option value="international" <?= (($destination['category'] ?? '') === 'international') ? 'selected' : '' ?>>International</option>
           </select>
@@ -182,19 +183,19 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Slug (URL Identifier)</label>
-          <input type="text" name="slug" placeholder="e.g. kerala" 
+          <input type="text" name="slug" placeholder="Enter your slug" 
                  value="<?= e($_POST['slug'] ?? $destination['slug'] ?? '') ?>"
                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
         </div>
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Region / State *</label>
-          <input type="text" name="region_state" required placeholder="e.g. Kerala" 
+          <input type="text" name="region_state" required placeholder="Enter your region or state" 
                  value="<?= e($_POST['region_state'] ?? $destination['region_state'] ?? '') ?>"
                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
         </div>
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Country *</label>
-          <input type="text" name="country" required placeholder="e.g. India" 
+          <input type="text" name="country" required placeholder="Enter your country" 
                  value="<?= e($_POST['country'] ?? $destination['country'] ?? 'India') ?>"
                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
         </div>
@@ -202,27 +203,27 @@ require_once __DIR__ . '/includes/admin-header.php';
 
       <div style="margin-bottom:20px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Tagline / Short Hook</label>
-        <input type="text" name="tagline" placeholder="e.g. God's Own Country of Mist, Spice & Tranquil Waters" 
+        <input type="text" name="tagline" placeholder="Enter your tagline" 
                value="<?= e($_POST['tagline'] ?? $destination['tagline'] ?? '') ?>"
                style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
       </div>
 
       <div style="margin-bottom:20px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Detailed Description *</label>
-        <textarea name="description" rows="5" required placeholder="Provide an evocative, factual overview of the destination..." 
+        <textarea name="description" rows="5" required placeholder="Enter your description" 
                   style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;line-height:1.6;"><?= e($_POST['description'] ?? $destination['description'] ?? '') ?></textarea>
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Key Highlights (Comma-separated)</label>
-          <input type="text" name="highlights" placeholder="Munnar Tea Hills, Alleppey Houseboat, Thekkady Safari" 
+          <input type="text" name="highlights" placeholder="Enter your highlights" 
                  value="<?= e($_POST['highlights'] ?? $destination['highlights'] ?? '') ?>"
                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
         </div>
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Best Time to Visit</label>
-          <input type="text" name="best_time_to_visit" placeholder="e.g. September to March" 
+          <input type="text" name="best_time_to_visit" placeholder="Enter your best time to visit" 
                  value="<?= e($_POST['best_time_to_visit'] ?? $destination['best_time_to_visit'] ?? '') ?>"
                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
         </div>

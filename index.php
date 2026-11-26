@@ -654,25 +654,25 @@ require_once __DIR__ . '/includes/header.php';
         <div class="form-row-2col">
           <div class="editorial-form-group">
             <label class="editorial-label"><?= e(__t('form_full_name', 'Your Name *')) ?></label>
-            <input type="text" name="name" class="editorial-input" placeholder="e.g. Adarsh" required>
+            <input type="text" name="name" class="editorial-input" placeholder="Enter your name" required>
           </div>
 
           <div class="editorial-form-group">
             <label class="editorial-label"><?= e(__t('form_phone', 'Phone / WhatsApp Number *')) ?></label>
-            <input type="tel" name="phone" class="editorial-input" placeholder="+91 98765 43210" required>
+            <input type="tel" name="phone" class="editorial-input" placeholder="Enter your phone number" required>
           </div>
         </div>
 
         <div class="form-row-2col">
           <div class="editorial-form-group">
             <label class="editorial-label"><?= e(__t('form_email', 'Email Address *')) ?></label>
-            <input type="email" name="email" class="editorial-input" placeholder="you@domain.com" required>
+            <input type="email" name="email" class="editorial-input" placeholder="Enter your email address" required>
           </div>
 
           <div class="editorial-form-group">
             <label class="editorial-label"><?= e(__t('form_select_destination', 'Preferred Destination')) ?></label>
             <select name="destination" class="editorial-select">
-              <option value=""><?= e(__t('form_select_destination', 'Select Destination')) ?></option>
+              <option value="">Select Destination</option>
               <option value="kerala">Kerala Backwaters &amp; Munnar</option>
               <option value="tamil-nadu">Tamil Nadu Temple Circuit</option>
               <option value="varanasi">Varanasi &amp; Prayagraj</option>
@@ -686,7 +686,7 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="editorial-form-group">
           <label class="editorial-label"><?= e(__t('form_additional_req', 'Travel Notes / Preferences')) ?></label>
-          <textarea name="message" class="editorial-textarea" rows="3" placeholder="Tell us about travelers, expected dates, and any special accommodations..."></textarea>
+          <textarea name="message" class="editorial-textarea" rows="3" placeholder="Enter your travel notes"></textarea>
         </div>
 
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:28px;">

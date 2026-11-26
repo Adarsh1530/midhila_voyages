@@ -377,7 +377,7 @@ require_once __DIR__ . '/includes/header.php';
                 Select Destination *
               </label>
               <select id="selectDestination" name="destination_id" required style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;cursor:pointer;">
-                <option value="">Choose Preferred Destination</option>
+                <option value="">Select Destination</option>
                 <?php foreach ($destinations as $d): ?>
                   <option value="<?= (int)$d['id'] ?>" <?= ((int)$d['id'] === $preDestId) ? 'selected' : '' ?>>
                     <?= loc($d, 'name') ?> (<?= e($d['region_state']) ?>)
@@ -389,13 +389,13 @@ require_once __DIR__ . '/includes/header.php';
               <label for="travelStartDate" style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:6px;">
                 Travel Starting Date *
               </label>
-              <input type="date" id="travelStartDate" name="departure_date" required min="<?= date('Y-m-d') ?>" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
+              <input type="date" id="travelStartDate" name="departure_date" required min="<?= date('Y-m-d') ?>" title="Select Travel Starting Date" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
             </div>
             <div>
               <label for="travelEndDate" style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:6px;">
                 Travel Ending Date
               </label>
-              <input type="date" id="travelEndDate" name="return_date" min="<?= date('Y-m-d') ?>" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
+              <input type="date" id="travelEndDate" name="return_date" min="<?= date('Y-m-d') ?>" title="Select Travel Ending Date" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;background:#FFF;">
             </div>
           </div>
         </div>
@@ -424,7 +424,7 @@ require_once __DIR__ . '/includes/header.php';
               </div>
               <div style="display:inline-flex;align-items:center;gap:8px;">
                 <button type="button" id="btnSeatMinus" style="width:38px;height:38px;border-radius:8px;border:1.5px solid #CBD5E1;background:#FFFFFF;font-size:1.25rem;font-weight:700;color:#0F172A;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" title="Decrease seats">&minus;</button>
-                <input type="number" id="seatsCountInput" name="seats_count" value="1" min="1" max="50" style="width:68px;height:38px;text-align:center;font-size:1.05rem;font-weight:700;color:#0F172A;border:1.5px solid #CBD5E1;border-radius:8px;outline:none;">
+                <input type="number" id="seatsCountInput" name="seats_count" value="1" min="1" max="50" placeholder="Enter your number of seats" style="width:68px;height:38px;text-align:center;font-size:1.05rem;font-weight:700;color:#0F172A;border:1.5px solid #CBD5E1;border-radius:8px;outline:none;">
                 <button type="button" id="btnSeatPlus" style="width:38px;height:38px;border-radius:8px;border:1.5px solid #CBD5E1;background:#FFFFFF;font-size:1.25rem;font-weight:700;color:#0F172A;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" title="Increase seats">&#43;</button>
               </div>
             </div>
@@ -446,15 +446,15 @@ require_once __DIR__ . '/includes/header.php';
               <div class="passenger-grid" style="display:grid;grid-template-columns:2fr 1.6fr 1fr;gap:14px;">
                 <div>
                   <label style="display:block;font-size:0.78rem;font-weight:700;color:#475569;margin-bottom:4px;">Name *</label>
-                  <input type="text" name="passengers[0][name]" required placeholder="e.g. Ramesh Kumar" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+                  <input type="text" name="passengers[0][name]" required placeholder="Enter your name" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
                 </div>
                 <div>
                   <label style="display:block;font-size:0.78rem;font-weight:700;color:#475569;margin-bottom:4px;">Phone Number *</label>
-                  <input type="tel" name="passengers[0][phone]" required placeholder="+91 62829 48227" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+                  <input type="tel" name="passengers[0][phone]" required placeholder="Enter your phone number" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
                 </div>
                 <div>
                   <label style="display:block;font-size:0.78rem;font-weight:700;color:#475569;margin-bottom:4px;">Age *</label>
-                  <input type="number" name="passengers[0][age]" min="1" max="120" value="30" required placeholder="Age" class="passenger-age-input" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;text-align:center;">
+                  <input type="number" name="passengers[0][age]" min="1" max="120" value="30" required placeholder="Enter your age" class="passenger-age-input" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;text-align:center;">
                 </div>
               </div>
             </div>
@@ -509,7 +509,7 @@ require_once __DIR__ . '/includes/header.php';
             <label for="specialRequests" style="display:block;font-size:0.78rem;font-weight:600;color:#64748B;margin-bottom:6px;">
               Special Requests / Temple Darshans / Sightseeing
             </label>
-            <textarea id="specialRequests" name="special_requests" rows="3" placeholder="Specify any specific places, elderly care needs, flight arrival timings..." style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;line-height:1.6;"></textarea>
+            <textarea id="specialRequests" name="special_requests" rows="3" placeholder="Enter your special requests" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;outline:none;line-height:1.6;"></textarea>
           </div>
         </div>
 
@@ -642,15 +642,15 @@ document.addEventListener('DOMContentLoaded', function() {
           '<div class="passenger-grid" style="display:grid;grid-template-columns:2fr 1.6fr 1fr;gap:14px;">' +
             '<div>' +
               '<label style="display:block;font-size:0.78rem;font-weight:700;color:#475569;margin-bottom:4px;">Name *</label>' +
-              '<input type="text" name="passengers[' + idx + '][name]" required placeholder="Passenger ' + i + ' Name" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">' +
+              '<input type="text" name="passengers[' + idx + '][name]" required placeholder="Enter your name" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">' +
             '</div>' +
             '<div>' +
               '<label style="display:block;font-size:0.78rem;font-weight:700;color:#475569;margin-bottom:4px;">Phone Number (Optional)</label>' +
-              '<input type="tel" name="passengers[' + idx + '][phone]" placeholder="Phone Number" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">' +
+              '<input type="tel" name="passengers[' + idx + '][phone]" placeholder="Enter your phone number" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">' +
             '</div>' +
             '<div>' +
               '<label style="display:block;font-size:0.78rem;font-weight:700;color:#475569;margin-bottom:4px;">Age *</label>' +
-              '<input type="number" name="passengers[' + idx + '][age]" min="1" max="120" value="25" required placeholder="Age" class="passenger-age-input" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;text-align:center;">' +
+              '<input type="number" name="passengers[' + idx + '][age]" min="1" max="120" value="25" required placeholder="Enter your age" class="passenger-age-input" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;text-align:center;">' +
             '</div>' +
           '</div>';
 

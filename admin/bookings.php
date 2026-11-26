@@ -180,7 +180,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 <div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;">
   <form method="GET" action="<?= ADMIN_URL ?>/bookings.php" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;flex:1;">
     <div style="position:relative;flex:1;min-width:240px;">
-      <input type="text" name="q" value="<?= e($search) ?>" placeholder="Search by customer name, phone, email, or reference..." 
+      <input type="text" name="q" value="<?= e($search) ?>" placeholder="Enter your search query" 
              style="width:100%;padding:9px 14px 9px 36px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;outline:none;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);">
         <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -188,7 +188,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     </div>
 
     <select name="status" onchange="this.form.submit()" style="padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;font-weight:600;">
-      <option value="all" <?= ($filterStatus === 'all') ? 'selected' : '' ?>>All Statuses</option>
+      <option value="all" <?= ($filterStatus === 'all') ? 'selected' : '' ?>>Select status (All)</option>
       <option value="pending" <?= ($filterStatus === 'pending') ? 'selected' : '' ?>>Pending Review</option>
       <option value="confirmed" <?= ($filterStatus === 'confirmed') ? 'selected' : '' ?>>Confirmed</option>
       <option value="completed" <?= ($filterStatus === 'completed') ? 'selected' : '' ?>>Completed</option>
@@ -394,6 +394,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="margin-bottom:14px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Tour Package *</label>
         <select name="package_id" required style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
+          <option value="" disabled selected>Select Package</option>
           <?php foreach ($packagesList as $p): ?>
             <option value="<?= (int)$p['id'] ?>"><?= e($p['title']) ?> (<?= format_price((float)$p['starting_price']) ?>)</option>
           <?php endforeach; ?>
@@ -403,33 +404,34 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Guest Full Name *</label>
-          <input type="text" name="customer_name" required placeholder="e.g. Suresh Kumar" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
+          <input type="text" name="customer_name" required placeholder="Enter your full name" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
         </div>
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Phone / WhatsApp *</label>
-          <input type="tel" name="customer_phone" required placeholder="+91 62829 48227" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
+          <input type="tel" name="customer_phone" required placeholder="Enter your phone number" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
         </div>
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Email Address</label>
-          <input type="email" name="customer_email" placeholder="suresh@example.com" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
+          <input type="email" name="customer_email" placeholder="Enter your email address" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
         </div>
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Departure Date</label>
-          <input type="date" name="travel_date" value="<?= date('Y-m-d') ?>" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
+          <input type="date" name="travel_date" value="<?= date('Y-m-d') ?>" title="Select travel date" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
         </div>
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Number of Guests</label>
-          <input type="number" name="travellers_count" min="1" max="50" value="2" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
+          <input type="number" name="travellers_count" min="1" max="50" value="2" placeholder="Enter your number of travellers" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
         </div>
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Initial Status</label>
           <select name="booking_status" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
+            <option value="" disabled>Select booking status</option>
             <option value="confirmed" selected>Confirmed</option>
             <option value="pending">Pending Review</option>
           </select>
@@ -438,7 +440,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
       <div style="margin-bottom:20px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:#0F172A;margin-bottom:4px;">Special Requests / Instructions</label>
-        <textarea name="special_requests" rows="2" placeholder="Room type, pickup, diet requirements..." style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;"></textarea>
+        <textarea name="special_requests" rows="2" placeholder="Enter your special requests" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;"></textarea>
       </div>
 
       <div style="display:flex;gap:10px;justify-content:flex-end;">

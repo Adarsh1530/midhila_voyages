@@ -127,24 +127,25 @@ require_once __DIR__ . '/includes/header.php';
           <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label"><?= e(__t('form_full_name', 'Your Name *')) ?></label>
-              <input type="text" name="name" class="editorial-input" placeholder="e.g. Adarsh" required>
+              <input type="text" name="name" class="editorial-input" placeholder="Enter your name" required>
             </div>
 
             <div class="editorial-form-group">
               <label class="editorial-label"><?= e(__t('form_phone', 'Phone / WhatsApp Number *')) ?></label>
-              <input type="tel" name="phone" class="editorial-input" placeholder="+91 62829 48227" required>
+              <input type="tel" name="phone" class="editorial-input" placeholder="Enter your phone number" required>
             </div>
           </div>
 
           <div class="form-row-2col">
             <div class="editorial-form-group">
               <label class="editorial-label"><?= e(__t('form_email', 'Email Address')) ?></label>
-              <input type="email" name="email" class="editorial-input" placeholder="you@domain.com">
+              <input type="email" name="email" class="editorial-input" placeholder="Enter your email address">
             </div>
 
             <div class="editorial-form-group">
               <label class="editorial-label"><?= e(__t('inquiry_subject', 'Inquiry Subject')) ?></label>
               <select name="subject" class="editorial-select">
+                <option value="">Select subject</option>
                 <option value="Pilgrim Tour Enquiry"><?= e(__t('nav_pilgrimage', 'Pilgrim Tour Reservation')) ?></option>
                 <option value="Custom Family Package"><?= e(__t('footer_link_family', 'Custom Family Package')) ?></option>
                 <option value="Honeymoon Itinerary"><?= e(__t('footer_link_romantic', 'Romantic Escape Planning')) ?></option>
@@ -156,7 +157,7 @@ require_once __DIR__ . '/includes/header.php';
 
           <div class="editorial-form-group">
             <label class="editorial-label"><?= e(__t('form_additional_req', 'Your Message or Requirements *')) ?></label>
-            <textarea name="message" class="editorial-textarea" rows="4" placeholder="Mention preferred travel dates, destinations, number of passengers..." required></textarea>
+            <textarea name="message" class="editorial-textarea" rows="4" placeholder="Enter your message" required></textarea>
           </div>
 
           <button type="submit" class="btn-cinematic-primary" style="margin-top:12px;padding:14px 36px;">

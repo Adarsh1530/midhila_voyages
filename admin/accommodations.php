@@ -107,11 +107,11 @@ require_once __DIR__ . '/includes/admin-header.php';
 <div class="admin-card" style="padding:16px 20px;margin-bottom:24px;">
   <form method="GET" action="" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
     <div style="position:relative;flex-grow:1;min-width:240px;max-width:340px;">
-      <input type="text" name="q" value="<?= e($search) ?>" placeholder="Search property name, address, contact..." style="width:100%;padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
+      <input type="text" name="q" value="<?= e($search) ?>" placeholder="Enter your search query" style="width:100%;padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;">
     </div>
 
     <select name="destination_id" style="padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFFFFF;">
-      <option value="0">All Destinations</option>
+      <option value="0">Select Destination (All)</option>
       <?php foreach ($destinations as $dst): ?>
         <option value="<?= (int)$dst['id'] ?>" <?= ($destFilter === (int)$dst['id']) ? 'selected' : '' ?>>
           <?= e($dst['name']) ?>
@@ -120,7 +120,7 @@ require_once __DIR__ . '/includes/admin-header.php';
     </select>
 
     <select name="category" style="padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFFFFF;">
-      <option value="">All Categories</option>
+      <option value="">Select Category (All)</option>
       <option value="Resort" <?= ($catFilter === 'Resort') ? 'selected' : '' ?>>Resort</option>
       <option value="Hotel" <?= ($catFilter === 'Hotel') ? 'selected' : '' ?>>Hotel</option>
       <option value="Premium Houseboat" <?= ($catFilter === 'Premium Houseboat') ? 'selected' : '' ?>>Houseboat</option>

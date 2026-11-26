@@ -194,13 +194,13 @@ require_once __DIR__ . '/includes/admin-header.php';
 
       <div class="admin-form-group">
         <label for="fullNameInput">Full Name *</label>
-        <input type="text" id="fullNameInput" name="full_name" required placeholder="e.g. Travel Operations Lead" 
+        <input type="text" id="fullNameInput" name="full_name" required placeholder="Enter your full name" 
                value="<?= e($editUser['full_name'] ?? '') ?>">
       </div>
 
       <div class="admin-form-group">
         <label for="usernameInput">Login Username *</label>
-        <input type="text" id="usernameInput" name="username" required placeholder="e.g. travel_manager" 
+        <input type="text" id="usernameInput" name="username" required placeholder="Enter your username" 
                value="<?= e($editUser['username'] ?? '') ?>"
                autocomplete="off"
                pattern="[A-Za-z0-9_.-]+"
@@ -224,13 +224,13 @@ require_once __DIR__ . '/includes/admin-header.php';
         <label for="passwordInput">
           Login Password <?= $editUser ? '<span style="font-weight:400;color:#64748B;">(Leave blank to keep current)</span>' : '*' ?>
         </label>
-        <input type="password" id="passwordInput" name="password" <?= $editUser ? '' : 'required' ?> placeholder="••••••••" autocomplete="new-password">
+        <input type="password" id="passwordInput" name="password" <?= $editUser ? '' : 'required' ?> placeholder="Enter your password" autocomplete="new-password">
         <div style="font-size:0.75rem;color:#64748B;margin-top:4px;">Used with the username above to sign in.</div>
       </div>
 
       <div class="admin-form-group">
         <label for="emailInput">Email Address <span style="font-weight:400;color:#64748B;">(Optional / Notifications)</span></label>
-        <input type="email" id="emailInput" name="email" placeholder="user@midhilavoyages.com" 
+        <input type="email" id="emailInput" name="email" placeholder="Enter your email address" 
                value="<?= e($editUser['email'] ?? '') ?>">
       </div>
 

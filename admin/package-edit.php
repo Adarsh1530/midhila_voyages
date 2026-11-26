@@ -270,7 +270,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
       <div style="margin-bottom:18px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Package Title *</label>
-        <input type="text" name="title" required placeholder="e.g. Kerala Serenade: Munnar Hills & Alleppey Waters" 
+        <input type="text" name="title" required placeholder="Enter your package title" 
                value="<?= e($_POST['title'] ?? $package['title'] ?? '') ?>"
                style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
       </div>
@@ -279,7 +279,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Destination *</label>
           <select name="destination_id" required style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
-            <option value="">-- Choose Destination --</option>
+            <option value="">Select Destination</option>
             <?php foreach ($dests as $d): ?>
               <option value="<?= (int)$d['id'] ?>" <?= (($package['destination_id'] ?? 0) == $d['id']) ? 'selected' : '' ?>>
                 <?= e($d['name']) ?>
@@ -291,7 +291,7 @@ require_once __DIR__ . '/includes/admin-header.php';
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Category *</label>
           <select name="category_id" required style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;background:#FFF;">
-            <option value="">-- Choose Category --</option>
+            <option value="">Select Category</option>
             <?php foreach ($cats as $c): ?>
               <option value="<?= (int)$c['id'] ?>" <?= (($package['category_id'] ?? 0) == $c['id']) ? 'selected' : '' ?>>
                 <?= e($c['name']) ?>
@@ -302,7 +302,7 @@ require_once __DIR__ . '/includes/admin-header.php';
 
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Slug (URL)</label>
-          <input type="text" name="slug" placeholder="e.g. kerala-serenade-munnar" 
+          <input type="text" name="slug" placeholder="Enter your slug" 
                  value="<?= e($_POST['slug'] ?? $package['slug'] ?? '') ?>"
                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
         </div>
@@ -311,19 +311,19 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;margin-bottom:18px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Duration (Days) *</label>
-          <input type="number" name="duration_days" min="1" max="60" required 
+          <input type="number" name="duration_days" min="1" max="60" required placeholder="Enter your duration in days" 
                  value="<?= (int)($_POST['duration_days'] ?? $package['duration_days'] ?? 5) ?>"
                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
         </div>
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Duration (Nights) *</label>
-          <input type="number" name="duration_nights" min="0" max="60" required 
+          <input type="number" name="duration_nights" min="0" max="60" required placeholder="Enter your duration in nights" 
                  value="<?= (int)($_POST['duration_nights'] ?? $package['duration_nights'] ?? 4) ?>"
                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
         </div>
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Subtitle / Tagline</label>
-          <input type="text" name="subtitle" placeholder="e.g. Mist-covered tea hills and private houseboat cruise" 
+          <input type="text" name="subtitle" placeholder="Enter your subtitle" 
                  value="<?= e($_POST['subtitle'] ?? $package['subtitle'] ?? '') ?>"
                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
         </div>
@@ -331,13 +331,13 @@ require_once __DIR__ . '/includes/admin-header.php';
 
       <div style="margin-bottom:18px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Short Description (Cards & Previews) *</label>
-        <textarea name="short_description" rows="2" required placeholder="A concise 1-2 sentence hook..." 
+        <textarea name="short_description" rows="2" required placeholder="Enter your short description" 
                   style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;"><?= e($_POST['short_description'] ?? $package['short_description'] ?? '') ?></textarea>
       </div>
 
       <div style="margin-bottom:18px;">
         <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Full Package Overview *</label>
-        <textarea name="overview" rows="4" required placeholder="Detailed journey story and experiential introduction..." 
+        <textarea name="overview" rows="4" required placeholder="Enter your package overview" 
                   style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;line-height:1.6;"><?= e($_POST['overview'] ?? $package['overview'] ?? '') ?></textarea>
       </div>
     </div>
@@ -349,7 +349,7 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:18px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Starting Price (₹ INR)</label>
-          <input type="number" step="0.01" name="starting_price" placeholder="e.g. 24500" 
+          <input type="number" step="0.01" name="starting_price" placeholder="Enter your starting price" 
                  value="<?= e($_POST['starting_price'] ?? $package['starting_price'] ?? '') ?>"
                  style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.95rem;">
         </div>
@@ -364,12 +364,12 @@ require_once __DIR__ . '/includes/admin-header.php';
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:18px;">
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Inclusions (Comma-separated)</label>
-          <textarea name="inclusions" rows="3" placeholder="4-star hotel stay, Daily breakfast & dinner, AC vehicle with driver..." 
+          <textarea name="inclusions" rows="3" placeholder="Enter your inclusions" 
                     style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;"><?= e($_POST['inclusions'] ?? $package['inclusions'] ?? '') ?></textarea>
         </div>
         <div>
           <label style="display:block;font-size:0.82rem;font-weight:700;color:var(--admin-navy);margin-bottom:6px;">Exclusions (Comma-separated)</label>
-          <textarea name="exclusions" rows="3" placeholder="Airfare to destination, Monument entry tickets, Personal laundry..." 
+          <textarea name="exclusions" rows="3" placeholder="Enter your exclusions" 
                     style="width:100%;padding:10px 14px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;"><?= e($_POST['exclusions'] ?? $package['exclusions'] ?? '') ?></textarea>
         </div>
       </div>
@@ -393,7 +393,7 @@ require_once __DIR__ . '/includes/admin-header.php';
           </div>
           <div>
             <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Or Image Path / External Web URL:</span>
-            <input type="text" name="image_url" id="pkgImageUrl" placeholder="https://images.unsplash.com/... or uploads/..." 
+            <input type="text" name="image_url" id="pkgImageUrl" placeholder="Enter your image URL" 
                    value="<?= e($_POST['image_url'] ?? $package['featured_image'] ?? '') ?>"
                    style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.9rem;">
           </div>
@@ -425,7 +425,7 @@ require_once __DIR__ . '/includes/admin-header.php';
             </div>
             <div>
               <span style="font-size:0.75rem;color:var(--admin-muted);display:block;margin-bottom:4px;">Or Add Image URLs (One per line):</span>
-              <textarea name="extra_gallery_urls" rows="2" placeholder="https://images.unsplash.com/...&#10;https://images.unsplash.com/..." style="width:100%;padding:6px 10px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.82rem;"></textarea>
+              <textarea name="extra_gallery_urls" rows="2" placeholder="Enter your image URLs" style="width:100%;padding:6px 10px;border:1px solid var(--admin-border);border-radius:6px;font-size:0.82rem;"></textarea>
             </div>
           </div>
         </div>
@@ -465,14 +465,14 @@ require_once __DIR__ . '/includes/admin-header.php';
                 <button type="button" onclick="this.closest('.itinerary-row').remove()" style="color:#EF4444;font-size:0.8rem;background:none;border:none;cursor:pointer;">Remove Day</button>
               </div>
               <div style="margin-bottom:8px;">
-                <input type="text" name="itin_title[]" value="<?= e($itin['title']) ?>" placeholder="Day Title (e.g. Arrival in Munnar & Spice Walk)" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:4px;font-weight:600;">
+                <input type="text" name="itin_title[]" value="<?= e($itin['title']) ?>" placeholder="Enter your day title" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:4px;font-weight:600;">
               </div>
               <div style="margin-bottom:8px;">
-                <textarea name="itin_desc[]" rows="2" placeholder="Describe the day's activities and sightseeing..." style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.9rem;"><?= e($itin['description']) ?></textarea>
+                <textarea name="itin_desc[]" rows="2" placeholder="Enter your day activities" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.9rem;"><?= e($itin['description']) ?></textarea>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                <input type="text" name="itin_meals[]" value="<?= e($itin['meals_included']) ?>" placeholder="Meals (e.g. Breakfast, Dinner)" style="width:100%;padding:6px 10px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.85rem;">
-                <input type="text" name="itin_stay[]" value="<?= e($itin['stay_location']) ?>" placeholder="Stay Location (e.g. Munnar Resort)" style="width:100%;padding:6px 10px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.85rem;">
+                <input type="text" name="itin_meals[]" value="<?= e($itin['meals_included']) ?>" placeholder="Enter your meals" style="width:100%;padding:6px 10px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.85rem;">
+                <input type="text" name="itin_stay[]" value="<?= e($itin['stay_location']) ?>" placeholder="Enter your stay location" style="width:100%;padding:6px 10px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.85rem;">
               </div>
             </div>
           <?php endforeach; ?>
@@ -482,14 +482,14 @@ require_once __DIR__ . '/includes/admin-header.php';
               <strong style="color:var(--admin-navy);">Day 1</strong>
             </div>
             <div style="margin-bottom:8px;">
-              <input type="text" name="itin_title[]" placeholder="Day Title (e.g. Arrival &amp; Check-in)" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:4px;font-weight:600;">
+              <input type="text" name="itin_title[]" placeholder="Enter your day title" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:4px;font-weight:600;">
             </div>
             <div style="margin-bottom:8px;">
-              <textarea name="itin_desc[]" rows="2" placeholder="Describe the day's activities..." style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.9rem;"></textarea>
+              <textarea name="itin_desc[]" rows="2" placeholder="Enter your day activities" style="width:100%;padding:8px 12px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.9rem;"></textarea>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-              <input type="text" name="itin_meals[]" placeholder="Meals (e.g. Dinner)" style="width:100%;padding:6px 10px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.85rem;">
-              <input type="text" name="itin_stay[]" placeholder="Stay Location" style="width:100%;padding:6px 10px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.85rem;">
+              <input type="text" name="itin_meals[]" placeholder="Enter your meals" style="width:100%;padding:6px 10px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.85rem;">
+              <input type="text" name="itin_stay[]" placeholder="Enter your stay location" style="width:100%;padding:6px 10px;border:1px solid var(--admin-border);border-radius:4px;font-size:0.85rem;">
             </div>
           </div>
         <?php endif; ?>

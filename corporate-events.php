@@ -311,23 +311,23 @@ require_once __DIR__ . '/includes/header.php';
           <div style="margin-bottom:20px;">
             <div class="form-group" style="margin-bottom:14px;">
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('corp_org_name') ?></label>
-              <input type="text" name="corporate_organisation_name" required placeholder="e.g. Infopark Technologies Ltd" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+              <input type="text" name="corporate_organisation_name" required placeholder="Enter your organisation name" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             </div>
 
             <div class="form-grid-2col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('corp_contact_person') ?></label>
-                <input type="text" name="full_name" required placeholder="e.g. Rajesh Kumar" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+                <input type="text" name="full_name" required placeholder="Enter your full name" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
               </div>
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_phone') ?></label>
-                <input type="tel" name="phone" required placeholder="+91 62829 48227" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+                <input type="tel" name="phone" required placeholder="Enter your phone number" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
               </div>
             </div>
 
             <div class="form-group" style="margin-bottom:14px;">
               <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('form_email') ?></label>
-              <input type="email" name="email" required placeholder="rajesh@company.com" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
+              <input type="email" name="email" required placeholder="Enter your email address" style="width:100%;padding:10px 14px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.9rem;">
             </div>
           </div>
 
@@ -337,6 +337,7 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('corp_event_type') ?></label>
                 <select name="corporate_event_type" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
+                  <option value="" disabled>Select event type</option>
                   <option value="Annual Conference" selected>Annual Corporate Conference</option>
                   <option value="Technical Seminar">Technical Seminar / Symposium</option>
                   <option value="Convention / Summit">Mega Convention / Industry Summit</option>
@@ -348,6 +349,7 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;">Venue Category</label>
                 <select name="corporate_venue_type" id="formVenueTypeSelect" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.88rem;background:#FFF;">
+                  <option value="" disabled>Select venue category</option>
                   <option value="conference_hall" <?= ($activeVenueType === 'conference_hall') ? 'selected' : '' ?>>Conference Hall</option>
                   <option value="seminar_hall" <?= ($activeVenueType === 'seminar_hall') ? 'selected' : '' ?>>Seminar Hall</option>
                   <option value="convention_centre" <?= ($activeVenueType === 'convention_centre') ? 'selected' : '' ?>>Convention Centre</option>
@@ -358,15 +360,15 @@ require_once __DIR__ . '/includes/header.php';
             <div class="form-grid-3col" style="margin-bottom:14px;">
               <div>
                 <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;">Event Date *</label>
-                <input type="date" name="departure_date" required min="<?= date('Y-m-d') ?>" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.85rem;background:#FFF;">
+                <input type="date" name="departure_date" required min="<?= date('Y-m-d') ?>" title="Select event date" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.85rem;background:#FFF;">
               </div>
               <div>
                 <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;">Duration (Days)</label>
-                <input type="number" name="duration_days" value="1" min="1" max="14" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.85rem;text-align:center;">
+                <input type="number" name="duration_days" value="1" min="1" max="14" placeholder="Enter your duration in days" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.85rem;text-align:center;">
               </div>
               <div>
                 <label style="display:block;font-size:0.78rem;font-weight:700;color:#334155;margin-bottom:4px;">Participants</label>
-                <input type="number" name="corporate_participants_count" value="80" min="10" max="5000" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.85rem;text-align:center;">
+                <input type="number" name="corporate_participants_count" value="80" min="10" max="5000" placeholder="Enter your number of participants" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.85rem;text-align:center;">
               </div>
             </div>
 
@@ -374,6 +376,7 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('corp_seating') ?></label>
                 <select name="corporate_seating_arrangement" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                  <option value="" disabled>Select seating arrangement</option>
                   <option value="Theater" selected>Theater Style</option>
                   <option value="Classroom">Classroom Style</option>
                   <option value="U-Shape">U-Shape Style</option>
@@ -385,6 +388,7 @@ require_once __DIR__ . '/includes/header.php';
               <div>
                 <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;">Catering Plan</label>
                 <select name="corporate_catering_needs" style="width:100%;padding:9px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;background:#FFF;">
+                  <option value="" disabled>Select catering plan</option>
                   <option value="Full Day (Lunch, Hi-Tea, Coffee Breaks)" selected>Full Day (Lunch, Hi-Tea, Coffee Breaks)</option>
                   <option value="Gala Dinner & Cocktail">Gala Dinner &amp; Evening Reception</option>
                   <option value="Hi-Tea & Snacks Only">Hi-Tea &amp; Snacks Only</option>
@@ -395,7 +399,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div style="margin-bottom:14px;">
               <label style="display:block;font-size:0.8rem;font-weight:700;color:#334155;margin-bottom:4px;"><?= __t('corp_av_needs') ?></label>
-              <input type="text" name="corporate_av_needs" placeholder="e.g. LED Video Wall, Wireless Collar Mics, Live Webcast stream" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;">
+              <input type="text" name="corporate_av_needs" placeholder="Enter your audio-visual requirements" style="width:100%;padding:9px 12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:0.86rem;">
             </div>
 
             <div style="display:flex;gap:16px;margin-bottom:14px;flex-wrap:wrap;">
@@ -411,7 +415,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div>
               <label style="display:block;font-size:0.78rem;font-weight:600;color:#64748B;margin-bottom:4px;">Additional Requirements / Special Notes</label>
-              <textarea name="travel_requirements" rows="3" placeholder="Tell us about special branding, registration desks, VIP protocol..." style="width:100%;padding:9px 12px;border:1px solid #CBD5E1;border-radius:6px;font-size:0.86rem;"></textarea>
+              <textarea name="travel_requirements" rows="3" placeholder="Enter your additional requirements" style="width:100%;padding:9px 12px;border:1px solid #CBD5E1;border-radius:6px;font-size:0.86rem;"></textarea>
             </div>
           </div>
 
